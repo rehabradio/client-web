@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/base.css">
+	<title>Musicman Front-end</title>
+</head>
+<body>
+
+<div id="app" class="app">
+<header>
+	<form id="search" method="GET" action="">
+		<label>Search</label>
+		<input class="search-field" type="text" value="Search">
+		<input type="checkbox" name="spotify" value="Spotify">Spotify
+		<input type="checkbox" name="soundcloud" value="Soundcloud">Soundcloud
+		<input type="submit" value="Search">
+	</form>
+
+	<section id="search-results" class="search-results">
+		<ul class="searchService-spotify"></ul>
+		<ul class="searchService-soundcloud"></ul>
+	</section>
+</header>
+	
+<main>
+	<section id="queue" class="queue">
+		<div class="content">
+			<h2>Queue</h2>
+			<ul></ul>
+		</div>
+	</section>
+
+	<div class="scaled-content">
+		<div class="content">
+			<section id="playlists" class="playlists">
+				<div class="content">
+					<h2>Playlists</h2>
+					<ul></ul>
+				</div>
+			</section>
+			<section id="tracks" class="tracks">
+				<div class="content">
+					<h2>Playlist</h2>
+					<h3>tracks</h3>
+					<ul></ul>
+				</div>
+			</section>
+			</div>
+		</div>
+	</main>
+</div>
+
+
+<!-- Load JS -->
+<script type="text/javascript" src="js/build/build.js"></script>
+
+</body>
+</html>
