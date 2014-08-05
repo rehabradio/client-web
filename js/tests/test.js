@@ -1,34 +1,15 @@
-playlists = require('./data/playlists');
+testDataQueue = require('./data/queue');
+testDataPlaylists = require('./data/playlists');
+mockjax = require('../../node_modules/jquery-mockjax/jquery.mockjax');
 
-
-var server = sinon.fakeServer.create();
-window.xhr = sinon.useFakeXMLHttpRequest();
- 
-server.respondWith("GET", "http://rehabradio.vagrant.local:8000/api/playlists", [
-    200, 
-    {
-    	"Content-Type": "application/json"
-    }, 
-    JSON.stringify(playlists)
-]);
-
-server.respondWith("GET", "http://rehabradio.vagrant.local:8000/api/queue", [
-    200, 
-    {
-    	"Content-Type": "application/json"
-    }, 
-    JSON.stringify(playlists)
-]);
-
-
-$.ajax({
-	method: 'GET',
+$.mockjax({
 	url: 'http://rehabradio.vagrant.local:8000/api/queue',
-	success: function(data){
-		console.log(data);
-	}
+	responseTime: 750,
+	responseText: testDataQueue
 });
 
-server.respond();
- 
-// server.restore();
+$.mockjax({
+	url: 'http://rehabradio.vagrant.local:8000/api/playlists',
+	responseTime: 750,
+	responseText: testDataPlaylists
+});

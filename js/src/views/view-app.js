@@ -1,11 +1,3 @@
-Backbone = require('backbone');
-$ = require('jquery');
-
-Backbone.$ = $;
-
-datastore = require('../utils/dataStore');
-dispatcher = require('../utils/dispatcher'); 
-
 var AppView = Backbone.View.extend({
 
 	el: '#app',

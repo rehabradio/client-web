@@ -1,12 +1,7 @@
-var Backbone = require('backbone'),
-$ = require('jquery');
-Backbone.$ = $;
+SearchCollection = require('../collections/collections-search');
+SearchTrackView = require('./view-search-track');
 
-var dispatcher = require('../../../utils/dispatcher');
-var SearchCollection = require('../collections/collections-search');
-var SearchTrackView = require('./view-search-track');
-
-var SearchServiceView = Backbone.View.extend({
+module.exports = Backbone.View.extend({
 
 	el: null,
 	tagName: 'li',
@@ -37,5 +32,3 @@ var SearchServiceView = Backbone.View.extend({
 		this.$el.append(trackView.render().$el);
 	}
 });
-
-module.exports = SearchServiceView;

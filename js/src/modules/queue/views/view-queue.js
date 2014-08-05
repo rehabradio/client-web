@@ -1,10 +1,4 @@
-// var Backbone = require('backbone'),
-// $ = require('jquery');
-// Backbone.$ = $;
-
-datastore = require('../../../utils/datastore');
-
-var QueueTrackView = require('./view-queue-track');
+QueueTrackView = require('./view-queue-track');
 
 module.exports = Backbone.View.extend({
 

@@ -1,4 +1,4 @@
-var Backbone = require('backbone');
+Backbone = require('backbone');
 
 var BaseCollection = Backbone.Collection.extend({
 

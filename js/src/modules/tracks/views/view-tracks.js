@@ -1,12 +1,3 @@
-Backbone = require('backbone');
-$ = require('jquery');
-
-Backbone.$ = $;
-
-_ = require('underscore');
-
-dispatcher = require('../../../utils/dispatcher');
-
 TracksCollection = require('../collections/collections-tracks.js');
 TrackView = require('./view-track.js');
 

@@ -31,7 +31,6 @@ body {
 
 main {
   position: relative;
-  padding: 62px 0 0 0;
   z-index: 0; }
 
 .scaled-content {
@@ -46,9 +45,6 @@ APP MODULES
 ---
 */
 header {
-  position: absolute;
-  top: 0;
-  left: 0;
   display: block;
   width: 100%;
   padding: 20px;
@@ -100,7 +96,7 @@ header {
 .queue {
   position: absolute;
   left: 0;
-  top: 62px;
+  top: 0;
   width: 400px; }
   .queue > .content {
     position: relative;

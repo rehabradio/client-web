@@ -1,5 +1,3 @@
-tracksBackbone = require('backbone');
-
 BaseCollection = require('../../../base-collection');
 
 TrackModel = require('../models/models-track.js');

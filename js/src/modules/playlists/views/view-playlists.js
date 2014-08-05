@@ -1,18 +1,10 @@
-// Backbone = require('backbone');
-// $ = require('jquery');
-
-// Backbone.$ = $;
-
-dispatcher = require('../../../utils/dispatcher');
-datastore = require('../../../utils/datastore');
-
 PlaylistView = require('./view-playlist');
 
 module.exports = Backbone.View.extend({
 
 	el: '#playlists',
 
-	collection: datastore.playlistsCollection,
+	collection: dataStore.playlistsCollection,
 	
 	initialize: function(){
 

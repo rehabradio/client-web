@@ -1,8 +1,3 @@
-Backbone = require('backbone');
-$ = require('jquery');
-
-Backbone.$ = $;
-
 var Router = Backbone.Router.extend({
 
 	initialize: function(){},
