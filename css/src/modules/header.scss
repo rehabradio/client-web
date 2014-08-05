@@ -1,0 +1,28 @@
+header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width:100%;
+	padding: 20px;
+	background-color: #000;
+	z-index: 1;
+
+	#search-results{
+		background: #000;
+		max-height: 300px;
+		overflow: scroll;
+		width: 100%;
+		padding: 20px 0px;
+		li{
+			
+			border-bottom: 1px solid #333;
+			img{
+				padding-right: 10px;
+				vertical-align: middle;
+				opacity: 0.8;
+			}
+		}
+	}
+
+}

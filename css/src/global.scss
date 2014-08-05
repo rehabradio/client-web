@@ -1,0 +1,27 @@
+body{
+	background-color: $dark-green;
+	color: $white;
+	font-size: 12px;
+	font-family: 'Noto Sans', sans-serif;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+}
+
+.app{
+}
+
+main{
+	position: relative;
+	padding: 62px 0 0 0;
+	z-index: 0;
+}
+
+.scaled-content{
+	padding-left: 400px;
+	overflow: hidden;
+
+	> .content{
+		width: 200%;
+	}
+
+}

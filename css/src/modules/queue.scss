@@ -1,0 +1,20 @@
+.queue{
+
+	position: absolute;
+	left: 0;
+	top: 62px;
+	width: 400px;
+
+	> .content{
+		position: relative;
+		padding: 0 20px 62px;
+	}
+
+	ul{
+		list-style: none;
+	}
+
+	li{
+		margin: 0 0 8px 0;
+	}
+}

@@ -1,0 +1,27 @@
+{
+  "name": "musicman",
+  "version": "1.0.0",
+  "description": "rehabstudio music player",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "jquery": "^2.1.1",
+    "q": "^1.0.1",
+    "twitter-bootstrap": "^2.1.1",
+    "underscore": "^1.6.0"
+  },
+  "devDependencies": {
+    "backbone.localstorage": "^1.1.9",
+    "gulp": "^3.8.6",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-browserify": "^0.5.0",
+    "gulp-concat": "^2.3.4",
+    "gulp-jshint": "^1.8.2",
+    "gulp-load-plugins": "^0.5.3",
+    "gulp-plumber": "^0.6.4",
+    "gulp-sass": "0.7.1",
+    "gulp-watch": "^0.6.9",
+    "handlebars": "^2.0.0-alpha.4",
+    "hbsfy": "^2.0.0",
+    "jshint-stylish": "^0.4.0"
+  }
+}

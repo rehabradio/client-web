@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+  *:before, *:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+
+h1, h2, h3, h4 {
+  font-weight: 100; }
+
+
+h2 {
+  margin: 0 0 4px 0; }
+
+h3 {
+  font-size: 16px; }
+
+h4 {
+  font-size: 13px; }
+
+body {
+  background-color: #263A45;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em; }
+
+
+main {
+  position: relative;
+  padding: 62px 0 0 0;
+  z-index: 0; }
+
+.scaled-content {
+  padding-left: 400px;
+  overflow: hidden; }
+  .scaled-content > .content {
+    width: 200%; }
+
+/*
+---
+APP MODULES
+---
+*/
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  padding: 20px;
+  background-color: #000;
+  z-index: 1; }
+  header #search-results {
+    background: #000;
+    max-height: 300px;
+    overflow: scroll;
+    width: 100%;
+    padding: 20px 0px; }
+    header #search-results li {
+      border-bottom: 1px solid #333; }
+      header #search-results li img {
+        padding-right: 10px;
+        vertical-align: middle;
+        opacity: 0.8; }
+
+.playlists {
+  position: relative;
+  width: 50%;
+  float: left;
+  z-index: 0;
+  -webkit-transition: width 150ms cubic-bezier(0, 0, 0.75, 1);
+          transition: width 150ms cubic-bezier(0, 0, 0.75, 1); }
+  .playlists.contract {
+    width: 25%; }
+  .playlists > .content {
+    padding: 0 20px 62px; }
+  .playlists ul {
+    list-style: none; }
+
+.tracks {
+  position: relative;
+  width: 25%;
+  float: left;
+  z-index: 1; }
+  .tracks > .content {
+    position: relative;
+    padding: 0 20px 62px; }
+  .tracks ul {
+    list-style: none; }
+  .tracks li {
+    margin: 0 0 4px 0; }
+    .tracks li .album, .tracks li .artist {
+      display: block;
+      font-size: 12px; }
+
+.queue {
+  position: absolute;
+  left: 0;
+  top: 62px;
+  width: 400px; }
+  .queue > .content {
+    position: relative;
+    padding: 0 20px 62px; }
+  .queue ul {
+    list-style: none; }
+  .queue li {
+    margin: 0 0 8px 0; }
+
