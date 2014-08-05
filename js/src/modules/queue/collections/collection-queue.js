@@ -1,6 +1,6 @@
-BaseCollection = require('../../../base-collection');
+var BaseCollection = require('../../../base-collection');
 
-Queue = require('../models/models-queue');
+var Queue = require('../models/models-queue');
 
 module.exports = BaseCollection.extend({
 

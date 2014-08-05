@@ -1,4 +1,4 @@
-PlaylistView = require('./view-playlist');
+var PlaylistView = require('./view-playlist');
 
 module.exports = Backbone.View.extend({
 

@@ -1,4 +1,4 @@
-QueueTrackView = require('./view-queue-track');
+var QueueTrackView = require('./view-queue-track');
 
 module.exports = Backbone.View.extend({
 

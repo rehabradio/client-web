@@ -1,6 +1,6 @@
-BaseCollection = require('../../../base-collection');
+var BaseCollection = require('../../../base-collection');
 
-Playlist = require('../models/models-playlists');
+var Playlist = require('../models/models-playlists');
 
 module.exports = BaseCollection.extend({
 

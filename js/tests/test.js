@@ -1,6 +1,6 @@
-testDataQueue = require('./data/queue');
-testDataPlaylists = require('./data/playlists');
-mockjax = require('../../node_modules/jquery-mockjax/jquery.mockjax');
+var testDataQueue = require('./data/queue');
+var testDataPlaylists = require('./data/playlists');
+var mockjax = require('../../node_modules/jquery-mockjax/jquery.mockjax');
 
 $.mockjax({
 	url: 'http://rehabradio.vagrant.local:8000/api/queue',

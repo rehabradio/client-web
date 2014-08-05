@@ -1,5 +1,5 @@
-TracksCollection = require('../collections/collections-tracks.js');
-TrackView = require('./view-track.js');
+var TracksCollection = require('../collections/collections-tracks.js');
+var TrackView = require('./view-track.js');
 
 module.exports = Backbone.View.extend({
 

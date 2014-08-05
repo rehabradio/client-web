@@ -1,5 +1,5 @@
-SearchCollection = require('../collections/collections-search');
-SearchTrackView = require('./view-search-track');
+var SearchCollection = require('../collections/collections-search');
+var SearchTrackView = require('./view-search-track');
 
 module.exports = Backbone.View.extend({
 

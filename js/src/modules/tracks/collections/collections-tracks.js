@@ -1,6 +1,6 @@
-BaseCollection = require('../../../base-collection');
+var BaseCollection = require('../../../base-collection');
 
-TrackModel = require('../models/models-track.js');
+var TrackModel = require('../models/models-track.js');
 
 module.exports = BaseCollection.extend({
 	
