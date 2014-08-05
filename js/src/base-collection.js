@@ -1,8 +1,9 @@
 var Backbone = require('backbone');
+var proxiedSync = Backbone.sync;
 
 var BaseCollection = Backbone.Collection.extend({
 
-	API_ENDPOINT: 'http://rehabradio.vagrant.local:8000/api/',
+	API_ENDPOINT: 'http://localhost:8000/api/',
 	model: null,
 	
 	initialize:function(){
