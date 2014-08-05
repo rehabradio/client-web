@@ -17,7 +17,7 @@ $.mockjax({
 });
 
 $.mockjax({
-	url: /(http:\/\/rehabradio.vagrant.local:8000\/api\/playlists\/)([0-9])/,
+	url: /(http:\/\/rehabradio.vagrant.local:8000\/api\/playlists\/)([\d]+)/,
 	urlParams: ['root', 'playlistId'],
 	responseTime: 750,
 	response: function(settings){
