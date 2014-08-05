@@ -27,11 +27,15 @@ var AppView = Backbone.View.extend({
 		dispatcher.on('add-track-to-playlist', self._addTrackToPlaylist);
 		dispatcher.on('queue-track-vote', self._voteTrack);
 
+		dispatcher.on('tracks-collection-reset', self._addToTracks);
+
+		
+
 		console.log('booting views...');
 
-        var loadQueue = self._loadQueue();
+        var loadQueue = self._preloadData();
 
-		$.when(self._loadQueue).then(function(){
+		$.when(self._preloadData).then(function(){
 			dispatcher.trigger('collections-when-pre-loaded');
 		});
 
@@ -41,7 +45,7 @@ var AppView = Backbone.View.extend({
 
 	},
 
-	_loadQueue: function(){
+	_preloadData: function(){
 		var deferred = $.Deferred();
 
 		$.when(
@@ -60,6 +64,15 @@ var AppView = Backbone.View.extend({
 		for(var view in this.preload){
 			new this.preload[view]();
 		}
+	},
+
+	_addToTracks: function(id){
+		// TODO - Fix url
+		dataStore.tracksCollection.fetch({
+			url: 'http://rehabradio.vagrant.local:8000/api/playlists/' + id,
+			add: true,
+			remove: true,
+		});
 	},
 
 	_addTrackToQueue: function(data){

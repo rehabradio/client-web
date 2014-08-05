@@ -15,7 +15,7 @@ module.exports = BaseCollection.extend({
 	initialize: function(){
 
 		// dispatcher.on('show-tracks', this._update, this); // TODO - probably needs to be more advanced
-		dispatcher.on('tracks-collection-reset', this._onReset, this);
+		// dispatcher.on('tracks-collection-reset', this._onReset, this);
 
 		this.on('add', this._onAddModel, this);
 		// this.on('remove', function(model){
@@ -32,25 +32,25 @@ module.exports = BaseCollection.extend({
 		dispatcher.trigger('tracks-add', model);
 	},
 
-	_onReset: function(id){
+	// _onReset: function(id){
 
-		this.fetch({
-			url: this.url(id),
-			// reset: true,
-			add: true,
-			remove: true,
-			success: function(){
-				dispatcher.trigger('tracks-populate');
-			},
-			error: function(){
+	// 	this.fetch({
+	// 		url: this.url(id),
+	// 		// reset: true,
+	// 		add: true,
+	// 		remove: true,
+	// 		success: function(){
+	// 			dispatcher.trigger('tracks-populate');
+	// 		},
+	// 		error: function(){
 
-			}
-		});
-	},
+	// 		}
+	// 	});
+	// },
 
-	_update: function(id){
-		this.fetch({
-			url: this.url(id)
-		});
-	}
+	// _update: function(id){
+	// 	this.fetch({
+	// 		url: this.url(id)
+	// 	});
+	// }
 });

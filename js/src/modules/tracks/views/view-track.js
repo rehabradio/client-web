@@ -46,7 +46,7 @@ module.exports = Backbone.View.extend({
 		e.preventDefault();
 
 
-		var playlists = datastore.playlistsCollection,
+		var playlists = dataStore.playlistsCollection,
 			$select = this.$el.find('select');
 
 		var placeholder = document.createElement('option');
@@ -59,8 +59,8 @@ module.exports = Backbone.View.extend({
 
 		playlists.each(function(element, index){
 			var option = document.createElement('option');
-			option.innerText = datastore.playlistsCollection.at(index).get('name');
-			option.value = datastore.playlistsCollection.at(index).get('id');
+			option.innerText = playlists.at(index).get('name');
+			option.value = playlists.at(index).get('id');
 
 			$select.append(option);
 		});
