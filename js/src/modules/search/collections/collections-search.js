@@ -1,5 +1,5 @@
 var BaseCollection = require('../../../base-collection');
-var Backbone = require('backbone');
+
 var SearchModel = require('../models/models-search');
 
 /*

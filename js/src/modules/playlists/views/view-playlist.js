@@ -1,10 +1,3 @@
-Backbone = require('backbone');
-$ = require('jquery');
-
-Backbone.$ = $;
-
-dispatcher = require('../../../utils/dispatcher');
-
 module.exports = Backbone.View.extend({
 
 	tagName: 'li',

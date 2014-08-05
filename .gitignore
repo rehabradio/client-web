@@ -22,5 +22,5 @@ node_modules/
 
 *.pyc
 
-app/static/css/base.css
-app/static/js/build/build.js
+css/base.css
+js/build/build.js

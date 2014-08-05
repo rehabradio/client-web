@@ -5,6 +5,7 @@
   "dependencies": {
     "backbone": "^1.1.2",
     "jquery": "^2.1.1",
+    "jquery-mockjax": "^1.5.3",
     "q": "^1.0.1",
     "twitter-bootstrap": "^2.1.1",
     "underscore": "^1.6.0"

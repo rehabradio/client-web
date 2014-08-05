@@ -1,8 +1,5 @@
-Backbone = require('backbone');
-$ = require('jquery');
-_ = require('underscore');
-
-Backbone.$ = $;
+var Backbone = require('backbone');
+var _ = require('underscore');
 
 var Dispatcher = _.extend({}, Backbone.Events);
 

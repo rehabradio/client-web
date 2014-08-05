@@ -1,20 +1,14 @@
-var Backbone = require('backbone'),
-$ = require('jquery');
-Backbone.$ = $;
-
-var QueueCollection = require('../collections/collection-queue');
 var QueueTrackView = require('./view-queue-track');
 
 module.exports = Backbone.View.extend({
 
 	el: '#queue',
 
-	collection: new QueueCollection(),
+	collection: dataStore.queueCollection,
 	
 	initialize: function(){
 
 		this.listenTo(this.collection, 'add', this._addToQueue, this);
-		this.collection.fetch();
 	},
 
 	_addToQueue: function(model){

@@ -1,9 +1,6 @@
-Backbone = require('backbone');
+var BaseCollection = require('../../../base-collection');
 
-BaseCollection = require('../../../base-collection');
-
-Queue = require('../models/models-queue');
-
+var Queue = require('../models/models-queue');
 
 module.exports = BaseCollection.extend({
 

@@ -1,8 +1,3 @@
-var Backbone = require('backbone'),
-$ = require('jquery');
-Backbone.$ = $;
-
-var dispatcher = require('../../../utils/dispatcher');
 var SearchServiceView = require('./view-search-service');
 
 var SearchView = Backbone.View.extend({

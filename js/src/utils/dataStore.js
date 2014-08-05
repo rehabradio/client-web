@@ -1,9 +1,9 @@
 var dataStore = {}
 
-PlaylistsCollection = require('../modules/playlists/collections/collections-playlists');
+var PlaylistsCollection = require('../modules/playlists/collections/collections-playlists');
 dataStore.playlistsCollection = new PlaylistsCollection();
 
-QueueCollection = require('../modules/queue/collections/collection-queue');
+var QueueCollection = require('../modules/queue/collections/collection-queue');
 dataStore.queueCollection = new QueueCollection();
 
 // var set

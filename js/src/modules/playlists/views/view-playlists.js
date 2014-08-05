@@ -1,26 +1,16 @@
-Backbone = require('backbone');
-$ = require('jquery');
-
-Backbone.$ = $;
-
-dispatcher = require('../../../utils/dispatcher');
-datastore = require('../../../utils/datastore');
-
-PlaylistView = require('./view-playlist');
+var PlaylistView = require('./view-playlist');
 
 module.exports = Backbone.View.extend({
 
 	el: '#playlists',
 
-	collection: datastore.playlistsCollection,
+	collection: dataStore.playlistsCollection,
 	
 	initialize: function(){
 
 		dispatcher.on('tracks-show', this._showTracks, this);
 
 		this.listenTo(this.collection, 'add', this._onAddPlaylist, this);
-
-		this.collection.fetch();
 	},
 
 	_onAddPlaylist: function(model){
