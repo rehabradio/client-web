@@ -1,7 +1,7 @@
-Backbone = require('backbone');
-$ = require('jquery');
+// Backbone = require('backbone');
+// $ = require('jquery');
 
-Backbone.$ = $;
+// Backbone.$ = $;
 
 dispatcher = require('../../../utils/dispatcher');
 

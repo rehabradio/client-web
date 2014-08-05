@@ -37,6 +37,8 @@ var AppView = Backbone.View.extend({
 
 		console.log('booting views...');
 
+        var loadQueue = self._loadQueue();
+
 		$.when(self._loadQueue).then(function(){
 			dispatcher.trigger('collections-when-pre-loaded');
 		});
@@ -51,8 +53,8 @@ var AppView = Backbone.View.extend({
 		var deferred = $.Deferred();
 
 		$.when(
-			dataStore.playlistsCollection.
-			dataStore.queueCollection
+			dataStore.playlistsCollection.fetch(),
+			dataStore.queueCollection.fetch()
 		).then(function(){
 			return deferred.resolve();
 		});
@@ -61,6 +63,7 @@ var AppView = Backbone.View.extend({
 	},
 
 	_startApp: function(){
+		// TODO - Remove a preloader
 
 		for(var view in this.preload){
 			new this.preload[view]();

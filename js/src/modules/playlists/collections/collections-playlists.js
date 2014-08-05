@@ -1,14 +1,12 @@
-Backbone = require('backbone');
+BaseCollection = require('../../../base-collection');
+
+// Backbone = require('backbone');
 Playlist = require('../models/models-playlists');
 
-module.exports = Backbone.Collection.extend({
+module.exports = BaseCollection.extend({
 
-	url: '/api/playlists',
+	request: 'playlists',
 
-	model: Playlist,
+	model: Playlist
 	
-	parse: function(resp){
-
-		return resp;
-	}
 });

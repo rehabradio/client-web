@@ -1,7 +1,7 @@
-Backbone = require('backbone');
-$ = require('jquery');
+// Backbone = require('backbone');
+// $ = require('jquery');
 
-Backbone.$ = $;
+// Backbone.$ = $;
 
 dispatcher = require('../../../utils/dispatcher');
 datastore = require('../../../utils/datastore');
@@ -19,8 +19,6 @@ module.exports = Backbone.View.extend({
 		dispatcher.on('tracks-show', this._showTracks, this);
 
 		this.listenTo(this.collection, 'add', this._onAddPlaylist, this);
-
-		this.collection.fetch();
 	},
 
 	_onAddPlaylist: function(model){

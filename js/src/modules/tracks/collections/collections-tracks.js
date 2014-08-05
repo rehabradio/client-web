@@ -1,12 +1,14 @@
 tracksBackbone = require('backbone');
 
+BaseCollection = require('../../../base-collection');
+
 TrackModel = require('../models/models-track.js');
 
-module.exports = Backbone.Collection.extend({
+module.exports = BaseCollection.extend({
 	
 	model: TrackModel,
 
-	urlRoot: '/api/playlists/',
+	urlRoot: this.API_ENDPOINT + '/playlists/',
 
 	url: function(id){
 		return this.urlRoot + id;
