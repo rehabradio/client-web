@@ -31,7 +31,6 @@ module.exports = Backbone.View.extend({
 
 		console.log('queue item', model.toJSON() );
 
-
 		var trackView = new QueueTrackView({model: model});
 
 		this.$list.append(trackView.render().$el);

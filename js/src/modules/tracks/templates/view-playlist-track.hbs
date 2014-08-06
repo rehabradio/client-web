@@ -1,8 +1,12 @@
-<h4>{{name}}</h4>
-<span class="album">{{album}}</span>
-{{#each artists}}
+<tr>
+
+<td>{{name}}</td>
+<td><span class="album">{{album}}</span></td>
+<td>{{#each artists}}
 	<span class="artist"></span>
-{{/each}}
-<a href="{{add_to_queue}}" class="add-to-queue">Add to queue</a>
-<a href="#" class="add-to-playlist">Add to playlist</a>
-<select></select>
+{{/each}}</td>
+<td><a href="{{add_to_queue}}" class="add-to-queue">Add to queue</a></td>
+<td><a href="#" class="add-to-playlist">Add to playlist</a></td>
+<td><select></select></td>
+
+</tr>

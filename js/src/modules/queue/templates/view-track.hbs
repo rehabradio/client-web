@@ -1,9 +1,7 @@
-<li>
-	<h3>Track: {{track_name}}</h3>
-	{{#if artists}}
-	<h4>Artist: {{artists.[0]}}</h4>
-	{{/if}}
-	<p>Source: {{source_type}}</p>
-	<!-- <button class="up vote">+</button> -->
-	<!-- <button class="down vote">-</button> -->
-</li>
+<tr>	
+	<td>Track: {{track_name}}</td>
+	<td>Artist: {{artists.[0]}}</td>
+	<td>Source: <img src="/img/{{source_type}}.png" /></td>
+	<td>Up Vote<button class="up vote">+</button></td>
+	<td>Down Vote<button class="down vote">-</button></td>
+</tr>
