@@ -3,14 +3,14 @@ var AppView = Backbone.View.extend({
 	el: '#app',
 
 	preload: {
-		queue: require('../modules/queue/views/view-queue'),
-		playlist: require('../modules/playlists/views/view-playlists')
+		queue: require('../../queue/views/view-queue'),
+		playlist: require('../../playlists/views/view-playlists')
 
 	},
 	
 	views: {
-		search: require('../modules/search/views/view-search'),
-		tracks: require('../modules/tracks/views/view-tracks')
+		search: require('../../search/views/view-search'),
+		tracks: require('../../tracks/views/view-tracks')
 
 	},
 
@@ -20,7 +20,7 @@ var AppView = Backbone.View.extend({
 		console.log('App Initialised');
 
 
-		console.log('creating global events...');
+		console.log('Creating global events...');
 
 		dispatcher.on('collections-when-pre-loaded', self._startApp.bind(self));
 		dispatcher.on('add-track-to-queue', self._addTrackToQueue);
@@ -69,7 +69,7 @@ var AppView = Backbone.View.extend({
 	_addToTracks: function(id){
 		// TODO - Fix url
 		dataStore.tracksCollection.fetch({
-			url: 'http://rehabradio.vagrant.local:8000/api/playlists/' + id,
+			url: 'http://localhost:8000/api/playlists/' + id,
 			add: true,
 			remove: true,
 		});
@@ -90,12 +90,16 @@ var AppView = Backbone.View.extend({
 	},
 
 	_addTrackToPlaylist: function(data){
+		// TODO - Fix url
+
+		var self = this;
+
 		$.ajax({
 			method: 'GET',
-			url: '/api/metadata/tracks/add/playlist/?source_type=' + data.sourceType + '&source_id=' + data.sourceId + '&playlist_id=' + data.playlistId,
-			success: this._addTrackToPlaylistSuccess,
-			error: this._onError
-		});	
+			url: 'http://localhost:8000/api/metadata/tracks/add/playlist/?source_type=' + data.sourceType + '&source_id=' + data.sourceId + '&playlist_id=' + data.playlistId,
+			success: self._addTrackToPlaylistSuccess,
+			error: self._onError
+		});
 	},
 
 	_addTrackToPlaylistSuccess: function(res){

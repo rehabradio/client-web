@@ -32,8 +32,8 @@ $.mockjax({
 // "http://rehabradio.localhost/api/metadata/tracks/add/playlist/?source_type=spotify&source_id=5hfP8cKSzpfBisP3R24cAy&playlist_id=2". 
 
 $.mockjax({
-	url: /http:\/\/localhost:8000\/api\/metadata\/tracks\/add\/playlist\/([\d]+)/,
-	urlParams: ['playlistId'],
+	url: /http:\/\/localhost:8000\/api\/metadata\/tracks\/add\/playlist\/\?source_type=([\c]+)\&source_id=([\c][\d]+)\&playlist_id=([\d]+)/,
+	urlParams: ['source_type', 'source_id', 'playlistId'],
 	responseTime: 750,
 	response: function(settings){
 

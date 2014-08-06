@@ -23,8 +23,8 @@ module.exports = BaseCollection.extend({
 		// }, this);
 	},
 
-	parse: function(resp){
-		return resp.tracks;
+	parse: function(res){
+		return res.tracks.results;
 	},
 
 	_onAddModel: function(model){

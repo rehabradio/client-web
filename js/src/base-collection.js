@@ -10,8 +10,8 @@ var BaseCollection = Backbone.Collection.extend({
 		this.url = this.API_ENDPOINT + this.request;
 	},
 
-	parse:function(response){
-		return response;
+	parse: function(res){
+		return res.results;
 	}
 
 });
