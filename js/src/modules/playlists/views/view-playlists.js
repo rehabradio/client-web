@@ -17,7 +17,7 @@ module.exports = Backbone.View.extend({
 
 		console.log('playlist', model.toJSON() );
 
-		var $parent = this.$el.find('ul');
+		var $parent = this.$el.find('table');
 		var view = new PlaylistView({model: model});
 
 		$parent.append(view.render().$el);

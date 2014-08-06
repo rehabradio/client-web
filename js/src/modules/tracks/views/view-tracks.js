@@ -31,7 +31,7 @@ module.exports = Backbone.View.extend({
 	_onTrackAdd: function(model){
 		console.log(model);
 
-		var $parent = this.$el.find('ul');
+		var $parent = this.$el.find('table');
 
 		var view = new TrackView({
 			model: model

@@ -1,7 +1,5 @@
 module.exports = Backbone.View.extend({
 
-	tagName: 'li',
-
 	template: require('../templates/view-playlist.hbs'),
 
 	events: {
@@ -18,6 +16,7 @@ module.exports = Backbone.View.extend({
 
 	_onShowTracks: function(e){
 		e.preventDefault();
+		console.log('_onShowTracks');
 
 		dispatcher.trigger('tracks-show');
 		dispatcher.trigger('tracks-collection-reset', this.model.get('id'));
