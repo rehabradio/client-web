@@ -65,5 +65,6 @@ gulp.task('watch', function(){
     gulp.watch('js/tests/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);
+    gulp.watch('js/jasmine/specs/*.js', ['build-jasmine']);
     gulp.watch('js/jasmine/spec.js', ['build-jasmine']);
 });
