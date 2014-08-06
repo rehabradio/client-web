@@ -4,7 +4,7 @@
 
  module.exports = Backbone.View.extend({
 
-	tagName: 'li',
+	tagName: 'tr',
 
 	events: {
 		'click .add-to-queue': '_onAddToQueue',

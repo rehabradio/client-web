@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
 
 		this.listenTo(this.collection, 'add', this._onAddPlaylist, this);
 
-		this.$list = this.$el.find('ul');
+		this.$list = this.$el.find('table');
 
 		this.render();
 	},
