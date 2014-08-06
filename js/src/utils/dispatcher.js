@@ -1,5 +1,6 @@
-var Backbone = require('backbone');
-var _ = require('underscore');
+/*
+ *	Backbone dispatcher
+ */
 
 var Dispatcher = _.extend({}, Backbone.Events);
 

@@ -1,5 +1,9 @@
 var dataStore = {}
 
+/*
+ *	Requiring and initialising empty collections
+ */
+
 var PlaylistsCollection = require('../modules/playlists/collections/collections-playlists');
 dataStore.playlistsCollection = new PlaylistsCollection();
 

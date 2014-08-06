@@ -1,4 +1,8 @@
-module.exports = Backbone.View.extend({
+/*
+ *	View for individual tracks within playlist
+ */
+
+ module.exports = Backbone.View.extend({
 
 	tagName: 'li',
 
