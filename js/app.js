@@ -35,6 +35,6 @@ if(document.location.search.match(/debug/gi)){
  *	Define and initialise the root view to start the application
  */
 
-var AppView = require('./src/modules/app/views/view-app');
+var AppView = require('../modules/app/views/view-app');
 
 var appView = new AppView();

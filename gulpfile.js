@@ -3,7 +3,7 @@ var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
 
 
-gulp.task('sass', function(){
+gulp.task('sass', ['build-modules'], function(){
 	return gulp.src('./css/src/base.scss')
 		.pipe(plugins.sass())
         .pipe(plugins.autoprefixer(
@@ -50,6 +50,13 @@ gulp.task('build-jasmine', ['lint'], function(){
 
 gulp.task('default', function(){
 	gulp.start('sass', 'build', 'build-jasmine');
+});
+
+gulp.task('build-modules', function(){
+    return gulp.src('modules/**/assets/scss/*.scss')
+        .pipe(plugins.plumber())
+        .pipe(plugins.concat('modules.scss'))
+        .pipe(gulp.dest('css/src/'))
 });
 
 gulp.task('watch', function(){

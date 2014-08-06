@@ -1,4 +1,4 @@
-var BaseCollection = require('../../../base-collection');
+var BaseCollection = require('../../../js/src/base-collection');
 
 var Queue = require('../models/models-queue');
 

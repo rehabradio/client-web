@@ -1,8 +1,8 @@
 /*
  *	Stores the data for tracks within a playlist.
  */
-
-var BaseCollection = require('../../../base-collection');
+ 
+var BaseCollection = require('../../../js/src/base-collection');
 
 var TrackModel = require('../models/models-track.js');
 
