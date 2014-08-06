@@ -46,6 +46,20 @@ main{
 	}
 
 }*/
+aside {
+  width: 20%;
+  height: 100%;
+  position: fixed;
+  background: #fff;
+  border-right: 1px solid #ddd; }
+  aside li.active {
+    background: #4f6aff; }
+
+#main {
+  width: 80%;
+  position: relative;
+  margin-left: 20%; }
+
 /*
 ---
 APP MODULES
@@ -78,17 +92,3 @@ APP MODULES
 }*/
 header {
   background: #4f6aff; }
-
-aside {
-  width: 20%;
-  height: 100%;
-  position: fixed;
-  background: #fff;
-  border-right: 1px solid #ddd; }
-  aside li.active {
-    background: #4f6aff; }
-
-#main {
-  width: 80%;
-  position: relative;
-  margin-left: 20%; }

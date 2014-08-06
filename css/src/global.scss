@@ -24,3 +24,21 @@ main{
 	}
 
 }*/
+
+aside{
+	width: 20%;
+	height: 100%;
+	position: fixed;
+	background: #fff;
+	border-right: 1px solid #ddd;
+
+	li.active{
+		background: $purple;
+	}
+}
+
+#main{
+	width: 80%;
+	position: relative;
+	margin-left: 20%;
+}
