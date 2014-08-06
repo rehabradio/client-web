@@ -28,7 +28,7 @@ router = require('./src/utils/router');
  */
 
 if(document.location.search.match(/debug/gi)){
-	var tests = require('./tests/test.js');
+	var tests = require('./mocks/mocks.js');
 }
 
 /*
