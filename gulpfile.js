@@ -63,7 +63,7 @@ gulp.task('build-test-suites', ['lint'], function(){
 });
 
 gulp.task('default', function(){
-    gulp.start('sass', 'build', 'build-jasmine');
+    gulp.start('sass', 'build', 'jasmine');
 });
 
 gulp.task('watch', function(){

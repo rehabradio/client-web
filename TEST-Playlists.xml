@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-	<testsuite tests="11" errors="0" failures="0" time="0.001" timestamp="2014-08-06T17:09:36">
+	<testsuite tests="11" errors="0" failures="0" time="0.001" timestamp="2014-08-06T17:17:19">
 		<testcase classname="suite2" name="Length of collection should equal count in mock data" time="0">
 		</testcase>
 		<testcase classname="suite2" name="Models should have the attribute &amp;quot;id&amp;quot;" time="0">
@@ -9,7 +9,7 @@
 		</testcase>
 		<testcase classname="suite2" name="Models should have the attribute &amp;quot;name&amp;quot;" time="0">
 		</testcase>
-		<testcase classname="suite2" name="The first model should have the same &amp;apos;name&amp;apos; value as the mock data" time="0">
+		<testcase classname="suite2" name="The first model should have the same &amp;apos;name&amp;apos; value as the mock data" time="0.001">
 		</testcase>
 		<testcase classname="suite2" name="Models should have the attribute &amp;quot;description&amp;quot;" time="0">
 		</testcase>
