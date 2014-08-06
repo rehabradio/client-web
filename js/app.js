@@ -24,7 +24,7 @@ dataStore = require('./src/utils/dataStore');
 router = require('./src/utils/router');
 
 /*
- *	Use Mock data by including the debug param in the URL
+ *	Use Mock data by including the 'debug' param in the URL
  */
 
 if(document.location.search.match(/debug/gi)){

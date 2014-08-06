@@ -1,9 +1,17 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
+var gutil = require('gulp-util');
 
 var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
 
+var onError = function (err) {  
+    gutil.beep();
+};
+
+/*
+ *  Gulp sass
+ */
 
 gulp.task('sass', ['build-modules-scss'], function(){
 	return gulp.src('./css/src/base.scss')
@@ -17,43 +25,83 @@ gulp.task('sass', ['build-modules-scss'], function(){
             'ios 6',
             'android 4'
         ))
-		.pipe(gulp.dest('./css'));
+		.pipe(gulp.dest('./css'))
+        .pipe(plugins.notify({
+            title: 'SASS',
+            message: 'CSS build complete'
+        }));
 });
 
+/*
+ *  Because the scss files for the separate modules are stored in the respective module folder this task is used to concatenate them 
+ *  before the sass task is run.
+ */
+
+gulp.task('build-modules-scss', function(){
+    return gulp.src('modules/**/assets/scss/*.scss')
+        .pipe(plugins.plumber({
+            errorHandler: onError
+        }))
+        .pipe(plugins.concat('modules.scss'))
+        .pipe(gulp.dest('css/src/'))
+});
+
+/*
+ *  Check code integrity before the build task is run
+ */
+
 gulp.task('lint', function(){
-    return gulp.src('./js/src/*.js')
-        .pipe(plugins.plumber())
+    return gulp.src(['./js/src/*.js', 'modules/**/*.js'])
+        .pipe(plugins.plumber({
+            errorHandler: onError
+        }))
         .pipe(plugins.jshint('./.jshintrc'))
         .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
 
+/*
+ *  After the code has been linted the browserify plugin is run.
+ */
+
 gulp.task('build', ['lint'], function(){
 	return gulp.src('./js/app.js')
-        .pipe(plugins.plumber())
+        .pipe(plugins.plumber({
+            errorHandler: onError
+        }))
         .pipe(plugins.browserify({
         	debug: true,
             transform: [hbsfy]
         }))
         .pipe(plugins.concat('build.js'))
-		.pipe(gulp.dest('./js/build'));
-
+		.pipe(gulp.dest('./js/build'))
+        .pipe(plugins.notify({
+            title: 'Build',
+            message: 'Javascript build complete'
+        }));
 });
 
-gulp.task('build-modules-scss', function(){
-    return gulp.src('modules/**/assets/scss/*.scss')
-        .pipe(plugins.plumber())
-        .pipe(plugins.concat('modules.scss'))
-        .pipe(gulp.dest('css/src/'))
-});
+/*
+ *  Jasmine test runner using a phantomjs instance
+ */
 
 gulp.task('jasmine', ['build-test-suites'], function(){
     return gulp.src('js/jasmine/spec-runner.html')
-        .pipe(jasminePhantomJs());
+        .pipe(jasminePhantomJs())
+        .pipe(plugins.notify({
+            title: 'Jasmine',
+            message: 'Jasmine test runner complete'
+        }));
 });
+
+/*
+ *  Builds the Jasmine spec using browserify
+ */
 
 gulp.task('build-test-suites', ['lint'], function(){
     return gulp.src('./js/jasmine/spec.js')
-        .pipe(plugins.plumber())
+        .pipe(plugins.plumber({
+            errorHandler: onError
+        }))
         .pipe(plugins.browserify({
             debug: true
         }))
@@ -68,8 +116,8 @@ gulp.task('default', function(){
 
 gulp.task('watch', function(){
     gulp.watch('css/src/**/*.scss', ['sass']);
+    gulp.watch('modules/**/*.js', ['build']);
     gulp.watch('js/*.js', ['build']);
-    gulp.watch('js/tests/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);
     gulp.watch('js/jasmine/specs/*.js', ['jasmine']);

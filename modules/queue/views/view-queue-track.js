@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
 
 		var upVote = ($(e.target).hasClass('up') ? true : false);
 
-		data = {
+		var data = {
 			upVote: upVote
 		};
 

@@ -38,10 +38,6 @@
 	_onAddToQueue: function(e){
 		e.preventDefault();
 
-		var data = {
-			url: e.target.href
-		}
-
 		dispatcher.trigger('add-track-to-queue', this); 
 
 	},
@@ -78,7 +74,7 @@
 			playlistId: e.target.value,
 			sourceType: this.model.get('source_type'),
 			sourceId: this.model.get('source_id')
-		}
+		};
 
 		dispatcher.trigger('add-track-to-playlist', data);	
 	}

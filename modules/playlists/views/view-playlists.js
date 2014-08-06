@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
 	render: function(){
 		var self = this;
 
-		self.collection.each(function(model, index){
+		self.collection.each(function(model){
 			var playlistView = new PlaylistView({model: model});
 
 
@@ -35,7 +35,7 @@ module.exports = Backbone.View.extend({
 
 		var view = new PlaylistView({model: model});
 
-		$list.append(view.render().$el);
+		this.$list.append(view.render().$el);
 	},
 
 	_showTracks: function(){

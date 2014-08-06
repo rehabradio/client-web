@@ -29,7 +29,7 @@ var SearchView = Backbone.View.extend({
 	onServiceSelect:function(e){
 
 		var service = e.currentTarget.name;
-		this.services[service] == e.currentTarget.checked;
+		this.services[service] = e.currentTarget.checked;
 
 	},
 

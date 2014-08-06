@@ -19,7 +19,7 @@ module.exports = Backbone.View.extend({
 	render: function(){
 		var self = this;
 
-		self.collection.each(function(model, index){
+		self.collection.each(function(model){
 			var trackView = new QueueTrackView({model: model});
 
 

@@ -2,6 +2,11 @@
     "undef": true,
     "unused": true,
     "globals": {
+        "Backbone": false,
+        "$": false,
+        "_": false,
+        "dispatcher": false,
+        "dataStore": false,
         "module": false,
         "clearInterval": false,
         "setInterval": false,
