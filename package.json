@@ -15,6 +15,7 @@
     "gulp-browserify": "^0.5.0",
     "gulp-concat": "^2.3.4",
     "gulp-jasmine": "^0.3.0",
+    "gulp-jasmine2-phantomjs": "^0.1.1",
     "gulp-jshint": "^1.8.2",
     "gulp-load-plugins": "^0.5.3",
     "gulp-plumber": "^0.6.4",
