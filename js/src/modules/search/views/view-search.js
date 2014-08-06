@@ -11,18 +11,19 @@ var SearchView = Backbone.View.extend({
 	},
 
 	services: {
-		spotify: true,
-		soundcloud: false
+		spotify: '.search-spotify',
+		soundcloud: '.search-soundcloud'
 	},
 
-	views: [], // stores view refereneces
+	views: [],
 
 	initialize: function(){
 		console.log('SearchView::initialize');
 
 		for(var service in this.services){
-			var viewEl = '.searchService-' + service;
-			this.views.push( new SearchServiceView({el: viewEl, service: service}) ) ;
+			this.views.push( new SearchServiceView({
+				el: this.services[service], service: service
+			}));
 		}
 	},
 
@@ -34,15 +35,6 @@ var SearchView = Backbone.View.extend({
 	},
 
 	onSubmit:function(event){
-
-		// trigger an event when searching when cleans previous views 
-		//dispater.trigger('searchView-cleanup');
-
-		/*
-			TODO
-			emit search event and pass query
-			Instantiate a new view depending on if the service is selected or not
-		*/
 
 		event.preventDefault();
 		var query = $.trim( $(event.currentTarget).find( this.searchField ).val() );

@@ -92,3 +92,13 @@ APP MODULES
 }*/
 header {
   background: #4f6aff; }
+
+
+#search-results {
+  position: absolute;
+  right: 0;
+  background: #4f6aff;
+  z-index: 1;
+  color: #fff;
+  max-height: 700px;
+  overflow: scroll; }

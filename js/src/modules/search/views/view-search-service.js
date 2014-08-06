@@ -8,6 +8,8 @@ module.exports = Backbone.View.extend({
 
 	initialize: function(options){
 
+		console.log(this.$el);
+
 		console.log('SearchServiceView::initialize');
 
 		this.service = options.service;
