@@ -1,3 +1,7 @@
+/*
+ *	Parent view for displaying all tracks within a playlist
+ */
+
 var TracksCollection = require('../collections/collections-tracks.js');
 var TrackView = require('./view-track.js');
 
@@ -8,17 +12,9 @@ module.exports = Backbone.View.extend({
 	collection: new TracksCollection(),
 
 	initialize: function(){
-		// this.listenTo(this.model, 'change', function(){
-		// 	console.log('tracks model change');
-		// 	// TODO - call collection fetch
-		// 	this.collection._update(this.model.get('id'));
 
-		// });
-
-		// this.listenTo(this.collection, 'add', this._onTrackAdd);
-
-
-		// TODO - Add to global dispatcher in App View
+		// TODO - move to App view
+		
 		dispatcher.on('tracks-add', this._onTrackAdd, this);
 		
 	},
@@ -39,6 +35,5 @@ module.exports = Backbone.View.extend({
 
 		$parent.append(view.render().$el);
 
-		//build Views 
 	}
 });

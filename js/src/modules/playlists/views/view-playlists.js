@@ -11,16 +11,31 @@ module.exports = Backbone.View.extend({
 		dispatcher.on('tracks-show', this._showTracks, this);
 
 		this.listenTo(this.collection, 'add', this._onAddPlaylist, this);
+
+		this.$list = this.$el.find('table');
+
+		this.render();
+	},
+
+	render: function(){
+		var self = this;
+
+		self.collection.each(function(model, index){
+			var playlistView = new PlaylistView({model: model});
+
+
+			self.$list.append(playlistView.render().$el);
+		});
+
 	},
 
 	_onAddPlaylist: function(model){
 
 		console.log('playlist', model.toJSON() );
 
-		var $parent = this.$el.find('table');
 		var view = new PlaylistView({model: model});
 
-		$parent.append(view.render().$el);
+		$list.append(view.render().$el);
 	},
 
 	_showTracks: function(){

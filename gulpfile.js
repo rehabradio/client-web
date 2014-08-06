@@ -37,15 +37,26 @@ gulp.task('build', ['lint'], function(){
 
 });
 
+gulp.task('build-jasmine', ['lint'], function(){
+    return gulp.src('./js/jasmine/spec.js')
+        .pipe(plugins.plumber())
+        .pipe(plugins.browserify({
+            debug: true
+        }))
+        .pipe(plugins.concat('build.js'))
+        .pipe(gulp.dest('./js/jasmine/build'));
+
+});
+
 gulp.task('default', function(){
-	gulp.start('sass', 'build');
+	gulp.start('sass', 'build', 'build-jasmine');
 });
 
 gulp.task('watch', function(){
     gulp.watch('css/src/**/*.scss', ['sass']);
     gulp.watch('js/*.js', ['build']);
+    gulp.watch('js/tests/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);
-    //gulp.watch('js/tests/**/*.js', ['build'])
-    // gulp.watch('src/**/*.hbs', ['debug']);
+    gulp.watch('js/jasmine/spec.js', ['build-jasmine']);
 });

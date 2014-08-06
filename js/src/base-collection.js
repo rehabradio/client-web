@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-var proxiedSync = Backbone.sync;
 
 var BaseCollection = Backbone.Collection.extend({
 
@@ -11,8 +10,8 @@ var BaseCollection = Backbone.Collection.extend({
 		this.url = this.API_ENDPOINT + this.request;
 	},
 
-	parse:function(response){
-		return response.results;
+	parse: function(res){
+		return res.results;
 	}
 
 });
