@@ -9,16 +9,31 @@ module.exports = Backbone.View.extend({
 	initialize: function(){
 
 		this.listenTo(this.collection, 'add', this._addToQueue, this);
+
+		this.$list = this.$el.find('ul');
+		
+		this.render();
+
+	},
+
+	render: function(){
+		var self = this;
+
+		self.collection.each(function(model, index){
+			var trackView = new QueueTrackView({model: model});
+
+
+			self.$list.append(trackView.render().$el);
+		});
 	},
 
 	_addToQueue: function(model){
 
 		console.log('queue item', model.toJSON() );
 
-		var $parent = this.$el.find('ul');
 
 		var trackView = new QueueTrackView({model: model});
 
-		$parent.append(trackView.render().$el);
+		this.$list.append(trackView.render().$el);
 	}
 });
