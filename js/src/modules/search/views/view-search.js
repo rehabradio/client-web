@@ -1,4 +1,4 @@
-var SearchServiceView = require('./view-search-service');
+var SearchResultsView = require('./view-search-results');
 
 var SearchView = Backbone.View.extend({
 
@@ -6,26 +6,11 @@ var SearchView = Backbone.View.extend({
 	searchField: '.search-field',
 
 	events: {
-  		"submit": "onSubmit",
-  		"click input[type='checkbox']": "onServiceSelect"
+  		"submit": "onSubmit"
 	},
-
-	services: {
-		spotify: '.search-spotify',
-		soundcloud: '.search-soundcloud'
-	},
-
-	views: [],
 
 	initialize: function(){
-		for(var service in this.services){
-			this.views.push( new SearchServiceView({ el: this.services[service], service: service }) );
-		}
-	},
-
-	onServiceSelect:function(e){
-		var service = e.currentTarget.name;
-		this.services[service] == e.currentTarget.checked;
+		new SearchResultsView();
 	},
 
 	onSubmit:function(event){

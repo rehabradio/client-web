@@ -32,13 +32,25 @@
    </header>
 
   <section id="search-results" class="search-results">
-  		<div class="search-spotify">
+
+    <div role="tabs">
+      <a data-service="spotify" href="#">Spotify</a>
+      <a data-service="soundcloud" href="#">Soundcloud</a>
+    </div>
+
+  		<div data-service="spotify" class="search-spotify">
   		
   			<ul class="results"></ul>
 
 				<ul class="pagination"></ul>
   		</div>
-  		<div class="search-soundcloud" style="display:none"></div>
+  		<div data-service="soundcloud" class="search-soundcloud" style="display:none">
+
+          <ul class="results"></ul>
+
+        <ul class="pagination"></ul>
+
+      </div>
 
   </section>
 

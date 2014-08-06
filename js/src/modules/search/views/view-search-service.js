@@ -14,11 +14,11 @@ module.exports = Backbone.View.extend({
 	pagination_template: require('../templates/pagination.hbs'),
 
 	initialize: function(options){
-
 		this.service = options.service;
 		this.collection = new SearchCollection();
 		this.listenTo(this.collection, 'add', this.addTrack, this);
 
+		dispatcher.on('search:change-service', this.changeService, this);
 		dispatcher.on('perform-search', this.performSearch, this);
 	},
 
@@ -27,6 +27,11 @@ module.exports = Backbone.View.extend({
 			next: resp.next,
 			prev: resp.previous
 		}));
+	},
+
+	changeService:function(service){
+		var fn = this.$el.data().service == service ? 'show' : 'hide';
+		this.$el[fn]();
 	},
 
 	paginate:function(event){
