@@ -1,6 +1,6 @@
 module.exports = Backbone.View.extend({
 
-	tagName: 'li',
+	tagName: 'tr',
 
 	events: {
 		'click .vote': '_onVote',

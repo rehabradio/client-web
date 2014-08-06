@@ -12,7 +12,7 @@ var BaseCollection = Backbone.Collection.extend({
 	},
 
 	parse:function(response){
-		return response;
+		return response.results;
 	}
 
 });

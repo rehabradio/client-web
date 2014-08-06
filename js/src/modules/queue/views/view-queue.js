@@ -15,7 +15,7 @@ module.exports = Backbone.View.extend({
 
 		console.log('queue item', model.toJSON() );
 
-		var $parent = this.$el.find('ul');
+		var $parent = this.$el.find('table');
 
 		var trackView = new QueueTrackView({model: model});
 
