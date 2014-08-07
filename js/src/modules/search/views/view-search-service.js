@@ -2,7 +2,7 @@ var SearchCollection = require('../collections/collections-search');
 var SearchTrackView = require('./view-search-track');
 var _ = require('underscore');
 
-module.exports = Backbone.View.extend({
+var SearchServiceView = Backbone.View.extend({
 
 	el: null,
 	tagName: 'li',
@@ -12,14 +12,40 @@ module.exports = Backbone.View.extend({
 	},
 
 	pagination_template: require('../templates/pagination.hbs'),
+	template: require('../templates/search-service.hbs'),
 
 	initialize: function(options){
-		this.service = options.service;
-		this.collection = new SearchCollection();
-		this.listenTo(this.collection, 'add', this.addTrack, this);
+	
+		for(var opts in options){
+			this[opts] = options[opts];
+		}
 
+		this.collection = new SearchCollection();
+		this.setUpListeners();
+
+		if( ! this.active ){
+			this.$el.hide();
+		}
+
+		this.render();
+	},
+
+	showLoader:function(){
+		this.$el.addClass('loading');
+		console.log(this.service, 'showLoader');
+	},
+
+	hideLoader:function(){
+		this.$el.removeClass('loading');
+		console.log(this.service, 'hideLoader');
+	},
+
+	setUpListeners:function(){
+
+		this.listenTo(this.collection, 'add', this.addTrack, this);
 		dispatcher.on('search:change-service', this.changeService, this);
 		dispatcher.on('perform-search', this.performSearch, this);
+
 	},
 
 	updatePagination:function(resp){
@@ -35,17 +61,24 @@ module.exports = Backbone.View.extend({
 	},
 
 	paginate:function(event){
-
 		event.preventDefault();
 		this.search({ url: event.currentTarget.href });
 	},
 
 	search:function(options){
 
+		this.showLoader();
+
 		this.$el.find('.results').empty();
 
 		var fetch = this.collection.fetch(options);
 		fetch.done(this.updatePagination.bind(this));
+
+		//always hide the ajax spinner after fetch 
+
+		fetch.always(function(){
+			this.hideLoader();
+		}.bind(this))
 
 	},	
 
@@ -60,5 +93,12 @@ module.exports = Backbone.View.extend({
 		var trackView = new SearchTrackView({model: track});
 
 		this.$el.find('.results').append(trackView.render().$el);
+	},
+
+	render:function(){
+		this.$el.html(this.template());
 	}
 });
+
+
+module.exports = SearchServiceView;

@@ -10,7 +10,8 @@ var SearchView = Backbone.View.extend({
 	},
 
 	initialize: function(){
-		new SearchResultsView();
+		this.SearchResultsView = new SearchResultsView();
+		this.SearchResultsView.$el.hide();
 	},
 
 	onSubmit:function(event){
@@ -23,7 +24,7 @@ var SearchView = Backbone.View.extend({
 		}
 
 		dispatcher.trigger('perform-search', query);
-
+		this.SearchResultsView.$el.show();
 	}
 });
 

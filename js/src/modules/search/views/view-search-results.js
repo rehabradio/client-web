@@ -14,7 +14,7 @@ var SearchResultsView = Backbone.View.extend({
 		soundcloud: '.search-soundcloud'
 	},
 
-	views: {},
+	views: {}, //keep a reference to service views.
 
 	initialize: function(){
 
@@ -26,17 +26,18 @@ var SearchResultsView = Backbone.View.extend({
 				this.views[service] = [];
 			}
 
-			this.views[service].push( new SearchServiceView({ el: this.services[service], service: service }));
+			this.views[service].push( new SearchServiceView({
+				el: this.services[service], 
+				service: service,
+				active: (service == 'spotify') 
+			}));
 		}
-
 	},
 
 	changeService:function(e){
 		e.preventDefault();
-		
 		var service = $(e.currentTarget).data().service;
 		dispatcher.trigger('search:change-service', service);
-
 	},
 
 });
