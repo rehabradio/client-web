@@ -10,11 +10,11 @@ module.exports = BaseCollection.extend({
 	
 	model: TrackModel,
 
-	urlRoot: this.API_ENDPOINT + '/playlists/',
+	// urlRoot: this.API_ENDPOINT + '/playlists/',
 
-	url: function(id){
-		return this.urlRoot + id;
-	},
+	// url: function(id){
+	// 	return this.urlRoot + id + '/tracks';
+	// },
 
 	initialize: function(){
 
@@ -22,7 +22,7 @@ module.exports = BaseCollection.extend({
 	},
 
 	parse: function(res){
-		return res.tracks.results;
+		return res.results;
 	},
 
 	_onAddModel: function(model){
