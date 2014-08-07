@@ -2,6 +2,8 @@
     "undef": true,
     "unused": true,
     "globals": {
+        "dataPlaylists": false,
+        "dataQueue": false,
         "Backbone": false,
         "$": false,
         "_": false,

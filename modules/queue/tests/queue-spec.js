@@ -17,7 +17,7 @@ describe('Queue', function(){
 			url: 'add/to/queue', // TODO - update when available
 			method: 'POST',
 			async: false,
-			success: function(data){
+			success: function(){
 				dataQueue.count = 5;
 				dataQueue.results.push({
 
@@ -48,13 +48,11 @@ describe('Queue', function(){
 
 	it('Tracks should be able to be removed from the queue', function(){
 
-		var collectionLength = dataStore.queueCollection.length;
-
 		$.ajax({
 			url: 'remove/from/queue', // TODO - update when available
 			method: 'POST',
 			async: false,
-			success: function(data){
+			success: function(){
 				dataQueue.count = 4;
 				dataQueue.results.splice(0, 1);
 			}

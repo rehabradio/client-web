@@ -55,11 +55,3 @@ dataStore.queueCollection.fetch({
 	url: 'http://localhost:8000/api/queue',
 	async: false
 });
-
-/*
- *	Test Suites
- */
-
-require('./specs/queue-spec');
-require('./specs/playlists-spec');
-require('./specs/tracks-spec');

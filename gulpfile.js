@@ -3,7 +3,9 @@ var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
 var gutil = require('gulp-util');
 
-var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
+// var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
+var karma = require('karma').server;
+var karmaConfig = require('./karma-config.js');
 
 var onError = function (err) {  
     gutil.beep();
@@ -80,38 +82,26 @@ gulp.task('build', ['lint'], function(){
         }));
 });
 
-/*
- *  Jasmine test runner using a phantomjs instance
- */
 
-gulp.task('jasmine', ['build-test-suites'], function(){
-    return gulp.src('js/jasmine/spec-runner.html')
-        .pipe(jasminePhantomJs())
-        .pipe(plugins.notify({
-            title: 'Jasmine',
-            message: 'Jasmine test runner complete'
-        }));
+gulp.task('karma', function(done){
+    karma.start(karmaConfig, done);
 });
 
-/*
- *  Builds the Jasmine spec using browserify
- */
-
 gulp.task('build-test-suites', ['lint'], function(){
-    return gulp.src('./js/jasmine/spec.js')
+    return gulp.src(['./js/jasmine/spec.js', './modules/**/tests/*.js'])
+        .pipe(plugins.concat('build.js'))
         .pipe(plugins.plumber({
             errorHandler: onError
         }))
         .pipe(plugins.browserify({
             debug: true
         }))
-        .pipe(plugins.concat('build.js'))
         .pipe(gulp.dest('./js/jasmine/build'));
 
 });
 
 gulp.task('default', function(){
-    gulp.start('sass', 'build', 'jasmine');
+    gulp.start('sass', 'build');
 });
 
 gulp.task('watch', function(){
@@ -120,6 +110,4 @@ gulp.task('watch', function(){
     gulp.watch('js/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);
-    gulp.watch('js/jasmine/specs/*.js', ['jasmine']);
-    gulp.watch('js/jasmine/spec.js', ['jasmine']);
 });

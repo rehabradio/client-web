@@ -14,8 +14,7 @@ module.exports = {
 
     // list of files / patterns to load in the browser
     files: [
-      'js/*.js',
-      'js/tests/*.js'
+      'js/jasmine/build/build.js'
     ],
 
 
