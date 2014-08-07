@@ -16,17 +16,4 @@ module.exports = BaseCollection.extend({
 	// 	return this.urlRoot + id + '/tracks';
 	// },
 
-	initialize: function(){
-
-		this.on('add', this._onAddModel, this);
-	},
-
-	parse: function(res){
-		return res.results;
-	},
-
-	_onAddModel: function(model){
-
-		dispatcher.trigger('tracks-add', model);
-	}
 });

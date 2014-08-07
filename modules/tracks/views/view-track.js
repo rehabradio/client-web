@@ -38,7 +38,7 @@
 	_onAddToQueue: function(e){
 		e.preventDefault();
 
-		dispatcher.trigger('add-track-to-queue', this); 
+		dispatcher.trigger('add-track-to-queue', this.model.toJSON()); 
 
 	},
 
@@ -70,11 +70,7 @@
 
 	_onSelectPlaylist: function(e){
 
-		var data = {
-			playlistId: e.target.value,
-			sourceType: this.model.get('source_type'),
-			sourceId: this.model.get('source_id')
-		};
+		var data = this.model.toJSON();
 
 		dispatcher.trigger('add-track-to-playlist', data);	
 	}

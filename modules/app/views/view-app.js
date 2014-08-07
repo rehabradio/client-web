@@ -35,7 +35,7 @@ var AppView = Backbone.View.extend({
 		 */
 
 		dispatcher.on('collections-when-pre-loaded', self._startApp.bind(self));
-		dispatcher.on('add-track-to-queue', self._addTrackToQueue);
+		dispatcher.on('add-track-to-queue', self._addTrackToQueue.bind(self));
 		dispatcher.on('add-track-to-playlist', self._addTrackToPlaylist);
 		dispatcher.on('queue-track-vote', self._voteTrack);
 
@@ -106,6 +106,9 @@ var AppView = Backbone.View.extend({
 			url: 'http://localhost:8000/api/playlists/' + id + '/tracks',
 			add: true,
 			remove: true,
+			success: function(collection, res){
+				console.log(res);
+			}
 		});
 	},
 
@@ -116,9 +119,11 @@ var AppView = Backbone.View.extend({
 		 *	and added to the template on render
 		 */
 
+
 		$.ajax({
-			method: 'GET',
-			url: data.href,
+			type: 'POST',
+			url: 'http://localhost:8000/api/queue',
+			data: data,
 			success: this._addTrackToQueueSuccess,
 			error: this._onError
 		});
@@ -129,6 +134,15 @@ var AppView = Backbone.View.extend({
 		/*
 		 *	Callback for a successful call to add track to queue
 		 */
+
+		dataStore.queueCollection.fetch({
+			// reset: true,
+			add: true,
+			remove: true,
+			success: function(collection, response, options){
+				console.log(collection, response);
+			}
+		});
 
 		return console.log('add track to queue success', res);
 	},
@@ -144,8 +158,9 @@ var AppView = Backbone.View.extend({
 		var self = this;
 
 		$.ajax({
-			method: 'GET',
-			url: 'http://localhost:8000/api/metadata/tracks/add/playlist/?source_type=' + data.sourceType + '&source_id=' + data.sourceId + '&playlist_id=' + data.playlistId,
+			type: 'PUT',
+			url: 'http://localhost:8000/api/playlists/1/',
+			data: data,
 			success: self._addTrackToPlaylistSuccess,
 			error: self._onError
 		});

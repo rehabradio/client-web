@@ -1,43 +1,87 @@
-var testDataQueue = require('./data/queue');
-var testDataPlaylists = require('./data/playlists');
-var testDataTracks = require('./data/tracks');
+var testDataQueue = require('./data/queue'); 
+var testDataPlaylists = require('./data/playlists'); // Playlist data
+var testDataTracks = require('./data/tracks'); // Playlist tracks data
 
 var mockjax = require('../../node_modules/jquery-mockjax/jquery.mockjax');
 
 $.mockjax({
 	url: 'http://localhost:8000/api/queue',
-	responseTime: 750,
-	responseText: testDataQueue
+	responseTime: 100,
+	response: function(req){
+
+		var method = req.type,
+			data = req.data,
+			res;
+
+		switch(method){
+
+			case 'POST':
+
+				testDataQueue.count += 1;
+				testDataQueue.results.push(data);
+
+				res = {success: true};
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
+			case 'GET':
+				res = testDataQueue;
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
+			default:
+				break;
+		}
+
+	}
 });
 
 $.mockjax({
 	url: 'http://localhost:8000/api/playlists',
-	responseTime: 750,
+	responseTime: 100,
 	responseText: testDataPlaylists
 });
 
 $.mockjax({
 	url: /http:\/\/localhost:8000\/api\/playlists\/([\d]+)/,
-	urlParams: ['playlistId'],
-	responseTime: 750,
-	response: function(settings){
+	urlParams: ['id'],
+	responseTime: 100,
+	response: function(req){
 
-		var playlistId = parseInt(settings.urlParams.playlistId),
-			data = _.findWhere(testDataTracks, {id: playlistId });
+		var method = req.type,
+			data = req.data,
+			id = parseInt(req.urlParams.id),
+			res;
 
-		this.responseText =  JSON.stringify(data);
-	}
-});
+		switch(method){
 
-$.mockjax({
-	url: /http:\/\/localhost:8000\/api\/metadata\/tracks\/add\/playlist\/\?source_type=([\c]+)\&source_id=([\c][\d]+)\&playlist_id=([\d]+)/,
-	urlParams: ['source_type', 'source_id', 'playlistId'],
-	responseTime: 750,
-	response: function(settings){
+			case 'POST':
+				break;
 
-		var playlistId = parseInt(settings.urlParams.playlistId),
-			data = _.findWhere(testDataTracks, {id: playlistId });
+			case 'GET':
 
-		this.responseText =  JSON.stringify(data);
+				res = _.findWhere(testDataTracks.results, {id: id });
+
+				this.responseText =  JSON.stringify(res);
+
+				break;
+
+			case 'PUT':
+
+				testDataTracks.results.push(data);
+				debugger;
+				break;
+
+			case 'DELETE':
+				break;
+
+			default:
+				break;
+		}
+
 	}
 });

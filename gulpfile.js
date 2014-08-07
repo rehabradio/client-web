@@ -74,6 +74,7 @@ gulp.task('build', ['lint'], function(){
         	debug: true,
             transform: [hbsfy]
         }))
+        .on('error', gutil.log)
         .pipe(plugins.concat('build.js'))
 		.pipe(gulp.dest('./js/build'))
         .pipe(plugins.notify({
@@ -83,7 +84,7 @@ gulp.task('build', ['lint'], function(){
 });
 
 
-gulp.task('karma', function(done){
+gulp.task('karma', ['build-test-suites'], function(done){
     karma.start(karmaConfig, done);
 });
 
@@ -110,4 +111,6 @@ gulp.task('watch', function(){
     gulp.watch('js/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);
+    gulp.watch('js/jasmine/mocks.js', ['build']);
+    gulp.watch('js/jasmine/data/*.js', ['build']);
 });
