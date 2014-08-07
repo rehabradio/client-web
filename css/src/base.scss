@@ -4,16 +4,5 @@
 
 @import "typography";
 @import "global";
-
-/*
----
-APP MODULES
----
-*/
-
-@import "modules/header";
-@import "modules/playlists";
-@import "modules/tracks";
-@import "modules/queue";
-@import "modules/search";
-
+@import "header";
+@import "modules";

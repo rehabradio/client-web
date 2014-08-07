@@ -39,11 +39,6 @@ main {
   .scaled-content > .content {
     width: 200%; }
 
-/*
----
-APP MODULES
----
-*/
 header {
   display: block;
   width: 100%;
@@ -77,6 +72,20 @@ header {
   .playlists ul {
     list-style: none; }
 
+.queue {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 400px; }
+  .queue > .content {
+    position: relative;
+    padding: 0 20px 62px; }
+  .queue ul {
+    list-style: none; }
+  .queue li {
+    margin: 0 0 8px 0; }
+
+
 .tracks {
   position: relative;
   width: 25%;
@@ -92,17 +101,3 @@ header {
     .tracks li .album, .tracks li .artist {
       display: block;
       font-size: 12px; }
-
-.queue {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 400px; }
-  .queue > .content {
-    position: relative;
-    padding: 0 20px 62px; }
-  .queue ul {
-    list-style: none; }
-  .queue li {
-    margin: 0 0 8px 0; }
-

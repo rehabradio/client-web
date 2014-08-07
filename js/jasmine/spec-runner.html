@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Javascript Tests with JUnit output</title>
+
+		<!-- Include Jasmine 2.0's assets -->
+		<link href="lib/jasmine/jasmine.css" rel="stylesheet" type="text/css">
+		<script src="lib/jasmine/jasmine.js"></script>
+		<script src="lib/jasmine/jasmine-html.js"></script>
+
+		<!-- The JUnit reporter should go before the boot script -->
+		<script src="lib/jasmine2-junit/jasmine2-junit.js"></script>
+		<!-- This boot.js is a modified version of Jasmine's default boot.js! -->
+		<script src="lib/jasmine2-junit/boot.js"></script>
+
+		<!-- Include your spec files here -->
+		<script src="build/build.js"></script>
+
+	</head>
+
+	<body>
+	</body>
+</html>

@@ -1,0 +1,66 @@
+.playlists{
+	position: relative;
+	width: 50%;
+	float: left;
+	z-index: 0;
+	transition: width 150ms cubic-bezier(0, 0, .75, 1);
+
+	&.contract{
+		width: 25%;
+	}
+
+	> .content{
+		padding: 0 20px 62px;
+	}
+
+	ul{
+		list-style: none;
+	}
+}
+.queue{
+
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 400px;
+
+	> .content{
+		position: relative;
+		padding: 0 20px 62px;
+	}
+
+	ul{
+		list-style: none;
+	}
+
+	li{
+		margin: 0 0 8px 0;
+	}
+}
+#search{
+	
+}
+.tracks{
+	position: relative;
+	width: 25%;
+	float: left;
+	z-index: 1;
+
+	> .content{
+		position: relative;
+		padding: 0 20px 62px;
+	}
+
+	ul{
+		list-style: none;
+	}
+
+	li{
+		margin: 0 0 4px 0;
+
+		.album, .artist{
+			display: block;
+			font-size: 12px;
+		}
+	}
+}

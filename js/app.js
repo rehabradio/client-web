@@ -24,17 +24,17 @@ dataStore = require('./src/utils/dataStore');
 router = require('./src/utils/router');
 
 /*
- *	Use Mock data by including the debug param in the URL
+ *	Use Mock data by including the 'debug' param in the URL
  */
 
 if(document.location.search.match(/debug/gi)){
-	var tests = require('./tests/test.js');
+	var tests = require('./jasmine/mocks.js');
 }
 
 /*
  *	Define and initialise the root view to start the application
  */
 
-var AppView = require('./src/modules/app/views/view-app');
+var AppView = require('../modules/app/views/view-app');
 
 var appView = new AppView();
