@@ -21,12 +21,19 @@
 		<input type="checkbox" name="soundcloud" value="Soundcloud">Soundcloud
 		<input type="submit" value="Search">
 	</form>
-
-	<section id="search-results" class="search-results">
-		<ul class="searchService-spotify"></ul>
-		<ul class="searchService-soundcloud"></ul>
-	</section>
 </header>
+
+<section id="search-results" class="search-results">
+
+    <div role="tabs">
+      <a data-service="spotify" href="#">Spotify</a>
+      <a data-service="soundcloud" href="#">Soundcloud</a>
+    </div>
+
+  		<div data-service="spotify" class="search-spotify"></div>
+  		<div data-service="soundcloud" class="search-soundcloud"></div>
+
+  </section>
 	
 <main>
 	<section id="queue" class="queue">

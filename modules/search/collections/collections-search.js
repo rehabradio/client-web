@@ -1,4 +1,4 @@
-var BaseCollection = require('../../../js/src/base-collection');
+var BaseCollection = require('../../core/base-collection');
 
 var SearchModel = require('../models/models-search');
 
@@ -16,14 +16,14 @@ var SearchCollection = BaseCollection.extend({
 	model: SearchModel,
 
 	fetch:function(options){
-		this.url = this.API_ENDPOINT + this.SEARCH_ENDPOINT + options.service + "/?q=" + options.query;
+		if(!options.url){
+			this.url = this.API_ENDPOINT + this.SEARCH_ENDPOINT + options.service + "/?q=" + options.query;
+		}
 		return Backbone.Collection.prototype.fetch.call(this, options);
 	},
 
 	parse:function(response){
-		if(response.results){
-			return response.results;
-		}
+		return response.results;
 	}
 
 });
