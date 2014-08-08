@@ -36,10 +36,14 @@ var AppView = Backbone.View.extend({
 
 		dispatcher.on('collections-when-pre-loaded', self._startApp.bind(self));
 		dispatcher.on('add-track-to-queue', self._addTrackToQueue.bind(self));
-		dispatcher.on('add-track-to-playlist', self._addTrackToPlaylist);
-		dispatcher.on('queue-track-vote', self._voteTrack);
+		dispatcher.on('add-track-to-playlist', self._addTrackToPlaylist.bind(self));
+		dispatcher.on('queue-track-vote', self._voteTrack.bind(self));
+		
+		dispatcher.on('delete-track-from-queue', self._deleteTrackFromQueue.bind(self));
 
-		dispatcher.on('tracks-collection-reset', self._addToTracks);
+		
+
+		dispatcher.on('tracks-collection-reset', self._addToTracks.bind(self));
 
 		
 
@@ -98,17 +102,14 @@ var AppView = Backbone.View.extend({
 	_addToTracks: function(id){
 
 		/*
-		 *	
+		 *	Called by clicking on a playlist
 		 */
 
 		// TODO - Fix url
 		dataStore.tracksCollection.fetch({
 			url: 'http://localhost:8000/api/playlists/' + id + '/tracks',
 			add: true,
-			remove: true,
-			success: function(collection, res){
-				console.log(res);
-			}
+			remove: true
 		});
 	},
 
@@ -138,13 +139,38 @@ var AppView = Backbone.View.extend({
 		dataStore.queueCollection.fetch({
 			// reset: true,
 			add: true,
-			remove: true,
-			success: function(collection, response, options){
-				console.log(collection, response);
-			}
+			remove: true
 		});
 
 		return console.log('add track to queue success', res);
+	},
+
+	_deleteTrackFromQueue: function(id){
+
+		/*
+		 *	Deletes the selected track from the queue based on the track_id
+		 */
+
+		$.ajax({
+			type: 'DELETE',
+			url: 'http://localhost:8000/api/queue',
+			data: id,
+			dataType: 'JSON',
+			success: this._deleteTrackFromQueueSuccess,
+			error: this._onError
+		});
+	},
+
+	_deleteTrackFromQueueSuccess: function(res){
+
+		/*
+		 *	Callback for a successful call to delete track from queue
+		 */
+
+		 dataStore.queueCollection.fetch({
+			add: true,
+			remove: true
+		});
 	},
 
 	_addTrackToPlaylist: function(data){

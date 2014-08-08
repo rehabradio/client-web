@@ -69,7 +69,8 @@
 	},
 
 	_onSelectPlaylist: function(e){
-
+		e.preventDefault();
+		
 		var data = this.model.toJSON();
 
 		dispatcher.trigger('add-track-to-playlist', data);	

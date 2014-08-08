@@ -33,6 +33,19 @@ $.mockjax({
 
 				break;
 
+
+			case 'DELETE':
+				// Remove by track_id.
+
+				testDataQueue.count -= 1;
+				testDataQueue.results = _.without(testDataQueue.results, _.findWhere(testDataQueue.results, {track_id: data}));
+
+				res = {success: true};
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
 			default:
 				break;
 		}

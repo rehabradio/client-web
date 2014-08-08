@@ -4,12 +4,15 @@ module.exports = Backbone.View.extend({
 
 	events: {
 		'click .vote': '_onVote',
+		'click .delete': '_onDelete',
 	},
 
 	template: require('../templates/view-track.hbs'),
 
 	initialize: function(){
 		this.setElement(this.template(this.model.toJSON()));
+
+		this.listenTo(this.model, 'remove', this._onDestroy);
 	},
 
 	render: function(){
@@ -25,6 +28,16 @@ module.exports = Backbone.View.extend({
 		};
 
 		dispatcher.trigger('queue-track-vote', data);
+	},
+
+	_onDelete: function(){
+		var trackId = this.model.get('track_id');
+
+		dispatcher.trigger('delete-track-from-queue', trackId);
+	},
+
+	_onDestroy: function(){
+		this.remove();
 	}
 
 });

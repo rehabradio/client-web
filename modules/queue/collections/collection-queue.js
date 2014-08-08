@@ -7,5 +7,11 @@ module.exports = BaseCollection.extend({
 	request: 'queue',
 
 	model: Queue,
+
+	initialize: function(){
+		this.on('remove', function(model){
+			console.log(model);
+		});
+	}
 	
 });

@@ -1,9 +1,10 @@
-<li>
+<li data-track-id="{{track_id}}">
 	<h3>Track: {{track_name}}</h3>
 	{{#if artists}}
 	<h4>Artist: {{artists.[0]}}</h4>
 	{{/if}}
 	<p>Source: {{source_type}}</p>
+	<button class="delete">Remove</button>
 	<!-- <button class="up vote">+</button> -->
 	<!-- <button class="down vote">-</button> -->
 </li>
