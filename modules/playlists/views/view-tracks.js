@@ -3,7 +3,6 @@
  */
 
 var TrackView = require('./view-track');
-var TrackModel = require('../models/models-tracks');
 
 module.exports = Backbone.View.extend({
 
@@ -12,6 +11,8 @@ module.exports = Backbone.View.extend({
 	collection: dataStore.tracksCollection,
 
 	initialize: function(){
+
+		// this.playlist = this.model.get('playlist');
 
 		this.collection.on('add', this._onTracksAdd, this);
 		this.collection.on('reset', this._onTrackReset, this);
@@ -24,15 +25,15 @@ module.exports = Backbone.View.extend({
 		return this;
 	},
 
-	_onTracksAdd: function(model){
+	// _onTracksAdd: function(model){
 
-		var view = new TrackView({
-			model: model
-		});
+	// 	var view = new TrackView({
+	// 		model: model
+	// 	});
 
-		this.$parent.append(view.render().$el);
+	// 	this.$parent.append(view.render().$el);
 
-	},
+	// },
 
 	_onTrackReset: function(){
 
@@ -42,7 +43,8 @@ module.exports = Backbone.View.extend({
 
 		self.collection.each(function(model){
 			var view = new TrackView({
-				model: model
+				model: model,
+				playlist: self.model.get('playlist')
 			});
 
 			self.$parent.append(view.render().$el);

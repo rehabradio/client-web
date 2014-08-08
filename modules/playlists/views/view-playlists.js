@@ -1,7 +1,6 @@
+var PlaylistsModel = require('../models/models-playlists');
 var PlaylistView = require('./view-playlist');
 var TracksView = require('../views/view-tracks');
-var TracksModel = require('../models/models-tracks');
-
 
 module.exports = Backbone.View.extend({
 
@@ -9,10 +8,12 @@ module.exports = Backbone.View.extend({
 
 	collection: dataStore.playlistsCollection,
 
+	model: new PlaylistsModel(),
+
 	initialize: function(){
 
 		this.tracksView = new TracksView({
-			model: new TracksModel()
+			model: this.model
 		});
 
 		dispatcher.on('tracks-show', this._showTracks, this);
@@ -28,7 +29,10 @@ module.exports = Backbone.View.extend({
 		var self = this;
 
 		self.collection.each(function(model){
-			var playlistView = new PlaylistView({model: model});
+			var playlistView = new PlaylistView({
+				model: model,
+				parent: self
+			});
 
 
 			self.$list.append(playlistView.render().$el);
@@ -40,7 +44,10 @@ module.exports = Backbone.View.extend({
 
 		console.log('playlist', model.toJSON() );
 
-		var view = new PlaylistView({model: model});
+		var view = new PlaylistView({
+			model: model,
+			parent: this
+		});
 
 		this.$list.append(view.render().$el);
 	},

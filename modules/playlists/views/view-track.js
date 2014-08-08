@@ -14,7 +14,10 @@
 
 	template: require('../templates/view-playlist-track.hbs'),
 	
-	initialize: function(){
+	initialize: function(options){
+
+		this.playlist = options.playlist;
+
 		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(this.model, 'remove', this._destroy);
 
@@ -47,9 +50,12 @@
 	_onAddToPlaylist: function(e){
 		e.preventDefault();
 
+		var self = this;
 
-		var playlists = dataStore.playlistsCollection,
-			$select = this.$el.find('select');
+		// Filter playlists to not include current playlist
+
+		var playlists = dataStore.playlistsCollection.filter(function(element){ return element.get('id') !== self.playlist}),
+			$select = self.$el.find('select');
 
 		var placeholder = document.createElement('option');
 
@@ -59,10 +65,10 @@
 
 		$select.append(placeholder);
 
-		playlists.each(function(element, index){
+		_.each(playlists, function(element, index){
 			var option = document.createElement('option');
-			option.innerText = playlists.at(index).get('name');
-			option.value = playlists.at(index).get('id');
+			option.innerText = element.get('name');
+			option.value = element.get('id');
 
 			$select.append(option);
 		});

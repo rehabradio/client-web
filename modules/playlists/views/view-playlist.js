@@ -8,7 +8,8 @@ module.exports = Backbone.View.extend({
 		'click a': '_onShowTracks'
 	},
 
-	initialize: function(){
+	initialize: function(options){
+		this.parent = options.parent;
 		this.setElement(this.template(this.model.toJSON()));
 	},
 
@@ -18,6 +19,8 @@ module.exports = Backbone.View.extend({
 
 	_onShowTracks: function(e){
 		e.preventDefault();
+
+		this.parent.model.set('playlist', this.model.get('id'));
 
 		dispatcher.trigger('tracks-show');
 		dispatcher.trigger('tracks-collection-reset', this.model.get('id'));
