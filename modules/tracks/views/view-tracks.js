@@ -12,8 +12,10 @@ module.exports = Backbone.View.extend({
 
 	initialize: function(){
 
-		this.collection.on('add', this._onTrackAdd, this);
+		this.collection.on('add', this._onTracksAdd, this);
+		this.collection.on('reset', this._onTrackReset, this);
 		
+		this.$parent = this.$el.find('ul');
 	},
 
 	render: function(){
@@ -21,15 +23,28 @@ module.exports = Backbone.View.extend({
 		return this;
 	},
 
-	_onTrackAdd: function(model){
-
-		var $parent = this.$el.find('ul');
+	_onTracksAdd: function(model){
 
 		var view = new TrackView({
 			model: model
 		});
 
-		$parent.append(view.render().$el);
+		this.$parent.append(view.render().$el);
 
+	},
+
+	_onTrackReset: function(){
+
+		var self = this;
+
+		self.$parent.empty();
+
+		self.collection.each(function(model){
+			var view = new TrackView({
+				model: model
+			});
+
+			self.$parent.append(view.render().$el);
+		});
 	}
 });

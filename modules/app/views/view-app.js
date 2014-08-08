@@ -108,8 +108,9 @@ var AppView = Backbone.View.extend({
 		// TODO - Fix url
 		dataStore.tracksCollection.fetch({
 			url: 'http://localhost:8000/api/playlists/' + id + '/tracks',
-			add: true,
-			remove: true
+			reset: true
+			// add: true,
+			// remove: true
 		});
 	},
 
