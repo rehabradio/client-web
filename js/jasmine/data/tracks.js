@@ -5,7 +5,7 @@ module.exports = {
     "results": [
         {
             "id": 1, 
-            "name": "Starred", 
+            "name": "Custom Playlist 1", 
             "results": [
                 {
                     'id': 1, 
@@ -103,6 +103,60 @@ module.exports = {
                     'source_type': '', 
                     'track_name': 'song 8', 
                     'album_name': 'album 8', 
+                    'artists': [], 
+                    'votes': 0, 
+                    'image_small': null, 
+                    'image_medium': null, 
+                    'image_large': null
+                },
+                {
+                    'id': 9, 
+                    'track_id': 'iiiiii', 
+                    'source_type': '', 
+                    'track_name': 'song 9', 
+                    'album_name': 'album 9', 
+                    'artists': [], 
+                    'votes': 0, 
+                    'image_small': null, 
+                    'image_medium': null, 
+                    'image_large': null
+                },
+                {
+                    'id': 10, 
+                    'track_id': 'jjjjjj', 
+                    'source_type': '', 
+                    'track_name': 'song 10', 
+                    'album_name': 'album 10', 
+                    'artists': [], 
+                    'votes': 0, 
+                    'image_small': null, 
+                    'image_medium': null, 
+                    'image_large': null
+                }
+            ]
+        },
+        {
+            "id": 3, 
+            "name": "User Playlist 1", 
+            "results": [
+                {
+                    'id': 1, 
+                    'track_id': 'aaaaaa', 
+                    'source_type': '', 
+                    'track_name': 'song 1', 
+                    'album_name': 'album 1', 
+                    'artists': [], 
+                    'votes': 0, 
+                    'image_small': null, 
+                    'image_medium': null, 
+                    'image_large': null
+                },
+                {
+                    'id': 2, 
+                    'track_id': 'bbbbbb', 
+                    'source_type': '', 
+                    'track_name': 'song 2', 
+                    'album_name': 'album 2', 
                     'artists': [], 
                     'votes': 0, 
                     'image_small': null, 

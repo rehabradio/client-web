@@ -31,6 +31,42 @@ $.mockjax({
 	}
 });
 
+
+$.mockjax({
+	url: /http:\/\/localhost:8000\/api\/playlists\/([a-zA-Z0-9]+)\/tracks\/([a-zA-Z0-9]+)/,
+	urlParams: ['playlist', 'track'],
+	responseTime: 100,
+	response: function(req){
+
+		var method = req.type,
+			data = req.data,
+			playlistId = parseInt(req.urlParams.playlist),
+			trackId = parseInt(req.urlParams.track),
+			res;
+
+		switch(method){
+
+			case 'POST':
+
+				var playlist = _.findWhere(testDataTracks.results, {id: playlistId});
+				var track = _.findWhere(testDataMeta.results, {id: trackId});
+
+				playlist.results.push(track);
+
+				res = {success: true};
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
+			default:
+				break;
+		}
+
+	}
+});
+
+
 $.mockjax({
 	url: /http:\/\/localhost:8000\/api\/queue\/([a-zA-Z0-9]+)/,
 	urlParams: ['id'],
@@ -113,7 +149,7 @@ $.mockjax({
 			case 'PUT':
 
 				testDataTracks.results.push(data);
-				debugger;
+
 				break;
 
 			case 'DELETE':

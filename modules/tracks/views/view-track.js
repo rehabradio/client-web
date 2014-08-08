@@ -73,7 +73,10 @@
 	_onSelectPlaylist: function(e){
 		e.preventDefault();
 		
-		var data = this.model.toJSON();
+		var data = {
+			playlist: e.target.value,
+			track: this.model.get('id')
+		};
 
 		dispatcher.trigger('add-track-to-playlist', data);	
 	}
