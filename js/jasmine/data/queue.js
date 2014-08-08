@@ -4,61 +4,53 @@ module.exports = {
     'previous': null,
     'results': [
         {
-            'id': 11, 
+            'id': 1, 
             'track_id': 'aaaaaa', 
-            'source_type': 'soundcloud', 
-            'track_name': 'queued song 1', 
-            'album_name': 'soundcloud', 
-            'artists': [
-                'UlybugMusic'
-            ], 
+            'source_type': '', 
+            'track_name': 'song 1', 
+            'album_name': 'album 1', 
+            'artists': [], 
             'votes': 0, 
             'image_small': null, 
             'image_medium': null, 
             'image_large': null
-        }, 
+        },
         {
-            'id': 12, 
+            'id': 2, 
             'track_id': 'bbbbbb', 
-            'source_type': 'soundcloud', 
-            'track_name': 'queued song 2', 
-            'album_name': 'soundcloud', 
-            'artists': [
-                'UlybugMusic'
-            ], 
+            'source_type': '', 
+            'track_name': 'song 2', 
+            'album_name': 'album 2', 
+            'artists': [], 
             'votes': 0, 
             'image_small': null, 
             'image_medium': null, 
             'image_large': null
         },
         {
-            'id': 13, 
-            'track_id': 'cccccc', 
-            'source_type': 'soundcloud', 
-            'track_name': 'queued song 3', 
-            'album_name': 'soundcloud', 
-            'artists': [
-                'UlybugMusic'
-            ], 
+            'id': 6, 
+            'track_id': 'fffffff', 
+            'source_type': '', 
+            'track_name': 'song 6', 
+            'album_name': 'album 6', 
+            'artists': [], 
             'votes': 0, 
             'image_small': null, 
             'image_medium': null, 
             'image_large': null
         },
         {
-            'id': 14, 
-            'track_id': 'dddddd', 
-            'source_type': 'soundcloud', 
-            'track_name': 'queued song 4', 
-            'album_name': 'soundcloud', 
-            'artists': [
-                'UlybugMusic'
-            ], 
+            'id': 7, 
+            'track_id': 'gggggg', 
+            'source_type': '', 
+            'track_name': 'song 7', 
+            'album_name': 'album 7', 
+            'artists': [], 
             'votes': 0, 
             'image_small': null, 
             'image_medium': null, 
             'image_large': null
-        }, 
+        }
     ]
 }
 

@@ -113,7 +113,7 @@ var AppView = Backbone.View.extend({
 		});
 	},
 
-	_addTrackToQueue: function(data){
+	_addTrackToQueue: function(id){
 
 		/*
 		 *	Adds the selected track to the queue. This uses the href of the link which is generated on the backend
@@ -123,14 +123,13 @@ var AppView = Backbone.View.extend({
 
 		$.ajax({
 			type: 'POST',
-			url: 'http://localhost:8000/api/queue',
-			data: data,
+			url: 'http://localhost:8000/api/queue/' + id,
 			success: this._addTrackToQueueSuccess,
 			error: this._onError
 		});
 	},
 
-	_addTrackToQueueSuccess: function(res){
+	_addTrackToQueueSuccess: function(){
 
 		/*
 		 *	Callback for a successful call to add track to queue
@@ -142,26 +141,26 @@ var AppView = Backbone.View.extend({
 			remove: true
 		});
 
-		return console.log('add track to queue success', res);
 	},
 
-	_deleteTrackFromQueue: function(id){
+	_deleteTrackFromQueue: function(model){
 
 		/*
 		 *	Deletes the selected track from the queue based on the track_id
 		 */
 
-		$.ajax({
-			type: 'DELETE',
-			url: 'http://localhost:8000/api/queue',
-			data: id,
-			dataType: 'JSON',
-			success: this._deleteTrackFromQueueSuccess,
-			error: this._onError
-		});
+		model.destroy();		 
+
+		// $.ajax({
+		// 	type: 'DELETE',
+		// 	url: 'http://localhost:8000/api/queue/' + id + '/',
+		// 	dataType: 'JSON',
+		// 	success: this._deleteTrackFromQueueSuccess,
+		// 	error: this._onError
+		// });
 	},
 
-	_deleteTrackFromQueueSuccess: function(res){
+	_deleteTrackFromQueueSuccess: function(){
 
 		/*
 		 *	Callback for a successful call to delete track from queue

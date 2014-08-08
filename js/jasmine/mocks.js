@@ -1,5 +1,6 @@
 var testDataQueue = require('./data/queue'); 
 var testDataPlaylists = require('./data/playlists'); // Playlist data
+var testDataMeta = require('./data/meta'); // Playlist data
 var testDataTracks = require('./data/tracks'); // Playlist tracks data
 
 var mockjax = require('../../node_modules/jquery-mockjax/jquery.mockjax');
@@ -15,9 +16,38 @@ $.mockjax({
 
 		switch(method){
 
-			case 'POST':
 
+			case 'GET':
+				res = testDataQueue;
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
+			default:
+				break;
+		}
+
+	}
+});
+
+$.mockjax({
+	url: /http:\/\/localhost:8000\/api\/queue\/([a-zA-Z0-9]+)/,
+	urlParams: ['id'],
+	responseTime: 100,
+	response: function(req){
+
+		var method = req.type,
+			id = parseInt(req.urlParams.id),
+			res;
+
+		switch(method){
+
+			case 'POST':
+	
 				testDataQueue.count += 1;
+
+				var data = _.findWhere(testDataMeta.results, {id: id});
 				testDataQueue.results.push(data);
 
 				res = {success: true};
@@ -27,18 +57,15 @@ $.mockjax({
 				break;
 
 			case 'GET':
-				res = testDataQueue;
-
-				this.responseText = JSON.stringify(res);
 
 				break;
 
 
 			case 'DELETE':
-				// Remove by track_id.
+				// Remove by id.
 
 				testDataQueue.count -= 1;
-				testDataQueue.results = _.without(testDataQueue.results, _.findWhere(testDataQueue.results, {track_id: data}));
+				testDataQueue.results = _.without(testDataQueue.results, _.findWhere(testDataQueue.results, {id: id}));
 
 				res = {success: true};
 

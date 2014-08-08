@@ -31,9 +31,8 @@ module.exports = Backbone.View.extend({
 	},
 
 	_onDelete: function(){
-		var trackId = this.model.get('track_id');
 
-		dispatcher.trigger('delete-track-from-queue', trackId);
+		dispatcher.trigger('delete-track-from-queue', this.model);
 	},
 
 	_onDestroy: function(){

@@ -38,7 +38,9 @@
 	_onAddToQueue: function(e){
 		e.preventDefault();
 
-		dispatcher.trigger('add-track-to-queue', this.model.toJSON()); 
+		var id = this.model.get('id');
+
+		dispatcher.trigger('add-track-to-queue', id); 
 
 	},
 
