@@ -1,12 +1,19 @@
 var PlaylistView = require('./view-playlist');
+var TracksView = require('../views/view-tracks');
+var TracksModel = require('../models/models-tracks');
+
 
 module.exports = Backbone.View.extend({
 
 	el: '#playlists',
 
 	collection: dataStore.playlistsCollection,
-	
+
 	initialize: function(){
+
+		this.tracksView = new TracksView({
+			model: new TracksModel()
+		});
 
 		dispatcher.on('tracks-show', this._showTracks, this);
 
