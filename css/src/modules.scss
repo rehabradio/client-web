@@ -17,6 +17,30 @@
 		list-style: none;
 	}
 }
+.tracks{
+	position: relative;
+	width: 25%;
+	float: left;
+	z-index: 1;
+
+	> .content{
+		position: relative;
+		padding: 0 20px 62px;
+	}
+
+	ul{
+		list-style: none;
+	}
+
+	li{
+		margin: 0 0 4px 0;
+
+		.album, .artist{
+			display: block;
+			font-size: 12px;
+		}
+	}
+}
 .queue{
 
 	position: absolute;
@@ -99,28 +123,3 @@
 	pointer-events:auto;
 }
 
-
-.tracks{
-	position: relative;
-	width: 25%;
-	float: left;
-	z-index: 1;
-
-	> .content{
-		position: relative;
-		padding: 0 20px 62px;
-	}
-
-	ul{
-		list-style: none;
-	}
-
-	li{
-		margin: 0 0 4px 0;
-
-		.album, .artist{
-			display: block;
-			font-size: 12px;
-		}
-	}
-}

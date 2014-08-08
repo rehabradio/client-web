@@ -19,7 +19,7 @@ var AppView = Backbone.View.extend({
 	
 	views: {
 		search: require('../../search/views/view-search'),
-		tracks: require('../../tracks/views/view-tracks')
+		tracks: require('../../playlists/views/view-tracks')
 
 	},
 

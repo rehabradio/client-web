@@ -72,6 +72,22 @@ header {
   .playlists ul {
     list-style: none; }
 
+.tracks {
+  position: relative;
+  width: 25%;
+  float: left;
+  z-index: 1; }
+  .tracks > .content {
+    position: relative;
+    padding: 0 20px 62px; }
+  .tracks ul {
+    list-style: none; }
+  .tracks li {
+    margin: 0 0 4px 0; }
+    .tracks li .album, .tracks li .artist {
+      display: block;
+      font-size: 12px; }
+
 .queue {
   position: absolute;
   left: 0;
@@ -130,19 +146,3 @@ header {
 [data-service] {
   opacity: 1;
   pointer-events: auto; }
-
-.tracks {
-  position: relative;
-  width: 25%;
-  float: left;
-  z-index: 1; }
-  .tracks > .content {
-    position: relative;
-    padding: 0 20px 62px; }
-  .tracks ul {
-    list-style: none; }
-  .tracks li {
-    margin: 0 0 4px 0; }
-    .tracks li .album, .tracks li .artist {
-      display: block;
-      font-size: 12px; }
