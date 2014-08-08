@@ -3,6 +3,7 @@
  */
 
 var TrackView = require('./view-track.js');
+var TrackModel = require('../models/models-tracks.js');
 
 module.exports = Backbone.View.extend({
 
@@ -15,7 +16,7 @@ module.exports = Backbone.View.extend({
 		this.collection.on('add', this._onTracksAdd, this);
 		this.collection.on('reset', this._onTrackReset, this);
 		
-		this.$parent = this.$el.find('ul');
+		this.$parent = this.$el.find('tbody');
 	},
 
 	render: function(){
@@ -41,7 +42,8 @@ module.exports = Backbone.View.extend({
 
 		self.collection.each(function(model){
 			var view = new TrackView({
-				model: model
+				model: model,
+				playlist: self.model.get('id')
 			});
 
 			self.$parent.append(view.render().$el);
