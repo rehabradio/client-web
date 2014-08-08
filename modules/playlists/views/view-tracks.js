@@ -2,8 +2,8 @@
  *	Parent view for displaying all tracks within a playlist
  */
 
-var TrackView = require('./view-track.js');
-var TrackModel = require('../models/models-tracks.js');
+var TrackView = require('./view-track');
+var TrackModel = require('../models/models-tracks');
 
 module.exports = Backbone.View.extend({
 
@@ -42,8 +42,7 @@ module.exports = Backbone.View.extend({
 
 		self.collection.each(function(model){
 			var view = new TrackView({
-				model: model,
-				playlist: self.model.get('id')
+				model: model
 			});
 
 			self.$parent.append(view.render().$el);
