@@ -23,6 +23,8 @@ dispatcher = require('./src/utils/dispatcher');
 dataStore = require('./src/utils/dataStore');
 router = require('./src/utils/router');
 
+// init = require('./src/utils/authentication');
+
 /*
  *	Use Mock data by including the 'debug' param in the URL
  */
@@ -37,4 +39,3 @@ if(document.location.search.match(/debug/gi)){
 
 var AppView = require('../modules/app/views/view-app');
 
-var appView = new AppView();

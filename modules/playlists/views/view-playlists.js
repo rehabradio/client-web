@@ -12,6 +12,11 @@ module.exports = Backbone.View.extend({
 
 	initialize: function(){
 
+		/*
+		 *	TracksView shares the model with PlaylistsView. When a Playlist is chosen, this model is updated with the id of the currently selected playlist,
+		 *	and this value then propagates through to the TrackViews to be used to filter out the current playlist from the selected playlists in 'add-to-playlist'
+		 */
+
 		this.tracksView = new TracksView({
 			model: this.model
 		});

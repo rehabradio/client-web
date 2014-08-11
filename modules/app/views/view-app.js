@@ -19,7 +19,6 @@ var AppView = Backbone.View.extend({
 	
 	views: {
 		search: require('../../search/views/view-search')
-
 	},
 
 	initialize: function(){
