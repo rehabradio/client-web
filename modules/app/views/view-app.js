@@ -40,8 +40,6 @@ var AppView = Backbone.View.extend({
 		
 		dispatcher.on('delete-track-from-queue', self._deleteTrackFromQueue.bind(self));
 
-		
-
 		dispatcher.on('tracks-collection-reset', self._addToTracks.bind(self));
 
 		dispatcher.on('queue:add', this.queueAdd, this);
