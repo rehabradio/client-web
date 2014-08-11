@@ -35,6 +35,8 @@ if(document.location.search.match(/debug/gi)){
  *	Define and initialise the root view to start the application
  */
 
+window.API_ROOT = 'http://localhost:8000/api/';
+
 var AppView = require('../modules/app/views/view-app');
 
 var appView = new AppView();

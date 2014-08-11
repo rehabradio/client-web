@@ -44,7 +44,7 @@ var AppView = Backbone.View.extend({
 
 		dispatcher.on('tracks-collection-reset', self._addToTracks.bind(self));
 
-		
+		dispatcher.on('queue:add', this.queueAdd, this);
 
 		console.log('booting views...');
 		
@@ -66,6 +66,38 @@ var AppView = Backbone.View.extend({
 			new self.views[view]();
 		}
 
+	},
+
+	queueAdd:function(payload, id){
+
+		var endpoint = 'metadata/tracks/';
+
+		if(!id){
+
+			var data = {
+				type: 'POST',
+				url: window.API_ROOT + endpoint,
+				data: payload
+			};
+
+			var xhr = $.ajax(data);
+
+			xhr.done(function(response) {
+   				this._addTrackToQueue( response.id );
+  			}.bind( this ));
+
+			xhr.fail(function(jqXHR, textStatus, err) {
+    			console.log( err );
+  			});
+
+			return;
+		}
+
+		this._addTrackToQueue(id);
+	},
+
+	_test:function(id){
+		console.log('id is', id);
 	},
 
 	_preloadData: function(){

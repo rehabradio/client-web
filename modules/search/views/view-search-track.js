@@ -12,7 +12,20 @@ module.exports = Backbone.View.extend({
 	},
 
 	_addToQueue:function(){
-		console.log(this.model.get('source_id'));
+		
+		/*
+		_addToQueue
+		PAYLOAD object accepts source_id, source_type
+		Triggers a queue:add event with payload and id
+		*/
+
+		var payload = {
+			source_id: this.model.get('source_id'),
+			source_type: this.model.get('source_type')
+		};
+
+		dispatcher.trigger('queue:add', payload, null);
+
 	},
 
 	render: function(){
