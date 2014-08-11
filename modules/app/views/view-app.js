@@ -96,10 +96,6 @@ var AppView = Backbone.View.extend({
 		this._addTrackToQueue(id);
 	},
 
-	_test:function(id){
-		console.log('id is', id);
-	},
-
 	_preloadData: function(){
 
 		/*
@@ -147,18 +143,20 @@ var AppView = Backbone.View.extend({
 
 	_addTrackToQueue: function(id){
 
-		/*
-		 *	Adds the selected track to the queue. This uses the href of the link which is generated on the backend
-		 *	and added to the template on render
-		 */
+		//TODO: endpoint should be 'queues/{{id}}/tracks/'
+		//Arguments should be queueId, trackID
+	
+		var endpoint = 'queues/1/tracks/'
 
-
-		$.ajax({
+		var data = {
 			type: 'POST',
-			url: 'http://localhost:8000/api/queue/' + id,
-			success: this._addTrackToQueueSuccess,
-			error: this._onError
-		});
+			url: window.API_ROOT + endpoint,
+			data: { track: id }
+		};
+
+		var xhr = $.ajax(data);
+		xhr.done( this._addTrackToQueueSuccess() );
+
 	},
 
 	_addTrackToQueueSuccess: function(){
