@@ -1,11 +1,13 @@
-var SearchCollection = require('../collections/collections-search');
-var SearchTrackView = require('./view-search-track');
-var Marionette = require('backbone.marionette');
+var Marionette 			= require('backbone.marionette'),
+	SearchCollection	= require('../collections/collections-search'),
+	SearchTrackView 	= require('./view-search-track'),
+	EmptyView    		= require('./view-empty');
 
 var SearchServiceView = Marionette.CompositeView.extend({
 
 	childView: SearchTrackView,
 	childViewContainer: '.results',
+	emptyView: EmptyView,
 
 	events: {
 		'click .pagination a' : 'paginate'
@@ -42,11 +44,6 @@ var SearchServiceView = Marionette.CompositeView.extend({
 		//}));
 	},
 
-	changeService:function(service){
-		var fn = this.$el.data().service == service ? 'show' : 'hide';
-		this.$el[fn]();
-	},
-
 	paginate:function(event){
 		event.preventDefault();
 		this.search({ url: event.currentTarget.href });
@@ -57,7 +54,7 @@ var SearchServiceView = Marionette.CompositeView.extend({
 		this.$el.find('.results').empty();
 
 		var fetch = this.collection.fetch(options);
-		fetch.done(this.updatePagination.bind(this));
+		//fetch.done(this.updatePagination.bind(this));
 
 		//always hide the ajax spinner after fetch 
 

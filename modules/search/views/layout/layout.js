@@ -1,4 +1,5 @@
-var Marionette = require('backbone.marionette');
+var Marionette 		= require('backbone.marionette'),
+	SearchRegion 	= require('../../regions/search');
 
 var SearchLayout = Marionette.LayoutView.extend({
 
@@ -7,7 +8,8 @@ var SearchLayout = Marionette.LayoutView.extend({
 	template: require('../../templates/layout.hbs'),
 
 	regions: {
-		service : '.service'
+		spotify : '.spotify-region',
+		soundcloud : '.soundcloud-region'
 	},
 
 	events: {
@@ -16,7 +18,24 @@ var SearchLayout = Marionette.LayoutView.extend({
 
 	changeService:function(e){
 		var service = $(e.currentTarget).data('service')
-		dispatcher.trigger('search:switchLayout', service);		
+		this.swapRegion( service );	
+	},
+
+	swapRegion:function( service ){
+
+		//simple tab interface to toggle between service regions
+		//hide all regions
+		this.hideRegions();
+
+		//show this region
+		this[service].$el.show();
+
+	},
+
+	hideRegions:function(){
+		for(var region in this.regions){
+			this[region].$el.hide();
+		}
 	}
 
 });

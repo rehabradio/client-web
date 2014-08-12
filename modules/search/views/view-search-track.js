@@ -1,15 +1,13 @@
-module.exports = Backbone.View.extend({
+var Marionette = require('backbone.marionette');
 
+module.exports = Marionette.ItemView.extend({
+
+	tagName: 'li',
 	template: require('../templates/view-search-tracks.hbs'),
 
 	events:{
 		"click [role='add-to-queue']" : "_addToQueue"
 	},	
-
-	initialize: function(){
-		console.log(this.model);
-		this.setElement(this.template(this.model.toJSON()));
-	},
 
 	_addToQueue:function(){
 		
@@ -26,10 +24,5 @@ module.exports = Backbone.View.extend({
 
 		dispatcher.trigger('queue:add', payload, null);
 
-	},
-
-	render: function(){
-		return this;
 	}
-
 });
