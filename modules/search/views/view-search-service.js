@@ -37,12 +37,7 @@ var SearchServiceView = Marionette.CompositeView.extend({
 
 	},
 
-	updatePagination:function(resp){
-		//this.$el.find('.pagination').html( this.pagination_template({ 
-		//	next: resp.next,
-		//	prev: resp.previous
-		//}));
-	},
+	updatePagination:function(resp){},
 
 	paginate:function(event){
 		event.preventDefault();
@@ -52,16 +47,8 @@ var SearchServiceView = Marionette.CompositeView.extend({
 	search:function(options){
 
 		this.$el.find('.results').empty();
-
 		var fetch = this.collection.fetch(options);
-		//fetch.done(this.updatePagination.bind(this));
-
-		//always hide the ajax spinner after fetch 
-
-		/*fetch.always(function(){
-			this.hideLoader();
-		}.bind(this));*/
-
+	
 	},	
 
 	performSearch:function(payload){

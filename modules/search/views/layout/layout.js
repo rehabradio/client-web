@@ -15,7 +15,7 @@ var SearchLayout = Marionette.LayoutView.extend({
 	events: {
 		'click a[data-service]' : 'changeService'
 	},
-
+	
 	changeService:function(e){
 		var service = $(e.currentTarget).data('service')
 		this.swapRegion( service );	
