@@ -15,7 +15,7 @@ module.exports = Backbone.View.extend({
 
 	initialize: function(){
 
-		this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this.model, 'change:loginStatus', this.render);
 
 		this.render();
 	},
@@ -28,15 +28,10 @@ module.exports = Backbone.View.extend({
 	},
 
 	_onSignIn: function(){
-		console.log('log in');
+
 		gapi.auth.signIn({
 			callback: 'authoriseUser'
 		});
-
-	},
-
-	_onSignInCallback: function(data){
-		console.log(data);
 	},
 
 	_onSignOut: function(){

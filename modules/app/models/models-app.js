@@ -1,6 +1,9 @@
 var ModelApp = Backbone.Model.extend({
 	defaults: {
-		loginStatus: false
+		loginStatus: false,
+		displayName: '',
+		image: '',
+		url: ''
 	}
 });
 

@@ -1,5 +1,6 @@
 {{#if loginStatus}}
-	<p>Username: {{username}}</p>
+	<p>Username: <a href="{{url}}">{{displayName}}</a></p>
+	<img src="{{image}}">
 	<button id="log-out">Log Out</button>
 {{else}}
 	<button id="log-in">Log In</button>

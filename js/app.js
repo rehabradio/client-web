@@ -49,12 +49,13 @@ window.authoriseUser = function(res){
 
 	 	gapi.client.load('plus', 'v1', function() {
 			gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
+				console.log('user', res);
 
 				var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
 
 				for(var i in res.emails){
 					if(/@rehabstudio\.com/.test(res.emails[i].value)){
-						dispatcher.trigger('login-set-status', true);
+						dispatcher.trigger('login-set-status', true, res.result);
 					}else{
 						console.log('not a rehabstudio email');
 					}
@@ -64,26 +65,4 @@ window.authoriseUser = function(res){
 	 }else{
 
 	 }
-
-	// gapi.auth.authorize({
-	// 	client_id: '263513175105-o8beutglcacde1pv5k6k6hnq0d0g1v53.apps.googleusercontent.com',
-	// 	immediate: true
-	// }, function(res){
-	// 	if(res.error){ return; }
-
-	// 	gapi.client.load('plus', 'v1', function() {
-	// 		gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
-
-	// 			var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
-
-	// 			for(var i in res.emails){
-	// 				if(/@rehabstudio\.com/.test(res.emails[i].value)){
-	// 					dispatcher.trigger('login-set-status', true);
-	// 				}else{
-	// 					console.log('not a rehabstudio email');
-	// 				}
-	// 			}
-	// 		})
-	// 	});
-	// });
 }

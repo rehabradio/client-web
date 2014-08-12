@@ -30,13 +30,17 @@ var AppView = Backbone.View.extend({
 
 		var viewUser = new ViewUser();
 
-		this.listenTo(this.model, 'change', this.onLoad);
+		this.listenTo(this.model, 'change:loginStatus', this.onLoad);
 
 		dispatcher.on('login-set-status', this.setLoginStatus.bind(this));
 	},
 
-	setLoginStatus: function(status){
-		this.model.set('loginStatus', status);
+	setLoginStatus: function(status, user){
+
+		this.model.set('url', user.url);
+		this.model.set('displayName', user.displayName);
+		this.model.set('image', user.image.url);
+		this.model.set('loginStatus', status); // Triggers the rerender;
 	},
 
 	onLoad: function(){
