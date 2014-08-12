@@ -2,6 +2,8 @@
     "undef": true,
     "unused": true,
     "globals": {
+        "gapi": false,
+        "viewUser": false,
         "UserView": false,
         "dataPlaylists": false,
         "dataQueue": false,

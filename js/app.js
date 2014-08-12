@@ -23,8 +23,6 @@ dispatcher = require('./src/utils/dispatcher');
 dataStore = require('./src/utils/dataStore');
 router = require('./src/utils/router');
 
-// init = require('./src/utils/authentication');
-
 /*
  *	Use Mock data by including the 'debug' param in the URL
  */
@@ -39,3 +37,53 @@ if(document.location.search.match(/debug/gi)){
 
 var AppView = require('../modules/app/views/view-app');
 
+var appView = new AppView();
+
+window.authoriseUser = function(res){
+
+	/*
+	 *	Test user login status
+	 */
+
+	 if (res['status']['signed_in']) {
+
+	 	gapi.client.load('plus', 'v1', function() {
+			gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
+
+				var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
+
+				for(var i in res.emails){
+					if(/@rehabstudio\.com/.test(res.emails[i].value)){
+						dispatcher.trigger('login-set-status', true);
+					}else{
+						console.log('not a rehabstudio email');
+					}
+				}
+			})
+		});
+	 }else{
+
+	 }
+
+	// gapi.auth.authorize({
+	// 	client_id: '263513175105-o8beutglcacde1pv5k6k6hnq0d0g1v53.apps.googleusercontent.com',
+	// 	immediate: true
+	// }, function(res){
+	// 	if(res.error){ return; }
+
+	// 	gapi.client.load('plus', 'v1', function() {
+	// 		gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
+
+	// 			var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
+
+	// 			for(var i in res.emails){
+	// 				if(/@rehabstudio\.com/.test(res.emails[i].value)){
+	// 					dispatcher.trigger('login-set-status', true);
+	// 				}else{
+	// 					console.log('not a rehabstudio email');
+	// 				}
+	// 			}
+	// 		})
+	// 	});
+	// });
+}

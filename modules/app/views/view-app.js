@@ -1,6 +1,11 @@
+var modelApp = require('../models/models-app');
+var ViewUser = require('./view-user');
+
 var AppView = Backbone.View.extend({
 
 	el: '#app',
+
+	model: modelApp,
 
 	/*
 	 *	These views are initialised only once the data has been loaded to the dataStore.
@@ -22,6 +27,24 @@ var AppView = Backbone.View.extend({
 	},
 
 	initialize: function(){
+
+		var viewUser = new ViewUser();
+
+		this.listenTo(this.model, 'change', this.onLoad);
+
+		dispatcher.on('login-set-status', this.setLoginStatus.bind(this));
+	},
+
+	setLoginStatus: function(status){
+		this.model.set('loginStatus', status);
+	},
+
+	onLoad: function(){
+
+		if(this.model.get('loginStatus') === false){
+			return;
+		}
+		
 		var self = this;
 
 		console.log('App Initialised');
