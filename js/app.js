@@ -45,11 +45,10 @@ window.authoriseUser = function(res){
 	 *	Test user login status
 	 */
 
-	 if (res['status']['signed_in']) {
+	if (res['status']['signed_in']) {
 
 	 	gapi.client.load('plus', 'v1', function() {
 			gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
-				console.log('user', res);
 
 				var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
 
@@ -62,7 +61,8 @@ window.authoriseUser = function(res){
 				}
 			})
 		});
-	 }else{
+	}else{
 
-	 }
+		dispatcher.trigger('login-set-status', false);
+	}
 }

@@ -19,7 +19,7 @@
 		this.playlist = options.playlist;
 
 		this.listenTo(this.model, 'change', this.render);
-		this.listenTo(this.model, 'remove', this._destroy);
+		this.listenTo(this.model, 'remove', this.destroy);
 
 		this.$el.data('source', this.model.get('source'));
 	},
@@ -33,7 +33,7 @@
 		console.log('change');
 	},
 
-	_destroy: function(){
+	destroy: function(){
 		this.off();
 		this.remove();
 	},

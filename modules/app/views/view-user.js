@@ -35,7 +35,9 @@ module.exports = Backbone.View.extend({
 	},
 
 	_onSignOut: function(){
-		console.log('log out');
+		
 		gapi.auth.signOut();
+
+		window.location.reload();
 	}
 });

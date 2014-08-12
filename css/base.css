@@ -44,19 +44,20 @@ header {
   width: 100%;
   padding: 20px;
   background-color: #000;
-  z-index: 1; }
-  header #search-results {
-    background: #000;
-    max-height: 300px;
-    overflow: scroll;
-    width: 100%;
-    padding: 20px 0px; }
-    header #search-results li {
-      border-bottom: 1px solid #333; }
-      header #search-results li img {
-        padding-right: 10px;
-        vertical-align: middle;
-        opacity: 0.8; }
+  z-index: 1;
+  overflow: hidden; }
+  header form {
+    float: left; }
+  header .user {
+    float: right;
+    overflow: hidden; }
+    header .user img {
+      float: left; }
+    header .user a {
+      display: block;
+      float: left; }
+    header .user button {
+      float: left; }
 
 .playlists {
   position: relative;

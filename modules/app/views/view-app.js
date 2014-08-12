@@ -7,6 +7,8 @@ var AppView = Backbone.View.extend({
 
 	model: modelApp,
 
+	children: [],
+
 	/*
 	 *	These views are initialised only once the data has been loaded to the dataStore.
 	 *	This uses jQuery Promises
@@ -30,25 +32,28 @@ var AppView = Backbone.View.extend({
 
 		var viewUser = new ViewUser();
 
-		this.listenTo(this.model, 'change:loginStatus', this.onLoad);
+		this.listenTo(this.model, 'change:loginStatus', function(model){
+			if(model.get('loginStatus')){
+				this._startApp();
+			}
+		});
 
 		dispatcher.on('login-set-status', this.setLoginStatus.bind(this));
 	},
 
 	setLoginStatus: function(status, user){
 
-		this.model.set('url', user.url);
-		this.model.set('displayName', user.displayName);
-		this.model.set('image', user.image.url);
+		if(!!user){
+			this.model.set('url', user.url);
+			this.model.set('displayName', user.displayName);
+			this.model.set('image', user.image.url);
+		}
+
 		this.model.set('loginStatus', status); // Triggers the rerender;
 	},
 
-	onLoad: function(){
+	_startApp: function(){
 
-		if(this.model.get('loginStatus') === false){
-			return;
-		}
-		
 		var self = this;
 
 		console.log('App Initialised');
@@ -59,18 +64,14 @@ var AppView = Backbone.View.extend({
 		 *	Assign events to the global dispatcher	
 		 */
 
-		dispatcher.on('collections-when-pre-loaded', self._startApp.bind(self));
+		dispatcher.on('data-preload-complete', self._onPreloadData.bind(self));
 		dispatcher.on('add-track-to-queue', self._addTrackToQueue.bind(self));
 		dispatcher.on('add-track-to-playlist', self._addTrackToPlaylist.bind(self));
 		dispatcher.on('queue-track-vote', self._voteTrack.bind(self));
 		
 		dispatcher.on('delete-track-from-queue', self._deleteTrackFromQueue.bind(self));
 
-		
-
 		dispatcher.on('tracks-collection-reset', self._addToTracks.bind(self));
-
-		
 
 		console.log('booting views...');
 		
@@ -81,7 +82,7 @@ var AppView = Backbone.View.extend({
         var loadQueue = self._preloadData();
 
 		$.when(loadQueue).then(function(){
-			dispatcher.trigger('collections-when-pre-loaded');
+			dispatcher.trigger('data-preload-complete');
 		});
 
 		/*
@@ -89,7 +90,8 @@ var AppView = Backbone.View.extend({
 		 */
 
 		for(var view in self.views){
-			new self.views[view]();
+			
+			self.children.push(new self.views[view]());
 		}
 
 	},
@@ -112,11 +114,11 @@ var AppView = Backbone.View.extend({
 		return deferred;
 	},
 
-	_startApp: function(){
+	_onPreloadData: function(){
 		// TODO - Remove a preloader
 
 		for(var view in this.preload){
-			new this.preload[view]();
+			this.children.push(new this.preload[view]());
 		}
 	},
 

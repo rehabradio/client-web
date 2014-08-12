@@ -10,6 +10,8 @@ module.exports = Backbone.View.extend({
 
 	model: new PlaylistsModel(),
 
+	playlists: [],
+
 	initialize: function(){
 
 		/*
@@ -53,6 +55,8 @@ module.exports = Backbone.View.extend({
 			model: model,
 			parent: this
 		});
+
+		this.playlists.push(view);
 
 		this.$list.append(view.render().$el);
 	},

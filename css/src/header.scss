@@ -4,22 +4,27 @@ header{
 	padding: 20px;
 	background-color: #000;
 	z-index: 1;
+	overflow: hidden;
 
-	#search-results{
-		background: #000;
-		max-height: 300px;
-		overflow: scroll;
-		width: 100%;
-		padding: 20px 0px;
-		li{
-			
-			border-bottom: 1px solid #333;
-			img{
-				padding-right: 10px;
-				vertical-align: middle;
-				opacity: 0.8;
-			}
-		}
+	form{
+		float: left;
 	}
 
+	.user{
+		float: right;
+		overflow: hidden;
+
+		img{
+			float: left;
+		}
+
+		a{
+			display: block;
+			float: left;
+		}
+
+		button{
+			float: left;
+		}
+	}
 }
