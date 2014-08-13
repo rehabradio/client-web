@@ -6,11 +6,14 @@ Backbone = require('backbone');
 _ = require('underscore');
 $ = require('jquery');
 
+Backbone.$ = $;
+
+Marionette = require('backbone.marionette');
+
 /*
  *	Tell Backbone to use jQuery
  */
 
-Backbone.$ = $;
 
 /*
  *	Utils:

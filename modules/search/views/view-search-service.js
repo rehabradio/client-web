@@ -1,5 +1,4 @@
-var Marionette 			= require('backbone.marionette'),
-	SearchCollection	= require('../collections/collections-search'),
+var SearchCollection	= require('../collections/collections-search'),
 	SearchTrackView 	= require('./view-search-track'),
 	EmptyView    		= require('./view-empty');
 

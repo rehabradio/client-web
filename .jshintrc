@@ -2,6 +2,7 @@
     "undef": true,
     "unused": true,
     "globals": {
+        "Marionette": false,
         "dataPlaylists": false,
         "dataQueue": false,
         "Backbone": false,

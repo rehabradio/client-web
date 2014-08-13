@@ -1,8 +1,6 @@
 var	SearchServiceView 	= require('./view-search-service'),
 	//SearchVM			= require('./view-search-vm'),
-	Marionette 			= require('backbone.marionette'),
-	Layout 				= require('./layout/layout'),
-	_					= require('underscore');
+	Layout 				= require('./layout/layout');
 
 var SearchView = Marionette.ItemView.extend({
 

@@ -1,12 +1,13 @@
-var testDataQueue = require('./data/queue'); 
-var testDataPlaylists = require('./data/playlists'); // Playlist data
-var testDataMeta = require('./data/meta'); // Playlist data
-var testDataTracks = require('./data/tracks'); // Playlist tracks data
+var dataQueues = require('./data/queues'); 
+var dataQueueTracks = require('./data/queue-tracks'); 
+var dataPlaylists = require('./data/playlists'); // Playlist data
+var dataMeta = require('./data/meta'); // Playlist data
+var dataTracks = require('./data/tracks'); // Playlist tracks data
 
 var mockjax = require('../../node_modules/jquery-mockjax/jquery.mockjax');
 
 $.mockjax({
-	url: 'http://localhost:8000/api/queue',
+	url: 'http://localhost:8000/api/queues',
 	responseTime: 100,
 	response: function(req){
 
@@ -18,7 +19,92 @@ $.mockjax({
 
 
 			case 'GET':
-				res = testDataQueue;
+				res = dataQueues;
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
+			default:
+				break;
+		}
+
+	}
+});
+
+$.mockjax({
+	url: /http:\/\/localhost:8000\/api\/queues\/([a-zA-Z0-9]+)\/tracks/,
+	urlParams: ['id'],
+	responseTime: 100,
+	response: function(req){
+
+		var method = req.type,
+			id = parseInt(req.urlParams.id),
+			res;
+
+		switch(method){
+
+			case 'POST':
+
+				break;
+
+			case 'GET':
+
+				res = dataQueueTracks[id - 1];
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
+			case 'DELETE':
+				// Remove by id.
+
+				break;
+
+			default:
+				break;
+		}
+
+	}
+});
+
+$.mockjax({
+	url: /http:\/\/localhost:8000\/api\/queues\/([a-zA-Z0-9]+)/,
+	urlParams: ['id'],
+	responseTime: 100,
+	response: function(req){
+
+		var method = req.type,
+			id = parseInt(req.urlParams.id),
+			res;
+
+		switch(method){
+
+			case 'POST':
+	
+				dataQueues.count += 1;
+
+				var data = _.findWhere(dataMeta.results, {id: id});
+				dataQueues.results.push(data);
+
+				res = {success: true};
+
+				this.responseText = JSON.stringify(res);
+
+				break;
+
+			case 'GET':
+
+				break;
+
+
+			case 'DELETE':
+				// Remove by id.
+
+				dataQueues.count -= 1;
+				dataQueues.results = _.without(dataQueues.results, _.findWhere(dataQueues.results, {id: id}));
+
+				res = {success: true};
 
 				this.responseText = JSON.stringify(res);
 
@@ -48,8 +134,8 @@ $.mockjax({
 
 			case 'POST':
 
-				var playlist = _.findWhere(testDataTracks.results, {id: playlistId});
-				var track = _.findWhere(testDataMeta.results, {id: trackId});
+				var playlist = _.findWhere(dataTracks.results, {id: playlistId});
+				var track = _.findWhere(dataMeta.results, {id: trackId});
 
 				playlist.results.push(track);
 
@@ -67,59 +153,11 @@ $.mockjax({
 });
 
 
-$.mockjax({
-	url: /http:\/\/localhost:8000\/api\/queue\/([a-zA-Z0-9]+)/,
-	urlParams: ['id'],
-	responseTime: 100,
-	response: function(req){
-
-		var method = req.type,
-			id = parseInt(req.urlParams.id),
-			res;
-
-		switch(method){
-
-			case 'POST':
-	
-				testDataQueue.count += 1;
-
-				var data = _.findWhere(testDataMeta.results, {id: id});
-				testDataQueue.results.push(data);
-
-				res = {success: true};
-
-				this.responseText = JSON.stringify(res);
-
-				break;
-
-			case 'GET':
-
-				break;
-
-
-			case 'DELETE':
-				// Remove by id.
-
-				testDataQueue.count -= 1;
-				testDataQueue.results = _.without(testDataQueue.results, _.findWhere(testDataQueue.results, {id: id}));
-
-				res = {success: true};
-
-				this.responseText = JSON.stringify(res);
-
-				break;
-
-			default:
-				break;
-		}
-
-	}
-});
 
 $.mockjax({
 	url: 'http://localhost:8000/api/playlists',
 	responseTime: 100,
-	responseText: testDataPlaylists
+	responseText: dataPlaylists
 });
 
 $.mockjax({
@@ -140,7 +178,7 @@ $.mockjax({
 
 			case 'GET':
 
-				res = _.findWhere(testDataTracks.results, {id: id });
+				res = _.findWhere(dataTracks.results, {id: id });
 
 				this.responseText =  JSON.stringify(res);
 
@@ -148,7 +186,7 @@ $.mockjax({
 
 			case 'PUT':
 
-				testDataTracks.results.push(data);
+				dataTracks.results.push(data);
 
 				break;
 

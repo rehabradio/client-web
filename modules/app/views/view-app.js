@@ -8,7 +8,7 @@ var AppView = Backbone.View.extend({
 	 */
 
 	preload: {
-		queue: require('../../queue/views/view-queue'),
+		queue: require('../../queues/views/view-queues-layout'),
 		playlist: require('../../playlists/views/view-playlists')
 
 	},
@@ -38,11 +38,12 @@ var AppView = Backbone.View.extend({
 		dispatcher.on('add-track-to-playlist', self._addTrackToPlaylist.bind(self));
 		dispatcher.on('queue-track-vote', self._voteTrack.bind(self));
 		
-		dispatcher.on('delete-track-from-queue', self._deleteTrackFromQueue.bind(self));
 
 		dispatcher.on('tracks-collection-reset', self._addToTracks.bind(self));
 
-		dispatcher.on('queue:add', this.queueAdd, this);
+		dispatcher.on('queue:reset', self._queueResetTracks.bind(self));
+		dispatcher.on('queue:add', this._queueAdd, this);
+		dispatcher.on('queue:track:delete', self._deleteTrackFromQueue.bind(self));
 
 		console.log('booting views...');
 		
@@ -66,7 +67,7 @@ var AppView = Backbone.View.extend({
 
 	},
 
-	queueAdd:function(payload, id){
+	_queueAdd:function(payload, id){
 
 		var endpoint = 'metadata/tracks/';
 
@@ -92,6 +93,18 @@ var AppView = Backbone.View.extend({
 		}
 
 		this._addTrackToQueue(id);
+	},
+
+	_queueResetTracks: function(id){
+		
+		/*
+		 *	Loads the data for current selected queue
+		 */
+
+		dataStore.queueTracksCollection.fetch({
+			url: window.API_ROOT + 'queues/' + id + '/tracks',
+			reset: true
+		});
 	},
 
 	_preloadData: function(){
@@ -176,6 +189,8 @@ var AppView = Backbone.View.extend({
 		/*
 		 *	Deletes the selected track from the queue based on the track_id
 		 */
+
+		debugger;
 
 		model.destroy();		 
 
