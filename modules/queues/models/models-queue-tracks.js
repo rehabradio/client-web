@@ -1,4 +1,3 @@
 module.exports = Backbone.Model.extend({
-	defaults: {
-	}
+	idAttribute: 'queue_id'
 });

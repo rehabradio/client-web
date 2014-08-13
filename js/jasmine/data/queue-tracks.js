@@ -5,7 +5,8 @@ module.exports = [
 	    'previous': null,
 	    'results': [
 	        {
-	            'id': 1, 
+	            'id': 1,
+	            'queue_id': 1,
 	            'track_id': 'aaaaaa', 
 	            'source_type': '', 
 	            'track_name': 'song 1', 
@@ -18,6 +19,7 @@ module.exports = [
 	        },
 	        {
 	            'id': 2, 
+	            'queue_id': 2,
 	            'track_id': 'bbbbbb', 
 	            'source_type': '', 
 	            'track_name': 'song 2', 
@@ -30,6 +32,7 @@ module.exports = [
 	        },
 	        {
 	            'id': 6, 
+	            'queue_id': 3,
 	            'track_id': 'fffffff', 
 	            'source_type': '', 
 	            'track_name': 'song 6', 
@@ -42,6 +45,7 @@ module.exports = [
 	        },
 	        {
 	            'id': 7, 
+	            'queue_id': 4,
 	            'track_id': 'gggggg', 
 	            'source_type': '', 
 	            'track_name': 'song 7', 
@@ -61,6 +65,7 @@ module.exports = [
 	    'results': [
 	        {
 	            'id': 1, 
+	            'queue_id': 1,
 	            'track_id': 'aaaaaa', 
 	            'source_type': '', 
 	            'track_name': 'song 1', 
@@ -73,6 +78,7 @@ module.exports = [
 	        },
 	        {
 	            'id': 2, 
+	            'queue_id': 2,
 	            'track_id': 'bbbbbb', 
 	            'source_type': '', 
 	            'track_name': 'song 2', 

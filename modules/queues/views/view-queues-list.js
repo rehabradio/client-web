@@ -1,15 +1,15 @@
-var ViewQueueItem = require('./view-queues-item');
+var ViewQueueItem = require('./view-queues-list-item');
 
 module.exports = Marionette.CollectionView.extend({
 
-	tagName: 'li',
-
+	tagName: 'ul',
+	
 	collection: dataStore.queueCollection,
 
 	childView: ViewQueueItem,
 
 	initialize: function(){
-
+		
 	}
 
 });

@@ -1,5 +1,7 @@
 module.exports = Marionette.ItemView.extend({
 
+	tagName: 'li',
+
 	template: require('../templates/view-queues-item.hbs'),
 
 	events: {
@@ -11,8 +13,10 @@ module.exports = Marionette.ItemView.extend({
 
 		var id = this.model.get('id');
 
-		dataStore.queueTracksCollection.queueId = id;
+		dispatcher.trigger('queue:change', id)
 
-		dispatcher.trigger('queue:reset', id)
+		// dataStore.queueTracksCollection.queueId = id;
+
+		// dispatcher.trigger('queue:reset', id)
 	}
 });

@@ -4,14 +4,19 @@ var QueueTrack = require('../models/models-queue-tracks');
 
 module.exports = BaseCollection.extend({
 
-	request: 'queues',
+	// request: 'queues',
 
-	queueId: null,
-
-	url: function(){
-		return this.API_ENDPOINT + this.request + '/' + this.queueId + '/tracks';
-	},
+	// queueId: null,
 
 	model: QueueTrack,
+
+	url: null,
+
+	initialize: function(models, options){
+		
+		this.url = options.url;
+
+		this.fetch();
+	}
 	
 });

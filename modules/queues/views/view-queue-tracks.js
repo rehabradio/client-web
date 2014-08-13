@@ -1,15 +1,15 @@
-var ViewTrackItem = require('./view-queue-track');
+var ViewTrackItem = require('./view-queue-tracks-item');
 
-module.exports = Marionette.CollectionView.extend({
+module.exports = Marionette.CompositeView.extend({
 
-	tagName: 'tbody',
-
-	collection: dataStore.queueTracksCollection,
+	template: require('../templates/view-tracks.hbs'),
 
 	childView: ViewTrackItem,
 
-	initialize: function(){
+	childViewContainer: 'tbody',
 
+	initialize: function(){
+		// this.collection = 
 	}
 
 });

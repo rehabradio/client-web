@@ -190,17 +190,7 @@ var AppView = Backbone.View.extend({
 		 *	Deletes the selected track from the queue based on the track_id
 		 */
 
-		debugger;
-
 		model.destroy();		 
-
-		// $.ajax({
-		// 	type: 'DELETE',
-		// 	url: 'http://localhost:8000/api/queue/' + id + '/',
-		// 	dataType: 'JSON',
-		// 	success: this._deleteTrackFromQueueSuccess,
-		// 	error: this._onError
-		// });
 	},
 
 	_deleteTrackFromQueueSuccess: function(){

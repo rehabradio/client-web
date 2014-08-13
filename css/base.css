@@ -28,6 +28,9 @@ body {
   font-weight: 400;
   letter-spacing: 0.04em; }
 
+a {
+  color: #FFF; }
+
 
 main {
   position: relative;
