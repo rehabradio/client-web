@@ -4,7 +4,7 @@ var Queue = require('../models/models-queue');
 
 module.exports = BaseCollection.extend({
 
-	request: 'queue',
+	request: 'queues/1/tracks',
 
 	model: Queue,
 
