@@ -5,6 +5,7 @@ var	SearchServiceView 	= require('./view-search-service'),
 var SearchView = Marionette.ItemView.extend({
 
 	el: '#search',
+
 	template: false,
 
 	ui: {
@@ -26,9 +27,10 @@ var SearchView = Marionette.ItemView.extend({
 		}, this);
 	},
 
-	onSubmit:function(event){
-		event.preventDefault();
-		var query = $.trim( $(event.currentTarget).find( this.ui.input ).val() );
+	onSubmit:function(e){
+
+		e.preventDefault();
+		var query = $.trim( $(e.currentTarget).find( this.ui.input ).val() );
 
 		if(! query.length ){
 			return;
