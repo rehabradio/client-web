@@ -6,10 +6,5 @@ module.exports = Marionette.CompositeView.extend({
 
 	childView: ViewTrackItem,
 
-	childViewContainer: 'tbody',
-
-	initialize: function(){
-		// this.collection = 
-	}
-
+	childViewContainer: 'tbody'
 });

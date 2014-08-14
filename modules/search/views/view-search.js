@@ -23,7 +23,7 @@ var SearchView = Marionette.ItemView.extend({
 
 		_.each(this.services, function(service){
 			this.layout[service].show(  new SearchServiceView({service: service, className: service })  );
-		}, this)
+		}, this);
 	},
 
 	onSubmit:function(event){

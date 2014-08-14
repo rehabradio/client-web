@@ -1,6 +1,3 @@
-var Marionette 		= require('backbone.marionette'),
-	SearchRegion 	= require('../../regions/search');
-
 var SearchLayout = Marionette.LayoutView.extend({
 
 	el: '#search-results',
@@ -17,7 +14,7 @@ var SearchLayout = Marionette.LayoutView.extend({
 	},
 	
 	changeService:function(e){
-		var service = $(e.currentTarget).data('service')
+		var service = $(e.currentTarget).data('service');
 		this.swapRegion( service );	
 	},
 

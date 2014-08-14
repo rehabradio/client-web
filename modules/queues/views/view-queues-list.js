@@ -4,7 +4,7 @@ module.exports = Marionette.CollectionView.extend({
 
 	tagName: 'ul',
 	
-	collection: dataStore.queueCollection,
+	collection: dataStore.queuesCollection,
 
 	childView: ViewQueueItem,
 

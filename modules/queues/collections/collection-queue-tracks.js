@@ -15,6 +15,7 @@ module.exports = BaseCollection.extend({
 	initialize: function(models, options){
 		
 		this.url = options.url;
+		this.id = options.id;
 
 		this.fetch();
 	}

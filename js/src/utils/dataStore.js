@@ -10,7 +10,7 @@ dataStore.playlistsCollection = new PlaylistsCollection();
 var TracksCollection = require('../../../modules/playlists/collections/collections-tracks');
 dataStore.tracksCollection = new TracksCollection();
 
-var QueueCollection = require('../../../modules/queues/collections/collection-queue');
-dataStore.queueCollection = new QueueCollection();
+var QueuesCollection = require('../../../modules/queues/collections/collection-queues-all');
+dataStore.queuesCollection = new QueuesCollection();
 
 module.exports = dataStore;

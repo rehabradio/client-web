@@ -36,7 +36,7 @@ var SearchServiceView = Marionette.CompositeView.extend({
 
 	},
 
-	updatePagination:function(resp){},
+	updatePagination:function(){},
 
 	paginate:function(event){
 		event.preventDefault();
@@ -46,7 +46,7 @@ var SearchServiceView = Marionette.CompositeView.extend({
 	search:function(options){
 
 		this.$el.find('.results').empty();
-		var fetch = this.collection.fetch(options);
+		this.collection.fetch(options);
 	
 	},	
 

@@ -17,40 +17,40 @@ module.exports = Marionette.LayoutView.extend({
 
 	initialize: function(){
 
-		var self = this;
+		dispatcher.on('queue:change', this._queueChange.bind(this));
 
-		dispatcher.on('queue:change', self._queueChange.bind(self));
+		dataStore.queueTracksCollections = [];
 
-		// self.queues = [];
+		this.render();
 
-		// dataStore.queueCollection.each(function(model){
+		// Render the list of queues available
 
-		// 	var queueId = model.get('id');
+		this.queuesList.show(new ViewQueuesList());
 
-		// 	self.queues.push(new ViewQueueTracks({
-		// 		model: model,
-		// 		collection: new CollectionQueueTracks({
-		// 			url: window.API_ENDPOINT + 'queues/' + queueId + '/tracks'
-		// 		})
-		// 	}));
-		// });
+		var initialQueueId = dataStore.queuesCollection.first().id;
 
-		self.render();
-		self.queuesList.show(new ViewQueuesList);
-		// self.queueTracks.show(self.queues[0]);
+		this._queueChange(initialQueueId);
 	},
 
 	_queueChange: function(id){
 
-		var collection = new CollectionQueueTracks([], {
-			url: 'http://localhost:8000/api/queues/' + id + '/tracks'
-		});
+		var model = dataStore.queuesCollection.find(function(element){ return element.get('id') === id; });
+
+		/*
+		 *	Check if the collection exists in dataStore. If it doesn't create it.
+		 */
+
+		if(!_.find(dataStore.queueTracksCollections, function(element){ return element.id === id; })){
+			dataStore.queueTracksCollections.push(new CollectionQueueTracks([], {
+				id: id,
+				url: window.API_ROOT + 'queues/' + id + '/tracks'
+			}));
+		}
 
 		this.queueTracks.show(new ViewQueueTracks({
-			// model: model,
-			collection: collection
+			model: model,
+			collection: _.find(dataStore.queueTracksCollections, function(element){ return element.id === id; })
 		}));
 
-		// _.findWhere(this.queues, function(element){ return element.model.get('id') === id; });
 	}
 });

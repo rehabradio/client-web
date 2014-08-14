@@ -9,14 +9,9 @@ module.exports = Marionette.ItemView.extend({
 	},
 
 	_loadSelectedQueue: function(){
-		console.log();
 
 		var id = this.model.get('id');
 
-		dispatcher.trigger('queue:change', id)
-
-		// dataStore.queueTracksCollection.queueId = id;
-
-		// dispatcher.trigger('queue:reset', id)
+		dispatcher.trigger('queue:change', id);
 	}
 });

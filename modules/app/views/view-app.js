@@ -117,7 +117,7 @@ var AppView = Backbone.View.extend({
 
 		$.when(
 			dataStore.playlistsCollection.fetch(),
-			dataStore.queueCollection.fetch()
+			dataStore.queuesCollection.fetch()
 		).then(function(){
 			return deferred.resolve();
 		});
@@ -157,7 +157,7 @@ var AppView = Backbone.View.extend({
 		//TODO: endpoint should be 'queues/{{id}}/tracks/'
 		//Arguments should be queueId, trackID
 	
-		var endpoint = 'queues/1/tracks/'
+		var endpoint = 'queues/1/tracks/';
 
 		var data = {
 			type: 'POST',
@@ -176,7 +176,7 @@ var AppView = Backbone.View.extend({
 		 *	Callback for a successful call to add track to queue
 		 */
 
-		dataStore.queueCollection.fetch({
+		dataStore.queuesCollection.fetch({
 			// reset: true,
 			add: true,
 			remove: true
@@ -199,7 +199,7 @@ var AppView = Backbone.View.extend({
 		 *	Callback for a successful call to delete track from queue
 		 */
 
-		 dataStore.queueCollection.fetch({
+		 dataStore.queuesCollection.fetch({
 			add: true,
 			remove: true
 		});
