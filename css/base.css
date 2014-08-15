@@ -61,36 +61,6 @@ header {
         vertical-align: middle;
         opacity: 0.8; }
 
-.playlists {
-  position: relative;
-  width: 50%;
-  float: left;
-  z-index: 0;
-  -webkit-transition: width 150ms cubic-bezier(0, 0, 0.75, 1);
-          transition: width 150ms cubic-bezier(0, 0, 0.75, 1); }
-  .playlists.contract {
-    width: 25%; }
-  .playlists > .content {
-    padding: 0 20px 62px; }
-  .playlists ul {
-    list-style: none; }
-
-.tracks {
-  position: relative;
-  width: 25%;
-  float: left;
-  z-index: 1; }
-  .tracks > .content {
-    position: relative;
-    padding: 0 20px 62px; }
-  .tracks ul {
-    list-style: none; }
-  .tracks li {
-    margin: 0 0 4px 0; }
-    .tracks li .album, .tracks li .artist {
-      display: block;
-      font-size: 12px; }
-
 .queue {
   position: absolute;
   left: 0;
@@ -149,3 +119,33 @@ header {
 [data-service] {
   opacity: 1;
   pointer-events: auto; }
+
+.playlists {
+  position: relative;
+  width: 50%;
+  float: left;
+  z-index: 0;
+  -webkit-transition: width 150ms cubic-bezier(0, 0, 0.75, 1);
+          transition: width 150ms cubic-bezier(0, 0, 0.75, 1); }
+  .playlists.contract {
+    width: 25%; }
+  .playlists > .content {
+    padding: 0 20px 62px; }
+  .playlists ul {
+    list-style: none; }
+
+.tracks {
+  position: relative;
+  width: 25%;
+  float: left;
+  z-index: 1; }
+  .tracks > .content {
+    position: relative;
+    padding: 0 20px 62px; }
+  .tracks ul {
+    list-style: none; }
+  .tracks li {
+    margin: 0 0 4px 0; }
+    .tracks li .album, .tracks li .artist {
+      display: block;
+      font-size: 12px; }
