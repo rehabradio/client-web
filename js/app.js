@@ -6,14 +6,17 @@ Backbone = require('backbone');
 _ = require('underscore');
 $ = require('jquery');
 
-Backbone.$ = $;
-
-Marionette = require('backbone.marionette');
-
 /*
  *	Tell Backbone to use jQuery
  */
 
+Backbone.$ = $;
+
+/*
+ *	Put Marionette on the global namespace
+ */
+
+Marionette = require('backbone.marionette');
 
 /*
  *	Utils:
@@ -58,7 +61,19 @@ window.authoriseUser = function(res){
 				var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
 
 				for(var i in res.emails){
+
+					// If one of the emails stored on the users google+ account is a rehabstudio
+
 					if(/@rehabstudio\.com/.test(res.emails[i].value)){
+
+						// Set the X_GOOGLE_AUTH_TOKEN header with the access_token so that the server can authorise the request.
+
+						$.ajaxSetup({
+							headers: { 'X_GOOGLE_AUTH_TOKEN': gapi.auth.getToken().access_token }
+						});
+
+						// initialise the app
+
 						dispatcher.trigger('login-set-status', true, res.result);
 					}else{
 						console.log('not a rehabstudio email');

@@ -118,7 +118,7 @@ var AppView = Backbone.View.extend({
 
 	_queueAdd:function(payload){
 
-		var endpoint = 'metadata/tracks';
+		var endpoint = 'metadata/tracks/';
 
 		$.ajax({
 			type: 'POST',
@@ -136,7 +136,7 @@ var AppView = Backbone.View.extend({
 		 */
 
 		dataStore.queueTracksCollection.fetch({
-			url: window.API_ROOT + 'queues/' + id + '/tracks',
+			url: window.API_ROOT + 'queues/' + id + '/tracks/',
 			reset: true
 		});
 	},
@@ -179,7 +179,7 @@ var AppView = Backbone.View.extend({
 
 		// TODO - Fix url
 		dataStore.tracksCollection.fetch({
-			url: window.API_ROOT + 'playlists/' + id + '/tracks',
+			url: window.API_ROOT + 'playlists/' + id + '/tracks/',
 			reset: true
 			// add: true,
 			// remove: true
@@ -188,7 +188,7 @@ var AppView = Backbone.View.extend({
 
 	_addTrackToQueue: function(id){
 
-		var endpoint = 'queues/' + this.model.get('queueId') + '/tracks';
+		var endpoint = 'queues/' + this.model.get('queueId') + '/tracks/';
 
 		$.ajax({
 			type: 'POST',
@@ -221,14 +221,6 @@ var AppView = Backbone.View.extend({
 		 *	Deletes the selected track from the queue based on the track_id
 		 */
 
-		/*
-		 *	#############################
-		 *	#                           #
-		 *	#          BROKEN           #
-		 *	#                           #
-		 *	#############################
-		 */
-
 		model.destroy();		 
 	},
 
@@ -252,7 +244,7 @@ var AppView = Backbone.View.extend({
 
 		$.ajax({
 			type: 'POST',
-			url: window.API_ROOT + '/playlists/' + data.playlist + '/tracks/' + data.track,
+			url: window.API_ROOT + '/playlists/' + data.playlist + '/tracks/' + data.track + '/',
 			success: this._addTrackToPlaylistSuccess,
 			error: this._onError
 		});

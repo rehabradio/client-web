@@ -52,7 +52,7 @@ module.exports = Marionette.LayoutView.extend({
 		if(!_.find(dataStore.queueTracksCollections, function(element){ return element.id === id; })){
 			dataStore.queueTracksCollections.push(new CollectionQueueTracks([], {
 				id: id,
-				url: window.API_ROOT + 'queues/' + id + '/tracks'
+				url: window.API_ROOT + 'queues/' + id + '/tracks/'
 			}));
 		}
 

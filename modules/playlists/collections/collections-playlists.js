@@ -4,7 +4,7 @@ var Playlist = require('../models/models-playlists');
 
 module.exports = BaseCollection.extend({
 
-	request: 'playlists',
+	request: 'playlists/',
 
 	model: Playlist
 

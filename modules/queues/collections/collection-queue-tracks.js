@@ -4,10 +4,6 @@ var QueueTrack = require('../models/models-queue-tracks');
 
 module.exports = BaseCollection.extend({
 
-	// request: 'queues',
-
-	// queueId: null,
-
 	model: QueueTrack,
 
 	url: null,
