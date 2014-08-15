@@ -31,21 +31,23 @@ var SearchController = Marionette.Controller.extend({
 
 	initialize: function(){
 
-		dispatcher.on('perform-search', this.performSearch, this);
-		dispatcher.on('service:switch', this.showLayout, this);
-
-		//controller will need to immiately boot up the search view to it can listen for the query in fetch
-
-		console.log('SearchController::initialize');
+		this.setUpListeners();
 		this.layout = new Layout();
 		this.layout.render();
+		this.bootCollections();
+		
+		new this.views.searchView();
+    },
 
-		_.each(this.services, function(service){
+    bootCollections:function(){
+    	_.each(this.services, function(service){
 			this.collections[service] = new SearchCollection();
 		}, this);
+    },
 
-		//boot up search view so we can listen for search terms
-		new this.views.searchView();
+    setUpListeners:function(){
+    	dispatcher.on('perform-search', this.performSearch, this);
+		dispatcher.on('service:switch', this.showLayout, this);
     },
 
     showDefaultService:function(service){
