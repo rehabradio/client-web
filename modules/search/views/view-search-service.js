@@ -8,22 +8,39 @@ var SearchServiceView = Marionette.CompositeView.extend({
 	childViewContainer: '.results',
 	emptyView: EmptyView,
 
+	pagination_template: require('../templates/pagination.hbs'),
+
 	events: {
 		'click .pagination a' : 'paginate'
 	},
 
 	template: require('../templates/search-service.hbs'),
 
-	initialize: function(){
-		console.log('SearchServiceView::initialize');
-		this.render();
+	initialize: function(opts){
+
+		this.pagination = opts.pagination;
+
+		/*
+		this.render() triggers onRenderCollection and onRender twice
+		https://github.com/marionettejs/backbone.marionette/issues/287
+
+		*/
+
+		this.once('render');
 	},
 
-	//TODO: pagination logic
+	onRenderCollection: function(){
+		this.updatePagination( this.collection.pagination );
+  	},
+
+	updatePagination:function( data ){
+		this.$el.find('.pagination').html(this.pagination_template(data));
+	},
 
 	paginate:function(event){
 		event.preventDefault();
-		//this.search({ url: event.currentTarget.href });
+		var fetch = this.collection.fetch({ url: event.currentTarget.href});
+		fetch.done(this.updatePagination.bind(this));
 	}
 });
 

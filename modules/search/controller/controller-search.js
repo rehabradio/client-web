@@ -29,6 +29,8 @@ var SearchController = Marionette.Controller.extend({
 
 	collections: {},
 
+	defaultService: 'spotify',
+
 	initialize: function(){
 
 		dispatcher.on('perform-search', this.performSearch, this);
@@ -48,20 +50,39 @@ var SearchController = Marionette.Controller.extend({
 		new this.views.searchView();
     },
 
+    showLayout:function(service){
+
+    	this.layout.results.show( new this.views.searchService({
+    		collection: this.collections[service], 
+    		className: service 
+    	}) );
+    },
+
+    fetchServices:function(query, service, callback){
+    	var xhr = this.collections[service].fetch({service:service, query:query});
+    	xhr.done(function(data){
+    		this.collections[service].pagination = {next: data.next, previous: data.previous}
+    		callback();
+    	}.bind(this));
+    },
+
+
     performSearch:function(query){
 
-		_.each(this.services, function(service){
-			this.collections[service].fetch({service: service, query:query});
-		}, this);
+    	_.each(this.services, function(service){
+    		this.fetchServices(query, service, function(){
+    			if(service == this.defaultService){
+    				this.showLayout(service);
+    			}
+    		}.bind(this) );
 
-		//default view to display when searching
+    	}, this);
 
-		this.layout.results.show( new this.views.searchService({collection: this.collections.spotify, className: 'spotify' }));
 
 	},
 
 	switchService:function( service ){
-		this.layout.results.show( new this.views.searchService({collection : this.collections[service], className:service }) );
+		this.showLayout(service);
 	}	
 
 });
