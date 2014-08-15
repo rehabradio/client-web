@@ -1,6 +1,5 @@
 
-var	SearchServiceView 	= require('./view-search-service'),
-	//SearchVM			= require('./view-search-vm'),
+var	SearchServiceView 	= require('./view-search-service');
 	Layout 				= require('./layout/layout');
 
 var SearchView = Marionette.ItemView.extend({
@@ -15,17 +14,6 @@ var SearchView = Marionette.ItemView.extend({
 
 	events: {
   		"submit": "onSubmit"
-	},
-
-	subViews: {}, services: ['spotify', 'soundcloud'],
-
-	renderLayout:function(){
-		this.layout = new Layout();
-		this.layout.render();
-
-		_.each(this.services, function(service){
-			this.layout[service].show(  new SearchServiceView({service: service, className: service })  );
-		}, this);
 	},
 
 	onSubmit:function(e){

@@ -27,41 +27,55 @@ var SearchController = Marionette.Controller.extend({
 
 	collections: {},
 
+	defaultService: 'spotify',
+
 	initialize: function(){
 
-		dispatcher.on('perform-search', this.performSearch, this);
-		dispatcher.on('service:switch', this.switchService, this);
-
-		//controller will need to immiately boot up the search view to it can listen for the query in fetch
-
-		console.log('SearchController::initialize');
+		this.setUpListeners();
 		this.layout = new Layout();
 		this.layout.render();
-
-		_.each(this.services, function(service){
-			this.collections[service] = new SearchCollection();
-		}, this);
-
-		//boot up search view so we can listen for search terms
+		this.bootCollections();
+		
 		new this.views.searchView();
     },
 
-    performSearch:function(query){
-
-		_.each(this.services, function(service){
-			this.collections[service].fetch({service: service, query:query});
+    bootCollections:function(){
+    	_.each(this.services, function(service){
+			this.collections[service] = new SearchCollection();
 		}, this);
+    },
 
-		//default view to display when searching
+    setUpListeners:function(){
+    	dispatcher.on('perform-search', this.performSearch, this);
+		dispatcher.on('service:switch', this.showLayout, this);
+    },
 
-		this.layout.results.show( new this.views.searchService({collection: this.collections.spotify, className: 'spotify' }));
+    showDefaultService:function(service){
+    	if(service == this.defaultService){
+    		this.showLayout(service);
+    	}
+    },
 
-	},
+    showLayout:function(service){
+    	this.layout.results.show( new this.views.searchService({
+    		collection: this.collections[service], 
+    		className: service 
+    	}) );
+    },
 
-	switchService:function( service ){
-		this.layout.results.show( new this.views.searchService({collection : this.collections[service], className:service }) );
-	}	
+    fetchServices:function(query, service, callback){
+    	var xhr = this.collections[service].fetch({service:service, query:query});
+    	xhr.done( callback );
+    },
 
+    performSearch:function(query){
+    	_.each(this.services, function(service){
+    		this.fetchServices(query, service, function(){
+    			this.showDefaultService(service);
+    		}.bind(this) );
+    	}, this);
+
+	}
 });
 
 module.exports = SearchController;

@@ -79,6 +79,14 @@
 		float: left;
 		padding: 10px 0px;
 
+		&[data-service='spotify']{
+			background: green;
+		}
+
+		&[data-service='soundcloud']{
+			background: red;
+		}
+
 		&.active{
 			background: $black;
 		}

@@ -25,3 +25,4 @@ node_modules/
 css/base.css
 js/build/build.js
 js/jasmine/build/build.js
+modules/core/tempAuth.js

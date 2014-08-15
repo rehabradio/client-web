@@ -17,15 +17,16 @@ var SearchCollection = BaseCollection.extend({
 
 	fetch:function(options){
 		if(!options.url){
-			this.url = this.API_ENDPOINT + this.SEARCH_ENDPOINT + options.service + "/?q=" + options.query;
+			this.url = window.API_ROOT + this.SEARCH_ENDPOINT + options.service + "/?q=" + options.query;
 		}
 		return Backbone.Collection.prototype.fetch.call(this, options);
+
 	},
 
 	parse:function(response){
+		this.pagination = { next: response.next, previous: response.previous};
 		return response.results;
 	}
-
 });
 
 module.exports = SearchCollection;

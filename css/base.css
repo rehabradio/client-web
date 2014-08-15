@@ -119,6 +119,10 @@ header {
     display: inline-block;
     float: left;
     padding: 10px 0px; }
+    #search-results [role="tabs"] a[data-service='spotify'] {
+      background: green; }
+    #search-results [role="tabs"] a[data-service='soundcloud'] {
+      background: red; }
     #search-results [role="tabs"] a.active {
       background: #0d0d0d; }
   #search-results .results li .track-details {
