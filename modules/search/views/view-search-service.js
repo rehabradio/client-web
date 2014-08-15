@@ -1,5 +1,4 @@
-var Marionette 			= require('backbone.marionette'),
-	SearchTrackView 	= require('./view-search-track'),
+var SearchTrackView 	= require('./view-search-track'),
 	EmptyView    		= require('./view-empty');
 
 var SearchServiceView = Marionette.CompositeView.extend({

@@ -1,5 +1,3 @@
-var Marionette 	= require('backbone.marionette');
-
 var SearchLayout = Marionette.LayoutView.extend({
 
 	el: '#search-results',
@@ -14,7 +12,7 @@ var SearchLayout = Marionette.LayoutView.extend({
 		'click a[data-service]' : 'changeService'
 	},
 
-	changeService:function(e){
+	changeService: function(e){
 		var service = $(e.currentTarget).data('service');
 		dispatcher.trigger('service:switch', service);
 	}

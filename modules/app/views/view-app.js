@@ -1,3 +1,5 @@
+var ModelApp = require('../models/models-app');
+
 var AppView = Backbone.View.extend({
 
 	el: '#app',
@@ -8,7 +10,7 @@ var AppView = Backbone.View.extend({
 	 */
 
 	preload: {
-		queue: require('../../queue/views/view-queue'),
+		queue: require('../../queues/views/view-queues-layout'),
 		playlist: require('../../playlists/views/view-playlists')
 
 	},
@@ -26,29 +28,37 @@ var AppView = Backbone.View.extend({
 	initialize: function(){
 		var self = this;
 
-		console.log('App Initialised');
+		/*
+		 *	Stores global information for the app. Examples include login information and queue information
+		 */
 
-		console.log('Creating global events...');
+		dataStore.appModel = new ModelApp();
+
+		this.model = dataStore.appModel;
+
+		console.log('App Initialised');
 
 		/*
 		 *	Assign events to the global dispatcher	
 		 */
+
+		console.log('Creating global events...');
 
 		dispatcher.on('collections-when-pre-loaded', self._startApp.bind(self));
 		dispatcher.on('add-track-to-queue', self._addTrackToQueue.bind(self));
 		dispatcher.on('add-track-to-playlist', self._addTrackToPlaylist.bind(self));
 		dispatcher.on('queue-track-vote', self._voteTrack.bind(self));
 		
-		dispatcher.on('delete-track-from-queue', self._deleteTrackFromQueue.bind(self));
+		dispatcher.on('tracks-collection-reset', self._viewPlaylistTracks.bind(self));
 
-		dispatcher.on('tracks-collection-reset', self._addToTracks.bind(self));
-
-		dispatcher.on('queue:add', this.queueAdd, this);
+		dispatcher.on('queue:reset', self._queueResetTracks.bind(self));
+		dispatcher.on('queue:add', this._queueAdd, this);
+		dispatcher.on('queue:track:delete', self._deleteTrackFromQueue.bind(self));
 
 		console.log('booting views...');
 		
 		/*
-		 *	Callback for when the deferred object is resolved
+		 *	Callback for when the deferred object is resolved. This loads content needed for the app to function, the queues data and playlists data
 		 */
 
         var loadQueue = self._preloadData();
@@ -67,32 +77,29 @@ var AppView = Backbone.View.extend({
 
 	},
 
-	queueAdd:function(payload, id){
+	_queueAdd:function(payload){
 
-		var endpoint = 'metadata/tracks/';
+		var endpoint = 'metadata/tracks';
 
-		if(!id){
+		$.ajax({
+			type: 'POST',
+			url: window.API_ROOT + endpoint,
+			data: payload,
+			success: this._addTrackToQueue.bind(this),
+			error: this._onError
+		});
+	},
 
-			var data = {
-				type: 'POST',
-				url: window.API_ROOT + endpoint,
-				data: payload
-			};
+	_queueResetTracks: function(id){
+		
+		/*
+		 *	Loads the data for current selected queue
+		 */
 
-			var xhr = $.ajax(data);
-
-			xhr.done(function(response) {
-   				this._addTrackToQueue( response.id );
-  			}.bind( this ));
-
-			xhr.fail(function(jqXHR, textStatus, err) {
-    			console.log( err );
-  			});
-
-			return;
-		}
-
-		this._addTrackToQueue(id);
+		dataStore.queueTracksCollection.fetch({
+			url: window.API_ROOT + 'queues/' + id + '/tracks',
+			reset: true
+		});
 	},
 
 	_preloadData: function(){
@@ -105,7 +112,7 @@ var AppView = Backbone.View.extend({
 
 		$.when(
 			dataStore.playlistsCollection.fetch(),
-			dataStore.queueCollection.fetch()
+			dataStore.queuesCollection.fetch()
 		).then(function(){
 			return deferred.resolve();
 		});
@@ -125,7 +132,7 @@ var AppView = Backbone.View.extend({
 	 *	Functions to be called when events are triggered from the modules.
 	 */
 
-	_addToTracks: function(id){
+	_viewPlaylistTracks: function(id){
 
 		/*
 		 *	Called by clicking on a playlist
@@ -142,20 +149,15 @@ var AppView = Backbone.View.extend({
 
 	_addTrackToQueue: function(id){
 
-		//TODO: endpoint should be 'queues/{{id}}/tracks/'
-		//Arguments should be queueId, trackID
-	
-		var endpoint = 'queues/1/tracks/'
+		var endpoint = 'queues/' + this.model.get('queueId') + '/tracks';
 
-		var data = {
+		$.ajax({
 			type: 'POST',
 			url: window.API_ROOT + endpoint,
-			data: { track: id }
-		};
-
-		var xhr = $.ajax(data);
-		xhr.done( this._addTrackToQueueSuccess() );
-
+			data: id,
+			success: this._addTrackToQueueSuccess,
+			error: this._onError
+		});
 	},
 
 	_addTrackToQueueSuccess: function(){
@@ -164,7 +166,9 @@ var AppView = Backbone.View.extend({
 		 *	Callback for a successful call to add track to queue
 		 */
 
-		dataStore.queueCollection.fetch({
+		var collection = _.find(dataStore.queueTracksCollections, function(element){ return element.id === dataStore.appModel.get('queueId'); });
+
+		collection.fetch({
 			// reset: true,
 			add: true,
 			remove: true
@@ -178,15 +182,15 @@ var AppView = Backbone.View.extend({
 		 *	Deletes the selected track from the queue based on the track_id
 		 */
 
-		model.destroy();		 
+		/*
+		 *	#############################
+		 *	#                           #
+		 *	#          BROKEN           #
+		 *	#                           #
+		 *	#############################
+		 */
 
-		// $.ajax({
-		// 	type: 'DELETE',
-		// 	url: 'http://localhost:8000/api/queue/' + id + '/',
-		// 	dataType: 'JSON',
-		// 	success: this._deleteTrackFromQueueSuccess,
-		// 	error: this._onError
-		// });
+		model.destroy();		 
 	},
 
 	_deleteTrackFromQueueSuccess: function(){
@@ -195,7 +199,7 @@ var AppView = Backbone.View.extend({
 		 *	Callback for a successful call to delete track from queue
 		 */
 
-		 dataStore.queueCollection.fetch({
+		 dataStore.queuesCollection.fetch({
 			add: true,
 			remove: true
 		});

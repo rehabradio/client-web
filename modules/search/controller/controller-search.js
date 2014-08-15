@@ -1,7 +1,5 @@
-var Marionette 			= require('backbone.marionette'),
-	Layout 				= require('../views/layout/layout'),
-	SearchCollection	= require('../collections/collections-search'),
-	_					= require('underscore');
+var Layout 				= require('../views/layout/layout'),
+	SearchCollection	= require('../collections/collections-search');
 
 /*
 

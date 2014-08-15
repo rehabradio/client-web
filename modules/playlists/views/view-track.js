@@ -54,7 +54,7 @@
 
 		// Filter playlists to not include current playlist
 
-		var playlists = dataStore.playlistsCollection.filter(function(element){ return element.get('id') !== self.playlist}),
+		var playlists = dataStore.playlistsCollection.filter(function(element){ return element.get('id') !== self.playlist; }),
 			$select = self.$el.find('select');
 
 		var placeholder = document.createElement('option');
@@ -65,7 +65,7 @@
 
 		$select.append(placeholder);
 
-		_.each(playlists, function(element, index){
+		_.each(playlists, function(element){
 			var option = document.createElement('option');
 			option.innerText = element.get('name');
 			option.value = element.get('id');

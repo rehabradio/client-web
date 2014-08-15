@@ -64,13 +64,11 @@
 #search{}
 
 #search-results{
-	position: absolute;
-	width: 400px;
-	right: 0;
 	background: $purple;
 	z-index: 1;
 	color: #fff;
-	overflow: scroll;
+	overflow-y: scroll;
+	max-height: 460px;
 
 	[role="tabs"] a{
 		width: 50%;
