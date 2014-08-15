@@ -1,11 +1,11 @@
 <td>
-	<h4>{{track_name}}</h4>
+	<h4>{{track.name}}</h4>
 </td>
 <td>
-	<span class="album">{{album_name}}</span>
+	<span class="album">{{track.album}}</span>
 </td>
 <td>
-	{{#each artists}}
+	{{#each track.artists}}
 		<span class="artist"></span>
 	{{/each}}
 </td>

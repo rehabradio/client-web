@@ -12,6 +12,8 @@ $ = require('jquery');
 
 Backbone.$ = $;
 
+Backbone.emulateHTTP = true;
+
 /*
  *	Put Marionette on the global namespace
  */
