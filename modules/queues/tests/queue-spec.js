@@ -4,14 +4,14 @@ describe('Queue', function(){
 	it('Length of collection should equal count in mock data', function(){
 
 		var collectionCount = dataQueue.count,
-			collectionLength = dataStore.queueCollection.length;
+			collectionLength = dataStore.queuesCollection.length;
 
 		expect(collectionLength).toEqual(collectionCount);
 	});
 
 	it('Tracks should be able to be added to the queue', function(){
 
-		var collectionLength = dataStore.queueCollection.length;
+		var collectionLength = dataStore.queuesCollection.length;
 
 		$.ajax({
 			url: 'add/to/queue', // TODO - update when available
@@ -38,11 +38,11 @@ describe('Queue', function(){
 			}
 		});
 
-		dataStore.queueCollection.fetch({
+		dataStore.queuesCollection.fetch({
 			async: false
 		});
 
-		expect(dataStore.queueCollection.length).toEqual(collectionLength + 1);
+		expect(dataStore.queuesCollection.length).toEqual(collectionLength + 1);
 
 	});
 
@@ -58,11 +58,11 @@ describe('Queue', function(){
 			}
 		});
 
-		dataStore.queueCollection.fetch({
+		dataStore.queuesCollection.fetch({
 			async: false
 		});
 
-		expect(dataStore.queueCollection.at(0).get('id')).toEqual(2);
+		expect(dataStore.queuesCollection.at(0).get('id')).toEqual(2);
 
 	});
 });

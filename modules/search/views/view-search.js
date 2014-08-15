@@ -1,30 +1,43 @@
-var SearchResultsView = require('./view-search-results');
 
-var SearchView = Backbone.View.extend({
+var	SearchServiceView 	= require('./view-search-service'),
+	//SearchVM			= require('./view-search-vm'),
+	Layout 				= require('./layout/layout');
+
+var SearchView = Marionette.ItemView.extend({
 
 	el: '#search',
-	searchField: '.search-field',
+
+	template: false,
+
+	ui: {
+		input: '.search-field'
+	},
 
 	events: {
   		"submit": "onSubmit"
 	},
 
-	initialize: function(){
-		this.SearchResultsView = new SearchResultsView();
-		this.SearchResultsView.$el.hide();
+	subViews: {}, services: ['spotify', 'soundcloud'],
+
+	renderLayout:function(){
+		this.layout = new Layout();
+		this.layout.render();
+
+		_.each(this.services, function(service){
+			this.layout[service].show(  new SearchServiceView({service: service, className: service })  );
+		}, this);
 	},
 
-	onSubmit:function(event){
+	onSubmit:function(e){
 
-		event.preventDefault();
-		var query = $.trim( $(event.currentTarget).find( this.searchField ).val() );
+		e.preventDefault();
+		var query = $.trim( $(e.currentTarget).find( this.ui.input ).val() );
 
 		if(! query.length ){
 			return;
 		}
 
 		dispatcher.trigger('perform-search', query);
-		this.SearchResultsView.$el.show();
 	}
 });
 

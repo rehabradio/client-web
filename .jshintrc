@@ -5,6 +5,7 @@
         "gapi": false,
         "viewUser": false,
         "UserView": false,
+        "Marionette": false,
         "dataPlaylists": false,
         "dataQueue": false,
         "Backbone": false,

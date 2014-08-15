@@ -6,11 +6,14 @@ Backbone = require('backbone');
 _ = require('underscore');
 $ = require('jquery');
 
+Backbone.$ = $;
+
+Marionette = require('backbone.marionette');
+
 /*
  *	Tell Backbone to use jQuery
  */
 
-Backbone.$ = $;
 
 /*
  *	Utils:
@@ -34,6 +37,8 @@ if(document.location.search.match(/debug/gi)){
 /*
  *	Define and initialise the root view to start the application
  */
+
+window.API_ROOT = 'http://server-core.herokuapp.com/api/';
 
 var AppView = require('../modules/app/views/view-app');
 

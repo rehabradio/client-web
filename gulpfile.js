@@ -107,7 +107,9 @@ gulp.task('default', function(){
 
 gulp.task('watch', function(){
     gulp.watch('css/src/**/*.scss', ['sass']);
+    gulp.watch('modules/**/assets/scss/*.scss', ['sass']);
     gulp.watch('modules/**/*.js', ['build']);
+    gulp.watch('modules/**/templates/*.hbs', ['build']);
     gulp.watch('js/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);

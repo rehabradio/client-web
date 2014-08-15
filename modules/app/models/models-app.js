@@ -1,3 +1,4 @@
+
 var ModelApp = Backbone.Model.extend({
 	defaults: {
 		loginStatus: false,
@@ -7,4 +8,4 @@ var ModelApp = Backbone.Model.extend({
 	}
 });
 
- module.exports = new ModelApp();
+module.exports = new ModelApp();
