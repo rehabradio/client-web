@@ -1,8 +1,8 @@
-// var Backbone = require('backbone');
+var Backbone = require('backbone');
 
 var BaseCollection = Backbone.Collection.extend({
 
-	API_ENDPOINT: 'http://localhost:8000/api/',
+	API_ENDPOINT: 'http://server-core.herokuapp.com/api/',
 
 	model: null,
 
@@ -12,6 +12,18 @@ var BaseCollection = Backbone.Collection.extend({
 	
 	parse: function(res){
 		return res.results;
+	},
+
+	sync:function(method, model, options){
+
+		options.beforeSend = function (xhr) {
+			xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    		xhr.setRequestHeader('X_GOOGLE_AUTH_TOKEN', 'ACCESS_TOKEN');
+  		};
+
+  		console.log(arguments);
+
+  		return Backbone.Collection.prototype.sync.apply(this, arguments);	
 	}
 
 });

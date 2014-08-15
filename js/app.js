@@ -7,6 +7,7 @@ _ = require('underscore');
 $ = require('jquery');
 
 Backbone.$ = $;
+Backbone.emulateHTTP = true;
 
 Marionette = require('backbone.marionette');
 
