@@ -137,8 +137,7 @@ var AppView = Backbone.View.extend({
 
 		dataStore.queueTracksCollection.fetch({
 			url: window.API_ROOT + 'queues/' + id + '/tracks/',
-			reset: true,
-			type: 'GET'
+			reset: true
 		});
 	},
 
@@ -151,8 +150,8 @@ var AppView = Backbone.View.extend({
 		var deferred = $.Deferred();
 
 		$.when(
-			dataStore.playlistsCollection.fetch({type: 'GET'}),
-			dataStore.queuesCollection.fetch({type: 'GET'})
+			dataStore.playlistsCollection.fetch(),
+			dataStore.queuesCollection.fetch()
 		).then(function(){
 			return deferred.resolve();
 		});
@@ -195,7 +194,7 @@ var AppView = Backbone.View.extend({
 		$.ajax({
 			type: 'POST',
 			url: window.API_ROOT + endpoint,
-			data: id,
+			data: {track: id},
 			success: this._addTrackToQueueSuccess,
 			error: this._onError
 		});
@@ -246,7 +245,9 @@ var AppView = Backbone.View.extend({
 
 		$.ajax({
 			type: 'POST',
-			url: window.API_ROOT + '/playlists/' + data.playlist + '/tracks/' + data.track + '/',
+			url: window.API_ROOT + 'playlists/' + data.playlist + '/tracks/',
+			dataType: 'JSON',
+			data: {track: data.track},
 			success: this._addTrackToPlaylistSuccess,
 			error: this._onError
 		});

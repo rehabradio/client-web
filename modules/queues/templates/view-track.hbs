@@ -1,11 +1,12 @@
 <td>
-	<h3>Track: {{track_name}}</h3>
+	<h3>Track: {{track.name}}</h3>
+	<h4>Album: {{track.album.name}}
 	{{#if artists}}
 	<h4>Artist: {{artists.[0]}}</h4>
 	{{/if}}
 </td>
 <td>
-	<p>Source: {{source_type}}</p>
+	<p>Source: {{track.source_type}}</p>
 </td>
 <td>
 	<button class="delete">Remove</button>

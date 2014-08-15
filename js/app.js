@@ -12,7 +12,6 @@ $ = require('jquery');
 
 Backbone.$ = $;
 
-Backbone.emulateHTTP = true;
 
 /*
  *	Put Marionette on the global namespace
@@ -67,20 +66,6 @@ window.authoriseUser = function(res){
 					// If one of the emails stored on the users google+ account is a rehabstudio
 
 					if(/@rehabstudio\.com/.test(res.emails[i].value)){
-
-						// Set the X_GOOGLE_AUTH_TOKEN header with the access_token so that the server can authorise the request.
-
-						$.ajaxSetup({
-							headers: { 'X_GOOGLE_AUTH_TOKEN': gapi.auth.getToken().access_token }
-						});
-
-						// $.ajax({
-						// 	url :'http://server-core.herokuapp.com/api/playlists/1/tracks/',
-						// 	type: 'GET',
-						// 	success: function(data){
-						// 		console.log('data', data);
-						// 	}
-						// });
 
 						// initialise the app
 

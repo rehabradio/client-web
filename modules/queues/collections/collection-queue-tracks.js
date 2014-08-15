@@ -13,9 +13,7 @@ module.exports = BaseCollection.extend({
 		this.url = options.url;
 		this.id = options.id;
 
-		this.fetch({
-			type: 'GET'
-		});
+		this.fetch();
 	}
 	
 });
