@@ -32,7 +32,7 @@ var SearchController = Marionette.Controller.extend({
 	initialize: function(){
 
 		dispatcher.on('perform-search', this.performSearch, this);
-		dispatcher.on('service:switch', this.switchService, this);
+		dispatcher.on('service:switch', this.showLayout, this);
 
 		//controller will need to immiately boot up the search view to it can listen for the query in fetch
 
@@ -48,8 +48,13 @@ var SearchController = Marionette.Controller.extend({
 		new this.views.searchView();
     },
 
-    showLayout:function(service){
+    showDefaultService:function(service){
+    	if(service == this.defaultService){
+    		this.showLayout(service);
+    	}
+    },
 
+    showLayout:function(service){
     	this.layout.results.show( new this.views.searchService({
     		collection: this.collections[service], 
     		className: service 
@@ -58,31 +63,17 @@ var SearchController = Marionette.Controller.extend({
 
     fetchServices:function(query, service, callback){
     	var xhr = this.collections[service].fetch({service:service, query:query});
-    	xhr.done(function(data){
-    		this.collections[service].pagination = {next: data.next, previous: data.previous}
-    		callback();
-    	}.bind(this));
+    	xhr.done( callback );
     },
 
-
     performSearch:function(query){
-
     	_.each(this.services, function(service){
     		this.fetchServices(query, service, function(){
-    			if(service == this.defaultService){
-    				this.showLayout(service);
-    			}
+    			this.showDefaultService(service);
     		}.bind(this) );
-
     	}, this);
 
-
-	},
-
-	switchService:function( service ){
-		this.showLayout(service);
-	}	
-
+	}
 });
 
 module.exports = SearchController;
