@@ -72,6 +72,14 @@ window.authoriseUser = function(res){
 							headers: { 'X_GOOGLE_AUTH_TOKEN': gapi.auth.getToken().access_token }
 						});
 
+						// $.ajax({
+						// 	url :'http://server-core.herokuapp.com/api/playlists/1/tracks/',
+						// 	type: 'GET',
+						// 	success: function(data){
+						// 		console.log('data', data);
+						// 	}
+						// });
+
 						// initialise the app
 
 						dispatcher.trigger('login-set-status', true, res.result);
