@@ -19,9 +19,10 @@ var AppView = Backbone.View.extend({
 	 *	These views can be loaded on start up as they don't rely on external data.
 	 */
 	
-	views: {
-		search: require('../../search/views/view-search')
+	 //switch to using search controller
 
+	modules: {
+		search: require('../../search/controller/controller-search')
 	},
 
 	initialize: function(){
@@ -70,8 +71,8 @@ var AppView = Backbone.View.extend({
 		 *	Initialise views that don't rely on external data
 		 */
 
-		for(var view in self.views){
-			new self.views[view]();
+		for(var module in self.modules){
+			new self.modules[module]();
 		}
 
 	},

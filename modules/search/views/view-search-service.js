@@ -1,5 +1,4 @@
-var SearchCollection	= require('../collections/collections-search'),
-	SearchTrackView 	= require('./view-search-track'),
+var SearchTrackView 	= require('./view-search-track'),
 	EmptyView    		= require('./view-empty');
 
 var SearchServiceView = Marionette.CompositeView.extend({
@@ -12,20 +11,10 @@ var SearchServiceView = Marionette.CompositeView.extend({
 		'click .pagination a' : 'paginate'
 	},
 
-	pagination_template: require('../templates/pagination.hbs'),
 	template: require('../templates/search-service.hbs'),
 
-	initialize: function(options){
-
+	initialize: function(){
 		console.log('SearchServiceView::initialize');
-	
-		for(var opts in options){
-			this[opts] = options[opts];
-		}
-
-		this.collection = new SearchCollection();
-		this.setUpListeners();
-
 		this.render();
 	},
 

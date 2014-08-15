@@ -1,3 +1,4 @@
+
 var	SearchServiceView 	= require('./view-search-service'),
 	//SearchVM			= require('./view-search-vm'),
 	Layout 				= require('./layout/layout');
@@ -36,7 +37,6 @@ var SearchView = Marionette.ItemView.extend({
 			return;
 		}
 
-		this.renderLayout();
 		dispatcher.trigger('perform-search', query);
 	}
 });
