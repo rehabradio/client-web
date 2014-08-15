@@ -140,7 +140,7 @@ var AppView = Backbone.View.extend({
 
 		// TODO - Fix url
 		dataStore.tracksCollection.fetch({
-			url: 'http://localhost:8000/api/playlists/' + id + '/tracks',
+			url: window.API_ROOT + 'playlists/' + id + '/tracks',
 			reset: true
 			// add: true,
 			// remove: true
@@ -213,7 +213,7 @@ var AppView = Backbone.View.extend({
 
 		$.ajax({
 			type: 'POST',
-			url: 'http://localhost:8000/api/playlists/' + data.playlist + '/tracks/' + data.track,
+			url: window.API_ROOT + '/playlists/' + data.playlist + '/tracks/' + data.track,
 			success: this._addTrackToPlaylistSuccess,
 			error: this._onError
 		});

@@ -10,10 +10,4 @@ module.exports = BaseCollection.extend({
 	
 	model: TrackModel,
 
-	// urlRoot: this.API_ENDPOINT + '/playlists/',
-
-	// url: function(id){
-	// 	return this.urlRoot + id + '/tracks';
-	// },
-
 });
