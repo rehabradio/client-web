@@ -1,6 +1,5 @@
 var BaseCollection = Backbone.Collection.extend({
-
-
+	
 	model: null,
 
 	url: function(){
