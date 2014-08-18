@@ -293,7 +293,6 @@ var AppView = Backbone.View.extend({
 
 		dataStore.tracksCollection.fetch({
 			url: window.API_ROOT + 'playlists/' + dataStore.tracksCollection.playlist + '/tracks/',
-			// reset: true,
 			add: true,
 			remove: true
 		});
