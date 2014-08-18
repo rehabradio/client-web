@@ -1,7 +1,7 @@
 #search{}
 
 #search-results{
-	background: lighten($purple, 10%);
+	background: lighten($blue, 10%);
 	z-index: 1;
 	color: #fff;
 	overflow-y: scroll;
@@ -17,7 +17,7 @@
 		padding: 20px 0px;
 
 		&.is-active{
-			background: $purple
+			background: $blue
 		}
 	}
 

@@ -9,6 +9,7 @@
 	events: {
 		'click .add-to-queue': '_onAddToQueue',
 		'click .add-to-playlist': '_onAddToPlaylist',
+		'click .remove-from-playlist': '_onRemoveFromPlaylist',
 		'change select': '_onSelectPlaylist'
 	},
 
@@ -63,7 +64,7 @@
 		placeholder.setAttribute('disabled', '');
 		placeholder.innerText = 'Select your playlist';
 
-		$select.append(placeholder);
+		$select.empty().append(placeholder);
 
 		_.each(playlists, function(element){
 			var option = document.createElement('option');
@@ -84,6 +85,17 @@
 			track: this.model.get('id')
 		};
 
-		dispatcher.trigger('add-track-to-playlist', data);	
+		dispatcher.trigger('playlist:add', data);	
+	},
+
+	_onRemoveFromPlaylist: function(e){
+		e.preventDefault();
+
+		var data = {
+			playlist: this.playlist,
+			track: this.model.get('id')
+		};
+
+		dispatcher.trigger('playlist:remove', data); 
 	}
 });

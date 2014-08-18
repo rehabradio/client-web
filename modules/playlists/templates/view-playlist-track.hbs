@@ -1,12 +1,8 @@
 <td>
-	<h4>{{transform track.name}}</h4>
-</td>
-<td>
-	<span class="album">{{track.album}}</span>
-</td>
-<td>
+	<h4>{{track.name}}</h4>
+	<h5 class="album">{{track.album.name}}</h5>
 	{{#each track.artists}}
-		<span class="artist"></span>
+		<h6 class="artist">{{name}}</h6>
 	{{/each}}
 </td>
 <td>
@@ -14,7 +10,16 @@
 </td>
 <td>
 	<a href="#" class="add-to-playlist">Add to playlist</a>
+	<select></select>
 </td>
 <td>
-	<select></select>
+	<a href="#" class="remove-from-playlist">Remove from playlist</a>
+</td>
+<td>
+	{{#sourceSpotify track.source_type}}
+		<a href="#" title=""><img src="/img/spotify.png" alt="Spotify"></a>
+	{{/sourceSpotify}}
+	{{#sourceSoundcloud track.source_type}}
+		<a href="#" title=""><img src="/img/soundcloud.png" alt="Spotify"></a>
+	{{/sourceSoundcloud}}
 </td>

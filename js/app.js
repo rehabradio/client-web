@@ -11,14 +11,13 @@ $ = require('jquery');
  */
 
 Backbone.$ = $;
-Backbone.emulateHTTP = true;
-
 
 /*
  *	Put Marionette on the global namespace
  */
 
 Marionette = require('backbone.marionette');
+Handlebars = require('hbsfy/runtime');
 
 /*
  *	Utils:
@@ -90,3 +89,17 @@ window.authoriseUser = function(res){
 		dispatcher.trigger('login-set-status', false);
 	}
 }
+
+Handlebars.registerHelper('sourceSpotify', function(source, options){
+	if(source === 'spotify'){
+		return options.fn(this);
+	}
+ 	return options.inverse(this);
+});
+
+Handlebars.registerHelper('sourceSoundcloud', function(source, options){
+	if(source === 'soundcloud'){
+		return options.fn(this);
+	}
+ 	return options.inverse(this);
+});

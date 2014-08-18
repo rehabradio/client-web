@@ -12,16 +12,18 @@ h1, h2, h3, h4 {
 
 
 h2 {
-  margin: 0 0 4px 0; }
+  margin: 0 0 4px 0;
+  color: #ec5542; }
 
 h3 {
-  font-size: 16px; }
+  font-size: 16px;
+  color: #4f6aff; }
 
 h4 {
   font-size: 13px; }
 
 body {
-  background-color: #0d0d0d;
+  background-color: #000000;
   color: #FFFFFF;
   font-size: 12px;
   font-family: 'Noto Sans', sans-serif;
@@ -115,7 +117,7 @@ header {
   #search-results [role="tabs"] a {
     width: 50%;
     text-align: center;
-    background: #121212;
+    background: #050505;
     color: #fff;
     display: inline-block;
     float: left;

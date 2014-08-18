@@ -1,19 +1,22 @@
 <td>
-	<h4>Track: {{track.name}}</h4>
-	<h5>Album: {{track.album.name}}</h5>
-	{{#if artists}}
-	<h6>Artist: {{artists.[0]}}</h6>
+	<h4>{{track.name}}</h4>
+	<h5>{{track.album.name}}</h5>
+	{{#if track.artists}}
+		<h6>{{track.artists.[0].name}}</h6>
 	{{/if}}
-</td>
-<td>
-	<p>Source: {{track.source_type}}</p>
 </td>
 <td>
 	<button class="delete">Remove</button>
 </td>
+<td>
+	{{#sourceSpotify track.source_type}}
+		<a href="#" title=""><img src="/img/spotify.png" alt="Spotify"></a>
+	{{/sourceSpotify}}
+	{{#sourceSoundcloud track.source_type}}
+		<a href="#" title=""><img src="/img/soundcloud.png" alt="Spotify"></a>
+	{{/sourceSoundcloud}}
+</td>
 <!-- <td> -->
 	<!-- <button class="up vote">+</button> -->
-<!-- </td> -->
-<!-- <td> -->
 	<!-- <button class="down vote">-</button> -->
 <!-- </td> -->
