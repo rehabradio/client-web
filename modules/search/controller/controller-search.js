@@ -64,6 +64,7 @@ var SearchController = Marionette.Controller.extend({
     },
 
     fetchServices:function(query, service, callback){
+        
     	var xhr = this.collections[service].fetch({service:service, query:query});
     	xhr.done( callback );
     },
