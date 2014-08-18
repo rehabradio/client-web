@@ -57,6 +57,10 @@ window.authoriseUser = function(res){
 
 	if (res['status']['signed_in']) {
 
+		$.ajaxSetup({
+			headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
+		});
+
 	 	gapi.client.load('plus', 'v1', function() {
 			gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
 
@@ -70,7 +74,10 @@ window.authoriseUser = function(res){
 
 						// initialise the app
 
+
 						dispatcher.trigger('login-set-status', true, res.result);
+
+
 					}else{
 						console.log('not a rehabstudio email');
 					}
