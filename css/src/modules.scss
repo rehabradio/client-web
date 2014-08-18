@@ -64,7 +64,7 @@
 #search{}
 
 #search-results{
-	background: $purple;
+	background: $blue;
 	z-index: 1;
 	color: #fff;
 	overflow-y: scroll;
@@ -73,7 +73,7 @@
 	[role="tabs"] a{
 		width: 50%;
 		text-align: center;
-		background: $purple;
+		background: $blue;
 		color: #fff;
 		display: inline-block;
 		float: left;

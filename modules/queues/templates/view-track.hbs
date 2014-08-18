@@ -6,14 +6,17 @@
 	{{/if}}
 </td>
 <td>
-	<p>Source: {{track.source_type}}</p>
+	<button class="delete">Remove</button>
 </td>
 <td>
-	<button class="delete">Remove</button>
+	{{#sourceSpotify track.source_type}}
+		<a href="#" title=""><img src="/img/spotify.png" alt="Spotify"></a>
+	{{/sourceSpotify}}
+	{{#sourceSoundcloud track.source_type}}
+		<a href="#" title=""><img src="/img/soundcloud.png" alt="Spotify"></a>
+	{{/sourceSoundcloud}}
 </td>
 <!-- <td> -->
 	<!-- <button class="up vote">+</button> -->
-<!-- </td> -->
-<!-- <td> -->
 	<!-- <button class="down vote">-</button> -->
 <!-- </td> -->

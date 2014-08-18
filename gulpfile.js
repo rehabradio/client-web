@@ -3,7 +3,6 @@ var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
 var gutil = require('gulp-util');
 
-// var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
 var karma = require('karma').server;
 var karmaConfig = require('./karma-config.js');
 

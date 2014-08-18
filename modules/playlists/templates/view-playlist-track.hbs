@@ -1,12 +1,8 @@
 <td>
 	<h4>{{track.name}}</h4>
-</td>
-<td>
-	<span class="album">{{track.album}}</span>
-</td>
-<td>
+	<h5 class="album">{{track.album.name}}</h5>
 	{{#each track.artists}}
-		<span class="artist"></span>
+		<h6 class="artist">{{name}}</h6>
 	{{/each}}
 </td>
 <td>
@@ -17,4 +13,12 @@
 </td>
 <td>
 	<select></select>
+</td>
+<td>
+	{{#sourceSpotify track.source_type}}
+		<a href="#" title=""><img src="/img/spotify.png" alt="Spotify"></a>
+	{{/sourceSpotify}}
+	{{#sourceSoundcloud track.source_type}}
+		<a href="#" title=""><img src="/img/soundcloud.png" alt="Spotify"></a>
+	{{/sourceSoundcloud}}
 </td>
