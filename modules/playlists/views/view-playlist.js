@@ -1,28 +1,24 @@
-module.exports = Backbone.View.extend({
+module.exports = Marionette.ItemView.extend({
 
-	tagName: 'li',
+	// tagName: 'li',
 
 	template: require('../templates/view-playlist.hbs'),
 
 	events: {
-		'click a': '_onShowTracks'
+		'click .view-playlist': '_onShowPlaylist'
 	},
 
 	initialize: function(options){
-		this.parent = options.parent;
-		this.setElement(this.template(this.model.toJSON()));
+		// this.parent = options.parent;
+		// this.setElement(this.template(this.model.toJSON()));
 	},
 
-	render: function(){
-		return this;
-	},
-
-	_onShowTracks: function(e){
+	_onShowPlaylist: function(e){
 		e.preventDefault();
 
-		this.parent.model.set('playlist', this.model.get('id'));
+		// this.parent.model.set('playlist', this.model.get('id'));
 
-		dispatcher.trigger('tracks-show');
-		dispatcher.trigger('tracks-collection-reset', this.model.get('id'));
+		dispatcher.trigger('playlist:tracks:show');
+		dispatcher.trigger('playlist:show', this.model.get('id'));
 	}
 });

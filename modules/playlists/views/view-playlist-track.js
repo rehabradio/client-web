@@ -91,11 +91,6 @@
 	_onRemoveFromPlaylist: function(e){
 		e.preventDefault();
 
-		var data = {
-			playlist: this.playlist,
-			track: this.model.get('id')
-		};
-
-		dispatcher.trigger('playlist:remove', data); 
+		dispatcher.trigger('playlist:remove', this.model); 
 	}
 });

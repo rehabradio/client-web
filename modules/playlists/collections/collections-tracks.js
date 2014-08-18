@@ -8,10 +8,12 @@ var TrackModel = require('../models/models-track.js');
 
 module.exports = BaseCollection.extend({
 
-	playlist: null,
+	url: null,
 
-	url: function(){
-		return window.API_ROOT + 'playlists/' + this.playlist + '/tracks/';
+	initialize: function(models, options){
+		this.url = options.url;
+
+		this.fetch();
 	},
 	
 	model: TrackModel
