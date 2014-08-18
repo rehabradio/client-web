@@ -14,6 +14,10 @@ module.exports = BaseCollection.extend({
 		this.id = options.id;
 
 		this.fetch();
+	},
+
+	comparator: function(element){
+		return element.position;
 	}
 	
 });

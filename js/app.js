@@ -11,6 +11,7 @@ $ = require('jquery');
  */
 
 Backbone.$ = $;
+Backbone.emulateHTTP = true;
 
 
 /*

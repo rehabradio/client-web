@@ -2,7 +2,7 @@ var BaseCollection = require('../../core/base-collection');
 
 module.exports = BaseCollection.extend({
 
-	request: 'queues/',
+	request: 'queues',
 
 	model: require('../models/models-queues'),
 

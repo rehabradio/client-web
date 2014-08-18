@@ -20,12 +20,13 @@ var SearchCollection = BaseCollection.extend({
 			this.url = window.API_ROOT + this.SEARCH_ENDPOINT + options.service + "/?q=" + options.query;
 		}
 		return Backbone.Collection.prototype.fetch.call(this, options);
+
 	},
 
 	parse:function(response){
+		this.pagination = { next: response.next, previous: response.previous};
 		return response.results;
 	}
-
 });
 
 module.exports = SearchCollection;

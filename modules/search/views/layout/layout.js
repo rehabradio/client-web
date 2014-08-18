@@ -5,7 +5,7 @@ var SearchLayout = Marionette.LayoutView.extend({
 	template: require('../../templates/layout.hbs'),
 
 	regions: {
-		results: '.search-results'
+		results: '.results'
 	},
 
 	events: {

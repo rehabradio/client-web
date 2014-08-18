@@ -7,43 +7,40 @@ var SearchServiceView = Marionette.CompositeView.extend({
 	childViewContainer: '.results',
 	emptyView: EmptyView,
 
+	pagination_template: require('../templates/pagination.hbs'),
+
 	events: {
 		'click .pagination a' : 'paginate'
 	},
 
 	template: require('../templates/search-service.hbs'),
 
-	initialize: function(){
-		console.log('SearchServiceView::initialize');
-		this.render();
+	initialize: function(opts){
+
+		this.pagination = opts.pagination;
+
+		/*
+		this.render() triggers onRenderCollection and onRender twice
+		https://github.com/marionettejs/backbone.marionette/issues/287
+
+		*/
+
+		this.once('render');
 	},
 
-	setUpListeners:function(){
+	onRenderCollection: function(){
+		this.updatePagination( this.collection.pagination );
+  	},
 
-		dispatcher.on('search:change-service', this.changeService, this);
-		dispatcher.on('perform-search', this.performSearch, this);
-
+	updatePagination:function( data ){
+		this.$el.find('.pagination').html(this.pagination_template(data));
 	},
-
-	updatePagination:function(){},
 
 	paginate:function(event){
 		event.preventDefault();
-		this.search({ url: event.currentTarget.href });
-	},
-
-	search:function(options){
-
-		this.$el.find('.results').empty();
-		this.collection.fetch(options);
-	
-	},	
-
-	performSearch:function(payload){
-
-		this.search({service: this.service, query: payload});
-
-	},	
+		var fetch = this.collection.fetch({ url: event.currentTarget.href});
+		fetch.done(this.updatePagination.bind(this));
+	}
 });
 
 
