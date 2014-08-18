@@ -118,14 +118,18 @@ var AppView = Backbone.View.extend({
 
 	_queueAdd:function(payload){
 
+		var self = this;
+
 		var endpoint = 'metadata/tracks/';
 
 		$.ajax({
 			type: 'POST',
 			url: window.API_ROOT + endpoint,
 			data: payload,
-			success: this._addTrackToQueue.bind(this),
-			error: this._onError
+			success: function(data){
+				self._addTrackToQueue(data.id);
+			},
+			error: self._onError
 		});
 	},
 

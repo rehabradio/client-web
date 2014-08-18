@@ -1,7 +1,3 @@
-
-var	SearchServiceView 	= require('./view-search-service');
-	Layout 				= require('./layout/layout');
-
 var SearchView = Marionette.ItemView.extend({
 
 	el: '#search',
