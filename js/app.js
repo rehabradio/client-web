@@ -14,15 +14,6 @@ Backbone.$ = $;
 Backbone.emulateHTTP = true;
 
 
-var Handlebars = require("hbsfy/runtime");
-
-Handlebars.registerHelper('transform', function(text) {
-
-    return text + " is now " + "test";
-
-});
-
-
 /*
  *	Put Marionette on the global namespace
  */

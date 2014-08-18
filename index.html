@@ -22,24 +22,12 @@
 	<form id="search" method="GET" action="">
 		<label>Search</label>
 		<input class="search-field" type="text" name="query" placeholder="Search">
-		<input type="checkbox" name="spotify" value="Spotify">Spotify
-		<input type="checkbox" name="soundcloud" value="Soundcloud">Soundcloud
 		<input type="submit" value="Search">
 	</form>
 	<div id="user" class="user"></div>
 </header>
 
-<section id="search-results" class="search-results">
-
-    <div role="tabs">
-      <a data-service="spotify" href="#">Spotify</a>
-      <a data-service="soundcloud" href="#">Soundcloud</a>
-    </div>
-
-	<div data-service="spotify" class="search-spotify"></div>
-	<div data-service="soundcloud" class="search-soundcloud"></div>
-
-</section>
+<section id="search-results" class="search-results"></section>
 	
 
 <main>

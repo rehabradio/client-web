@@ -1,5 +1,11 @@
 	<div class="track-details">
-		<img src="{{image_large}}" />  {{name}} by {{artists.[0].name}}
+	{{#if image_large}}
+		<img src="{{image_large}}" />  
+	{{else}}
+		<img src="http://gallery.orchardproject.net/Themes/OrchardGallery/Content/Images/moduleDefaultIcon.png" /> 
+	{{/if}}
+		{{name}} by {{artists.[0].name}}
+	
 	</div>
 
 	<a role="add-to-queue" href="#">Add to Queue</a>

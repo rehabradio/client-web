@@ -4,6 +4,13 @@ var SearchLayout = Marionette.LayoutView.extend({
 
 	template: require('../../templates/layout.hbs'),
 
+	initialize: function(options){
+		this.activeService = options.defaultService;
+		this.templateHelpers = {
+			active: this.activeService
+		}
+	},
+
 	regions: {
 		results: '.results'
 	},
@@ -12,24 +19,14 @@ var SearchLayout = Marionette.LayoutView.extend({
 		'click a[data-service]' : 'changeService'
 	},
 	
-	// changeService: function(e){
-	// 	var service = $(e.currentTarget).data('service');
-	// 	this.swapRegion( service );	
-	// },
-
-	swapRegion: function( service ){
-
-		//simple tab interface to toggle between service regions
-		//hide all regions
-		this.hideRegions();
-
-		//show this region
-		this[service].$el.show();
-	},
-
 	changeService: function(e){
-		var service = $(e.currentTarget).data('service');
-		dispatcher.trigger('service:switch', service);
+
+		this.$el.find('a').removeClass('is-active');
+		$(e.currentTarget).addClass('is-active');
+
+		this.activeService = $(e.currentTarget).data('service');
+		dispatcher.trigger('service:switch', this.activeService);
+
 	}
 });
 

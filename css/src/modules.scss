@@ -64,7 +64,7 @@
 #search{}
 
 #search-results{
-	background: $purple;
+	background: lighten($purple, 10%);
 	z-index: 1;
 	color: #fff;
 	overflow-y: scroll;
@@ -73,22 +73,14 @@
 	[role="tabs"] a{
 		width: 50%;
 		text-align: center;
-		background: $purple;
+		background: lighten($black, 2%);
 		color: #fff;
 		display: inline-block;
 		float: left;
-		padding: 10px 0px;
+		padding: 20px 0px;
 
-		&[data-service='spotify']{
-			background: green;
-		}
-
-		&[data-service='soundcloud']{
-			background: red;
-		}
-
-		&.active{
-			background: $black;
+		&.is-active{
+			background: $purple
 		}
 	}
 

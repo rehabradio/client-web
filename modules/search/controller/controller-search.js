@@ -1,5 +1,7 @@
 var Layout 				= require('../views/layout/layout'),
-	SearchCollection	= require('../collections/collections-search');
+	SearchCollection	= require('../collections/collections-search'),
+    searchView          = require('../views/view-search'),
+    searchServiceView   = require('../views/view-search-service');
 
 /*
 
@@ -20,34 +22,26 @@ var SearchController = Marionette.Controller.extend({
 		'soundcloud'
 	],
 
-	views: {
-		searchView: require('../views/view-search'),
-		searchService: require('../views/view-search-service')
-	},
-
 	collections: {},
 
 	defaultService: 'spotify',
 
-	initialize: function(){
-
-		this.setUpListeners();
-		this.layout = new Layout();
-		this.layout.render();
-		this.bootCollections();
-		
-		new this.views.searchView();
+    initialize: function(){
+        this.layout = new Layout({defaultService: this.defaultService });
+        this.bootCollections();
+        this.setUpListeners();
+        new searchView();
+    },
+    
+    setUpListeners:function(){
+        dispatcher.on('perform-search', this.performSearch, this);
+        dispatcher.on('service:switch', this.showLayout, this);
     },
 
     bootCollections:function(){
     	_.each(this.services, function(service){
 			this.collections[service] = new SearchCollection();
 		}, this);
-    },
-
-    setUpListeners:function(){
-    	dispatcher.on('perform-search', this.performSearch, this);
-		dispatcher.on('service:switch', this.showLayout, this);
     },
 
     showDefaultService:function(service){
@@ -57,19 +51,21 @@ var SearchController = Marionette.Controller.extend({
     },
 
     showLayout:function(service){
-    	this.layout.results.show( new this.views.searchService({
+    	this.layout.results.show( new searchServiceView({
     		collection: this.collections[service], 
     		className: service 
     	}) );
     },
 
-    fetchServices:function(query, service, callback){
-        
+    fetchServices:function(query, service, cb){
     	var xhr = this.collections[service].fetch({service:service, query:query});
-    	xhr.done( callback );
+    	xhr.done( cb );
     },
 
     performSearch:function(query){
+
+        this.layout.render();
+
     	_.each(this.services, function(service){
     		this.fetchServices(query, service, function(){
     			this.showDefaultService(service);

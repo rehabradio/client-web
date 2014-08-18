@@ -107,7 +107,7 @@ header {
 
 
 #search-results {
-  background: #4f6aff;
+  background: #8297ff;
   z-index: 1;
   color: #fff;
   overflow-y: scroll;
@@ -115,17 +115,13 @@ header {
   #search-results [role="tabs"] a {
     width: 50%;
     text-align: center;
-    background: #4f6aff;
+    background: #121212;
     color: #fff;
     display: inline-block;
     float: left;
-    padding: 10px 0px; }
-    #search-results [role="tabs"] a[data-service='spotify'] {
-      background: green; }
-    #search-results [role="tabs"] a[data-service='soundcloud'] {
-      background: red; }
-    #search-results [role="tabs"] a.active {
-      background: #0d0d0d; }
+    padding: 20px 0px; }
+    #search-results [role="tabs"] a.is-active {
+      background: #4f6aff; }
   #search-results .results li .track-details {
     list-style-type: none;
     padding: 10px 0px;
