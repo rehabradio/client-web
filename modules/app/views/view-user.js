@@ -36,8 +36,14 @@ module.exports = Backbone.View.extend({
 
 	_onSignOut: function(){
 		
-		gapi.auth.signOut();
+		$.ajax({
+			url: 'https://accounts.google.com/o/oauth2/revoke?token=' + gapi.auth.getToken(),
+			success: function(){
 
-		window.location.reload();
+				window.location.reload();
+			}
+		});
+		// gapi.auth.signOut();
+
 	}
 });

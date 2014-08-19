@@ -64,7 +64,7 @@ window.authoriseUser = function(res){
 	 *	Test user login status
 	 */
 
-	if (res['status']['signed_in']) {
+	if (res['status']['signed_in'] && res['status']['method'] === 'PROMPT') {
 
 		$.ajaxSetup({
 			headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
@@ -93,9 +93,6 @@ window.authoriseUser = function(res){
 				}
 			})
 		});
-	}else{
-
-		dispatcher.trigger('login-set-status', false);
 	}
 }
 
