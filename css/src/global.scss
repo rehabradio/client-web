@@ -9,14 +9,18 @@ body{
 
 a{
 	color: #FFF;
+	text-decoration: none;
 }
 
-.app{
+li{
+	list-style-type: none;
 }
 
-main{
-	position: relative;
+main{ 
 	z-index: 0;
+	background: white;
+	width: 100%;
+	height: 100px;
 }
 
 .scaled-content{

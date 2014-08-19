@@ -31,12 +31,17 @@ body {
   letter-spacing: 0.04em; }
 
 a {
-  color: #FFF; }
+  color: #FFF;
+  text-decoration: none; }
 
+li {
+  list-style-type: none; }
 
 main {
-  position: relative;
-  z-index: 0; }
+  z-index: 0;
+  background: white;
+  width: 100%;
+  height: 100px; }
 
 .scaled-content {
   padding-left: 400px;
@@ -63,6 +68,17 @@ header {
       float: left; }
     header .user button {
       float: left; }
+
+#sidebar {
+  background: #1f1f1f;
+  float: left;
+  width: 200px;
+  height: 100%; }
+  #sidebar li {
+    font-size: 14px;
+    text-indent: 30px;
+    padding: 15px 0px;
+    border-bottom: 1px solid #1f1f1f; }
 
 .playlists {
   position: relative;

@@ -28,7 +28,7 @@ Handlebars = require('hbsfy/runtime');
 
 dispatcher = require('./src/utils/dispatcher');
 dataStore = require('./src/utils/dataStore');
-router = require('./src/utils/router');
+//router = require('./src/utils/router');
 
 /*
  *	Use Mock data by including the 'debug' param in the URL

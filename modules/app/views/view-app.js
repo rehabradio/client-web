@@ -1,6 +1,8 @@
 
 var modelApp = require('../models/models-app'); // Already initialised
 var ViewUser = require('./view-user');
+var AppLayout = require('../layout/layout');
+var AppRouter = require('../../core/router/router');
 
 var AppView = Backbone.View.extend({
 
@@ -30,9 +32,16 @@ var AppView = Backbone.View.extend({
 
 	modules: {
 		search: require('../../search/controller/controller-search')
+		//navigation: require('../../navigation/controller')
 	},
 
 	initialize: function(){
+
+		this.router = new AppRouter();
+		Backbone.history.start({ pushState: true, start: true });
+
+		this.layout = new AppLayout();
+		this.layout.render();
 
 		var viewUser = new ViewUser();
 
@@ -93,6 +102,8 @@ var AppView = Backbone.View.extend({
 		dispatcher.on('queue:add', this._queueAdd, this);
 		dispatcher.on('queue:track:delete', self._deleteTrackFromQueue.bind(self));
 
+		dispatcher.on('router:showPlaylists', this._showPlaylists, this);
+
 
 		console.log('booting views...');
 		
@@ -102,18 +113,43 @@ var AppView = Backbone.View.extend({
 
         var loadQueue = self._preloadData();
 
-		$.when(loadQueue).then(function(){
-			dispatcher.trigger('data-preload-complete');
-		});
+		//$.when(loadQueue).then(function(){
+		//	dispatcher.trigger('data-preload-complete');
+		//});
 
 		/*
 		 *	Initialise views that don't rely on external data
 		 */
 
-		for(var view in self.modules){
+		//for(var view in self.modules){
 			
-			self.children.push(new self.modules[view]());
-		}
+			//self.children.push(new self.modules[view]());
+		//}
+
+		$('#sidebar a').on('click', function(e){
+			e.preventDefault();
+			var module = $(e.currentTarget).data('name');
+
+			this.router.navigate(module);
+
+			switch(module) {
+    			case 'playlists':
+        			this.router.controller.showPlaylists();
+        		break;
+    			case 'queues':
+        			this.router.controller.showQueues()
+        		break;
+			}
+
+		}.bind(this));
+
+	},
+
+	_showPlaylists:function(){
+	
+		console.log('showing view');
+
+		//this.layout.regionName.show(ViewName)
 
 	},
 
