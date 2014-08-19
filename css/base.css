@@ -65,18 +65,21 @@ header {
       float: left; }
 
 .playlists {
-  position: relative;
-  width: 50%;
-  float: left;
-  z-index: 0;
-  -webkit-transition: width 150ms cubic-bezier(0, 0, 0.75, 1);
-          transition: width 150ms cubic-bezier(0, 0, 0.75, 1); }
-  .playlists.contract {
-    width: 25%; }
+  padding-left: 400px;
+  overflow: hidden;
+  /*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/ }
+  .playlists > .content {
+    width: 200%; }
   .playlists > .content {
     padding: 0 20px 62px; }
-  .playlists ul {
-    list-style: none; }
+  .playlists .left-column {
+    width: 50%;
+    float: left; }
+    .playlists .left-column.contract {
+      width: 25%; }
+  .playlists .right-column {
+    width: 25%;
+    float: left; }
 
 .tracks {
   position: relative;
@@ -86,13 +89,6 @@ header {
   .tracks > .content {
     position: relative;
     padding: 0 20px 62px; }
-  .tracks ul {
-    list-style: none; }
-  .tracks li {
-    margin: 0 0 4px 0; }
-    .tracks li .album, .tracks li .artist {
-      display: block;
-      font-size: 12px; }
 
 .queue {
   position: absolute;
