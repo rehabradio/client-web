@@ -4,7 +4,7 @@ var CollectionQueueTracks = require('../collections/collection-queue-tracks');
 
 module.exports = Marionette.LayoutView.extend({
 
-	el: '#queue',
+	//el: '#queue',
 
 	template: require('../templates/view-queues.hbs'),
 
@@ -28,6 +28,9 @@ module.exports = Marionette.LayoutView.extend({
 		this.queuesList.show(new ViewQueuesList());
 
 		var initialQueueId = dataStore.queuesCollection.first().id;
+
+		console.log(dataStore.queuesCollection);
+		console.log(initialQueueId);
 
 		this._queueChange(initialQueueId);
 	},

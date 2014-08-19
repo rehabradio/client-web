@@ -3,7 +3,7 @@
 module.exports = {
 	showPlaylists:function(){
 		console.log('showPlaylists');	
-		dispatcher.trigger('router:showPlaylists');
+		dispatcher.trigger('router:showView', 'playlist');
 	},
 
 	showPlaylist:function(){

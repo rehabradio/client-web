@@ -102,7 +102,7 @@ var AppView = Backbone.View.extend({
 		dispatcher.on('queue:add', this._queueAdd, this);
 		dispatcher.on('queue:track:delete', self._deleteTrackFromQueue.bind(self));
 
-		dispatcher.on('router:showPlaylists', this._showPlaylists, this);
+		dispatcher.on('router:showView', this._showView, this);
 
 
 		console.log('booting views...');
@@ -126,11 +126,16 @@ var AppView = Backbone.View.extend({
 			//self.children.push(new self.modules[view]());
 		//}
 
+		//needs moved into its own module
+
 		$('#sidebar a').on('click', function(e){
 			e.preventDefault();
 			var module = $(e.currentTarget).data('name');
 
 			this.router.navigate(module);
+			//call the method on the controller directly, not {trigger:true}
+			//http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
+			//http://media.pragprog.com/titles/dsbackm/sample2.pdf
 
 			switch(module) {
     			case 'playlists':
@@ -145,11 +150,11 @@ var AppView = Backbone.View.extend({
 
 	},
 
-	_showPlaylists:function(){
+	_showView:function(view){
 	
 		console.log('showing view');
 
-		//this.layout.regionName.show(ViewName)
+		this.layout.main.show(new this.preload[view]() );
 
 	},
 

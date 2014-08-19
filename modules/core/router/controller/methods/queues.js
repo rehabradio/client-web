@@ -3,6 +3,7 @@
 module.exports = {
 	showQueues:function(){
 		console.log('showQueues');
+		dispatcher.trigger('router:showView', 'queue');
 	},
 
 	showQueue:function(){
