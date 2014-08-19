@@ -29,15 +29,23 @@ module.exports = Backbone.View.extend({
 
 	_onSignIn: function(){
 
-		gapi.auth.signIn({
-			callback: 'authoriseUser'
+		$.ajax({
+			type: 'POST',
+			url: '/login',
+			success: function(data){
+				console.log('login', data);
+			}
 		});
+
+		// gapi.auth.signIn({
+		// 	callback: 'authoriseUser'
+		// });
 	},
 
 	_onSignOut: function(){
 		
-		gapi.auth.signOut();
+		// gapi.auth.signOut();
 
-		window.location.reload();
+		// window.location.reload();
 	}
 });

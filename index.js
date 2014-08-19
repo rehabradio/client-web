@@ -24,7 +24,7 @@ passport.use(new GooglePlusStrategy({
 }))
 
 
-app.post('/auth/google/callback', passport.authenticate('google'), function(req, res) {
+app.post('/login', passport.authenticate('google'), function(req, res) {
     // Return user back to client
     res.send(req.user);
 });
