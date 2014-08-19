@@ -1,6 +1,4 @@
-var PlaylistsModel = require('../models/models-playlists');
 var PlaylistsAll = require('./view-playlists-all');
-var PlaylistView = require('./view-playlist');
 var PlaylistTracks = require('../views/view-playlist-tracks');
 var TracksCollection = require('../collections/collections-tracks');
 
@@ -38,7 +36,7 @@ module.exports = Marionette.LayoutView.extend({
 
 	_onPlaylistTracksShow: function(){
 
-		this.$el.find('.left-column').addClass('contract')
+		this.$el.find('.left-column').addClass('contract');
 	}
 
 });
