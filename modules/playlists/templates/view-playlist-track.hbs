@@ -16,10 +16,7 @@
 	<a href="#" class="remove-from-playlist">Remove from playlist</a>
 </td>
 <td>
-	{{#sourceSpotify track.source_type}}
-		<a href="#" title=""><img src="/img/spotify.png" alt="Spotify"></a>
-	{{/sourceSpotify}}
-	{{#sourceSoundcloud track.source_type}}
-		<a href="#" title=""><img src="/img/soundcloud.png" alt="Spotify"></a>
-	{{/sourceSoundcloud}}
+	<a href="#" title="">
+		<img src="/img/{{track.source_type}}.png" alt="{{track.source_type}}">
+	</a>
 </td>

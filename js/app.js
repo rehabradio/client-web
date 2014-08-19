@@ -12,15 +12,6 @@ $ = require('jquery');
 
 Backbone.$ = $;
 
-var Handlebars = require("hbsfy/runtime");
-
-Handlebars.registerHelper('transform', function(text) {
-
-    return text + " is now " + "test";
-
-});
-
-
 /*
  *	Put Marionette on the global namespace
  */
@@ -51,8 +42,8 @@ if(document.location.search.match(/debug/gi)){
  *	Define and initialise the root view to start the application
  */
 
-// window.API_ROOT = 'http://server-core.herokuapp.com/api/';
-window.API_ROOT = 'http://localhost:8000/api/';
+ window.API_ROOT = 'http://server-core.herokuapp.com/api/';
+//window.API_ROOT = 'http://localhost:8000/api/';
 
 var AppView = require('../modules/app/views/view-app');
 
@@ -98,17 +89,3 @@ window.authoriseUser = function(res){
 		dispatcher.trigger('login-set-status', false);
 	}
 }
-
-Handlebars.registerHelper('sourceSpotify', function(source, options){
-	if(source === 'spotify'){
-		return options.fn(this);
-	}
- 	return options.inverse(this);
-});
-
-Handlebars.registerHelper('sourceSoundcloud', function(source, options){
-	if(source === 'soundcloud'){
-		return options.fn(this);
-	}
- 	return options.inverse(this);
-});
