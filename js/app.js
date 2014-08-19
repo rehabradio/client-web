@@ -12,15 +12,6 @@ $ = require('jquery');
 
 Backbone.$ = $;
 
-var Handlebars = require("hbsfy/runtime");
-
-Handlebars.registerHelper('transform', function(text) {
-
-    return text + " is now " + "test";
-
-});
-
-
 /*
  *	Put Marionette on the global namespace
  */
@@ -64,35 +55,36 @@ window.authoriseUser = function(res){
 	 *	Test user login status
 	 */
 
-	if (res['status']['signed_in'] && res['status']['method'] === 'PROMPT') {
+	if (res['status']['signed_in']){
+		if(res['status']['method'] === 'PROMPT' || res['status']['method'] === 'AUTO'){
 
-		$.ajaxSetup({
-			headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
-		});
+			$.ajaxSetup({
+				headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
+			});
 
-	 	gapi.client.load('plus', 'v1', function() {
-			gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
+		 	gapi.client.load('plus', 'v1', function() {
+				gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
 
-				var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
+					var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
 
-				for(var i in res.emails){
+					for(var i in res.emails){
 
-					// If one of the emails stored on the users google+ account is a rehabstudio
+						// If one of the emails stored on the users google+ account is a rehabstudio
 
-					if(/@rehabstudio\.com/.test(res.emails[i].value)){
+						if(/@rehabstudio\.com/.test(res.emails[i].value)){
 
-						// initialise the app
+							// initialise the app
+
+							dispatcher.trigger('login-set-status', true, res.result);
 
 
-						dispatcher.trigger('login-set-status', true, res.result);
-
-
-					}else{
-						console.log('not a rehabstudio email');
+						}else{
+							console.log('not a rehabstudio email');
+						}
 					}
-				}
-			})
-		});
+				})
+			});
+		}
 	}
 }
 

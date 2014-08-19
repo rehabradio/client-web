@@ -36,14 +36,19 @@ module.exports = Backbone.View.extend({
 
 	_onSignOut: function(){
 		
-		$.ajax({
-			url: 'https://accounts.google.com/o/oauth2/revoke?token=' + gapi.auth.getToken(),
-			success: function(){
+		gapi.auth.signOut();
+		window.location.reload();
 
-				window.location.reload();
-			}
-		});
-		// gapi.auth.signOut();
+		// FORCES TOKEN REMOVAL
+
+		// $.ajax({
+		// 	url: 'https://accounts.google.com/o/oauth2/revoke?token=' + gapi.auth.getToken().access_token,
+		// 	dataType: 'JSONP',
+		// 	success: function(){
+				// gapi.auth.signOut();
+				// window.location.reload();
+		// 	}
+		// });
 
 	}
 });
