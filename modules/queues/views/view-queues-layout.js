@@ -17,6 +17,8 @@ module.exports = Marionette.LayoutView.extend({
 
 	initialize: function(){
 
+		console.log( this );
+
 		dispatcher.on('queue:change', this._queueChange.bind(this));
 
 		dataStore.queueTracksCollections = [];
@@ -28,9 +30,6 @@ module.exports = Marionette.LayoutView.extend({
 		this.queuesList.show(new ViewQueuesList());
 
 		var initialQueueId = dataStore.queuesCollection.first().id;
-
-		console.log(dataStore.queuesCollection);
-		console.log(initialQueueId);
 
 		this._queueChange(initialQueueId);
 	},

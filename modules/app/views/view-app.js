@@ -111,7 +111,7 @@ var AppView = Backbone.View.extend({
 		 *	Callback for when the deferred object is resolved. This loads content needed for the app to function, the queues data and playlists data
 		 */
 
-        var loadQueue = self._preloadData();
+        self._preloadData();
 
 		//$.when(loadQueue).then(function(){
 		//	dispatcher.trigger('data-preload-complete');
@@ -121,10 +121,10 @@ var AppView = Backbone.View.extend({
 		 *	Initialise views that don't rely on external data
 		 */
 
-		//for(var view in self.modules){
+		for(var view in self.modules){
 			
-			//self.children.push(new self.modules[view]());
-		//}
+			self.children.push(new self.modules[view]());
+		}
 
 		//needs moved into its own module
 
@@ -151,7 +151,7 @@ var AppView = Backbone.View.extend({
 	},
 
 	_showView:function(view){
-	
+
 		console.log('showing view');
 
 		this.layout.main.show(new this.preload[view]() );
@@ -193,7 +193,7 @@ var AppView = Backbone.View.extend({
 		 *	Deferred object to be resolved once data for Playlists and Queue has been loaded
 		 */
 
-		var deferred = $.Deferred();
+		/*var deferred = $.Deferred();
 
 		$.when(
 			dataStore.playlistsCollection.fetch(),
@@ -202,7 +202,10 @@ var AppView = Backbone.View.extend({
 			return deferred.resolve();
 		});
 
-		return deferred;
+		return deferred;*/
+
+		dataStore.playlistsCollection.fetch();
+		dataStore.queuesCollection.fetch();
 	},
 
 	_onPreloadData: function(){

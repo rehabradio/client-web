@@ -1,7 +1,6 @@
 module.exports = Marionette.ItemView.extend({
 
 	tagName: 'li',
-
 	template: require('../templates/view-queues-item.hbs'),
 
 	events: {

@@ -14,6 +14,14 @@ module.exports = Marionette.CompositeView.extend({
 
 	model: new PlaylistsModel(),
 
+	collectionEvents: {
+    	"add": "modelAdded"
+  	},
+
+  	modelAdded:function(model){
+  		console.log(model);
+  	},
+
 	//playlists: [], 
 
 	initialize: function(){

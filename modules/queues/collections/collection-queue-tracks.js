@@ -10,6 +10,8 @@ module.exports = BaseCollection.extend({
 
 	initialize: function(models, options){
 		
+		console.log('??');
+
 		this.url = options.url;
 		this.id = options.id;
 

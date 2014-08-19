@@ -28,6 +28,7 @@ var SearchController = Marionette.Controller.extend({
 
     initialize: function(){
         this.layout = new Layout({defaultService: this.defaultService });
+        this.layout.render();
         this.bootCollections();
         this.setUpListeners();
         new searchView();
@@ -63,8 +64,6 @@ var SearchController = Marionette.Controller.extend({
     },
 
     performSearch:function(query){
-
-        this.layout.render();
 
     	_.each(this.services, function(service){
     		this.fetchServices(query, service, function(){
