@@ -33,21 +33,56 @@ body {
 a {
   color: #FFF; }
 
-
 main {
   position: relative;
   z-index: 0; }
 
-.scaled-content {
-  padding-left: 400px;
-  overflow: hidden; }
-  .scaled-content > .content {
-    width: 200%; }
+.close {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  border: none;
+  padding: 6px 10px 7px;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  outline: none; }
+
+.btn {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 800;
+  color: #FFFFFF;
+  background-color: #2c2c2c;
+  cursor: pointer; }
+  .btn.blue {
+    background-color: #4f6aff; }
+  .btn.orange {
+    background-color: #ec5542; }
+  .btn:hover {
+    background-color: #ababab; }
+
+form input[type="text"] {
+  padding: 10px 10px 10px;
+  border: none;
+  border-radius: 4px 0 0 4px; }
+form input[type="submit"], form button {
+  outline: none; }
+form .group input[type="text"] {
+  display: block;
+  float: left; }
+form .group input[type="submit"], form .group button {
+  display: block;
+  float: left;
+  border-radius: 0 4px 4px 0; }
+
 
 header {
   display: block;
   width: 100%;
-  padding: 40px 0px;
+  padding: 10px 20px;
   background-color: #4f6aff;
   z-index: 1;
   overflow: hidden; }
@@ -57,10 +92,14 @@ header {
     float: right;
     overflow: hidden; }
     header .user img {
-      float: left; }
+      float: left;
+      height: 33px;
+      margin: 0 0 0 10px; }
     header .user a {
       display: block;
-      float: left; }
+      float: left;
+      line-height: 33px;
+      margin: 0 0 0 10px; }
     header .user button {
       float: left; }
 
@@ -103,6 +142,8 @@ header {
   .queue li {
     margin: 0 0 8px 0; }
 
+#search label {
+  display: none; }
 
 #search-results {
   background: #ec5542;
@@ -144,3 +185,33 @@ header {
 [data-service] {
   opacity: 1;
   pointer-events: auto; }
+
+.modal {
+  display: table;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); }
+  .modal fieldset {
+    margin: 0 0 10px 0; }
+  .modal input[type="text"] {
+    padding: 6px 4px;
+    border: 1px solid #ababab;
+    border-radius: 2px; }
+
+.modal-offset {
+  display: table-cell;
+  vertical-align: middle; }
+
+.modal-content {
+  width: 50%;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  color: #000000; }
+
+.modal-header, .modal-body {
+  position: relative; }

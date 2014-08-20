@@ -3,7 +3,8 @@ module.exports = Marionette.ItemView.extend({
 	template: require('../templates/view-playlist.hbs'),
 
 	events: {
-		'click .view-playlist': '_onShowPlaylist'
+		'click .view-playlist': '_onShowPlaylist',
+		'click #playlist-create': '_onPlaylistCreate'
 	},
 
 	_onShowPlaylist: function(e){
@@ -11,5 +12,9 @@ module.exports = Marionette.ItemView.extend({
 
 		dispatcher.trigger('playlist:tracks:show');
 		dispatcher.trigger('playlist:show', this.model.get('id'));
+	},
+
+	_onPlaylistCreate: function(){
+		
 	}
 });

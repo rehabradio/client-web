@@ -59,7 +59,12 @@
 		margin: 0 0 8px 0;
 	}
 }
-#search{}
+#search{
+
+	label{
+		display: none;
+	}
+}
 
 #search-results{
 	background: $orange;
@@ -95,7 +100,6 @@
 		width: 30px;
 		height: 30px;
 	}
-
 }
 
 .pagination{

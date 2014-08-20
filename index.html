@@ -11,6 +11,7 @@
 	<!-- <meta name="google-signin-requestvisibleactions" content="http://schema.org/AddAction" /> -->
 	<meta name="google-signin-cookiepolicy" content="single_host_origin" />
 	<meta name="google-signin-callback" content="authoriseUser" />
+
 	<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/base.css">
 	<title>Musicman Front-end</title>
@@ -21,8 +22,10 @@
 <header>
 	<form id="search" method="GET" action="">
 		<label>Search</label>
-		<input class="search-field" type="text" name="query" placeholder="Search">
-		<input type="submit" value="Search">
+		<div class="group">
+			<input class="search-field" type="text" name="query" placeholder="Search">
+			<input type="submit" value="Search" class="btn orange">
+		</div>
 	</form>
 	<div id="user" class="user"></div>
 </header>
@@ -33,23 +36,34 @@
 <main>
 	<section id="queue" class="queue"></section>
 	<section id="playlists" class="playlists"></section>
-	<!-- <div class="scaled-content">
-		<div class="content">
-			</div>
-			</section>
-			<section id="tracks" class="tracks">
-				<div class="content">
-					<h2>Playlist</h2>
-					<h3>tracks</h3>
-					<table>
-						<tbody></tbody>
-					</table>
-				</div>
-			</section>
-		</div>
-	</div> -->
 </main>
-</div>
+
+<div id="modal-container"></div>
+
+<!-- <div id="modal-playlist-create" class="modal">
+	<div class="modal-offset">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close">x</button>
+				<h2>Create playlist</h2>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<fieldset class="form-group">
+						<label>Name</label>
+						<input name="playlist-create-name" class="form-control" type="text" placeholder="enter a name...">
+					</fieldset>
+					<fieldset class="form-group">
+						<label>Description</label>
+						<input name="playlist-create-Description" class="form-control" type="text" placeholder="enter a description...">
+					</fieldset>
+					<button type="button" class="btn">Close</button>
+					<button type="button" class="btn blue">Save changes</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div> -->
 
 <script type="text/javascript" src="js/build/build.js"></script>
 

@@ -4,7 +4,7 @@
 
 Backbone = require('backbone');
 _ = require('underscore');
-$ = require('jquery');
+$ = jQuery = require('jquery');
 
 /*
  *	Tell Backbone to use jQuery
@@ -13,7 +13,7 @@ $ = require('jquery');
 Backbone.$ = $;
 
 /*
- *	Put Marionette on the global namespace
+ *	Put Marionette and Handlebars on the global namespace
  */
 
 Marionette = require('backbone.marionette');
