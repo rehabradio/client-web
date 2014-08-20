@@ -15,9 +15,8 @@ var AppView = Backbone.View.extend({
 	//modules that will be started as soon as the app boots
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
-
+		search: require('../../search/controller/controller-search')
 	},
-
 
 	//views that are called by the router's controller, these views will be displayed within the 
 	//layouts 'main' region
@@ -32,7 +31,7 @@ var AppView = Backbone.View.extend({
 		this.appModules = _.extend(this.coreModules, this.viewModules);
 
 		this.router = new AppRouter();	
-		Backbone.history.start({ pushState: true, start: true });
+		Backbone.history.start({ pushState: false, root:'/' });
 
 		//Create an overall App Layout and render it
 		this.layout = new AppLayout();
@@ -65,6 +64,9 @@ var AppView = Backbone.View.extend({
 		console.log('_startApp');
 
 		var self = this;
+
+
+        self._fetchData();
 
 		/*
 		 *	Stores global information for the app. Examples include login information and queue information
@@ -115,14 +117,12 @@ var AppView = Backbone.View.extend({
 		 *	Callback for when the deferred object is resolved. This loads content needed for the app to function, the queues data and playlists data
 		 */
 
-        self._fetchData();
-
 		/*
 		 *	Initialise views that don't rely on external data // core modules
 		 */
 
-		for(var view in this.viewModules){
-			this.children.push( new this.viewModules[view]() );
+		for(var view in this.coreModules){
+			this.children.push( new this.coreModules[view]() );
 		}
 
 		this.attachTempClickHandler(); //temporary until its own module is created
@@ -137,7 +137,7 @@ var AppView = Backbone.View.extend({
 		var url = playlist.request + '/' + playlist.id + '/tracks/';
 
 		this.router.navigate( url );
-		this.router.controller.showPlaylistTracks( playlist.id );
+		//this.router.controller.showPlaylistTracks( playlist.id );
 		
 	},
 
@@ -147,7 +147,7 @@ var AppView = Backbone.View.extend({
 			e.preventDefault();
 			var module = $(e.currentTarget).data('name');
 
-			this.router.navigate(module);
+			//this.router.navigate(module);
 			//call the method on the controller directly, not {trigger:true}
 			//http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
 			//http://media.pragprog.com/titles/dsbackm/sample2.pdf

@@ -30,8 +30,9 @@ var Router = Marionette.AppRouter.extend({
 
   	},
 
-    onRoute: function(){
+    onRoute: function(name, path, args){
         console.log('route ::', arguments);
+        //this.navigate(path);        
     }
 });
 

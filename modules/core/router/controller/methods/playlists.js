@@ -4,6 +4,7 @@ module.exports = {
 	showPlaylists:function(){
 		console.log('showPlaylists');	
 		dispatcher.trigger('router:showView', 'playlist');
+		//router.navigate('playlists');
 	},
 
 	showPlaylist:function(){

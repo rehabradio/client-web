@@ -9,6 +9,5 @@ var routerController = {
 
 _.extend(routerController, Playlists, Queues);
 
-console.log(routerController);
 
 module.exports = routerController;
