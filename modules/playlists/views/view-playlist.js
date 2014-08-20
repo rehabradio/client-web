@@ -1,32 +1,26 @@
 module.exports = Marionette.ItemView.extend({
-	
+
 	template: require('../templates/view-playlist.hbs'),
 
 	events: {
-		'click a': '_onShowTracks'
+		'click .playlist-view': '_onShowPlaylist',
+		'click .playlist-delete': '_onDeletePlaylist'
 	},
 
 	initialize: function(options){
 		this.parent = options.parent;
 	},
+	
+	_onShowPlaylist: function(){
 
-	_onShowTracks: function(e){
+		dispatcher.trigger('playlist:tracks:show');
+		dispatcher.trigger('playlist:show', this.model.get('id'));
+	},
 
-		//should raise an event to the core. From here the router's controller will action.
-		//get playlist id = this.model.get('id');
+	_onDeletePlaylist: function(){
 
-		e.preventDefault();
+		dispatcher.trigger('playlist:delete', this.model);
 
-		var config = {
-			id:  this.model.get('id'),
-			request: this.parent.collection.request
-		};
-
-		dispatcher.trigger('router:showTracks', config);
-
-		//this.parent.model.set('playlist', this.model.get('id'));
-		//dispatcher.trigger('tracks-show');
-		//dispatcher.trigger('tracks-collection-reset', this.model.get('id'));
 	}
 
 });

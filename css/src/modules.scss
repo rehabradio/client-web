@@ -13,24 +13,35 @@
 
 }
 .playlists{
-	position: relative;
-	width: 50%;
-	float: left;
-	z-index: 0;
-	transition: width 150ms cubic-bezier(0, 0, .75, 1);
+	padding-left: 400px;
+	overflow: hidden;
 
-	&.contract{
-		width: 25%;
+	> .content{
+		width: 200%;
 	}
+	
+	/*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/
+
 
 	> .content{
 		padding: 0 20px 62px;
 	}
 
-	ul{
-		list-style: none;
+	.left-column{
+		width: 50%;
+		float: left;
+
+		&.contract{
+			width: 25%;
+		}
+	}
+
+	.right-column{
+		width: 25%;
+		float: left;
 	}
 }
+
 .tracks{
 	position: relative;
 	width: 25%;
@@ -40,19 +51,6 @@
 	> .content{
 		position: relative;
 		padding: 0 20px 62px;
-	}
-
-	ul{
-		list-style: none;
-	}
-
-	li{
-		margin: 0 0 4px 0;
-
-		.album, .artist{
-			display: block;
-			font-size: 12px;
-		}
 	}
 }
 .queue{
@@ -75,10 +73,15 @@
 		margin: 0 0 8px 0;
 	}
 }
-#search{}
+#search{
+
+	label{
+		display: none;
+	}
+}
 
 #search-results{
-	background: lighten($blue, 10%);
+	background: $orange;
 	z-index: 1;
 	color: #fff;
 	overflow-y: scroll;
@@ -111,7 +114,6 @@
 		width: 30px;
 		height: 30px;
 	}
-
 }
 
 .pagination{

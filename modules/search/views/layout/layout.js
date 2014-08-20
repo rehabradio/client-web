@@ -8,7 +8,7 @@ var SearchLayout = Marionette.LayoutView.extend({
 		this.activeService = options.defaultService;
 		this.templateHelpers = {
 			active: this.activeService
-		}
+		};
 	},
 
 	regions: {

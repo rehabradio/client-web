@@ -4,7 +4,7 @@
 
 Backbone = require('backbone');
 _ = require('underscore');
-$ = require('jquery');
+$ = jQuery = require('jquery');
 
 /*
  *	Tell Backbone to use jQuery
@@ -13,7 +13,7 @@ $ = require('jquery');
 Backbone.$ = $;
 
 /*
- *	Put Marionette on the global namespace
+ *	Put Marionette and Handlebars on the global namespace
  */
 
 Marionette = require('backbone.marionette');
@@ -42,7 +42,7 @@ if(document.location.search.match(/debug/gi)){
  *	Define and initialise the root view to start the application
  */
 
- window.API_ROOT = 'http://server-core.herokuapp.com/api/';
+  window.API_ROOT = 'http://server-core.herokuapp.com/api/';
 //window.API_ROOT = 'http://localhost:8000/api/';
 
 var AppView = require('../modules/app/views/view-app');
@@ -55,37 +55,35 @@ window.authoriseUser = function(res){
 	 *	Test user login status
 	 */
 
-	if (res['status']['signed_in']) {
+	if (res['status']['signed_in']){
+		if(res['status']['method'] === 'PROMPT' || res['status']['method'] === 'AUTO'){
 
-		$.ajaxSetup({
-			headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
-		});
+			$.ajaxSetup({
+				headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
+			});
 
-	 	gapi.client.load('plus', 'v1', function() {
-			gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
+		 	gapi.client.load('plus', 'v1', function() {
+				gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(res) {
 
-				var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
+					var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
 
-				for(var i in res.emails){
+					for(var i in res.emails){
 
-					// If one of the emails stored on the users google+ account is a rehabstudio
+						// If one of the emails stored on the users google+ account is a rehabstudio
 
-					if(/@rehabstudio\.com/.test(res.emails[i].value)){
+						if(/@rehabstudio\.com/.test(res.emails[i].value)){
 
-						// initialise the app
+							// initialise the app
+
+							dispatcher.trigger('login-set-status', true, res.result);
 
 
-						dispatcher.trigger('login-set-status', true, res.result);
-
-
-					}else{
-						console.log('not a rehabstudio email');
+						}else{
+							console.log('not a rehabstudio email');
+						}
 					}
-				}
-			})
-		});
-	}else{
-
-		dispatcher.trigger('login-set-status', false);
+				})
+			});
+		}
 	}
 }

@@ -1,8 +1,10 @@
 <header>
 	<form id="search" method="GET" action="">
 		<label>Search</label>
-		<input class="search-field" type="text" name="query" placeholder="Search">
-		<input type="submit" value="Search">
+		<div class="group">
+			<input class="search-field" type="text" name="query" placeholder="Search">
+			<input type="submit" value="Search" class="btn orange">
+		</div>
 	</form>
 	<div id="user" class="user"></div>
 </header>
@@ -14,10 +16,8 @@
 	
 	<ul>
 		<li><a href="#" data-name='test'>Your Profile</a></li>
-		<li><a href="#" data-name='queues'>Queues</li>
-		<li><a href="#" data-name='playlists'>Playlists</li>
-		<!--<li><a href="#" data-name='tracks'>Tracks</a></li>
-		<li><a href="#" data-name='search'>Search</a></li>-->
+		<li><a href="#" data-name='queues'>Queues</a></li>
+		<li><a href="#" data-name='playlists'>Playlists</a></li>
 	</ul>
 
 </aside>
@@ -25,20 +25,4 @@
 
 <main></main>
 
-<!--<main>
-
-	<div class="scaled-content">
-		<div class="content">
-			
-			<section id="tracks" class="tracks">
-				<div class="content">
-					<h2>Playlist</h2>
-					<h3>tracks</h3>
-					<table>
-						<tbody></tbody>
-					</table>
-				</div>
-			</section>
-		</div>
-	</div>
-</main>-->
+<div id="modal-container"></div>

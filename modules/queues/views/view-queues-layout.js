@@ -16,20 +16,23 @@ module.exports = Marionette.LayoutView.extend({
 
 	initialize: function(){	
 		dataStore.queueTracksCollections = [];
+		this.once('render');
 	},
 
 	onRender: function() {
 
-		dispatcher.on('queue:change', this._queueChange.bind(this));
-
-		console.log(this);
-
 		// Render the list of queues available
       	this.queuesList.show(new ViewQueuesList());
 
+      	//dispatcher.on('queue:change', this._queueChange, this); << causes problems with marionette cleanups, use listenTo
+      	//http://stackoverflow.com/questions/16823746/backbone-js-listento-vs-on
+
+      	this.listenTo(dispatcher, 'queue:change', this._queueChange, this);
+
       	var initialQueueId = dataStore.queuesCollection.first().id;
+
 		this._queueChange(initialQueueId);
- 
+
     },
 
 	_queueChange: function(id){
