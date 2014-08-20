@@ -14,18 +14,8 @@ module.exports = Marionette.LayoutView.extend({
 		queueTracks: '#queue-tracks'
 	},
 
-	initialize: function(){
-
-		console.log('LayoutView::initialize');
-	
+	initialize: function(){	
 		dataStore.queueTracksCollections = [];
-
-		//this.queuesList.show(new ViewQueuesList());  <-- This throws and exception because the regions are not available yet
-		//http://stackoverflow.com/questions/11974176/understanding-layouts-in-marionette-for-backbone-js
-		
-		//var initialQueueId = dataStore.queuesCollection.first().id;
-
-		//this._queueChange(initialQueueId);
 	},
 
 	onRender: function() {
@@ -33,11 +23,6 @@ module.exports = Marionette.LayoutView.extend({
 		dispatcher.on('queue:change', this._queueChange.bind(this));
 
 		console.log(this);
-
-		//var err = new Error();
-    	//console.log(err.stack);
-
-    	//return;
 
 		// Render the list of queues available
       	this.queuesList.show(new ViewQueuesList());

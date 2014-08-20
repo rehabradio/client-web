@@ -29,7 +29,6 @@ var AppView = Backbone.View.extend({
 
 	initialize: function(){
 
-
 		 //Store a reference to all appModules
 		this.appModules = _.extend(this.coreModules, this.viewModules);
 
@@ -102,6 +101,9 @@ var AppView = Backbone.View.extend({
 		dispatcher.on('router:showView', this._showView, this);
 
 
+		this.newListenMethods();
+
+
 		console.log('booting views...');
 		
 		/*
@@ -119,6 +121,19 @@ var AppView = Backbone.View.extend({
 		}
 
 		this.attachTempClickHandler(); //temporary until its own module is created
+	},
+
+	newListenMethods:function(){
+		dispatcher.on('router:showTracks', this.showPlaylistTracks, this);
+	},
+
+	showPlaylistTracks:function( playlist ){
+
+		var url = playlist.request + '/' + playlist.id + '/tracks/';
+
+		this.router.navigate( url );
+		this.router.controller.showPlaylistTracks( playlist.id );
+		
 	},
 
 	attachTempClickHandler:function(){

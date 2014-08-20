@@ -4,7 +4,6 @@ var TracksView = require('../views/view-tracks');
 
 module.exports = Marionette.CompositeView.extend({
 
-	//el: '#playlists',
 	childView: PlaylistView,
 	childViewContainer: 'ul',
 
@@ -37,40 +36,8 @@ module.exports = Marionette.CompositeView.extend({
 
 		dispatcher.on('tracks-show', this._showTracks, this);
 
-		//this.listenTo(this.collection, 'add', this._onAddPlaylist, this);
-
-		//this.$list = this.$el.find('ul');
-		//this.render();
+		
 	},
-
-	/*render: function(){
-		var self = this;
-
-		self.collection.each(function(model){
-			var playlistView = new PlaylistView({
-				model: model,
-				parent: self
-			});
-
-
-			self.$list.append(playlistView.render().$el);
-		});
-
-	},
-
-	_onAddPlaylist: function(model){
-
-		console.log('playlist', model.toJSON() );
-
-		var view = new PlaylistView({
-			model: model,
-			parent: this
-		});
-
-		this.playlists.push(view);
-
-		this.$list.append(view.render().$el);
-	},*/
 
 	_showTracks: function(){
 		this.$el.addClass('contract');

@@ -1,33 +1,3 @@
-/*module.exports = Backbone.View.extend({
-
-	tagName: 'li',
-
-	template: require('../templates/view-playlist.hbs'),
-
-	events: {
-		'click a': '_onShowTracks'
-	},
-
-	initialize: function(options){
-		this.parent = options.parent;
-		this.setElement(this.template(this.model.toJSON()));
-	},
-
-	render: function(){
-		return this;
-	},
-
-	_onShowTracks: function(e){
-		e.preventDefault();
-
-		this.parent.model.set('playlist', this.model.get('id'));
-
-		dispatcher.trigger('tracks-show');
-		dispatcher.trigger('tracks-collection-reset', this.model.get('id'));
-	}
-});*/
-
-
 module.exports = Marionette.ItemView.extend({
 	
 	template: require('../templates/view-playlist.hbs'),
@@ -38,18 +8,25 @@ module.exports = Marionette.ItemView.extend({
 
 	initialize: function(options){
 		this.parent = options.parent;
-		console.log( options );
 	},
 
 	_onShowTracks: function(e){
+
+		//should raise an event to the core. From here the router's controller will action.
+		//get playlist id = this.model.get('id');
+
 		e.preventDefault();
 
-		console.log(this.parent.model);
+		var config = {
+			id:  this.model.get('id'),
+			request: this.parent.collection.request
+		};
 
-		this.parent.model.set('playlist', this.model.get('id'));
+		dispatcher.trigger('router:showTracks', config);
 
-		dispatcher.trigger('tracks-show');
-		dispatcher.trigger('tracks-collection-reset', this.model.get('id'));
+		//this.parent.model.set('playlist', this.model.get('id'));
+		//dispatcher.trigger('tracks-show');
+		//dispatcher.trigger('tracks-collection-reset', this.model.get('id'));
 	}
 
 });

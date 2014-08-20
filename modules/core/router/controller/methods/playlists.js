@@ -11,6 +11,7 @@ module.exports = {
 	},
 
 	showPlaylistTracks:function(){
+		console.log(arguments);
 		console.log('showPlaylistTracks');
 	},
 

@@ -14,6 +14,8 @@ module.exports = Backbone.View.extend({
 
 	initialize: function(){
 
+		console.log('tracksView::initialize');
+
 		// this.playlist = this.model.get('playlist');
 
 		this.collection.on('add', this._onTracksAdd, this);
