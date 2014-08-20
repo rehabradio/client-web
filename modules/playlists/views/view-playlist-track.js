@@ -63,13 +63,13 @@
 			track: this.model.get('id')
 		};
 
-		dispatcher.trigger('playlist:add', data);	
+		dispatcher.trigger('playlist:track:add', data);	
 	},
 
 	_onRemoveFromPlaylist: function(e){
 		e.preventDefault();
 
-		dispatcher.trigger('playlist:remove', this.model); 
+		dispatcher.trigger('playlist:track:remove', this.model); 
 	}
  });
 

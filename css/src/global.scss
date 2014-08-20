@@ -39,6 +39,7 @@ main{
 	color: $white;
 	background-color: $grey;
 	cursor: pointer;
+	outline: none;
 
 	&.blue{
 		background-color: $blue;
@@ -54,12 +55,21 @@ main{
 
 }
 
+.btn-secondary{
+	padding: 6px 10px;
+}
+
 form{
+
+	fieldset{
+		border: none;
+		margin: 0 0 10px 0;
+	}
 
 	input[type="text"]{
 		padding: 10px 10px 10px;
 		border: none;
-		border-radius: 4px 0 0 4px;
+		border-radius: 4px;
 	}
 
 	input[type="submit"], button{
@@ -70,6 +80,7 @@ form{
 
 		input[type="text"]{
 
+			border-radius: 4px 0 0 4px;
 			display: block;
 			float: left;
 		}

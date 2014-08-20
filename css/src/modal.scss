@@ -7,14 +7,15 @@
 	height: 100%;
 	background-color: transparentize($black, .2);
 
-	fieldset{
-		margin: 0 0 10px 0;
+
+	label{
+		display: block;
 	}
 
 	input[type="text"]{
-		padding: 6px 4px;
+		display: block;
+		width: 100%;
 		border: 1px solid lighten($grey, 50%);
-		border-radius: 2px;
 	}
 }
 

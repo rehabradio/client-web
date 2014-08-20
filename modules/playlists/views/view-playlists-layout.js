@@ -1,17 +1,23 @@
 var PlaylistsAll = require('./view-playlists-all');
 var PlaylistTracks = require('../views/view-playlist-tracks');
+var PlaylistCreateModal = require('../views/view-modal-playlist-create');
 var TracksCollection = require('../collections/collections-tracks');
 
 module.exports = Marionette.LayoutView.extend({
 
 	el: '#playlists',
 
+	events: {
+		'click #playlist-create': '_onPlaylistCreate'
+	},
+
 	template: require('../templates/view-playlists.hbs'),
 
 	regions: {
 		playlistsUser: '#playlists-user',
 		playlistsAll: '#playlists-all',
-		playlistsTracks: '#playlists-tracks'
+		playlistsTracks: '#playlists-tracks',
+		modalContainer: '#playlist-modal-container'
 	},
 
 	initialize: function(){
@@ -37,6 +43,10 @@ module.exports = Marionette.LayoutView.extend({
 	_onPlaylistTracksShow: function(){
 
 		this.$el.find('.left-column').addClass('contract');
+	},
+
+	_onPlaylistCreate: function(){
+		this.modalContainer.show(new PlaylistCreateModal());
 	}
 
 });
