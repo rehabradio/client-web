@@ -12,34 +12,31 @@ var AppView = Backbone.View.extend({
 
 	children: [],
 
-	/*
-	 *	These views are initialised only once the data has been loaded to the dataStore.
-	 *	This uses jQuery Promises
-	 */
+	//modules that will be started as soon as the app boots
+	//maybe move them into core, things like header, sidebar will go here
+	coreModules: {
 
-	preload: {
+	},
+
+
+	//views that are called by the router's controller, these views will be displayed within the 
+	//layouts 'main' region
+	viewModules: {
 		queue: require('../../queues/views/view-queues-layout'),
 		playlist: require('../../playlists/views/view-playlists')
-
 	},
 
-	/*
-	 *	These views can be loaded on start up as they don't rely on external data.
-	 */
-	
-
-	 //switch to using search controller
-
-	modules: {
-		search: require('../../search/controller/controller-search')
-		//navigation: require('../../navigation/controller')
-	},
 
 	initialize: function(){
 
-		this.router = new AppRouter();
+
+		 //Store a reference to all appModules
+		this.appModules = _.extend(this.coreModules, this.viewModules);
+
+		this.router = new AppRouter();	
 		Backbone.history.start({ pushState: true, start: true });
 
+		//Create an overall App Layout and render it
 		this.layout = new AppLayout();
 		this.layout.render();
 
@@ -67,6 +64,8 @@ var AppView = Backbone.View.extend({
 
 	_startApp: function(){
 
+		console.log('_startApp');
+
 		var self = this;
 
 		/*
@@ -84,8 +83,6 @@ var AppView = Backbone.View.extend({
 		 */
 
 		 // TODO - come up with better event names
-
-		dispatcher.on('data-preload-complete', self._onPreloadData.bind(self));
 
 		console.log('Creating global events...');
 
@@ -111,22 +108,20 @@ var AppView = Backbone.View.extend({
 		 *	Callback for when the deferred object is resolved. This loads content needed for the app to function, the queues data and playlists data
 		 */
 
-        self._preloadData();
-
-		//$.when(loadQueue).then(function(){
-		//	dispatcher.trigger('data-preload-complete');
-		//});
+        self._fetchData();
 
 		/*
-		 *	Initialise views that don't rely on external data
+		 *	Initialise views that don't rely on external data // core modules
 		 */
 
-		for(var view in self.modules){
-			
-			self.children.push(new self.modules[view]());
+		for(var view in this.viewModules){
+			this.children.push( new this.viewModules[view]() );
 		}
 
-		//needs moved into its own module
+		this.attachTempClickHandler(); //temporary until its own module is created
+	},
+
+	attachTempClickHandler:function(){
 
 		$('#sidebar a').on('click', function(e){
 			e.preventDefault();
@@ -147,14 +142,13 @@ var AppView = Backbone.View.extend({
 			}
 
 		}.bind(this));
-
 	},
 
 	_showView:function(view){
 
 		console.log('showing view');
 
-		this.layout.main.show(new this.preload[view]() );
+		this.layout.main.show(new this.viewModules[view]() );
 
 	},
 
@@ -187,7 +181,7 @@ var AppView = Backbone.View.extend({
 		});
 	},
 
-	_preloadData: function(){
+	_fetchData: function(){
 
 		/*
 		 *	Deferred object to be resolved once data for Playlists and Queue has been loaded
@@ -204,16 +198,10 @@ var AppView = Backbone.View.extend({
 
 		return deferred;*/
 
+		//dont really need to be deferred anymore
+
 		dataStore.playlistsCollection.fetch();
 		dataStore.queuesCollection.fetch();
-	},
-
-	_onPreloadData: function(){
-		// TODO - Remove a preloader
-
-		for(var view in this.preload){
-			this.children.push(new this.preload[view]());
-		}
 	},
 
 	/*

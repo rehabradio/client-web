@@ -1,4 +1,4 @@
-var ViewQueuesList = require('./view-queues-list');
+var ViewQueuesList = require('./view-queues-list'); //composite view
 var ViewQueueTracks = require('./view-queue-tracks');
 var CollectionQueueTracks = require('../collections/collection-queue-tracks');
 
@@ -9,7 +9,6 @@ module.exports = Marionette.LayoutView.extend({
 	template: require('../templates/view-queues.hbs'),
 
 	regions: {
-
 		currentTrack: '#current-track',
 		queuesList: '#queues',
 		queueTracks: '#queue-tracks'
@@ -17,22 +16,36 @@ module.exports = Marionette.LayoutView.extend({
 
 	initialize: function(){
 
-		console.log( this );
+		console.log('LayoutView::initialize');
+	
+		dataStore.queueTracksCollections = [];
+
+		//this.queuesList.show(new ViewQueuesList());  <-- This throws and exception because the regions are not available yet
+		//http://stackoverflow.com/questions/11974176/understanding-layouts-in-marionette-for-backbone-js
+		
+		//var initialQueueId = dataStore.queuesCollection.first().id;
+
+		//this._queueChange(initialQueueId);
+	},
+
+	onRender: function() {
 
 		dispatcher.on('queue:change', this._queueChange.bind(this));
 
-		dataStore.queueTracksCollections = [];
+		console.log(this);
 
-		this.render();
+		//var err = new Error();
+    	//console.log(err.stack);
+
+    	//return;
 
 		// Render the list of queues available
+      	this.queuesList.show(new ViewQueuesList());
 
-		this.queuesList.show(new ViewQueuesList());
-
-		var initialQueueId = dataStore.queuesCollection.first().id;
-
+      	var initialQueueId = dataStore.queuesCollection.first().id;
 		this._queueChange(initialQueueId);
-	},
+ 
+    },
 
 	_queueChange: function(id){
 
@@ -45,13 +58,13 @@ module.exports = Marionette.LayoutView.extend({
 
 		var model = dataStore.queuesCollection.find(function(element){ return element.get('id') === id; });
 
-
 		// TODO - move to view-app
 		/*
 		 *	Check if the collection exists in dataStore. If it doesn't create it.
 		 */
 
 		if(!_.find(dataStore.queueTracksCollections, function(element){ return element.id === id; })){
+			console.log('fired');
 			dataStore.queueTracksCollections.push(new CollectionQueueTracks([], {
 				id: id,
 				url: window.API_ROOT + 'queues/' + id + '/tracks/'

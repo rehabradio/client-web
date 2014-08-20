@@ -14,15 +14,13 @@ module.exports = Marionette.CompositeView.extend({
 
 	model: new PlaylistsModel(),
 
-	collectionEvents: {
-    	"add": "modelAdded"
-  	},
+ 	childViewOptions : function () { 
+		return { 
+			parent: this
+		};	 
+	},
 
-  	modelAdded:function(model){
-  		console.log(model);
-  	},
-
-	//playlists: [], 
+	playlists: [], 
 
 	initialize: function(){
 
@@ -33,16 +31,16 @@ module.exports = Marionette.CompositeView.extend({
 		 *	and this value then propagates through to the TrackViews to be used to filter out the current playlist from the selected playlists in 'add-to-playlist'
 		 */
 
-		//this.tracksView = new TracksView({
-		//	model: this.model
-		//});
+		this.tracksView = new TracksView({
+			model: this.model
+		});
 
-		//dispatcher.on('tracks-show', this._showTracks, this);
+		dispatcher.on('tracks-show', this._showTracks, this);
 
 		//this.listenTo(this.collection, 'add', this._onAddPlaylist, this);
 
 		//this.$list = this.$el.find('ul');
-		this.render();
+		//this.render();
 	},
 
 	/*render: function(){

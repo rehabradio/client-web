@@ -10,6 +10,7 @@ module.exports = Marionette.CompositeView.extend({
 	template: require('../templates/view-queues-list.hbs'),
 
 	initialize: function(){
+		console.log('CompositeView::Queue::initialize', this.collection);
 		this.render();
 	}
 });
