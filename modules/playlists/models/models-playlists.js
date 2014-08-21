@@ -1,6 +1,9 @@
 module.exports = Backbone.Model.extend({
 	defaults: {
-		playlist: null
+		id: null,
+		name: null,
+		description: null,
+		coverart: null
 	},
 
 	url: function(){

@@ -7,8 +7,9 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box; }
 
-h1, h2, h3, h4 {
-  font-weight: 100; }
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+  margin: 0 0 0.2em 0; }
 
 
 h2 {
@@ -142,15 +143,28 @@ header {
   .playlists .right-column {
     width: 25%;
     float: left; }
-
-.tracks {
-  position: relative;
-  width: 25%;
-  float: left;
-  z-index: 1; }
-  .tracks > .content {
-    position: relative;
-    padding: 0 20px 62px; }
+  .playlists .playlist {
+    margin: 0 0 20px 0;
+    overflow: hidden; }
+    .playlists .playlist .coverart {
+      margin: 0 20px 0 0;
+      width: 80px;
+      height: 80px;
+      float: left;
+      overflow: hidden;
+      background-image: url(/img/album.png);
+      background-size: cover; }
+      .playlists .playlist .coverart img {
+        display: block;
+        width: 50%;
+        float: left; }
+  .playlists .track .coverart {
+    display: block;
+    margin: 0 10px 0 0;
+    width: 40px;
+    background-image: url(/img/album.png); }
+  .playlists .details {
+    float: left; }
 
 .queue {
   position: absolute;
@@ -164,6 +178,12 @@ header {
     list-style: none; }
   .queue li {
     margin: 0 0 8px 0; }
+  .queue .cover-art {
+    display: block;
+    margin: 0 10px 0 0;
+    width: 40px; }
+  .queue td {
+    padding: 0 0 10px 0; }
 
 #search label {
   display: none; }

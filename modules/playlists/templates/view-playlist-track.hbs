@@ -1,4 +1,7 @@
 <td>
+	<img src="{{track.image_small}}" class="coverart">
+</td>
+<td>
 	<h4>{{track.name}}</h4>
 	<h5 class="album">{{track.album.name}}</h5>
 	{{#each track.artists}}
@@ -6,14 +9,14 @@
 	{{/each}}
 </td>
 <td>
-	<a href="#" class="add-to-queue">Add to queue</a>
+	<button type="button" class="btn orange add-to-queue">Add to queue</button>
 </td>
 <td>
-	<a href="#" class="add-to-playlist">Add to playlist</a>
+	<button type="button" class="btn orange add-to-playlist">Add to playlist</button>
 	<select></select>
 </td>
 <td>
-	<a href="#" class="remove-from-playlist">Remove from playlist</a>
+	<button type="button" class="btn remove-from-playlist">Remove from playlist</button>
 </td>
 <td>
 	<a href="#" title="">

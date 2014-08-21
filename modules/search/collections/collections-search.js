@@ -26,6 +26,10 @@ var SearchCollection = BaseCollection.extend({
 	parse:function(response){
 		this.pagination = { next: response.next, previous: response.previous};
 		return response.results;
+	},
+
+	initialize: function(){
+
 	}
 });
 
