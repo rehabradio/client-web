@@ -41,6 +41,7 @@ module.exports = Marionette.ItemView.extend({
 		});
 	},
 
+
 	_onShowPlaylist: function(){
 
 		dispatcher.trigger('playlist:tracks:show');
@@ -50,6 +51,7 @@ module.exports = Marionette.ItemView.extend({
 	_onDeletePlaylist: function(){
 
 		dispatcher.trigger('playlist:delete', this.model);
+
 	},
 
 	_onCoverartChange: function(){
@@ -59,5 +61,7 @@ module.exports = Marionette.ItemView.extend({
 		_.each(this.model.get('coverart'), function(element){
 			self.$el.find('.coverart').append('<img src="' + element + '" alt="">');
 		});
+		
 	}
+
 });

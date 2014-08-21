@@ -28,7 +28,7 @@ Handlebars = require('hbsfy/runtime');
 
 dispatcher = require('./src/utils/dispatcher');
 dataStore = require('./src/utils/dataStore');
-router = require('./src/utils/router');
+//router = require('./src/utils/router');
 
 /*
  *	Use Mock data by including the 'debug' param in the URL
@@ -42,7 +42,7 @@ if(document.location.search.match(/debug/gi)){
  *	Define and initialise the root view to start the application
  */
 
- // window.API_ROOT = 'http://server-core.herokuapp.com/api/';
+  // window.API_ROOT = 'http://server-core.herokuapp.com/api/';
 window.API_ROOT = 'http://localhost:8000/api/';
 
 var AppView = require('../modules/app/views/view-app');

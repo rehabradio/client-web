@@ -24,12 +24,10 @@
 	},
 
 	_onAddToQueue: function(e){
-		e.preventDefault();
 
 		var id = this.model.get('track').id;
 
-		dispatcher.trigger('add-track-to-queue', id); 
-
+		dispatcher.trigger('playlist:queue:modal', id);
 	},
 
 	_onAddToPlaylist: function(){

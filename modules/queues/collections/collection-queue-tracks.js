@@ -17,7 +17,7 @@ module.exports = BaseCollection.extend({
 	},
 
 	comparator: function(element){
-		return element.position;
+		return element.id;
 	}
 	
 });

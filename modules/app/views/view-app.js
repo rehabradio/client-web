@@ -1,6 +1,8 @@
 
 var modelApp = require('../models/models-app'); // Already initialised
 var ViewUser = require('./view-user');
+var AppLayout = require('../layout/layout');
+var AppRouter = require('../../core/router/router');
 
 var AppView = Backbone.View.extend({
 
@@ -10,29 +12,30 @@ var AppView = Backbone.View.extend({
 
 	children: [],
 
-	/*
-	 *	These views are initialised only once the data has been loaded to the dataStore.
-	 *	This uses jQuery Promises
-	 */
-
-	preload: {
-		queue: require('../../queues/views/view-queues-layout'),
-		playlist: require('../../playlists/views/view-playlists-layout')
-
-	},
-
-	/*
-	 *	These views can be loaded on start up as they don't rely on external data.
-	 */
-	
-
-	 //switch to using search controller
-
-	modules: {
+	//modules that will be started as soon as the app boots
+	//maybe move them into core, things like header, sidebar will go here
+	coreModules: {
 		search: require('../../search/controller/controller-search')
 	},
 
+	//views that are called by the router's controller, these views will be displayed within the 
+	//layouts 'main' region
+	viewModules: {
+		queue: require('../../queues/views/view-queues-layout'),
+		playlist: require('../../playlists/views/view-playlists-layout')
+	},
+
 	initialize: function(){
+
+		 //Store a reference to all appModules
+		this.appModules = _.extend(this.coreModules, this.viewModules);
+
+		this.router = new AppRouter();	
+		Backbone.history.start({ pushState: false, root:'/' });
+
+		//Create an overall App Layout and render it
+		this.layout = new AppLayout( this );
+		this.layout.render();
 
 		var viewUser = new ViewUser();
 
@@ -58,7 +61,12 @@ var AppView = Backbone.View.extend({
 
 	_startApp: function(){
 
+		console.log('_startApp');
+
 		var self = this;
+
+
+        self._fetchData();
 
 		/*
 		 *	Stores global information for the app. Examples include login information and queue information
@@ -76,13 +84,11 @@ var AppView = Backbone.View.extend({
 
 		 // TODO - come up with better event names
 
-		dispatcher.on('data-preload-complete', self._onPreloadData.bind(self));
-
 		console.log('Creating global events...');
 
 		dispatcher.on('collections-when-pre-loaded', self._startApp.bind(self));
 
-		dispatcher.on('add-track-to-queue', self._addTrackToQueue.bind(self));
+		dispatcher.on('playlist:queue:add', self._addTrackToQueue.bind(self));
 
 		dispatcher.on('playlist:create', self._createPlaylist.bind(self));
 		dispatcher.on('playlist:delete', self._deletePlaylist.bind(self));
@@ -100,28 +106,61 @@ var AppView = Backbone.View.extend({
 		dispatcher.on('queue:track:delete', self._deleteTrackFromQueue.bind(self));
 
 
+		this.listenTo(dispatcher, 'router:showModule', this._showModule, this);
+		//this.listenTo(dispatcher, 'router:triggerController', this._triggerRouterController, this);
+
+
 		console.log('booting views...');
 		
 		/*
 		 *	Callback for when the deferred object is resolved. This loads content needed for the app to function, the queues data and playlists data
 		 */
 
-        var loadQueue = self._preloadData();
-
-		$.when(loadQueue).then(function(){
-			dispatcher.trigger('data-preload-complete');
-		});
-
 		/*
-		 *	Initialise views that don't rely on external data
+		 *	Initialise views that don't rely on external data // core modules
 		 */
 
-		for(var view in self.modules){
-			
-			self.children.push(new self.modules[view]());
+		for(var view in this.coreModules){
+			this.children.push( new this.coreModules[view]() );
 		}
 
+		this.attachTempClickHandler(); //temporary until its own module is created
 	},
+
+	attachTempClickHandler:function(){
+
+		$('#sidebar a').on('click', function(e){
+			e.preventDefault();
+			var module = $(e.currentTarget).data('name');
+
+			//call the method on the controller directly, not {trigger:true}
+			//http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
+			//http://media.pragprog.com/titles/dsbackm/sample2.pdf
+
+			switch(module) {
+    			case 'playlists':
+        			this.router.controller.showPlaylists();
+        		break;
+    			case 'queues':
+        			this.router.controller.showQueues();
+        		break;
+			}
+
+		}.bind(this));
+
+	},
+
+	_showModule:function( module, routeOptions ){
+
+		this.layout.main.show( new this.viewModules[module]() );
+		this.router.navigate( routeOptions.path );
+
+	},
+
+	//will need to be re-looked at. Should give each module access to the router instead maybe.
+	//_triggerRouterController:function( method ){
+		//this.router.controller[method]();
+	//},	
 
 	_queueAdd:function(payload){
 
@@ -152,13 +191,13 @@ var AppView = Backbone.View.extend({
 		});
 	},
 
-	_preloadData: function(){
+	_fetchData: function(){
 
 		/*
 		 *	Deferred object to be resolved once data for Playlists and Queue has been loaded
 		 */
 
-		var deferred = $.Deferred();
+		/*var deferred = $.Deferred();
 
 		$.when(
 			dataStore.playlistsCollection.fetch(),
@@ -167,15 +206,12 @@ var AppView = Backbone.View.extend({
 			return deferred.resolve();
 		});
 
-		return deferred;
-	},
+		return deferred;*/
 
-	_onPreloadData: function(){
-		// TODO - Remove a preloader
+		//dont really need to be deferred anymore
 
-		for(var view in this.preload){
-			this.children.push(new this.preload[view]());
-		}
+		dataStore.playlistsCollection.fetch();
+		dataStore.queuesCollection.fetch();
 	},
 
 	/*
@@ -198,14 +234,14 @@ var AppView = Backbone.View.extend({
 		});
 	},
 
-	_addTrackToQueue: function(id){
+	_addTrackToQueue: function(data){
 
-		var endpoint = 'queues/' + this.model.get('queueId') + '/tracks/';
+		var endpoint = 'queues/' + data.queue + '/tracks/';
 
 		$.ajax({
 			type: 'POST',
 			url: window.API_ROOT + endpoint,
-			data: {track: id},
+			data: {track: data.track},
 			success: this._addTrackToQueueSuccess,
 			error: this._onError
 		});
@@ -217,13 +253,13 @@ var AppView = Backbone.View.extend({
 		 *	Callback for a successful call to add track to queue
 		 */
 
-		var collection = _.find(dataStore.queueTracksCollections, function(element){ return element.id === dataStore.appModel.get('queueId'); });
+		// var collection = _.find(dataStore.queueTracksCollections, function(element){ return element.id === dataStore.appModel.get('queueId'); });
 
-		collection.fetch({
-			// reset: true,
-			add: true,
-			remove: true
-		});
+		// collection.fetch({
+		// 	// reset: true,
+		// 	add: true,
+		// 	remove: true
+		// });
 
 	},
 

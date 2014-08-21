@@ -3,18 +3,20 @@ var PlaylistTracks = require('../views/view-playlist-tracks');
 var PlaylistCreateModal = require('../views/modal-playlist-create');
 var PlaylistAddTrackModal = require('../views/modal-playlist-add-track');
 var ModelPlaylistAdd = require('../models/models-playlist-add');
+var PlaylistAddQueueModal = require('../views/modal-playlist-add-queue');
+var ModelPlaylistQueue = require('../models/models-playlist-queue');
 var TracksModel = require('../models/models-tracks');
 var TracksCollection = require('../collections/collections-tracks');
 
 module.exports = Marionette.LayoutView.extend({
-
-	el: '#playlists',
 
 	events: {
 		'click #playlist-create': '_onPlaylistCreate'
 	},
 
 	template: require('../templates/view-playlists.hbs'),
+
+	className: 'playlists',
 
 	regions: {
 		playlistsUser: '#playlists-user',
@@ -23,17 +25,20 @@ module.exports = Marionette.LayoutView.extend({
 		modalContainer: '#playlist-modal-container'
 	},
 
-	initialize: function(){
+	onRender:function(){
 
-		this.render();
+		//dont start listening until the region is ready
+		////http://stackoverflow.com/questions/11974176/understanding-layouts-in-marionette-for-backbone-js
 
 		this.playlistsAll.show(new PlaylistsAll());
+		
+		this.listenTo(dispatcher, 'playlist:tracks:show', this._onPlaylistTracksShow, this);
 
-		dispatcher.on('playlist:tracks:show', this._onPlaylistTracksShow.bind(this));
+		this.listenTo(dispatcher, 'playlist:tracks:modal', this._onAddToPlaylist, this);
 
-		dispatcher.on('playlist:tracks:modal', this._onAddToPlaylist.bind(this));
+		this.listenTo(dispatcher, 'playlist:queue:modal', this._onAddToQueue, this);
 
-		dispatcher.on('playlist:show', this._onPlaylistShow.bind(this));
+		this.listenTo(dispatcher, 'playlist:show', this._onPlaylistShow, this);
 
 	},
 
@@ -69,6 +74,22 @@ module.exports = Marionette.LayoutView.extend({
 		this.modalContainer.show(new PlaylistAddTrackModal({
 			model: modelPlaylistAdd,
 			collection: dataStore.playlistsCollection
+		}));
+	},
+
+	_onAddToQueue: function(id){
+
+		/*
+		 *	Initialise the Add To Playlist modal
+		 */
+
+		var modelPlaylistQueue = new ModelPlaylistQueue({
+			track: id
+		});
+
+		this.modalContainer.show(new PlaylistAddQueueModal({
+			model: modelPlaylistQueue,
+			collection: dataStore.queuesCollection
 		}));
 	}
 
