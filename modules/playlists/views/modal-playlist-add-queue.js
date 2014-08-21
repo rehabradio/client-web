@@ -9,13 +9,15 @@ module.exports = Marionette.ItemView.extend({
 
 	initialize: function(){
 
-		/*
-		 *	Filter the collection to exclude the currently displayed playlist
-		 */
+		
 
 	},
 
 	serializeData: function(){
+		
+		/*
+		 *	Over-writes the default behaviour to render the collection instead of the model.
+		 */
 
 		var data = { items: _.partial(this.serializeCollection, this.collection).apply(this, arguments) };
 
