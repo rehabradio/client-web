@@ -37,6 +37,8 @@ module.exports = Marionette.LayoutView.extend({
 		var viewPlaylistTracks = new PlaylistTracks({collection: collectionPlaylistTracks});
 
 		this.playlistsTracks.show(viewPlaylistTracks);
+
+
 	},
 
 	_onPlaylistTracksShow: function(){

@@ -9,15 +9,22 @@ module.exports = {
 		dispatcher.trigger('router:showModule', 'playlist', options);
 	},
 
-	showPlaylist:function(){
+	showPlaylist:function( playlistID ){
 		console.log('showPlaylist');	
+
+		var options = {
+			path : 'playlists/'+playlistID +'/'
+		}
+
+		dispatcher.trigger('route:showModule', 'playlist', options);
+
 	},
 
-	showPlaylistTracks:function(){
+	showPlaylistTracks:function(playlistID){
 		console.log('showPlaylistTracks');
 	},
 
-	showPlaylistTrack:function(){
+	showPlaylistTrack:function(playlistID, trackID){
 		console.log('showPlaylistTrack');
 	}
 };

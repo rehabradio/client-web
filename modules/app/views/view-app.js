@@ -1,4 +1,3 @@
-
 var modelApp = require('../models/models-app'); // Already initialised
 var ViewUser = require('./view-user');
 var AppLayout = require('../layout/layout');

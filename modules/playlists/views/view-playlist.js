@@ -46,6 +46,7 @@ module.exports = Marionette.ItemView.extend({
 
 		dispatcher.trigger('playlist:tracks:show');
 		dispatcher.trigger('playlist:show', this.model.get('id'));
+
 	},
 
 	_onDeletePlaylist: function(){
