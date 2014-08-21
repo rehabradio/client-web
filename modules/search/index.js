@@ -1,7 +1,7 @@
-var Layout 				= require('../views/layout/layout'),
-	SearchCollection	= require('../collections/collections-search'),
-    searchView          = require('../views/view-search'),
-    searchServiceView   = require('../views/view-search-service');
+var Layout 				= require('./views/layout/layout'),
+	SearchCollection	= require('./collections/collections-search'),
+    searchView          = require('./views/view-search'),
+    searchServiceView   = require('./views/view-search-service');
 
 /*
 
@@ -35,8 +35,10 @@ var SearchController = Marionette.Controller.extend({
     },
     
     setUpListeners:function(){
-        dispatcher.on('perform-search', this.performSearch, this);
-        dispatcher.on('service:switch', this.showLayout, this);
+        
+        this.listenTo(dispatcher, 'search:perform:search', this.performSearch, this);  
+        this.listenTo(dispatcher, 'search:service:switch', this.showLayout, this);
+
     },
 
     bootCollections:function(){

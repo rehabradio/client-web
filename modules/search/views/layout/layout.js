@@ -6,9 +6,6 @@ var SearchLayout = Marionette.LayoutView.extend({
 
 	initialize: function(options){
 		this.activeService = options.defaultService;
-		this.templateHelpers = {
-			active: this.activeService
-		};
 	},
 
 	regions: {
@@ -25,7 +22,7 @@ var SearchLayout = Marionette.LayoutView.extend({
 		$(e.currentTarget).addClass('is-active');
 
 		this.activeService = $(e.currentTarget).data('service');
-		dispatcher.trigger('service:switch', this.activeService);
+		dispatcher.trigger('search:service:switch', this.activeService);
 
 	}
 });

@@ -21,7 +21,7 @@ var SearchView = Marionette.ItemView.extend({
 			return;
 		}
 
-		dispatcher.trigger('perform-search', query);
+		dispatcher.trigger('search:perform:search', query);
 	}
 });
 

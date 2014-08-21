@@ -1,32 +1,27 @@
-var SearchTrackView 	= require('./view-search-track'),
-	EmptyView    		= require('./view-empty');
+var SearchTrackView 	= require('./view-search-track');
+	//EmptyView    		= require('./view-empty');
 
 var SearchServiceView = Marionette.CompositeView.extend({
 
 	childView: SearchTrackView,
 	childViewContainer: '.results',
 	paginationClass: '.pagination',
-	emptyView: EmptyView,
 
 	templates :{
 		pagination: require('../templates/pagination.hbs'),
 		view : require('../templates/search-service.hbs')
 	},
 
-	events: {
-		'click .pagination a' : 'paginate'
+	ui:{
+		controls: '.pagination a'
 	},
+	
+	events: {
+    	'click @ui.controls': 'paginate'
+  	},
 
 	initialize: function(){
-
-		/*
-		this.render() triggers onRender twice
-		https://github.com/marionettejs/backbone.marionette/issues/287
-
-		*/
-
 		this.template = this.templates.view;
-		this.once('render');
 	},
 
 	onRender: function(){

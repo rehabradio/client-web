@@ -12,10 +12,11 @@ var AppView = Backbone.View.extend({
 
 	children: [],
 
-	//modules that will be started as soon as the app boots
-	//maybe move them into core, things like header, sidebar will go here
+	//require the controller for each module, which in turn is responsible for setting up its views
+	//controller `index.js`
 	coreModules: {
-		search: require('../../search/controller/controller-search')
+		search: require('../../search/'),
+		navigation: require('../../navigation/')
 	},
 
 	//views that are called by the router's controller, these views will be displayed within the 
@@ -121,33 +122,8 @@ var AppView = Backbone.View.extend({
 		 */
 
 		for(var view in this.coreModules){
-			this.children.push( new this.coreModules[view]() );
+			this.children.push( new this.coreModules[view](this) );
 		}
-
-		this.attachTempClickHandler(); //temporary until its own module is created
-	},
-
-	attachTempClickHandler:function(){
-
-		$('#sidebar a').on('click', function(e){
-			e.preventDefault();
-			var module = $(e.currentTarget).data('name');
-
-			//call the method on the controller directly, not {trigger:true}
-			//http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
-			//http://media.pragprog.com/titles/dsbackm/sample2.pdf
-
-			switch(module) {
-    			case 'playlists':
-        			this.router.controller.showPlaylists();
-        		break;
-    			case 'queues':
-        			this.router.controller.showQueues();
-        		break;
-			}
-
-		}.bind(this));
-
 	},
 
 	_showModule:function( module, routeOptions ){
