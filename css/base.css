@@ -142,6 +142,7 @@ header {
       .playlists .playlist .coverart img {
         display: block;
         width: 50%;
+        height: 50%;
         float: left; }
   .playlists .track .coverart {
     display: block;

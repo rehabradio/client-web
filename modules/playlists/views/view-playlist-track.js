@@ -19,6 +19,10 @@
 		'change select': '_onSelectPlaylist'
 	},
 
+	initialize: function(){
+
+	},
+
 	_onAddToQueue: function(e){
 		e.preventDefault();
 
@@ -28,44 +32,26 @@
 
 	},
 
-	_onAddToPlaylist: function(e){
-		e.preventDefault();
+	_onAddToPlaylist: function(){
 
-		var self = this;
+		/*
+		 *	Harvest the Playlist id from the model url
+		 */
 
-		// Filter playlists to not include current playlist
+		var urlRegex = /api\/playlists\/(.*)\/tracks\/(.*)\//,
+			url = this.model.url();
 
-		var playlists = dataStore.playlistsCollection.filter(function(element){ return element.get('id') !== self.playlist; }),
-			$select = self.$el.find('select');
-
-		var placeholder = document.createElement('option');
-
-		placeholder.setAttribute('selected', '');
-		placeholder.setAttribute('disabled', '');
-		placeholder.innerText = 'Select your playlist';
-
-		$select.empty().append(placeholder);
-
-		_.each(playlists, function(element){
-			var option = document.createElement('option');
-			option.innerText = element.get('name');
-			option.value = element.get('id');
-
-			$select.append(option);
-		});
-
-
-	},
-
-	_onSelectPlaylist: function(e){
-		e.preventDefault();
-		
 		var data = {
-			playlist: e.target.value,
-			track: this.model.get('id')
-		};
 
-		dispatcher.trigger('playlist:track:add', data);	
+			playlist: url.match(urlRegex)[1],
+			track: this.model.get('track').id
+		}
+
+		/*
+		 *	Trigger the initialisation of the Add-To-Playlists modal
+		 */
+
+		dispatcher.trigger('playlist:tracks:modal', data);
 	},
 
 	_onRemoveFromPlaylist: function(e){
