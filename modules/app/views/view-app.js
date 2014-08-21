@@ -34,7 +34,7 @@ var AppView = Backbone.View.extend({
 		Backbone.history.start({ pushState: false, root:'/' });
 
 		//Create an overall App Layout and render it
-		this.layout = new AppLayout();
+		this.layout = new AppLayout( this );
 		this.layout.render();
 
 		var viewUser = new ViewUser();
@@ -105,10 +105,9 @@ var AppView = Backbone.View.extend({
 		dispatcher.on('queue:add', this._queueAdd, this);
 		dispatcher.on('queue:track:delete', self._deleteTrackFromQueue.bind(self));
 
-		dispatcher.on('router:showView', this._showView, this);
 
-
-		this.newListenMethods();
+		this.listenTo(dispatcher, 'router:showModule', this._showModule, this);
+		//this.listenTo(dispatcher, 'router:triggerController', this._triggerRouterController, this);
 
 
 		console.log('booting views...');
@@ -128,26 +127,12 @@ var AppView = Backbone.View.extend({
 		this.attachTempClickHandler(); //temporary until its own module is created
 	},
 
-	newListenMethods:function(){
-		dispatcher.on('router:showTracks', this.showPlaylistTracks, this);
-	},
-
-	showPlaylistTracks:function( playlist ){
-
-		var url = playlist.request + '/' + playlist.id + '/tracks/';
-
-		this.router.navigate( url );
-		//this.router.controller.showPlaylistTracks( playlist.id );
-		
-	},
-
 	attachTempClickHandler:function(){
 
 		$('#sidebar a').on('click', function(e){
 			e.preventDefault();
 			var module = $(e.currentTarget).data('name');
 
-			//this.router.navigate(module);
 			//call the method on the controller directly, not {trigger:true}
 			//http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
 			//http://media.pragprog.com/titles/dsbackm/sample2.pdf
@@ -157,20 +142,25 @@ var AppView = Backbone.View.extend({
         			this.router.controller.showPlaylists();
         		break;
     			case 'queues':
-        			this.router.controller.showQueues()
+        			this.router.controller.showQueues();
         		break;
 			}
 
 		}.bind(this));
-	},
-
-	_showView:function(view){
-
-		console.log('showing view');
-
-		this.layout.main.show(new this.viewModules[view]() );
 
 	},
+
+	_showModule:function( module, routeOptions ){
+
+		this.layout.main.show( new this.viewModules[module]() );
+		this.router.navigate( routeOptions.path );
+
+	},
+
+	//will need to be re-looked at. Should give each module access to the router instead maybe.
+	//_triggerRouterController:function( method ){
+		//this.router.controller[method]();
+	//},	
 
 	_queueAdd:function(payload){
 

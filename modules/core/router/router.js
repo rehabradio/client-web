@@ -12,8 +12,6 @@ var Router = Marionette.AppRouter.extend({
 
 	appRoutes: {
 
-        '' : 'home',
-
     	//Playlist Endpoints
     	'playlists' : 'showPlaylists',
     	'playlists/:id': 'showPlaylist',
@@ -31,8 +29,7 @@ var Router = Marionette.AppRouter.extend({
   	},
 
     onRoute: function(name, path, args){
-        console.log('route ::', arguments);
-        //this.navigate(path);        
+        console.log('route ::', arguments);        
     }
 });
 

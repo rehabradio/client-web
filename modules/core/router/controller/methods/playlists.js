@@ -2,9 +2,11 @@
 
 module.exports = {
 	showPlaylists:function(){
-		console.log('showPlaylists');	
-		dispatcher.trigger('router:showView', 'playlist');
-		//router.navigate('playlists');
+		var options = {
+			path: 'playlists' 
+		};
+		
+		dispatcher.trigger('router:showModule', 'playlist', options);
 	},
 
 	showPlaylist:function(){
@@ -12,7 +14,6 @@ module.exports = {
 	},
 
 	showPlaylistTracks:function(){
-		console.log(arguments);
 		console.log('showPlaylistTracks');
 	},
 

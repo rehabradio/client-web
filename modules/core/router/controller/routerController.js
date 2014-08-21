@@ -1,11 +1,7 @@
 var Queues = require('./methods/queues');
 var Playlists = require('./methods/playlists');
 
-var routerController = {
-	home:function(){
-		console.log('home!!');
-	}
-};
+var routerController = {};
 
 _.extend(routerController, Playlists, Queues);
 

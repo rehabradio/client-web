@@ -9,8 +9,8 @@ module.exports = Marionette.ItemView.extend({
 
 	_loadSelectedQueue: function(){
 
-		var id = this.model.get('id');
+		dispatcher.trigger('queue:change', this.model.get('id'));
+		dispatcher.trigger('router:triggerController', this.model.get('id'));
 
-		dispatcher.trigger('queue:change', id);
 	}
 });

@@ -2,19 +2,29 @@
 
 module.exports = {
 	showQueues:function(){
-		console.log('showQueues');
-		dispatcher.trigger('router:showView', 'queue');
+		
+		var options = {
+			path: 'queues'
+		};
+
+		dispatcher.trigger('router:showModule', 'queue', options);
 	},
 
-	showQueue:function(){
-		console.log('showQueue');
+	showQueue:function(queueID){
+
+		var options = {
+			path: 'queues/' + queueID + '/'
+		}
+
+		dispatcher.trigger('router:showModule', 'queue', options);
+
 	},
 
-	showQueueTracks:function(){
+	showQueueTracks:function(queueID){
 		console.log('showQueueTracks');
 	},
 
-	showQueueTrack:function(){
+	showQueueTrack:function(queueID, trackID){
 		console.log('showQueueTrack');
 	}
 };
