@@ -4,8 +4,6 @@ var CollectionQueueTracks = require('../collections/collection-queue-tracks');
 
 module.exports = Marionette.LayoutView.extend({
 
-	//el: '#queue',
-
 	template: require('../templates/view-queues.hbs'),
 
 	regions: {
@@ -13,6 +11,8 @@ module.exports = Marionette.LayoutView.extend({
 		queuesList: '#queues',
 		queueTracks: '#queue-tracks'
 	},
+
+	className: 'queue',
 
 	initialize: function(){	
 		dataStore.queueTracksCollections = [];

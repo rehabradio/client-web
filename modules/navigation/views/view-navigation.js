@@ -11,6 +11,9 @@ module.exports = Marionette.ItemView.extend({
     },
 
     stateUpdate:function(e){
+
+        //step 1
+
         e.preventDefault();
         var module = $(e.currentTarget).data('name');
         dispatcher.trigger('router:controller', module);

@@ -1,6 +1,6 @@
 module.exports = Marionette.ItemView.extend({
 
-	template: require('../templates/view-playlist-create.hbs'),
+	template: require('../templates/modal-playlist-create.hbs'),
 
 	events: {
 		'click .cancel': 'remove',

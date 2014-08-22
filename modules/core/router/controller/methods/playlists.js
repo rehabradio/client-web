@@ -7,16 +7,21 @@ module.exports = {
 		};
 		
 		dispatcher.trigger('router:showModule', 'playlist', options);
+
+		//this.layout.main.show('');
+
 	},
 
 	showPlaylist:function( playlistID ){
-		console.log('showPlaylist');	
+		console.log('showPlaylist', playlistID);	
 
 		var options = {
 			path : 'playlists/'+playlistID +'/'
 		}
 
-		dispatcher.trigger('route:showModule', 'playlist', options);
+		console.log(options.path);
+
+		//dispatcher.trigger('route:showModule', 'playlist', options);
 
 	},
 

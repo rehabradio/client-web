@@ -26,11 +26,7 @@ var Router = Marionette.AppRouter.extend({
 
     	//Search Endpoints
 
-  	},
-
-    onRoute: function(name, path, args){
-        console.log('route ::', arguments);        
-    }
+  	}
 });
 
 

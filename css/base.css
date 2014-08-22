@@ -42,6 +42,9 @@ main {
   z-index: 0;
   width: 100%; }
 
+table {
+  width: 100%; }
+
 .close {
   position: absolute;
   top: -20px;
@@ -128,7 +131,6 @@ header {
     border-bottom: 1px solid #1f1f1f; }
 
 .playlists {
-  padding-left: 400px;
   overflow: hidden;
   /*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/ }
   .playlists > .content {
@@ -157,6 +159,7 @@ header {
       .playlists .playlist .coverart img {
         display: block;
         width: 50%;
+        height: 50%;
         float: left; }
   .playlists .track .coverart {
     display: block;
@@ -167,13 +170,11 @@ header {
     float: left; }
 
 .queue {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 400px; }
+  overflow: hidden; }
   .queue > .content {
     position: relative;
-    padding: 0 20px 62px; }
+    width: 100%;
+    padding: 0 20px; }
   .queue ul {
     list-style: none; }
   .queue li {

@@ -1,3 +1,9 @@
+/*
+APP DEPENDENCIES
+*/
+
+
+
 var modelApp = require('../models/models-app'); // Already initialised
 var ViewUser = require('./view-user');
 var AppLayout = require('../layout/layout');
@@ -88,7 +94,7 @@ var AppView = Backbone.View.extend({
 
 		dispatcher.on('collections-when-pre-loaded', self._startApp.bind(self));
 
-		dispatcher.on('add-track-to-queue', self._addTrackToQueue.bind(self));
+		dispatcher.on('playlist:queue:add', self._addTrackToQueue.bind(self));
 
 		dispatcher.on('playlist:create', self._createPlaylist.bind(self));
 		dispatcher.on('playlist:delete', self._deletePlaylist.bind(self));
@@ -209,14 +215,14 @@ var AppView = Backbone.View.extend({
 		});
 	},
 
-	_addTrackToQueue: function(id){
+	_addTrackToQueue: function(data){
 
-		var endpoint = 'queues/' + this.model.get('queueId') + '/tracks/';
+		var endpoint = 'queues/' + data.queue + '/tracks/';
 
 		$.ajax({
 			type: 'POST',
 			url: window.API_ROOT + endpoint,
-			data: {track: id},
+			data: {track: data.track},
 			success: this._addTrackToQueueSuccess,
 			error: this._onError
 		});
@@ -228,13 +234,13 @@ var AppView = Backbone.View.extend({
 		 *	Callback for a successful call to add track to queue
 		 */
 
-		var collection = _.find(dataStore.queueTracksCollections, function(element){ return element.id === dataStore.appModel.get('queueId'); });
+		// var collection = _.find(dataStore.queueTracksCollections, function(element){ return element.id === dataStore.appModel.get('queueId'); });
 
-		collection.fetch({
-			// reset: true,
-			add: true,
-			remove: true
-		});
+		// collection.fetch({
+		// 	// reset: true,
+		// 	add: true,
+		// 	remove: true
+		// });
 
 	},
 

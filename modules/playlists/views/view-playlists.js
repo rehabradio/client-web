@@ -5,6 +5,7 @@ var TracksView = require('../views/view-tracks');
 module.exports = Marionette.CompositeView.extend({
 
 	childView: PlaylistView,
+
 	childViewContainer: 'ul',
 
 	collection: dataStore.playlistsCollection,
@@ -35,6 +36,10 @@ module.exports = Marionette.CompositeView.extend({
 		});
 
 		dispatcher.on('tracks-show', this._showTracks, this);
+
+		//this.listenTo(dispatcher, 'playlist:show', this.router.controller.showPlaylist, this);
+
+		//dispatcher.on('playlist:show', )
 
 		
 	},

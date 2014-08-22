@@ -1,0 +1,7 @@
+{{#if loginStatus}}
+	<button type="button" class="btn" id="log-out">Log Out</button>
+	<a href="{{url}}" target="_blank">{{displayName}}</a>
+	<img src="{{image}}">
+{{else}}
+	<button type="button" class="btn" id="log-in">Log In</button>
+{{/if}}
