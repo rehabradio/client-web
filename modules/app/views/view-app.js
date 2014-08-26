@@ -144,10 +144,12 @@ module.exports = Backbone.View.extend({
 
     			case 'playlists':
         			this.router.controller.showPlaylists();
+					Backbone.history.navigate('playlists', {trigger: false})
         		break;
 
     			case 'queues':
         			this.router.controller.showQueues();
+					Backbone.history.navigate('queues', {trigger: false})
         		break;
 			}
 

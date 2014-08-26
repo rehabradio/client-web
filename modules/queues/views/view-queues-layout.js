@@ -49,11 +49,6 @@ module.exports = Marionette.LayoutView.extend({
 
       	//var initialQueueId = dataStore.queuesCollection.first().id;
 
-		// self._queueChange(1);
-
-		// ####################################### Temp
-//		Backbone.history.navigate('queues', {trigger: false});
-
     },
 
 	_queueChange: function(id){
