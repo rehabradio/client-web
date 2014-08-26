@@ -7,7 +7,7 @@ module.exports = {
 			path: 'queues'
 		};
 
-		dispatcher.trigger('router:showModule', 'queue', options);
+		dispatcher.trigger('router:showModule', 'queues', options);
 	},
 
 	showQueue:function(queueID){
@@ -16,7 +16,7 @@ module.exports = {
 			path: 'queues/' + queueID + '/'
 		}
 
-		dispatcher.trigger('router:showModule', 'queue', options);
+		dispatcher.trigger('router:showModule', 'queues', options);
 
 	},
 

@@ -1,9 +1,9 @@
 var PlaylistsAll = require('./view-playlists-all');
 var PlaylistTracks = require('../views/view-playlist-tracks');
-var PlaylistCreateModal = require('../views/modal-playlist-create');
-var PlaylistAddTrackModal = require('../views/modal-playlist-add-track');
-var ModelPlaylistAdd = require('../models/models-playlist-add');
-var PlaylistAddQueueModal = require('../views/modal-playlist-add-queue');
+// var PlaylistCreateModal = require('../views/modal-playlist-create');
+// var PlaylistAddTrackModal = require('../views/modal-playlist-add-track');
+// var ModelPlaylistAdd = require('../models/models-playlist-add');
+// var PlaylistAddQueueModal = require('../views/modal-playlist-add-queue');
 var ModelPlaylistQueue = require('../models/models-playlist-queue');
 var TracksModel = require('../models/models-tracks');
 var TracksCollection = require('../collections/collections-tracks');
@@ -30,15 +30,38 @@ module.exports = Marionette.LayoutView.extend({
 		//dont start listening until the region is ready
 		////http://stackoverflow.com/questions/11974176/understanding-layouts-in-marionette-for-backbone-js
 
-		this.playlistsAll.show(new PlaylistsAll());
+		var self = this;
+
+		self.playlistsAll.show(new PlaylistsAll());
+
+		var PlaylistRoute = Marionette.SubRouter.extend({
+
+			controller: {
+
+				loadPlaylist: function(id){
+					self._onPlaylistShow(id);
+				}	
+			},
+
+			appRoutes: {
+				':id': 'loadPlaylist'
+			},
+			
+		});
+
+		var playlistRoute = new PlaylistRoute('playlists');
 		
-		this.listenTo(dispatcher, 'playlist:tracks:show', this._onPlaylistTracksShow, this);
+		self.listenTo(dispatcher, 'playlist:tracks:show', self._onPlaylistTracksShow, self);
 
-		this.listenTo(dispatcher, 'playlist:tracks:modal', this._onAddToPlaylist, this);
+		self.listenTo(dispatcher, 'playlist:tracks:modal', self._onAddToPlaylist, self);
 
-		this.listenTo(dispatcher, 'playlist:queue:modal', this._onAddToQueue, this);
+		self.listenTo(dispatcher, 'playlist:queue:modal', self._onAddToQueue, self);
 
-		this.listenTo(dispatcher, 'playlist:show', this._onPlaylistShow, this);
+		self.listenTo(dispatcher, 'playlist:show', self._onPlaylistShow, self);
+
+
+		// ####################################### Temp Maybe
+		Backbone.history.navigate('playlists', {trigger: false});
 
 	},
 
@@ -49,6 +72,11 @@ module.exports = Marionette.LayoutView.extend({
 		var viewPlaylistTracks = new PlaylistTracks({collection: collectionPlaylistTracks, model: new TracksModel({id: id})});
 
 		this.playlistsTracks.show(viewPlaylistTracks);
+
+
+		// ####################################### Temp Maybe
+		Backbone.history.navigate('playlists/' + id, {trigger: false})
+		this._onPlaylistTracksShow();
 	},
 
 	_onPlaylistTracksShow: function(){

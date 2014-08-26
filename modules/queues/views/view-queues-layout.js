@@ -20,17 +20,39 @@ module.exports = Marionette.LayoutView.extend({
 
 	onRender: function() {
 
+		var self = this;
+
 		// Render the list of queues available
-      	this.queuesList.show(new ViewQueuesList());
+      	self.queuesList.show(new ViewQueuesList());
+
+		var QueuesRoute = Marionette.SubRouter.extend({
+
+			controller: {
+
+				loadQueue: function(id){
+					self._queueChange(id);
+				}	
+			},
+
+			appRoutes: {
+				':id': 'loadQueue'
+			},
+			
+		});
+
+		var queuesRoute = new QueuesRoute('queues');
 
       	//dispatcher.on('queue:change', this._queueChange, this); << causes problems with marionette cleanups, use listenTo
       	//http://stackoverflow.com/questions/16823746/backbone-js-listento-vs-on
 
-      	this.listenTo(dispatcher, 'queue:change', this._queueChange, this);
+      	self.listenTo(dispatcher, 'queue:change', self._queueChange, self);
 
       	//var initialQueueId = dataStore.queuesCollection.first().id;
 
-		this._queueChange(1);
+		// self._queueChange(1);
+
+		// ####################################### Temp
+//		Backbone.history.navigate('queues', {trigger: false});
 
     },
 
@@ -62,6 +84,8 @@ module.exports = Marionette.LayoutView.extend({
 			model: model,
 			collection: _.find(dataStore.queueTracksCollections, function(element){ return element.id === id; })
 		}));
+
+		Backbone.history.navigate('queues/' + id, {trigger: false});
 
 	}
 });

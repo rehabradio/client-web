@@ -4,7 +4,7 @@ var ViewUser = require('./view-user');
 var AppLayout = require('../layout/layout');
 var AppRouter = require('../../core/router/router');
 
-var AppView = Backbone.View.extend({
+module.exports = Backbone.View.extend({
 
 	el: '#app',
 
@@ -21,8 +21,8 @@ var AppView = Backbone.View.extend({
 	//views that are called by the router's controller, these views will be displayed within the 
 	//layouts 'main' region
 	viewModules: {
-		queue: require('../../queues/views/view-queues-layout'),
-		playlist: require('../../playlists/views/view-playlists-layout')
+		queues: require('../../queues/views/view-queues-layout'),
+		playlists: require('../../playlists/views/view-playlists-layout')
 	},
 
 	initialize: function(){
@@ -30,8 +30,9 @@ var AppView = Backbone.View.extend({
 		 //Store a reference to all appModules
 		this.appModules = _.extend(this.coreModules, this.viewModules);
 
-		this.router = new AppRouter();	
-		Backbone.history.start({ pushState: false, root:'/' });
+		this.router = new AppRouter();
+
+		
 
 		//Create an overall App Layout and render it
 		this.layout = new AppLayout( this );
@@ -111,7 +112,8 @@ var AppView = Backbone.View.extend({
 
 
 		console.log('booting views...');
-		
+
+		Backbone.history.start({ pushState: true, trigger: true });		
 		/*
 		 *	Callback for when the deferred object is resolved. This loads content needed for the app to function, the queues data and playlists data
 		 */
@@ -131,16 +133,19 @@ var AppView = Backbone.View.extend({
 
 		$('#sidebar a').on('click', function(e){
 			e.preventDefault();
+
 			var module = $(e.currentTarget).data('name');
 
-			//call the method on the controller directly, not {trigger:true}
-			//http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
-			//http://media.pragprog.com/titles/dsbackm/sample2.pdf
+			// call the method on the controller directly, not {trigger:true}
+			// http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
+			// http://media.pragprog.com/titles/dsbackm/sample2.pdf
 
 			switch(module) {
+
     			case 'playlists':
         			this.router.controller.showPlaylists();
         		break;
+
     			case 'queues':
         			this.router.controller.showQueues();
         		break;
@@ -150,10 +155,10 @@ var AppView = Backbone.View.extend({
 
 	},
 
-	_showModule:function( module, routeOptions ){
+	_showModule:function( module ){
 
 		this.layout.main.show( new this.viewModules[module]() );
-		this.router.navigate( routeOptions.path );
+		// this.router.navigate( module );
 
 	},
 
@@ -362,5 +367,3 @@ var AppView = Backbone.View.extend({
 		return console.log('Error', error);
 	}
 });
-
-module.exports = AppView;

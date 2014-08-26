@@ -12,12 +12,17 @@ $ = jQuery = require('jquery');
 
 Backbone.$ = $;
 
+
+
 /*
  *	Put Marionette and Handlebars on the global namespace
  */
 
 Marionette = require('backbone.marionette');
 Handlebars = require('hbsfy/runtime');
+
+// require('./libs/backbone.subroute.js');
+require('./libs/backbone.marionette.subrouter.js');
 
 /*
  *	Utils:
@@ -48,6 +53,7 @@ window.API_ROOT = 'https://server-core.herokuapp.com/api/';
 var AppView = require('../modules/app/views/view-app');
 
 var appView = new AppView();
+
 
 window.authoriseUser = function(res){
 

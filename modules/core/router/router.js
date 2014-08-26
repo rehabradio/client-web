@@ -1,4 +1,3 @@
-var Marionette = require('backbone.marionette');
 var RouterController = require('./controller/routerController');
 
 var Router = Marionette.AppRouter.extend({
@@ -13,23 +12,23 @@ var Router = Marionette.AppRouter.extend({
 	appRoutes: {
 
     	//Playlist Endpoints
-    	'playlists' : 'showPlaylists',
-    	'playlists/:id': 'showPlaylist',
-    	'playlists/:id/tracks' : 'showPlaylistTracks',
-    	'playlists/:id/tracks/:id' : 'showPlaylistTrack',
+    	'playlists(/:id)' : 'showPlaylists',
+    	// 'playlists/:id': 'showPlaylists',
+    	// 'playlists/:id/tracks' : 'showPlaylistTracks',
+    	// 'playlists/:id/tracks/:id' : 'showPlaylistTrack',
 
     	//Queue Endpoints
-    	'queues': 'showQueues',
-    	'queues/:id' : 'showQueue',
-    	'queues/:id/tracks' : 'showQueueTracks',
-    	'queues/:id/tracks/:id' : 'showQueueTrack'
+    	'queues(/:id)': 'showQueues'
+    	// 'queues/:id' : 'showQueue',
+    	// 'queues/:id/tracks' : 'showQueueTracks',
+    	// 'queues/:id/tracks/:id' : 'showQueueTrack'
 
     	//Search Endpoints
 
   	},
 
-    onRoute: function(name, path, args){
-        console.log('route ::', arguments);        
+    onRoute: function(name, path, arguments){
+        // console.log('route ::', name, path, arguments);
     }
 });
 

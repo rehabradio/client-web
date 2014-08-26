@@ -1,15 +1,12 @@
 //playlist methods
 
 module.exports = {
-	showPlaylists:function(){
-		var options = {
-			path: 'playlists' 
-		};
+	showPlaylists:function(options){
 		
-		dispatcher.trigger('router:showModule', 'playlist', options);
+		dispatcher.trigger('router:showModule', 'playlists');
 	},
 
-	showPlaylist:function(){
+	showPlaylist:function(options){
 		console.log('showPlaylist');	
 	},
 
