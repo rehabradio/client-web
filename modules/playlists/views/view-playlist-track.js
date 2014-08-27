@@ -53,9 +53,9 @@
 		// dispatcher.trigger('playlist:tracks:modal', data);
 	},
 
-	_onRemoveFromPlaylist: function(e){
-		e.preventDefault();
+	_onRemoveFromPlaylist: function(){
 
-		dispatcher.trigger('playlist:track:remove', this.model); 
+		this.trigger('playlists:tracks:remove', this.model);
+		// dispatcher.trigger('playlist:track:remove', this.model);
 	}
  });
