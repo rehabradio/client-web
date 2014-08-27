@@ -44,8 +44,14 @@ module.exports = Marionette.ItemView.extend({
 
 	_onShowPlaylist: function(){
 
-		dispatcher.trigger('playlist:tracks:show');
-		dispatcher.trigger('playlist:show', this.model.get('id'));
+		/*
+		 *	Bubbles up to layout view and is available in the controller through the layout.
+		 */
+
+		this.trigger('playlists:tracks:show', this.model.get('id'));
+
+		// dispatcher.trigger('playlist:tracks:show');
+		// dispatcher.trigger('playlist:show', this.model.get('id'));
 	},
 
 	_onDeletePlaylist: function(){

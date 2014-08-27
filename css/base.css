@@ -138,7 +138,7 @@ header {
   .playlists > .content {
     padding: 0 20px 62px; }
   .playlists .left-column {
-    width: 50%;
+    width: 25%;
     float: left; }
     .playlists .left-column.contract {
       width: 25%; }

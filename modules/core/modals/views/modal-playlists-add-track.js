@@ -1,10 +1,14 @@
-module.exports = Backbone.View.extend({
+module.exports = Marionette.ItemView.extend({
 
 	template: require('../templates/modal-playlist-add-track.hbs'),
 
 	events: {
 		'click .cancel': 'remove',
 		'click .save': '_onSavePlaylist'
+	},
+
+	triggers: {
+		// 'click .save': 'test'
 	},
 
 	initialize: function(){
@@ -37,7 +41,8 @@ module.exports = Backbone.View.extend({
 				track: this.model.get('track')
 			}
 
-			dispatcher.trigger('playlist:track:add', data);	
+			// dispatcher.trigger('playlist:track:add', data);
+			this.trigger('playlist:tracks:add', data)
 		}
 
 		this.remove();

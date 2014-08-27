@@ -27,7 +27,7 @@
 
 		var id = this.model.get('track').id;
 
-		dispatcher.trigger('playlist:queue:modal', id);
+		this.trigger('queue:tracks:modal', id);
 	},
 
 	_onAddToPlaylist: function(){
@@ -49,7 +49,8 @@
 		 *	Trigger the initialisation of the Add-To-Playlists modal
 		 */
 
-		dispatcher.trigger('playlist:tracks:modal', data);
+		this.trigger('playlists:tracks:modal', data);
+		// dispatcher.trigger('playlist:tracks:modal', data);
 	},
 
 	_onRemoveFromPlaylist: function(e){

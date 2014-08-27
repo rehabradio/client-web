@@ -13,10 +13,14 @@ module.exports = Marionette.ItemView.extend({
 
 	},
 
+    onSave: function(){
+    	console.log('modal save');
+    },
+
 	serializeData: function(){
 		
 		/*
-		 *	Over-writes the default behaviour to render the collection instead of the model.
+		 *	Over-writes the default behaviour and instead render the collection instead of the model.
 		 */
 
 		var data = { items: _.partial(this.serializeCollection, this.collection).apply(this, arguments) };
@@ -35,9 +39,11 @@ module.exports = Marionette.ItemView.extend({
 				track: this.model.get('track')
 			}
 
-			dispatcher.trigger('playlist:queue:add', data);	
+			this.trigger('queues:tracks:add', data)
+			// dispatcher.trigger('playlist:queue:add', data);
 		}
 
 		this.remove();
-	}
+	},
+
 });
