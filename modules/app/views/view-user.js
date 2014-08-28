@@ -1,4 +1,5 @@
-var modelApp = require('../models/models-app');
+var modelApp = require('../models/models-app'),
+	Auth  	 = require('../../core/auth/');
 
 module.exports = Backbone.View.extend({
 
@@ -30,7 +31,9 @@ module.exports = Backbone.View.extend({
 	_onSignIn: function(){
 
 		gapi.auth.signIn({
-			callback: 'authoriseUser'
+			callback: function(result){
+				new Auth(result);
+			}
 		});
 	},
 

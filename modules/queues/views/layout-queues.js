@@ -8,5 +8,4 @@ module.exports = Marionette.LayoutView.extend({
 		this.regions = options.regions;
 		dataStore.queueTracksCollections = [];
 	},
-
 });

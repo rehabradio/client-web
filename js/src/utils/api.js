@@ -1,9 +1,27 @@
-
-
 function Api(){}
 
-Api.prototype = {
+//Queues
 
+Api.prototype.Queues = {
+	addTrackToQueue: function(data){
+		$.ajax({
+			type: 'POST',
+			url: window.API_ROOT + 'queues/' + data.queue + '/tracks/',
+			data: {track: data.track},
+			success: function(data){
+				console.log('queues:tracks:add', data);
+			},
+			error: function(error){
+				console.log('queues:tracks:add:error', error);
+			}
+		});
+	}
+};
+
+
+//Playlists
+
+Api.prototype.Playlists = {
 	addTrackToPlaylist: function(data){
 
 		$.ajax({
@@ -16,20 +34,6 @@ Api.prototype = {
 			},
 			error: function(error){
 				console.log('playlists:tracks:add:error', error);
-			}
-		});
-	},
-
-	addTrackToQueue: function(data){
-		$.ajax({
-			type: 'POST',
-			url: window.API_ROOT + 'queues/' + data.queue + '/tracks/',
-			data: {track: data.track},
-			success: function(data){
-				console.log('queues:tracks:add', data);
-			},
-			error: function(error){
-				console.log('queues:tracks:add:error', error);
 			}
 		});
 	},
@@ -48,7 +52,8 @@ Api.prototype = {
 				console.log('playlists:create:error', error);
 			}
 		});
-	},
-}
+	}
+
+};
 
 module.exports = new Api();

@@ -15,7 +15,8 @@ module.exports = Backbone.View.extend({
 	//modules that will be started as soon as the app boots
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
-		search: require('../../search/controller/controller-search')
+		search: require('../../search/controller/controller-search'),
+		navigation : require('../../navigation/')
 	},
 
 	//views that are called by the router's controller, these views will be displayed within the 
@@ -122,39 +123,11 @@ module.exports = Backbone.View.extend({
 		 *	Initialise views that don't rely on external data // core modules
 		 */
 
-		// for(var view in this.coreModules){
-		// 	this.children.push( new this.coreModules[view]() );
-		// }
+		for(var view in this.coreModules){
+			new this.coreModules[view](this);
+		}
 
-		this.attachTempClickHandler(); //temporary until its own module is created
-	},
-
-	attachTempClickHandler:function(){
-
-		$('#sidebar a').on('click', function(e){
-			e.preventDefault();
-
-			var module = $(e.currentTarget).data('name');
-
-			// call the method on the controller directly, not {trigger:true}
-			// http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
-			// http://media.pragprog.com/titles/dsbackm/sample2.pdf
-
-			switch(module) {
-
-    			case 'playlists':
-        			this.router.controller.showPlaylists();
-					Backbone.history.navigate('playlists', {trigger: false})
-        		break;
-
-    			case 'queues':
-        			this.router.controller.showQueues();
-					Backbone.history.navigate('queues', {trigger: false})
-        		break;
-			}
-
-		}.bind(this));
-
+	
 	},
 
 	_showModule:function( module ){
