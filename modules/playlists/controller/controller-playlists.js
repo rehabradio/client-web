@@ -39,26 +39,9 @@ module.exports = Marionette.Controller.extend({
 				playlistsControls: '#playlists-controls'
 			}
 		});
-
-		var PlaylistRoute = Marionette.SubRouter.extend({
-
-			controller: {
-
-				loadPlaylist: function(id){
-					console.log(id);
-				}	
-			},
-
-			appRoutes: {
-				':id': 'loadPlaylist'
-			},
-			
-		});
-
-		var playlistRoute = new PlaylistRoute('playlists');
-
-		this.listenTo(this.layout, 'show', this.onShow);
 		
+		this.listenTo(this.layout, 'show', this.onShow);
+
 	},
 
 	show: function(){
@@ -98,7 +81,24 @@ module.exports = Marionette.Controller.extend({
 			self._deletePlaylistModal(data);
 		}.bind(self));
 
-		
+		/*
+		 *	routing for initial page load to trigger an event to show the playlist tracks
+		 */
+
+		var PlaylistRoute = Marionette.SubRouter.extend({
+
+			controller: {
+
+				loadPlaylist: self._onPlaylistShow.bind(self)
+			},
+
+			appRoutes: {
+				':id': 'loadPlaylist'
+			},
+			
+		});
+
+		var playlistRoute = new PlaylistRoute('playlists');
 	},
 
 	_createPlaylistModal: function(){
@@ -120,8 +120,6 @@ module.exports = Marionette.Controller.extend({
 		self.layout.listenTo(playlistsCreateModal, 'playlist:create:confirm', this.API.Playlists.createPlaylist);
 
 	},
-
-	//_createPlaylist: createPlaylist,
 
 	_deletePlaylistModal: function(model){
 
@@ -205,8 +203,6 @@ module.exports = Marionette.Controller.extend({
 
 		self.layout.listenTo(playlistAddTrackModal, 'playlist:tracks:add', self.onPlaylistsTracksAdd);
 	},
-
-	//onPlaylistsTracksAdd: function(){},
 
 	_onAddToQueue: function(id){
 

@@ -14,23 +14,6 @@ module.exports = Marionette.Controller.extend({
 			}
 		});
 
-		var PlaylistRoute = Marionette.SubRouter.extend({
-
-			controller: {
-
-				loadPlaylist: function(id){
-					console.log(id);
-				}	
-			},
-
-			appRoutes: {
-				':id': 'loadPlaylist'
-			},
-			
-		});
-
-		var playlistRoute = new PlaylistRoute('playlists');
-
 		this.listenTo(this.layout, 'show', this.onShow);
 	},
 
@@ -54,6 +37,20 @@ module.exports = Marionette.Controller.extend({
 			self._queueChange(data);
 		});
 
+		var QueuesRoute = Marionette.SubRouter.extend({
+
+			controller: {
+
+				loadPlaylist: self._queueChange.bind(self)
+			},
+
+			appRoutes: {
+				':id': 'loadPlaylist'
+			},
+			
+		});
+
+		var queuesRoute = new QueuesRoute('queues');
 	},
 
 	_queueChange: function(id){

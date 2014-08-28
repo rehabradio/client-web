@@ -2,7 +2,7 @@
 
 module.exports = {
 	showPlaylists:function(options){
-		console.log('showPlaylists!');
+		
 		dispatcher.trigger('router:showModule', 'playlists');
 	},
 
