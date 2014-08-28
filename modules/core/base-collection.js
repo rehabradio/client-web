@@ -23,7 +23,7 @@ var BaseCollection = Backbone.Collection.extend({
 
 		// 	self.fetch({
 		// 		success: function(){
-		// 			∂self.poll();
+		// 			self.poll();
 
 		// 		}
 		// 	});
