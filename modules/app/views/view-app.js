@@ -16,7 +16,7 @@ module.exports = Backbone.View.extend({
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
 		search: require('../../search/controller/controller-search'),
-		navigation : require('../../navigation/')
+		// navigation : require('../../navigation/')
 	},
 
 	//views that are called by the router's controller, these views will be displayed within the 
