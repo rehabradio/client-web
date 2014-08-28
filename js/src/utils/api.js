@@ -32,7 +32,23 @@ Api.prototype = {
 				console.log('queues:tracks:add:error', error);
 			}
 		});
-	}
+	},
+
+	createPlaylist: function(data){
+		
+		$.ajax({
+			type: 'POST',
+			url: window.API_ROOT + 'playlists/',
+			dataType: 'JSON',
+			data: data,
+			success: function(data){
+				console.log('playlists:create:', data);
+			},
+			error: function(error){
+				console.log('playlists:create:error', error);
+			}
+		});
+	},
 }
 
 module.exports = new Api();

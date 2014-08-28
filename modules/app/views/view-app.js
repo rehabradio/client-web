@@ -91,8 +91,8 @@ module.exports = Backbone.View.extend({
 
 		// dispatcher.on('playlist:queue:add', self._addTrackToQueue.bind(self));
 
-		dispatcher.on('playlist:create', self._createPlaylist.bind(self));
-		dispatcher.on('playlist:delete', self._deletePlaylist.bind(self));
+		// dispatcher.on('playlist:create', self._createPlaylist.bind(self));
+		// dispatcher.on('playlist:delete', self._deletePlaylist.bind(self));
 
 
 		// dispatcher.on('playlist:track:add', self._addTrackToPlaylist.bind(self));
@@ -311,27 +311,27 @@ module.exports = Backbone.View.extend({
 	// 	model.destroy();
 	// },
 
-	_createPlaylist: function(data){
+	// _createPlaylist: function(data){
 		
-		$.ajax({
-			type: 'POST',
-			url: window.API_ROOT + 'playlists/',
-			dataType: 'JSON',
-			data: data,
-			success: this._createPlaylistSuccess,
-			error: this._onError
-		});
-	},
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: window.API_ROOT + 'playlists/',
+	// 		dataType: 'JSON',
+	// 		data: data,
+	// 		success: this._createPlaylistSuccess,
+	// 		error: this._onError
+	// 	});
+	// },
 
-	_createPlaylistSuccess: function(data){
+	// _createPlaylistSuccess: function(data){
 
-		dataStore.playlistsCollection.fetch();
-	},
+	// 	dataStore.playlistsCollection.fetch();
+	// },
 
-	_deletePlaylist: function(model){
+	// _deletePlaylist: function(model){
 
-		model.destroy();
-	},
+	// 	model.destroy();
+	// },
 
 	_voteTrack: function(data){
 

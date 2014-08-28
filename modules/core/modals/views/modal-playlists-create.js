@@ -18,7 +18,7 @@ module.exports = Marionette.ItemView.extend({
 			description: this.el.querySelector('input[name="playlist-create-description"]').value
 		};
 
-		dispatcher.trigger('playlist:create', data);
+		this.trigger('playlist:create:confirm', data);
 		this.remove();
 	}
 });

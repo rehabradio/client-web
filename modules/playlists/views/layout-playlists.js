@@ -12,7 +12,7 @@
 module.exports = Marionette.LayoutView.extend({
 
 	events: {
-		'click #playlist-create': '_onPlaylistCreate'// Move to view
+		// 'click #playlist-create': '_onPlaylistCreate'
 	},
 
 	template: require('../templates/view-playlists.hbs'),
@@ -21,13 +21,6 @@ module.exports = Marionette.LayoutView.extend({
 
 	initialize: function(options){
 		this.regions = options.regions;
-	},
-
-	regions: {
-		playlistsUser: '#playlists-user',
-		playlistsAll: '#playlists-all',
-		playlistsTracks: '#playlists-tracks',
-		modalContainer: '#playlist-modal-container'
 	},
 
 	onRender:function(){
@@ -89,9 +82,9 @@ module.exports = Marionette.LayoutView.extend({
 		this.$el.find('.left-column').addClass('contract');
 	},
 
-	_onPlaylistCreate: function(){
-		this.modalContainer.show(new PlaylistCreateModal());
-	},
+	// _onPlaylistCreate: function(){
+	// 	this.modalContainer.show(new PlaylistCreateModal());
+	// },
 
 	// _onAddToPlaylist: function(data){
 

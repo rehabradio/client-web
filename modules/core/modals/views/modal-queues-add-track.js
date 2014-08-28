@@ -1,16 +1,10 @@
 module.exports = Marionette.ItemView.extend({
 
-	template: require('../templates/modal-playlist-add-queue.hbs'),
+	template: require('../templates/modal-queues-add-track.hbs'),
 
 	events: {
 		'click .cancel': 'remove',
 		'click .save': '_onAddToQueue'
-	},
-
-	initialize: function(){
-
-		
-
 	},
 
     onSave: function(){
@@ -40,7 +34,6 @@ module.exports = Marionette.ItemView.extend({
 			}
 
 			this.trigger('queues:tracks:add', data)
-			// dispatcher.trigger('playlist:queue:add', data);
 		}
 
 		this.remove();

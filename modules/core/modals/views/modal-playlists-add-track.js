@@ -6,11 +6,7 @@ module.exports = Marionette.ItemView.extend({
 		'click .cancel': 'remove',
 		'click .save': '_onSavePlaylist'
 	},
-
-	triggers: {
-		// 'click .save': 'test'
-	},
-
+	
 	initialize: function(){
 
 		/*
@@ -41,7 +37,6 @@ module.exports = Marionette.ItemView.extend({
 				track: this.model.get('track')
 			}
 
-			// dispatcher.trigger('playlist:track:add', data);
 			this.trigger('playlist:tracks:add', data)
 		}
 
