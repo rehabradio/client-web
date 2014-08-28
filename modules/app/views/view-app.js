@@ -34,7 +34,6 @@ module.exports = Backbone.View.extend({
 		this.router = new AppRouter();
 
 		
-
 		//Create an overall App Layout and render it
 		this.layout = new AppLayout( this );
 		this.layout.render();
@@ -63,10 +62,7 @@ module.exports = Backbone.View.extend({
 
 	_startApp: function(){
 
-		console.log('_startApp');
-
 		var self = this;
-
 
         self._fetchData();
 
@@ -74,9 +70,7 @@ module.exports = Backbone.View.extend({
 		 *	Stores global information for the app. Examples include login information and queue information
 		 */
 
-		dataStore.appModel = modelApp;
-
-		this.model = dataStore.appModel;
+		this.model = dataStore.appModel = modelApp;
 
 		console.log('App Initialised');
 
@@ -84,14 +78,9 @@ module.exports = Backbone.View.extend({
 		 *	Assign events to the global dispatcher	
 		 */
 
-		 // TODO - come up with better event names
-
 		console.log('Creating global events...');
 
-
 		this.listenTo(dispatcher, 'router:showModule', this._showModule, this);
-		//this.listenTo(dispatcher, 'router:triggerController', this._triggerRouterController, this);
-
 
 
 		Backbone.history.start({ pushState: true, trigger: true });
@@ -132,30 +121,11 @@ module.exports = Backbone.View.extend({
 	},
 
 	_showModule:function( module ){
-		// debugger;
-		this.layout.main.show( new this.viewModules[module]().show() );
-		// this.router.navigate( module );
 
+		this.layout.main.show( new this.viewModules[module]().show() );
 	},
 	
 	_fetchData: function(){
-
-		/*
-		 *	Deferred object to be resolved once data for Playlists and Queue has been loaded
-		 */
-
-		/*var deferred = $.Deferred();
-
-		$.when(
-			dataStore.playlistsCollection.fetch(),
-			dataStore.queuesCollection.fetch()
-		).then(function(){
-			return deferred.resolve();
-		});
-
-		return deferred;*/
-
-		//dont really need to be deferred anymore
 
 		dataStore.playlistsCollection.fetch();
 		dataStore.queuesCollection.fetch();
