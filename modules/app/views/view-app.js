@@ -98,7 +98,37 @@ module.exports = Backbone.View.extend({
 		/*
 		 *	Initialise views that don't rely on external data // core modules
 		 */
-	
+
+		console.log('booting views...');
+		this.attachTempClickHandler(); //temporary until its own module is created
+	},
+
+	attachTempClickHandler:function(){
+
+		$('#sidebar a').on('click', function(e){
+			e.preventDefault();
+
+			var module = $(e.currentTarget).data('name');
+
+			// call the method on the controller directly, not {trigger:true}
+			// http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
+			// http://media.pragprog.com/titles/dsbackm/sample2.pdf
+
+			switch(module) {
+
+    			case 'playlists':
+        			this.router.controller.showPlaylists();
+					Backbone.history.navigate('playlists', {trigger: false})
+        		break;
+
+    			case 'queues':
+        			this.router.controller.showQueues();
+					Backbone.history.navigate('queues', {trigger: false})
+        		break;
+			}
+
+		}.bind(this));
+
 	},
 
 	_showModule:function( module ){
