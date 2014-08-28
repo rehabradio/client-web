@@ -30,6 +30,8 @@ module.exports = Marionette.Controller.extend({
 	
 	initialize: function(){
 
+		debugger;
+
 		this.layout = new PlaylistsLayout({
 			regions: {
 				playlistsUser: '#playlists-user',
