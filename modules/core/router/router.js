@@ -11,7 +11,7 @@ var Router = Marionette.AppRouter.extend({
 
 	appRoutes: {
 
-        '/profile': 'showProfile',
+        // '/profile': 'showProfile',
 
     	//Playlist Endpoints
     	'playlists(/:id)(/)' : 'showPlaylists',
