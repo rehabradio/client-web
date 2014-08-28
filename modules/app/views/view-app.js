@@ -46,6 +46,10 @@ module.exports = Backbone.View.extend({
 			}
 		});
 
+		for(var view in this.coreModules){
+			this.children.push( new this.coreModules[view]() );
+		}
+
 		dispatcher.on('login-set-status', this.setLoginStatus.bind(this));
 	},
 
