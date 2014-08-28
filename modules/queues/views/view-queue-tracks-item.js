@@ -5,12 +5,12 @@ module.exports = Marionette.ItemView.extend({
 	template: require('../templates/view-track.hbs'),
 
 	events: {
-		'click .delete': '_onDeleteTrack'
+		'click .remove': '_onRemoveTrack'
 	},
 
-	_onDeleteTrack: function(){
+	_onRemoveTrack: function(){
 
-		dispatcher.trigger('queue:track:delete', this.model);
+		this.trigger('queues:tracks:remove', this.model);
 	}
 
 });
