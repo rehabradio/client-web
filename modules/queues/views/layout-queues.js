@@ -58,6 +58,8 @@ module.exports = Marionette.LayoutView.extend({
 		 *	set the queue id in the main App Model so that it can be referenced in the view-app _addToQueue function
 		 */
 
+		console.log('_queueChange');
+
 		dataStore.appModel.set('queueId', id);
 
 		var model = dataStore.queuesCollection.find(function(element){ return element.get('id') === id; });
