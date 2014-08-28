@@ -24,13 +24,12 @@ var PlaylistsDeleteModal = require('../../core/modals/views/modal-playlists-dele
  *	Api services
  */
 
-var addTrackToPlaylist = require('../../../js/src/utils/api').addTrackToPlaylist;
-var addTrackToQueue = require('../../../js/src/utils/api').addTrackToQueue;
-var createPlaylist = require('../../../js/src/utils/api').createPlaylist;
+var API = require('../../../js/src/utils/api');
 
 module.exports = Marionette.Controller.extend({
 	
 	initialize: function(){
+
 		this.layout = new PlaylistsLayout({
 			regions: {
 				playlistsUser: '#playlists-user',
@@ -118,11 +117,11 @@ module.exports = Marionette.Controller.extend({
 
 		self.layout.modalContainer.show(playlistsCreateModal);
 
-		self.layout.listenTo(playlistsCreateModal, 'playlist:create:confirm', self._createPlaylist);
+		self.layout.listenTo(playlistsCreateModal, 'playlist:create:confirm', this.API.Playlists.createPlaylist);
 
 	},
 
-	_createPlaylist: createPlaylist,
+	//_createPlaylist: createPlaylist,
 
 	_deletePlaylistModal: function(model){
 
@@ -207,15 +206,13 @@ module.exports = Marionette.Controller.extend({
 		self.layout.listenTo(playlistAddTrackModal, 'playlist:tracks:add', self.onPlaylistsTracksAdd);
 	},
 
-	onPlaylistsTracksAdd: addTrackToPlaylist,
+	//onPlaylistsTracksAdd: function(){},
 
 	_onAddToQueue: function(id){
 
 		/*
 		 *	Initialise the Add To Queue modal
 		 */
-
-		var self = this;
 
 		var modelPlaylistQueue = new ModelPlaylistQueue({
 			track: id
@@ -226,13 +223,11 @@ module.exports = Marionette.Controller.extend({
 			collection: dataStore.queuesCollection
 		});
 
-		self.layout.modalContainer.show(modalAddQueue);
+		this.layout.modalContainer.show(modalAddQueue);
 
 
-		self.layout.listenTo(modalAddQueue, 'queues:tracks:add', self.onQueuesTracksAdd);
+		this.layout.listenTo(modalAddQueue, 'queues:tracks:add', this.API.Queues.addTrackToQueue);
 	},
-
-	onQueuesTracksAdd: addTrackToQueue,
 
 	_removeTrackFromPlaylist: function(model){
 
