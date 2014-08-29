@@ -1,4 +1,4 @@
-	<div class="track-details">
+<div class="track-details">
 	{{#if image_large}}
 		<img src="{{image_large}}" />  
 	{{else}}
@@ -7,5 +7,10 @@
 		{{name}} by {{artists.[0].name}}
 	
 	</div>
-
-	<a role="add-to-queue" href="#">Add to Queue</a>
+	<td>
+		<button type="button" class="btn orange add-to-queue">Add to queue</button>
+	</td>
+	<td>
+		<button type="button" class="btn orange add-to-playlist">Add to playlist</button>
+	</td>
+</div>

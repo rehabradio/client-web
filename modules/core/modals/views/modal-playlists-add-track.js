@@ -32,6 +32,7 @@ module.exports = Marionette.ItemView.extend({
 			data = {};
 
 		for(var i in formData){
+
 			data = {
 				playlist: formData[i].name,
 				track: this.model.get('track')

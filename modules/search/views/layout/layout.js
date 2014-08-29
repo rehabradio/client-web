@@ -12,7 +12,8 @@ var SearchLayout = Marionette.LayoutView.extend({
 	},
 
 	regions: {
-		results: '.results'
+		results: '.results',
+		modalContainer : '#search-modal'
 	},
 
 	events: {

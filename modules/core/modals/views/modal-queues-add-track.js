@@ -28,6 +28,9 @@ module.exports = Marionette.ItemView.extend({
 			data = {};
 
 		for(var i in formData){
+
+			console.log(this.model);
+
 			data = {
 				queue: formData[i].name,
 				track: this.model.get('track')

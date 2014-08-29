@@ -103,6 +103,7 @@ module.exports = Marionette.Controller.extend({
 		//}
 
 		new this.coreModules.navigation(this);
+		new this.coreModules.search(this);
 		
 	},
 
