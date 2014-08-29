@@ -14,11 +14,11 @@ h1, h2, h3, h4, h5, h6 {
 
 h2 {
   margin: 0 0 4px 0;
-  color: #ec5542; }
+  color: #E7564D; }
 
 h3 {
   font-size: 16px;
-  color: #4f6aff; }
+  color: #5373F7; }
 
 h4 {
   font-size: 13px; }
@@ -58,20 +58,55 @@ table {
   outline: none; }
 
 .btn {
-  padding: 10px;
+  position: relative;
+  margin: 0;
+  padding: 8px 20px 8px 60px;
+  background-color: transparent;
   border: none;
-  border-radius: 4px;
-  font-weight: 800;
-  color: #FFFFFF;
-  background-color: #2c2c2c;
-  cursor: pointer;
-  outline: none; }
-  .btn.blue {
-    background-color: #4f6aff; }
-  .btn.orange {
-    background-color: #ec5542; }
+  overflow: hidden;
+  outline: none;
+  color: #5373F7;
+  /*&.blue:before{
+		background-color: $blue;
+	}
+
+	&.orange:before{
+		background-color: $orange;
+	}*/ }
+  .btn:before {
+    display: block;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    content: '';
+    background-color: transparent;
+    border-radius: 100%;
+    z-index: -1; }
   .btn:hover {
-    background-color: #ababab; }
+    color: #FFFFFF;
+    cursor: pointer; }
+    .btn:hover:before {
+      background-color: #E7564D; }
+    .btn:hover i {
+      fill: #FFFFFF; }
+  .btn i {
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 18px;
+    width: 20px;
+    fill: #5373F7; }
+
+icon.blue {
+  fill: #5373F7; }
+
+icon.orange {
+  fill: #E7564D; }
+
+icon.grey {
+  fill: #2c2c2c; }
 
 .btn-secondary {
   padding: 6px 10px; }
@@ -99,7 +134,7 @@ header {
   display: block;
   width: 100%;
   padding: 10px 20px;
-  background-color: #4f6aff;
+  background-color: #5373F7;
   z-index: 1;
   overflow: hidden; }
   header form {
@@ -119,16 +154,12 @@ header {
     header .user button {
       float: left; }
 
-#sidebar {
-  background: #1f1f1f;
-  float: left;
-  width: 200px;
-  height: 100%; }
-  #sidebar li {
-    font-size: 14px;
-    text-indent: 30px;
-    padding: 15px 0px;
-    border-bottom: 1px solid #1f1f1f; }
+nav {
+  margin: 30px 0; }
+  nav ul {
+    text-align: center; }
+  nav li {
+    display: inline-block; }
 
 .playlists {
   overflow: hidden;
@@ -190,7 +221,7 @@ header {
   display: none; }
 
 #search-results {
-  background: #ec5542;
+  background: #E7564D;
   z-index: 1;
   color: #fff;
   overflow-y: scroll;
@@ -204,7 +235,7 @@ header {
     float: left;
     padding: 20px 0px; }
     #search-results [role="tabs"] a.is-active {
-      background: #4f6aff; }
+      background: #5373F7; }
   #search-results .results li .track-details {
     list-style-type: none;
     padding: 10px 0px;

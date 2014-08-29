@@ -16,7 +16,7 @@ module.exports = Backbone.View.extend({
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
 		search: require('../../search/controller/controller-search'),
-		// navigation : require('../../navigation/')
+		navigation : require('../../navigation/controller/controller-navigation')
 	},
 
 	//views that are called by the router's controller, these views will be displayed within the 
@@ -85,6 +85,7 @@ module.exports = Backbone.View.extend({
 		console.log('Creating global events...');
 
 		this.listenTo(dispatcher, 'router:showModule', this._showModule, this);
+		this.listenTo(dispatcher, 'navigation:changemodule', this._changeModule, this);
 
 
 		Backbone.history.start({ pushState: true, trigger: true });
@@ -93,36 +94,22 @@ module.exports = Backbone.View.extend({
 		 */
 
 		console.log('booting views...');
-		this.attachTempClickHandler(); //temporary until its own module is created
 	},
 
-	attachTempClickHandler:function(){
+	_changeModule:function( module ){
 
-		$('#sidebar a').on('click', function(e){
-			e.preventDefault();
+     	switch(module) {
+            case 'playlists':
+                this.router.controller.showPlaylists();
+                this.router.navigate('playlists', {trigger: false});
+            break;
+            case 'queues':
+                this.router.controller.showQueues();
+                this.router.navigate('queues', {trigger: false});
+            break;
+        }
 
-			var module = $(e.currentTarget).data('name');
-
-			// call the method on the controller directly, not {trigger:true}
-			// http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
-			// http://media.pragprog.com/titles/dsbackm/sample2.pdf
-
-			switch(module) {
-
-    			case 'playlists':
-        			this.router.controller.showPlaylists();
-					Backbone.history.navigate('playlists', {trigger: false})
-        		break;
-
-    			case 'queues':
-        			this.router.controller.showQueues();
-					Backbone.history.navigate('queues', {trigger: false})
-        		break;
-			}
-
-		}.bind(this));
-
-	},
+    },
 
 	_showModule:function( module ){
 

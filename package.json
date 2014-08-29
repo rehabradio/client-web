@@ -6,6 +6,7 @@
     "backbone": "^1.1.2",
     "backbone.marionette": "^2.1.0",
     "express": "^4.8.5",
+    "express-handlebars": "^1.0.1",
     "jquery": "^2.1.1",
     "jquery-mockjax": "^1.5.3",
     "underscore": "^1.6.0"

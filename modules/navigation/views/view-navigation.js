@@ -2,6 +2,8 @@ module.exports = Marionette.ItemView.extend({
 	
 	template: require('../templates/navigation.hbs'),
 
+    tagName: 'ul',
+
 	ui:{
         link: 'a',
     },
@@ -13,6 +15,6 @@ module.exports = Marionette.ItemView.extend({
     stateUpdate:function(e){
         e.preventDefault();
         var module = $(e.currentTarget).data('name');
-        dispatcher.trigger('navigation:switch:module', module);
+        dispatcher.trigger('navigation:changemodule', module);
     }
 });
