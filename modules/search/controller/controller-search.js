@@ -48,13 +48,17 @@ var SearchController = Marionette.Controller.extend({
     },
 
     _onAddToQueue:function(model){
+        API.Meta.addTrack(model.attributes, _.bind(this.createQueueModal, this) );
+    },
 
-        //post source_id, source_type to meta to retrieve a valid id
-        API.Meta.addTrack(model.attributes, _.bind(this.createModal, this) );
+    _onAddToPlaylist:function(model){
+
+    console.log('_onAddToPlaylist');
+       API.Meta.addTrack(model.attributes, _.bind(this.createPlaylistModal, this) );
 
     },
 
-    createModal:function(response){
+    createQueueModal:function(response){
 
         console.log('successfully saved...', response);
 
@@ -66,16 +70,26 @@ var SearchController = Marionette.Controller.extend({
             model: new Model({track: id })
         });
 
-        this.renderModal();
-    },
-
-    renderModal:function(){
         this.layout.modalContainer.show(this.modalAddQueue);
         this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
-    },  
-    
+    },
+
+    createPlaylistModal:function(response){
+        var Model = Backbone.Model.extend({});
+
+        this.modalAddPlaylist = new this.models.playlists.addTrack({
+            collection: dataStore.playlistsCollection,
+            model: new Model({track: response.track, playlist: response.playlist })
+        })
+
+        this.layout.modalContainer.show(this.modalAddPlaylist);
+        this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
+
+    },
+  
     setUpListeners:function(){
         this.listenTo(dispatcher, 'search:onAddToQueue', this._onAddToQueue, this);
+        this.listenTo(dispatcher, 'search:onAddToPlaylist', this._onAddToPlaylist, this);
         this.listenTo(dispatcher, 'perform-search', this.performSearch, this);
         this.listenTo(dispatcher, 'service:switch', this.showLayout, this);
     },

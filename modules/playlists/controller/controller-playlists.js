@@ -221,7 +221,6 @@ module.exports = Marionette.Controller.extend({
 
 		this.layout.modalContainer.show(modalAddQueue);
 
-
 		this.layout.listenTo(modalAddQueue, 'queues:tracks:add', this.API.Queues.addTrackToQueue);
 	},
 

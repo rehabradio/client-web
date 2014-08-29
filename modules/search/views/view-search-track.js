@@ -14,15 +14,23 @@ module.exports = Marionette.ItemView.extend({
 
     _onAddToPlaylist: function(){
 
+    	console.log('this model', this.model);
+
+    	//return;
+
         var urlRegex = /api\/playlists\/(.*)\/tracks\/(.*)\//,
             url = this.model.url();
+
+        console.log(this.model.url());
+
+        console.log( this.model.url().match(urlRegex));
 
         var data = {
             playlist: url.match(urlRegex)[1],
             track: this.model.get('track').id
         }
 
-        this.trigger('playlists:tracks:modal', data);
+        dispatcher.trigger('search:onAddToPlaylist', data);
     },
 
     _onRemoveFromPlaylist: function(){
