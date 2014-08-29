@@ -45,6 +45,29 @@ main {
 table {
   width: 100%; }
 
+button {
+  background-color: transparent;
+  border: none; }
+
+.btn {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  outline: none;
+  color: #5373F7; }
+  .btn:hover {
+    color: #FFFFFF;
+    cursor: pointer; }
+    .btn:hover i {
+      fill: #FFFFFF; }
+  .btn i {
+    display: block;
+    width: 20px;
+    fill: #5373F7; }
+
 .close {
   position: absolute;
   top: -20px;
@@ -57,48 +80,6 @@ table {
   cursor: pointer;
   outline: none; }
 
-.btn {
-  position: relative;
-  margin: 0;
-  padding: 8px 20px 8px 60px;
-  background-color: transparent;
-  border: none;
-  overflow: hidden;
-  outline: none;
-  color: #5373F7;
-  /*&.blue:before{
-		background-color: $blue;
-	}
-
-	&.orange:before{
-		background-color: $orange;
-	}*/ }
-  .btn:before {
-    display: block;
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 300%;
-    content: '';
-    background-color: transparent;
-    border-radius: 100%;
-    z-index: -1; }
-  .btn:hover {
-    color: #FFFFFF;
-    cursor: pointer; }
-    .btn:hover:before {
-      background-color: #E7564D; }
-    .btn:hover i {
-      fill: #FFFFFF; }
-  .btn i {
-    display: block;
-    position: absolute;
-    top: 4px;
-    left: 18px;
-    width: 20px;
-    fill: #5373F7; }
-
 icon.blue {
   fill: #5373F7; }
 
@@ -107,9 +88,6 @@ icon.orange {
 
 icon.grey {
   fill: #2c2c2c; }
-
-.btn-secondary {
-  padding: 6px 10px; }
 
 form fieldset {
   border: none;
@@ -160,6 +138,26 @@ nav {
     text-align: center; }
   nav li {
     display: inline-block; }
+  nav .btn {
+    padding: 8px 20px 8px 60px; }
+    nav .btn:before {
+      display: block;
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 300%;
+      content: '';
+      background-color: transparent;
+      border-radius: 100%;
+      z-index: -1; }
+    nav .btn:hover:before {
+      background-color: #E7564D; }
+    nav .btn i {
+      position: absolute;
+      top: 4px;
+      left: 18px;
+      width: 20px; }
 
 .playlists {
   overflow: hidden;

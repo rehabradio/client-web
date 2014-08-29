@@ -5,7 +5,7 @@ module.exports = Marionette.ItemView.extend({
     tagName: 'ul',
 
 	ui:{
-        link: 'a',
+        link: 'button'
     },
 
     events:{

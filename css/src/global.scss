@@ -26,6 +26,38 @@ table{
 	width: 100%;
 }
 
+button{
+	background-color: transparent;
+	border: none;
+}
+
+.btn{
+	position: relative;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	overflow: hidden;
+	outline: none;
+	color: $blue;
+
+	&:hover{
+		color: $white;
+		cursor: pointer;
+
+		i{
+			fill: $white;
+		}
+	}
+
+	i{
+		display: block;
+		width: 20px;
+		fill: $blue;
+	}
+
+}
+
 .close{
 
 	position: absolute;
@@ -40,61 +72,6 @@ table{
 	outline: none;
 }
 
-.btn{
-
-	position: relative;
-	margin: 0;
-	padding: 8px 20px 8px 60px;
-	background-color: transparent;
-	border: none;
-	overflow: hidden;
-	outline: none;
-	color: $blue;
-
-	&:before{
-		display: block;
-		position: absolute;
-		top: -100%;
-		left: 0;
-		width: 100%;
-		height: 300%;
-		content: '';
-		background-color: transparent;
-		border-radius: 100%;
-		z-index: -1;
-	}
-
-	&:hover{
-		color: $white;
-		cursor: pointer;
-
-		&:before{
-			background-color: $orange;
-		}
-
-		i{
-			fill: $white;
-		}
-	}
-
-	i{
-		display: block;
-		position: absolute;
-		top: 4px;
-		left: 18px;
-		width: 20px;
-		fill: $blue;
-	}
-
-	/*&.blue:before{
-		background-color: $blue;
-	}
-
-	&.orange:before{
-		background-color: $orange;
-	}*/
-}
-
 icon.blue{
 	fill: $blue;
 }
@@ -105,10 +82,6 @@ icon.orange{
 
 icon.grey{
 	fill: $grey;
-}
-
-.btn-secondary{
-	padding: 6px 10px;
 }
 
 form{

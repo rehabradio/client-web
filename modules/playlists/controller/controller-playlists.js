@@ -39,6 +39,8 @@ module.exports = Marionette.Controller.extend({
 				playlistsControls: '#playlists-controls'
 			}
 		});
+
+		this.API = API;
 		
 		this.listenTo(this.layout, 'show', this.onShow);
 
