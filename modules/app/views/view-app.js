@@ -1,16 +1,16 @@
-
 var modelApp = require('../models/models-app'); // Already initialised
-var ViewUser = require('./view-user');
 var AppLayout = require('../layout/layout');
 var AppRouter = require('../../core/router/router');
+var Login = require('../../login/');
 
-module.exports = Backbone.View.extend({
+var Layouts = {
+	main : require('../layout/main'),
+	application : require('../layout/layout')
+};
 
-	el: '#app',
+module.exports = Marionette.Controller.extend({
 
 	model: modelApp,
-
-	children: [],
 
 	//modules that will be started as soon as the app boots
 	//maybe move them into core, things like header, sidebar will go here
@@ -28,18 +28,18 @@ module.exports = Backbone.View.extend({
 
 	initialize: function(){
 
-		 //Store a reference to all appModules
 		this.appModules = _.extend(this.coreModules, this.viewModules);
 
-		this.router = new AppRouter();
+		//render a layout with a main region for 
+		//switching between login View and the Application Layout
+		this.MainLayout = new Layouts.main();
+		this.MainLayout.render();
 
+		//create a new instance of the login module controller
+		this.login = new Login(this);
+
+		this.listenTo(dispatcher, 'login-set-status', this.setLoginStatus, this);
 		
-		//Create an overall App Layout and render it
-		this.layout = new AppLayout( this );
-		this.layout.render();
-
-		var viewUser = new ViewUser();
-
 		this.listenTo(this.model, 'change:loginStatus', function(model){
 			if(model.get('loginStatus')){
 				this._startApp();
@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
 		}
 
 		dispatcher.on('login-set-status', this.setLoginStatus.bind(this));
+
 	},
 
 	setLoginStatus: function(status, user){
@@ -62,13 +63,23 @@ module.exports = Backbone.View.extend({
 		}
 
 		this.model.set('loginStatus', status); // Triggers the rerender;
+
 	},
 
 	_startApp: function(){
+		
+		console.log('_startApp');
 
+		this.router = new AppRouter();
+
+		//Application layout
+		//render the Application layout when logged in
+		this.layout = new Layouts.application(this);
+		this.MainLayout.main.show( this.layout );
+	
 		var self = this;
 
-        self._fetchData();
+		self._fetchData();
 
 		/*
 		 *	Stores global information for the app. Examples include login information and queue information
@@ -93,35 +104,14 @@ module.exports = Backbone.View.extend({
 		 */
 
 		console.log('booting views...');
-		this.attachTempClickHandler(); //temporary until its own module is created
-	},
 
-	attachTempClickHandler:function(){
+		//for(var module in this.coreModules){
+		//	new this.coreModules[module](this);
+		//}
 
-		$('#sidebar a').on('click', function(e){
-			e.preventDefault();
-
-			var module = $(e.currentTarget).data('name');
-
-			// call the method on the controller directly, not {trigger:true}
-			// http://lostechies.com/derickbailey/2011/08/28/dont-execute-a-backbone-js-route-handler-from-your-code/
-			// http://media.pragprog.com/titles/dsbackm/sample2.pdf
-
-			switch(module) {
-
-    			case 'playlists':
-        			this.router.controller.showPlaylists();
-					Backbone.history.navigate('playlists', {trigger: false})
-        		break;
-
-    			case 'queues':
-        			this.router.controller.showQueues();
-					Backbone.history.navigate('queues', {trigger: false})
-        		break;
-			}
-
-		}.bind(this));
-
+		new this.coreModules.navigation(this);
+		new this.coreModules.search(this);
+		
 	},
 
 	_showModule:function( module ){

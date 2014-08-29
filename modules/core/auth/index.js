@@ -28,17 +28,14 @@ var Auth = function(res){
 	};
 
 
-
 	this.startAuth = function(){
 		gapi.client.load('plus', 'v1', this.onClientLoad.bind( this ) );
 	};
 
 
-
 	this.onClientLoad = function(){
 		gapi.client.plus.people.get( {'userId' : 'me'} ).execute( this.authorizeUsers.bind(this) );
 	};
-
 
 
 	this.authorizeUsers = function(res){
@@ -52,7 +49,6 @@ var Auth = function(res){
 			}
 		}
 	};	
-
 
 
 	if( signed_in && method === 'PROMPT' || method ==='AUTO'){

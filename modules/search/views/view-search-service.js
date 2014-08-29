@@ -18,18 +18,11 @@ var SearchServiceView = Marionette.CompositeView.extend({
 	},
 
 	initialize: function(){
-
-		/*
-		this.render() triggers onRender twice
-		https://github.com/marionettejs/backbone.marionette/issues/287
-
-		*/
-
 		this.template = this.templates.view;
-		this.once('render');
 	},
 
 	onRender: function(){
+		console.log('onRender');
 		this.updatePagination( this.collection.pagination );
   	},
 
