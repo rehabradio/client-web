@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
 var gutil = require('gulp-util');
+var svgmin = require('gulp-svgmin');
+var svgstore = require('gulp-svgstore');
 
 var karma = require('karma').server;
 var karmaConfig = require('./karma-config.js');
@@ -98,6 +100,13 @@ gulp.task('build-test-suites', ['lint'], function(){
         }))
         .pipe(gulp.dest('./js/jasmine/build'));
 
+});
+
+gulp.task('svg', function(){
+    return gulp.src('svg/*.svg')
+        .pipe(svgmin())
+        .pipe(svgstore({fileName: 'icons.svg', prefix: 'icon-'}))
+        .pipe(gulp.dest('img/'));
 });
 
 gulp.task('default', function(){

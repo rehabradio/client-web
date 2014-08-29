@@ -21,6 +21,8 @@
     "gulp-notify": "^1.4.2",
     "gulp-plumber": "^0.6.4",
     "gulp-sass": "0.7.1",
+    "gulp-svgmin": "^0.4.6",
+    "gulp-svgstore": "^1.0.1",
     "gulp-util": "^3.0.0",
     "gulp-watch": "^0.6.9",
     "handlebars": "^2.0.0-alpha.4",
