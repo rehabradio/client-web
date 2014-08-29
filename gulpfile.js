@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
 var gutil = require('gulp-util');
+var svgmin = require('gulp-svgmin');
+var svgstore = require('gulp-svgstore');
 
 var karma = require('karma').server;
 var karmaConfig = require('./karma-config.js');
@@ -100,6 +102,21 @@ gulp.task('build-test-suites', ['lint'], function(){
 
 });
 
+function transformSvg (svg, cb) {
+    svg.attr({ style: 'display:none' });
+    svg.find('//*[@fill]').forEach(function (child) {
+        child.attr('fill').remove()
+    });
+    cb(null);
+}
+
+gulp.task('svg', function(){
+    return gulp.src('svg/*.svg')
+        .pipe(svgmin())
+        .pipe(svgstore({fileName: 'icons.svg', prefix: 'icon-', transformSvg: transformSvg}))
+        .pipe(gulp.dest('img/'));
+});
+
 gulp.task('default', function(){
     gulp.start('sass', 'build');
 });
@@ -114,4 +131,5 @@ gulp.task('watch', function(){
     gulp.watch('js/src/**/*.js', ['build']);
     gulp.watch('js/jasmine/mocks.js', ['build']);
     gulp.watch('js/jasmine/data/*.js', ['build']);
+    gulp.watch('svg/*.svg', ['svg']);
 });
