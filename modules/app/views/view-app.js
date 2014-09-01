@@ -46,10 +46,6 @@ module.exports = Marionette.Controller.extend({
 			}
 		});
 
-		for(var view in this.coreModules){
-			this.children.push( new this.coreModules[view]() );
-		}
-
 		dispatcher.on('login-set-status', this.setLoginStatus.bind(this));
 
 	},
@@ -106,8 +102,8 @@ module.exports = Marionette.Controller.extend({
 
 		console.log('booting views...');
 
-		// new this.coreModules.navigation(this);
-		// new this.coreModules.search(this);
+		new this.coreModules.navigation(this);
+		new this.coreModules.search(this);
 	},
 
 	_changeModule:function( module ){

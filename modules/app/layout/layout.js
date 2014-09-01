@@ -5,7 +5,7 @@ var AppLayout = Marionette.LayoutView.extend({
 	template: require('../templates/layout.hbs'),
 
 	regions: {
-		navigation: '#sidebar',
+		navigation: '#navigation',
 		main: 'main',
 		user: '#user'
 	},

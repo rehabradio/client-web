@@ -1,10 +1,10 @@
 var MainLayout = Marionette.LayoutView.extend({
 
-	el: '#rehabradio',
+	el: '#app',
 	template: require('../templates/main.hbs'),
 
 	regions: {
-		main: "#main"
+		main: "main"
 	},
 
 });
