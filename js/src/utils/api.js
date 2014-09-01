@@ -18,6 +18,19 @@ Api.prototype.Queues = {
 	}
 };
 
+Api.prototype.Meta = {
+	addTrack:function(model, callback){
+		var xhr = $.ajax({
+			type: 'POST',
+			url: window.API_ROOT + 'metadata/tracks/',
+			data: {source_id : model.source_id, source_type: model.source_type}
+		});
+
+		xhr.done(function(data){
+			callback(data);
+		});
+	}
+}
 
 //Playlists
 

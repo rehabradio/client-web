@@ -15,6 +15,8 @@ Collection data will still be present within the controller
 
 */
 
+var API = require('../../../js/src/utils/api');
+
 var SearchController = Marionette.Controller.extend({
 
 	services: [
@@ -26,6 +28,17 @@ var SearchController = Marionette.Controller.extend({
 
 	defaultService: 'spotify',
 
+    modals: {
+        queues: {
+            addTrack : require('../../core/modals/views/modal-queues-add-track')
+        },
+        playlists: {
+            addTrack : require('../../core/modals/views/modal-playlists-add-track'),
+            create : require('../../core/modals/views/modal-playlists-create'),
+            remove : require('../../core/modals/views/modal-playlists-delete')
+        }
+    },
+
     initialize: function(){
         this.layout = new Layout({defaultService: this.defaultService });
         this.layout.render();
@@ -33,10 +46,52 @@ var SearchController = Marionette.Controller.extend({
         this.setUpListeners();
         new searchView();
     },
-    
-    setUpListeners: function(){
-        dispatcher.on('perform-search', this.performSearch, this);
-        dispatcher.on('service:switch', this.showLayout, this);
+
+    _onAddToQueue:function(model){
+        API.Meta.addTrack(model.attributes, _.bind(this.createQueueModal, this) );
+    },
+
+    _onAddToPlaylist:function(model){
+
+    console.log('_onAddToPlaylist');
+       API.Meta.addTrack(model.attributes, _.bind(this.createPlaylistModal, this) );
+
+    },
+
+    createQueueModal:function(response){
+
+        console.log('successfully saved...', response);
+
+        var Model = Backbone.Model.extend({}),
+        id = response.id;
+
+        this.modalAddQueue = new this.modals.queues.addTrack({
+            collection: dataStore.queuesCollection,
+            model: new Model({track: id })
+        });
+
+        this.layout.modalContainer.show(this.modalAddQueue);
+        this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
+    },
+
+    createPlaylistModal:function(response){
+        var Model = Backbone.Model.extend({});
+
+        this.modalAddPlaylist = new this.models.playlists.addTrack({
+            collection: dataStore.playlistsCollection,
+            model: new Model({track: response.track, playlist: response.playlist })
+        })
+
+        this.layout.modalContainer.show(this.modalAddPlaylist);
+        this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
+
+    },
+  
+    setUpListeners:function(){
+        this.listenTo(dispatcher, 'search:onAddToQueue', this._onAddToQueue, this);
+        this.listenTo(dispatcher, 'search:onAddToPlaylist', this._onAddToPlaylist, this);
+        this.listenTo(dispatcher, 'perform-search', this.performSearch, this);
+        this.listenTo(dispatcher, 'service:switch', this.showLayout, this);
     },
 
     bootCollections: function(){

@@ -1,5 +1,3 @@
-var ViewUser = require('../views/view-user');
-
 var AppLayout = Marionette.LayoutView.extend({
 
 	template: require('../templates/layout.hbs'),
@@ -7,11 +5,6 @@ var AppLayout = Marionette.LayoutView.extend({
 	regions: {
 		navigation: '#sidebar',
 		main: 'main',
-		user: '#user'
-	},
-
-	onRender:function(){
-		this.user.show( new ViewUser() );
 	},
 
 });
