@@ -203,7 +203,7 @@ module.exports = Marionette.Controller.extend({
 
 		self.layout.modalContainer.show(playlistAddTrackModal);
 
-		self.layout.listenTo(playlistAddTrackModal, 'playlist:tracks:add', self.onPlaylistsTracksAdd);
+		self.layout.listenTo(playlistAddTrackModal, 'playlist:tracks:add', this.API.Playlists.addTrackToPlaylist);
 	},
 
 	_onAddToQueue: function(id){

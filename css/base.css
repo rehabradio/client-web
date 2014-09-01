@@ -105,7 +105,11 @@ form .group input[type="text"] {
 form .group input[type="submit"], form .group button {
   display: block;
   float: left;
-  border-radius: 0 4px 4px 0; }
+  border-radius: 0 4px 4px 0;
+  background-color: #E7564D;
+  color: #FFFFFF;
+  line-height: 33px;
+  padding: 0 20px; }
 
 
 header {
@@ -130,7 +134,12 @@ header {
       line-height: 33px;
       margin: 0 0 0 10px; }
     header .user button {
-      float: left; }
+      float: left;
+      background-color: #E7564D;
+      color: #FFFFFF;
+      line-height: 33px;
+      padding: 0 20px;
+      border-radius: 4px; }
 
 nav {
   margin: 30px 0; }
