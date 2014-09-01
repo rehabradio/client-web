@@ -29,6 +29,11 @@ header{
 
 		button{
 			float: left;
+			background-color: $orange;
+			color: $white;
+			line-height: 33px;
+			padding: 0 20px;
+			border-radius: 4px;
 		}
 	}
 }

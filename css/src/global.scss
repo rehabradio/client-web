@@ -26,6 +26,38 @@ table{
 	width: 100%;
 }
 
+button{
+	background-color: transparent;
+	border: none;
+}
+
+.btn{
+	position: relative;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	overflow: hidden;
+	outline: none;
+	color: $blue;
+
+	&:hover{
+		color: $white;
+		cursor: pointer;
+
+		i{
+			fill: $white;
+		}
+	}
+
+	i{
+		display: block;
+		width: 20px;
+		fill: $blue;
+	}
+
+}
+
 .close{
 
 	position: absolute;
@@ -40,33 +72,16 @@ table{
 	outline: none;
 }
 
-.btn{
-
-	padding: 10px;
-	border: none;
-	border-radius: 4px;
-	font-weight: 800;
-	color: $white;
-	background-color: $grey;
-	cursor: pointer;
-	outline: none;
-
-	&.blue{
-		background-color: $blue;
-	}
-
-	&.orange{
-		background-color: $orange;
-	}
-
-	&:hover{
-		background-color: lighten($grey, 50%);
-	}
-
+icon.blue{
+	fill: $blue;
 }
 
-.btn-secondary{
-	padding: 6px 10px;
+icon.orange{
+	fill: $orange;
+}
+
+icon.grey{
+	fill: $grey;
 }
 
 form{
@@ -96,10 +111,13 @@ form{
 		}
 
 		input[type="submit"], button{
-
 			display: block;
 			float: left;
 			border-radius: 0 4px 4px 0;
+			background-color: $orange;
+			color: $white;
+			line-height: 33px;
+			padding: 0 20px;
 		}
 	}
 }

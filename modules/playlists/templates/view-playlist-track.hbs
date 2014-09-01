@@ -2,23 +2,28 @@
 	<img src="{{track.image_small}}" class="coverart">
 </td>
 <td>
-	<h4>{{track.name}}</h4>
-	<h5 class="album">{{track.album.name}}</h5>
-	{{#each track.artists}}
-		<h6 class="artist">{{name}}</h6>
-	{{/each}}
+	<h4>
+		{{track.name}}
+		{{#each track.artists}}
+			 - {{name}} 
+		{{/each}} - 
+		{{track.album.name}}
+	</h4>	
 </td>
 <td>
-	<button type="button" class="btn orange add-to-queue">Add to queue</button>
+	<button type="button" class="btn from-playlist"><i>{{icon 'icon-heart'}}</i></button>
 </td>
 <td>
-	<button type="button" class="btn orange add-to-playlist">Add to playlist</button>
+	<button type="button" class="btn remove-from-playlist"><i>{{icon 'icon-trash'}}</i></button>
 </td>
 <td>
-	<button type="button" class="btn remove-from-playlist">Remove from playlist</button>
+	<button type="button" class="btn add-to-queue"><i>{{icon 'icon-queues-add'}}</i></button>
 </td>
 <td>
+	<button type="button" class="btn add-to-playlist"><i>{{icon 'icon-playlists'}}</i></button>
+</td>
+<!-- <td>
 	<a href="#" title="">
 		<img src="/img/{{track.source_type}}.png" alt="{{track.source_type}}">
 	</a>
-</td>
+</td> -->

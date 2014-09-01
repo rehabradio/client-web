@@ -34,36 +34,36 @@ var SearchController = Marionette.Controller.extend({
         new searchView();
     },
     
-    setUpListeners:function(){
+    setUpListeners: function(){
         dispatcher.on('perform-search', this.performSearch, this);
         dispatcher.on('service:switch', this.showLayout, this);
     },
 
-    bootCollections:function(){
+    bootCollections: function(){
     	_.each(this.services, function(service){
 			this.collections[service] = new SearchCollection();
 		}, this);
     },
 
-    showDefaultService:function(service){
+    showDefaultService: function(service){
     	if(service == this.defaultService){
     		this.showLayout(service);
     	}
     },
 
-    showLayout:function(service){
+    showLayout: function(service){
     	this.layout.results.show( new searchServiceView({
     		collection: this.collections[service], 
     		className: service 
     	}) );
-    },
+    }, 
 
-    fetchServices:function(query, service, cb){
+    fetchServices: function(query, service, cb){
     	var xhr = this.collections[service].fetch({service:service, query:query});
     	xhr.done( cb );
     },
 
-    performSearch:function(query){
+    performSearch: function(query){
 
     	_.each(this.services, function(service){
     		this.fetchServices(query, service, function(){
