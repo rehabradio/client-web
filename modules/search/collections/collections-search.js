@@ -13,7 +13,10 @@ http://rehabradio.vagrant.local:8000/api/metadata/search/soundcloud/?q=narsti
 var SearchCollection = BaseCollection.extend({
 
 	SEARCH_ENDPOINT: 'metadata/search/',
+
 	model: SearchModel,
+
+	request: 'search',
 
 	fetch:function(options){
 		if(!options.url){

@@ -9,7 +9,8 @@ module.exports = Marionette.ItemView.extend({
 	},
 
 	_onAddToQueue: function(){
-		dispatcher.trigger('search:onAddToQueue', this.model);
+
+        this.trigger('search:queue:add');
     },
 
     _onAddToPlaylist: function(){

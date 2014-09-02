@@ -106,16 +106,16 @@ module.exports = Marionette.Controller.extend({
 		new this.coreModules.navigation(this);
 	},
 
-	_changeModule:function( module ){
+	_changeModule:function(module){
 
 		this.appContent.main.show( new this.viewModules[module]().show() );
         this.router.navigate(module, {trigger: false});
 
     },
 
-	_showModule:function( module ){
+	_showModule:function(module, data){
 		
-		this.appContent.main.show( new this.viewModules[module]().show() );
+		this.appContent.main.show( new this.viewModules[module](data).show() );
 	},
 	
 	_fetchData: function(){

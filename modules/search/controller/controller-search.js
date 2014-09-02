@@ -24,8 +24,6 @@ module.exports = Marionette.Controller.extend({
         'soundcloud'
     ],
 
-    collections: {},
-
     defaultService: 'spotify',
 
     modals: {
@@ -41,8 +39,9 @@ module.exports = Marionette.Controller.extend({
 
     model: new SearchModel(),
 
-    initialize: function(options){
-        this.model.set('query', options.query);
+    initialize: function(query){
+
+        this.model.set('query', query);
 
         this.layout = new SearchLayout({
             // defaultService: this.defaultService,
@@ -62,6 +61,7 @@ module.exports = Marionette.Controller.extend({
         }
 
         this.listenTo(this.layout, 'show', this.onShow);
+        this.listenTo(this.layout, 'before:destroy', this.onBeforeDestroy);
     },
 
     show: function(){
@@ -75,48 +75,68 @@ module.exports = Marionette.Controller.extend({
 
     onShow: function(){
 
+        this.listenTo(this.layout, 'search:service:change', this.showLayout);
+
         if(this.model.get('query') && this.model.get('query').length > 0){
             this.performSearch();
         }
 
+        this.layout.results.show(this.createService(this.defaultService));
+    },
+
+    createService: function(service){
+
         var self = this;
 
         var searchService = new searchServiceView({
-            collection: dataStore.searchCollections[self.defaultService], 
-            className: self.defaultService
+            collection: dataStore.searchCollections[service], 
+            className: service
         });
 
-        self.listenTo(self.layout, 'search:service:change', self.showLayout);
+        self.layout.listenTo(searchService, 'childview:search:queue:add', self._onAddToQueue.bind(self));
+        self.layout.listenTo(searchService, 'childview:search:playlist:add', self._onAddToPlaylist.bind(self));
 
-        self.layout.results.show(searchService);
+        return searchService;
     },
 
- //    _onAddToQueue:function(model){
- //        API.Meta.addTrack(model.attributes, _.bind(this.createQueueModal, this) );
- //    },
+    onBeforeDestroy: function(){
 
- //    _onAddToPlaylist:function(model){
+        /*
+         *  TODO remove service views
+         */
 
- //        console.log('_onAddToPlaylist');
- //       API.Meta.addTrack(model.attributes, _.bind(this.createPlaylistModal, this) );
+    },
 
- //    },
+    _onAddToQueue: function(view){
 
- //    createQueueModal:function(response){
+        /*
+         *  Add the track to the meta data before opening the add to queue modal. The function to open the modal is triggered by the ajax promise callback 
+         */
 
- //        console.log('successfully saved...', response);
+        API.Meta.addTrack(view.model.attributes, this.createQueueModal.bind(this) );
+    },
 
- //        var Model = Backbone.Model.extend({}),
- //        id = response.id;
+    _onAddToPlaylist:function(view){
 
- //        this.modalAddQueue = new this.modals.queues.addTrack({
- //            collection: dataStore.queuesCollection,
- //            model: new Model({track: id })
- //        });
+       API.Meta.addTrack(view.model.attributes, _.bind(this.createPlaylistModal, this) );
 
- //        this.layout.modalContainer.show(this.modalAddQueue);
- //        this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
- //    },
+    },
+
+    createQueueModal:function(response){
+
+        console.log('successfully saved...', response);
+
+        var Model = Backbone.Model.extend({}),
+        id = response.id;
+
+        this.modalAddQueue = new this.modals.queues.addTrack({
+            collection: dataStore.queuesCollection,
+            model: new Model({track: id })
+        });
+
+        this.layout.modalContainer.show(this.modalAddQueue);
+        this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
+    },
 
  //    createPlaylistModal:function(response){
  //        var Model = Backbone.Model.extend({});
@@ -133,10 +153,7 @@ module.exports = Marionette.Controller.extend({
 
 
     showLayout: function(service){
-        this.layout.results.show( new searchServiceView({
-            collection: dataStore.searchCollections[service], 
-            className: service 
-        }) );
+        this.layout.results.show(this.createService(service));
     }, 
 
     fetchServices: function(query, service, cb){
