@@ -10,28 +10,29 @@ module.exports = Marionette.ItemView.extend({
 
 	_onAddToQueue: function(){
 
-        this.trigger('search:queue:add');
+        this.trigger('search:queues:add');
     },
 
     _onAddToPlaylist: function(){
 
-    	console.log('this model', this.model);
 
-    	//return;
+        this.trigger('search:playlists:add');
 
-        var urlRegex = /api\/playlists\/(.*)\/tracks\/(.*)\//,
-            url = this.model.url();
+    	// console.log('this model', this.model);
 
-        console.log(this.model.url());
+     //    var urlRegex = /api\/playlists\/(.*)\/tracks\/(.*)\//,
+     //        url = this.model.url();
 
-        console.log( this.model.url().match(urlRegex));
+     //    console.log(this.model.url());
 
-        var data = {
-            playlist: url.match(urlRegex)[1],
-            track: this.model.get('track').id
-        };
+     //    console.log( this.model.url().match(urlRegex));
 
-        dispatcher.trigger('search:onAddToPlaylist', data);
+     //    var data = {
+     //        playlist: url.match(urlRegex)[1],
+     //        track: this.model.get('track').id
+     //    };
+
+     //    dispatcher.trigger('search:onAddToPlaylist', data);
     },
 
     _onRemoveFromPlaylist: function(){

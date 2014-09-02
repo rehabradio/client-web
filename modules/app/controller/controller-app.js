@@ -126,7 +126,7 @@ module.exports = Marionette.Controller.extend({
 
 	_onPerformSearch: function(query){
         this.router.navigate('search/?query=' + query, {trigger: false});
-		this.appContent.main.show( new this.viewModules.search({query: query}).show() );
+		this.appContent.main.show( new this.viewModules.search(query).show() );
 	}
 
 });

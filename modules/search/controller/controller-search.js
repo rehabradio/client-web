@@ -47,7 +47,7 @@ module.exports = Marionette.Controller.extend({
             // defaultService: this.defaultService,
             regions: {
                 results: '#results',
-                modalContainer : '#search-modal'
+                modalContainer : '#search-modal-container'
             }
         });
 
@@ -93,8 +93,8 @@ module.exports = Marionette.Controller.extend({
             className: service
         });
 
-        self.layout.listenTo(searchService, 'childview:search:queue:add', self._onAddToQueue.bind(self));
-        self.layout.listenTo(searchService, 'childview:search:playlist:add', self._onAddToPlaylist.bind(self));
+        self.layout.listenTo(searchService, 'childview:search:queues:add', self._onAddToQueue.bind(self));
+        self.layout.listenTo(searchService, 'childview:search:playlists:add', self._onAddToPlaylist.bind(self));
 
         return searchService;
     },
@@ -110,7 +110,7 @@ module.exports = Marionette.Controller.extend({
     _onAddToQueue: function(view){
 
         /*
-         *  Add the track to the meta data before opening the add to queue modal. The function to open the modal is triggered by the ajax promise callback 
+         *  Add the track to the meta data before opening the add-to-queue modal. The function to open the modal is triggered by the ajax promise callback 
          */
 
         API.Meta.addTrack(view.model.attributes, this.createQueueModal.bind(this) );
@@ -118,38 +118,40 @@ module.exports = Marionette.Controller.extend({
 
     _onAddToPlaylist:function(view){
 
-       API.Meta.addTrack(view.model.attributes, _.bind(this.createPlaylistModal, this) );
+        /*
+         *  Add the track to the meta data before opening the add-to-playlist modal. The function to open the modal is triggered by the ajax promise callback 
+         */
+
+       API.Meta.addTrack(view.model.attributes, this.createPlaylistModal.bind(this) );
 
     },
 
-    createQueueModal:function(response){
+    createQueueModal: function(response){
 
-        console.log('successfully saved...', response);
-
-        var Model = Backbone.Model.extend({}),
-        id = response.id;
+        var Model = Backbone.Model.extend({});
 
         this.modalAddQueue = new this.modals.queues.addTrack({
             collection: dataStore.queuesCollection,
-            model: new Model({track: id })
+            model: new Model({track: response.id})
         });
 
         this.layout.modalContainer.show(this.modalAddQueue);
         this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
     },
 
- //    createPlaylistModal:function(response){
- //        var Model = Backbone.Model.extend({});
+    createPlaylistModal:function(response){
 
- //        this.modalAddPlaylist = new this.models.playlists.addTrack({
- //            collection: dataStore.playlistsCollection,
- //            model: new Model({track: response.track, playlist: response.playlist })
- //        });
+        var Model = Backbone.Model.extend({});
 
- //        this.layout.modalContainer.show(this.modalAddPlaylist);
- //        this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
+        this.modalAddPlaylist = new this.modals.playlists.addTrack({
+            collection: dataStore.playlistsCollection,
+            model: new Model({track: response.id})
+        });
 
- //    },
+        this.layout.modalContainer.show(this.modalAddPlaylist);
+        this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
+
+    },
 
 
     showLayout: function(service){
@@ -162,6 +164,10 @@ module.exports = Marionette.Controller.extend({
     },
 
     performSearch: function(){
+
+        _.each(dataStore.searchCollections, function(element){
+            element.reset();
+        });
 
         var query = this.model.get('query');
 
