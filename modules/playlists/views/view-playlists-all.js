@@ -7,6 +7,7 @@ module.exports = Marionette.CollectionView.extend({
 
 	collection: dataStore.playlistsCollection,
 
-	emptyView: EmptyView
+	emptyView: EmptyView,
 
+	className: 'playlists'
 });

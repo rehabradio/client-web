@@ -1,8 +1,13 @@
-<div class="coverart">
-</div>
+<button id="playlist-view" class="playlist-view">
+	<span class="cover-art">
+	{{#each coverart}}
+		<img src="{{url}}">
+	{{/each}}
+	</span>
+	<i>{{icon 'icon-play'}}</i>
+</button>
 <div class="details">
 	<h3>{{name}}</h3>
 	<h4>{{description}}</h4>
-	<button type="button" class="btn playlist-view">View Tracks</button>
 	<button type="button" class="btn playlist-delete">Delete</button>
 </div>

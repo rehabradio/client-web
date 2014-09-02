@@ -3,7 +3,7 @@ module.exports = Backbone.Model.extend({
 		id: null,
 		name: null,
 		description: null,
-		coverart: null
+		coverart: []
 	},
 
 	url: function(){

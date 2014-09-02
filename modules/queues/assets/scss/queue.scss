@@ -1,35 +1,48 @@
-.queue{
-	overflow: hidden;
+.module-queues{
 
 	> .content{
-		position: relative;
 		width: 100%;
-		padding: 0 20px;
+		overflow: hidden;
 	}
 
-	ul{
-		list-style: none;
+	.column{
+		width: 50%;
+		float: left;
 	}
 
-	li{
-		margin: 0 0 8px 0;
-	}
+	.queue{
+		overflow: hidden;
 
-	.cover-art{
-		display: block;
-		margin: 0 10px 0 0;
-		width: 40px;
-	}
+		> .content{
+			position: relative;
+			width: 100%;
+			padding: 0 20px;
+		}
 
-	table{
+		ul{
+			list-style: none;
+		}
 
-	}
+		li{
+			margin: 0 0 8px 0;
+		}
 
-	tr{
+		.cover-art{
+			display: block;
+			margin: 0 10px 0 0;
+			width: 40px;
+		}
 
-	}
+		table{
 
-	td{
-		padding: 0 0 10px 0;
+		}
+
+		tr{
+
+		}
+
+		td{
+			padding: 0 0 10px 0;
+		}
 	}
 }

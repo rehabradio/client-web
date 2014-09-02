@@ -12,33 +12,43 @@ module.exports = Marionette.ItemView.extend({
 	initialize: function(){
 		var self = this;
 
+		/*
+		 *	Load the thumbnail images for the first four tracks in the playlist
+		 */
+
 		self.listenTo(self.model, 'change:coverart', self._onCoverartChange);
 
-		$.ajax({
-			url: window.API_ROOT + 'playlists/' + self.model.get('id') + '/tracks/',
-			type: 'GET',
-			success: function(data){
+		if(self.model.get('coverart').length < 4){
+			$.ajax({
+				url: window.API_ROOT + 'playlists/' + self.model.get('id') + '/tracks/',
+				type: 'GET',
+				success: function(data){
 
-				var count = Math.min(data.count, 4),
-					coverart = [];
+					var count = Math.min(data.count, 4),
+						coverart = [];
 
-				for(var i = 0; i < count; i++){
+					for(var i = 0; i < count; i++){
 
-					if(!!data.results[i]){
+						if(!!data.results[i]){
 
-						if(!!data.results[i].track.image_small){
+							/*
+							 *	If the track doesn't have a thumbnail then it is skipped
+							 */
 
-							coverart.push(data.results[i].track.image_small);
-						}else{
+							if(!!data.results[i].track.image_small){
 
-							count++;
+								coverart.push({url: data.results[i].track.image_small});
+							}else{
+
+								count++;
+							}
 						}
 					}
-				}
 
-				self.model.set('coverart', coverart);
-			}
-		});
+					self.model.set('coverart', coverart);
+				}
+			});
+		}
 	},
 
 
@@ -49,9 +59,7 @@ module.exports = Marionette.ItemView.extend({
 		 */
 
 		this.trigger('playlists:tracks:show', this.model.get('id'));
-
-		// dispatcher.trigger('playlist:tracks:show');
-		// dispatcher.trigger('playlist:show', this.model.get('id'));
+		
 	},
 
 	_onDeletePlaylist: function(){
@@ -65,7 +73,7 @@ module.exports = Marionette.ItemView.extend({
 		var self = this;
 
 		_.each(this.model.get('coverart'), function(element){
-			self.$el.find('.coverart').append('<img src="' + element + '" alt="">');
+			self.$el.find('#playlist-view .cover-art').append('<img src="' + element.url + '" alt="">');
 		});
 		
 	}

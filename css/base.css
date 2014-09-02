@@ -17,11 +17,11 @@ h2 {
   color: #E7564D; }
 
 h3 {
-  font-size: 16px;
+  font-size: 13px;
   color: #5373F7; }
 
 h4 {
-  font-size: 13px; }
+  font-size: 12px; }
 
 body {
   background-color: #000000;
@@ -179,60 +179,122 @@ nav {
       left: 18px;
       width: 20px; }
 
-.playlists {
+.module-playlists {
   overflow: hidden;
   /*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/ }
-  .playlists > .content {
-    width: 200%; }
-  .playlists > .content {
-    padding: 0 20px 62px; }
-  .playlists .left-column {
-    width: 25%;
-    float: left; }
-    .playlists .left-column.contract {
-      width: 25%; }
-  .playlists .right-column {
-    width: 25%;
-    float: left; }
-  .playlists .playlist {
-    margin: 0 0 20px 0;
+  .module-playlists > .content {
+    padding: 0 20px 62px;
     overflow: hidden; }
-    .playlists .playlist .coverart {
-      margin: 0 20px 0 0;
-      width: 80px;
-      height: 80px;
-      float: left;
+  .module-playlists .left-column {
+    width: 50%;
+    float: left; }
+  .module-playlists .right-column {
+    width: 50%;
+    float: left; }
+  .module-playlists .playlists {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-align-content: space-around;
+        -ms-flex-line-pack: distribute;
+            align-content: space-around;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start; }
+  .module-playlists .playlist {
+    width: 110px;
+    margin: 0 25px 20px 0;
+    -webkit-box-ordinal-group: 1;
+    -webkit-order: 0;
+        -ms-flex-order: 0;
+            order: 0;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+            align-self: auto;
+    overflow: hidden; }
+    .module-playlists .playlist .playlist-view {
+      position: relative;
+      margin: 0 0 20px 0;
+      width: 110px;
+      height: 110px;
       overflow: hidden;
-      background-image: url(/img/album.png);
-      background-size: cover; }
-      .playlists .playlist .coverart img {
+      background-color: #5373F7;
+      outline: none;
+      cursor: pointer; }
+      .module-playlists .playlist .playlist-view .cover-art {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0; }
+      .module-playlists .playlist .playlist-view img {
         display: block;
         width: 50%;
         height: 50%;
         float: left; }
-  .playlists .track .coverart {
+      .module-playlists .playlist .playlist-view i {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-color: rgba(0, 0, 0, 0.2);
+        display: none; }
+      .module-playlists .playlist .playlist-view .icon {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        fill: #FFF; }
+      .module-playlists .playlist .playlist-view:hover i {
+        display: block; }
+  .module-playlists .track .coverart {
     display: block;
     margin: 0 10px 0 0;
     width: 40px;
     background-image: url(/img/album.png); }
-  .playlists .details {
+  .module-playlists .details {
     float: left; }
 
-.queue {
+.module-queues > .content {
+  width: 100%;
   overflow: hidden; }
-  .queue > .content {
+.module-queues .column {
+  width: 50%;
+  float: left; }
+.module-queues .queue {
+  overflow: hidden; }
+  .module-queues .queue > .content {
     position: relative;
     width: 100%;
     padding: 0 20px; }
-  .queue ul {
+  .module-queues .queue ul {
     list-style: none; }
-  .queue li {
+  .module-queues .queue li {
     margin: 0 0 8px 0; }
-  .queue .cover-art {
+  .module-queues .queue .cover-art {
     display: block;
     margin: 0 10px 0 0;
     width: 40px; }
-  .queue td {
+  .module-queues .queue td {
     padding: 0 0 10px 0; }
 
 #search label {
