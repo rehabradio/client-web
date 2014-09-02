@@ -1,12 +1,10 @@
 var modelApp = require('../models/models-app'); // Already initialised
-var AppLayout = require('../layout/layout');
+var AppLayout = require('../views/layout-app');
 var AppRouter = require('../../core/router/router');
-var Login = require('../../login/');
 
-var Layouts = {
-	main : require('../layout/main'),
-	application : require('../layout/layout')
-};
+var Login = require('../../login/controller/controller-login');
+
+var AppContent = require('../views/layout-app-content');
 
 module.exports = Marionette.Controller.extend({
 
@@ -15,63 +13,63 @@ module.exports = Marionette.Controller.extend({
 	//modules that will be started as soon as the app boots
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
-		search: require('../../search/controller/controller-search'),
 		navigation : require('../../navigation/controller/controller-navigation')
 	},
 
 	//views that are called by the router's controller, these views will be displayed within the 
 	//layouts 'main' region
 	viewModules: {
+		search: require('../../search/controller/controller-search'),
 		queues: require('../../queues/controller/controller-queues'),
 		playlists: require('../../playlists/controller/controller-playlists')
 	},
 
+
 	initialize: function(){
 
-		this.appModules = _.extend(this.coreModules, this.viewModules);
-
-		//render a layout with a main region for 
-		//switching between login View and the Application Layout
-		this.MainLayout = new Layouts.main();
-		this.MainLayout.render();
-
-		//create a new instance of the login module controller
-		this.login = new Login(this);
-
-		this.listenTo(dispatcher, 'login-set-status', this.setLoginStatus, this);
-		
-		this.listenTo(this.model, 'change:loginStatus', function(model){
-			if(model.get('loginStatus')){
-				this._startApp();
+		this.layout = new AppLayout({
+			regions: {
+				appContent: '#app-content'
 			}
 		});
 
-		dispatcher.on('login-set-status', this.setLoginStatus.bind(this));
+		this.layout.render();
 
+		this.login = new Login();
+
+		this.listenTo(dispatcher, 'login:status', this.setLoginStatus, this);
+		
+		this.listenTo(this.model, 'change:loginStatus', function(model){
+			if(model.get('loginStatus')){
+				this.startApp();
+			}
+		});
 	},
 
 	setLoginStatus: function(status, user){
 
-		if(!!user){
+		if(!!status){
+
 			this.model.set('url', user.url);
 			this.model.set('displayName', user.displayName);
 			this.model.set('image', user.image.url);
+
+			this.model.set('loginStatus', status); // Triggers the rerender;
+
+		}else{
+
+			this.layout.appContent.show(this.login.show());
 		}
-
-		this.model.set('loginStatus', status); // Triggers the rerender;
-
 	},
 
-	_startApp: function(){
+	startApp: function(){
 		
-		console.log('_startApp');
+		console.log('Start App');
 
 		this.router = new AppRouter();
 
-		//Application layout
-		//render the Application layout when logged in
-		this.layout = new Layouts.application(this);
-		this.MainLayout.main.show( this.layout );
+		this.appContent = new AppContent();
+		this.layout.appContent.show(this.appContent);
 	
 		var self = this;
 
@@ -94,8 +92,11 @@ module.exports = Marionette.Controller.extend({
 		this.listenTo(dispatcher, 'router:showModule', this._showModule, this);
 		this.listenTo(dispatcher, 'navigation:changemodule', this._changeModule, this);
 
+		this.listenTo(dispatcher, 'search:perform', this._onPerformSearch, this);
+
 
 		Backbone.history.start({ pushState: true, trigger: true });
+
 		/*
 		 *	Initialise views that don't rely on external data // core modules
 		 */
@@ -103,27 +104,18 @@ module.exports = Marionette.Controller.extend({
 		console.log('booting views...');
 
 		new this.coreModules.navigation(this);
-		new this.coreModules.search(this);
 	},
 
 	_changeModule:function( module ){
 
-     	switch(module) {
-            case 'playlists':
-                this.router.controller.showPlaylists();
-                this.router.navigate('playlists', {trigger: false});
-            break;
-            case 'queues':
-                this.router.controller.showQueues();
-                this.router.navigate('queues', {trigger: false});
-            break;
-        }
+		this.appContent.main.show( new this.viewModules[module]().show() );
+        this.router.navigate(module, {trigger: false});
 
     },
 
 	_showModule:function( module ){
-
-		this.layout.main.show( new this.viewModules[module]().show() );
+		
+		this.appContent.main.show( new this.viewModules[module]().show() );
 	},
 	
 	_fetchData: function(){
@@ -131,5 +123,10 @@ module.exports = Marionette.Controller.extend({
 		dataStore.playlistsCollection.fetch();
 		dataStore.queuesCollection.fetch();
 	},
+
+	_onPerformSearch: function(query){
+        this.router.navigate('search/?query=' + query, {trigger: false});
+		this.appContent.main.show( new this.viewModules.search({query: query}).show() );
+	}
 
 });

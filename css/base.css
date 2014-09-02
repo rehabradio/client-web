@@ -238,32 +238,26 @@ nav {
 #search label {
   display: none; }
 
-#search-results {
-  background: #E7564D;
-  z-index: 1;
+.search-results [role="tabs"] a {
+  width: 50%;
+  text-align: center;
+  background: #050505;
   color: #fff;
-  overflow-y: scroll;
-  max-height: 460px; }
-  #search-results [role="tabs"] a {
-    width: 50%;
-    text-align: center;
-    background: #050505;
-    color: #fff;
-    display: inline-block;
-    float: left;
-    padding: 20px 0px; }
-    #search-results [role="tabs"] a.is-active {
-      background: #5373F7; }
-  #search-results .results li .track-details {
-    list-style-type: none;
-    padding: 10px 0px;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; }
-  #search-results img {
-    width: 30px;
-    height: 30px; }
+  display: inline-block;
+  float: left;
+  padding: 20px 0px; }
+  .search-results [role="tabs"] a.is-active {
+    background: #5373F7; }
+.search-results .results li .track-details {
+  list-style-type: none;
+  padding: 10px 0px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+.search-results img {
+  width: 30px;
+  height: 30px; }
 
 .pagination {
   text-align: center;

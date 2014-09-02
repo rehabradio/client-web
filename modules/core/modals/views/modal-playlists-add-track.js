@@ -36,9 +36,9 @@ module.exports = Marionette.ItemView.extend({
 			data = {
 				playlist: formData[i].name,
 				track: this.model.get('track')
-			}
+			};
 
-			this.trigger('playlist:tracks:add', data)
+			this.trigger('playlist:tracks:add', data);
 		}
 
 		this.remove();

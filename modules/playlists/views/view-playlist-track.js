@@ -23,7 +23,7 @@
 
 	},
 
-	_onAddToQueue: function(e){
+	_onAddToQueue: function(){
 
 		var id = this.model.get('track').id;
 
@@ -43,7 +43,7 @@
 
 			playlist: url.match(urlRegex)[1],
 			track: this.model.get('track').id
-		}
+		};
 
 		/*
 		 *	Trigger the initialisation of the Add-To-Playlists modal

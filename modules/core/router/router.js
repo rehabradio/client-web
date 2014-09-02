@@ -13,6 +13,8 @@ var Router = Marionette.AppRouter.extend({
 
         // '/profile': 'showProfile',
 
+        'search(/)(?query=[.*])': 'showSearch',
+
     	//Playlist Endpoints
     	'playlists(/:id)(/)' : 'showPlaylists',
     	// 'playlists/:id': 'showPlaylists',
@@ -27,11 +29,7 @@ var Router = Marionette.AppRouter.extend({
 
     	//Search Endpoints
 
-  	},
-
-    onRoute: function(name, path, arguments){
-        // console.log('route ::', name, path, arguments);
-    }
+  	}
 });
 
 

@@ -1,6 +1,6 @@
-var Layout 				= require('../views/layout/layout'),
-	SearchCollection	= require('../collections/collections-search'),
-    searchView          = require('../views/view-search'),
+var SearchLayout                = require('../views/layout-search'),
+    SearchModel         = require('../models/models-search'),
+    SearchCollection    = require('../collections/collections-search'),
     searchServiceView   = require('../views/view-search-service');
 
 /*
@@ -17,16 +17,16 @@ Collection data will still be present within the controller
 
 var API = require('../../../js/src/utils/api');
 
-var SearchController = Marionette.Controller.extend({
+module.exports = Marionette.Controller.extend({
 
-	services: [
-		'spotify',
-		'soundcloud'
-	],
+    services: [
+        'spotify',
+        'soundcloud'
+    ],
 
-	collections: {},
+    collections: {},
 
-	defaultService: 'spotify',
+    defaultService: 'spotify',
 
     modals: {
         queues: {
@@ -39,94 +39,118 @@ var SearchController = Marionette.Controller.extend({
         }
     },
 
-    initialize: function(){
-        this.layout = new Layout({defaultService: this.defaultService });
-        this.layout.render();
-        this.bootCollections();
-        this.setUpListeners();
-        new searchView();
-    },
+    model: new SearchModel(),
 
-    _onAddToQueue:function(model){
-        API.Meta.addTrack(model.attributes, _.bind(this.createQueueModal, this) );
-    },
+    initialize: function(options){
+        this.model.set('query', options.query);
 
-    _onAddToPlaylist:function(model){
-
-    console.log('_onAddToPlaylist');
-       API.Meta.addTrack(model.attributes, _.bind(this.createPlaylistModal, this) );
-
-    },
-
-    createQueueModal:function(response){
-
-        console.log('successfully saved...', response);
-
-        var Model = Backbone.Model.extend({}),
-        id = response.id;
-
-        this.modalAddQueue = new this.modals.queues.addTrack({
-            collection: dataStore.queuesCollection,
-            model: new Model({track: id })
+        this.layout = new SearchLayout({
+            // defaultService: this.defaultService,
+            regions: {
+                results: '#results',
+                modalContainer : '#search-modal'
+            }
         });
 
-        this.layout.modalContainer.show(this.modalAddQueue);
-        this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
+        if(!dataStore.searchCollections){
+
+            dataStore.searchCollections = {};
+
+            _.each(this.services, function(element, index){
+                dataStore.searchCollections[element] = new SearchCollection();
+            });
+        }
+
+        this.listenTo(this.layout, 'show', this.onShow);
     },
 
-    createPlaylistModal:function(response){
-        var Model = Backbone.Model.extend({});
+    show: function(){
 
-        this.modalAddPlaylist = new this.models.playlists.addTrack({
-            collection: dataStore.playlistsCollection,
-            model: new Model({track: response.track, playlist: response.playlist })
-        })
-
-        this.layout.modalContainer.show(this.modalAddPlaylist);
-        this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
-
-    },
-  
-    setUpListeners:function(){
-        this.listenTo(dispatcher, 'search:onAddToQueue', this._onAddToQueue, this);
-        this.listenTo(dispatcher, 'search:onAddToPlaylist', this._onAddToPlaylist, this);
-        this.listenTo(dispatcher, 'perform-search', this.performSearch, this);
-        this.listenTo(dispatcher, 'service:switch', this.showLayout, this);
+        /*
+         *  Return search layout view
+         */
+        
+        return this.layout;
     },
 
-    bootCollections: function(){
-    	_.each(this.services, function(service){
-			this.collections[service] = new SearchCollection();
-		}, this);
+    onShow: function(){
+
+        if(this.model.get('query') && this.model.get('query').length > 0){
+            this.performSearch();
+        }
+
+        var self = this;
+
+        var searchService = new searchServiceView({
+            collection: dataStore.searchCollections[self.defaultService], 
+            className: self.defaultService
+        });
+
+        self.listenTo(self.layout, 'search:service:change', self.showLayout);
+
+        self.layout.results.show(searchService);
     },
 
-    showDefaultService: function(service){
-    	if(service == this.defaultService){
-    		this.showLayout(service);
-    	}
-    },
+ //    _onAddToQueue:function(model){
+ //        API.Meta.addTrack(model.attributes, _.bind(this.createQueueModal, this) );
+ //    },
+
+ //    _onAddToPlaylist:function(model){
+
+ //        console.log('_onAddToPlaylist');
+ //       API.Meta.addTrack(model.attributes, _.bind(this.createPlaylistModal, this) );
+
+ //    },
+
+ //    createQueueModal:function(response){
+
+ //        console.log('successfully saved...', response);
+
+ //        var Model = Backbone.Model.extend({}),
+ //        id = response.id;
+
+ //        this.modalAddQueue = new this.modals.queues.addTrack({
+ //            collection: dataStore.queuesCollection,
+ //            model: new Model({track: id })
+ //        });
+
+ //        this.layout.modalContainer.show(this.modalAddQueue);
+ //        this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
+ //    },
+
+ //    createPlaylistModal:function(response){
+ //        var Model = Backbone.Model.extend({});
+
+ //        this.modalAddPlaylist = new this.models.playlists.addTrack({
+ //            collection: dataStore.playlistsCollection,
+ //            model: new Model({track: response.track, playlist: response.playlist })
+ //        });
+
+ //        this.layout.modalContainer.show(this.modalAddPlaylist);
+ //        this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
+
+ //    },
+
 
     showLayout: function(service){
-    	this.layout.results.show( new searchServiceView({
-    		collection: this.collections[service], 
-    		className: service 
-    	}) );
+        this.layout.results.show( new searchServiceView({
+            collection: dataStore.searchCollections[service], 
+            className: service 
+        }) );
     }, 
 
     fetchServices: function(query, service, cb){
-    	var xhr = this.collections[service].fetch({service:service, query:query});
-    	xhr.done( cb );
+        var xhr = dataStore.searchCollections[service].fetch({service:service, query:query});
+        // xhr.done( cb );
     },
 
-    performSearch: function(query){
+    performSearch: function(){
 
-    	_.each(this.services, function(service){
-    		this.fetchServices(query, service, function(){
-    			this.showDefaultService(service);
-    		}.bind(this) );
-    	}, this);
+        var query = this.model.get('query');
 
-	}
+        _.each(this.services, function(service){
+            this.fetchServices(query, service);
+        }, this);
+
+    }
 });
-
-module.exports = SearchController;

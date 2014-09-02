@@ -1,6 +1,6 @@
 require('./src/utils/config');
 
-var Application = require('../modules/app/views/view-app');
+var Application = require('../modules/app/controller/controller-app');
 //var Login = require('../modules/login/');
 
 $(function(){

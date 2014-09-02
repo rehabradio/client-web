@@ -5,5 +5,8 @@ var routerController = {};
 
 _.extend(routerController, Playlists, Queues);
 
+routerController.showSearch = function(data){
+	dispatcher.trigger('router:showModule', 'search');
+};
 
 module.exports = routerController;

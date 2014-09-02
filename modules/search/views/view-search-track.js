@@ -8,7 +8,7 @@ module.exports = Marionette.ItemView.extend({
         'click .add-to-playlist': '_onAddToPlaylist'
 	},
 
-	_onAddToQueue: function(e){
+	_onAddToQueue: function(){
 		dispatcher.trigger('search:onAddToQueue', this.model);
     },
 
@@ -28,7 +28,7 @@ module.exports = Marionette.ItemView.extend({
         var data = {
             playlist: url.match(urlRegex)[1],
             track: this.model.get('track').id
-        }
+        };
 
         dispatcher.trigger('search:onAddToPlaylist', data);
     },

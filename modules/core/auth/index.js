@@ -39,13 +39,15 @@ var Auth = function(res){
 
 
 	this.authorizeUsers = function(res){
-		var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
+		// var emails = _.where(res.emails, function(element){ return /@rehabstudio\.com/g.match(element.value); });
 
 		for(var i in res.emails){
 			// If one of the emails stored on the users google+ account is a rehabstudio
 			if(/@rehabstudio\.com/.test(res.emails[i].value)){
 				// initialise the app
-				dispatcher.trigger('login-set-status', true, res.result);
+				dispatcher.trigger('login:status', true, res.result);
+			}else{
+				dispatcher.trigger('login:status', false, res.result);
 			}
 		}
 	};	
@@ -59,4 +61,4 @@ var Auth = function(res){
 
 };
 
-module.exports = window.authoriseUser = Auth
+module.exports = window.authoriseUser = Auth;

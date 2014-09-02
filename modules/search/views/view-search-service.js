@@ -1,41 +1,45 @@
 var SearchTrackView 	= require('./view-search-track'),
 	EmptyView    		= require('./view-empty');
 
-var SearchServiceView = Marionette.CompositeView.extend({
+module.exports = Marionette.CompositeView.extend({
 
 	childView: SearchTrackView,
-	childViewContainer: '.results',
+
+	childViewContainer: '.tracks',
+
 	paginationClass: '.pagination',
+	
 	emptyView: EmptyView,
 
-	templates :{
-		pagination: require('../templates/pagination.hbs'),
-		view : require('../templates/search-service.hbs')
-	},
+	template: require('../templates/search-service.hbs'),
+
+	// templates :{
+	// 	pagination: require('../templates/pagination.hbs'),
+	// 	view : require('../templates/search-service.hbs')
+	// },
 
 	events: {
 		'click .pagination a' : 'paginate'
 	},
 
 	initialize: function(){
-		this.template = this.templates.view;
+		// this.template = this.templates.view;
 	},
 
-	onRender: function(){
-		console.log('onRender');
-		this.updatePagination( this.collection.pagination );
-  	},
+	// onRender: function(){
 
-	updatePagination:function( pages ){
-		this.$el.find( this.paginationClass ).html( this.templates.pagination( pages ) );
-	},
+	// 	this.updatePagination( this.collection.pagination );
+ //  	},
 
-	paginate:function(event){
-		event.preventDefault();
-		var fetch = this.collection.fetch({ url: event.currentTarget.href});
-		fetch.done(this.updatePagination.bind(this));
-	}
+	// updatePagination:function( pages ){
+
+	// 	this.$el.find( this.paginationClass ).html( this.templates.pagination( pages ) );
+	// },
+
+	// paginate:function(event){
+		
+	// 	event.preventDefault();
+	// 	var fetch = this.collection.fetch({ url: event.currentTarget.href});
+	// 	fetch.done(this.updatePagination.bind(this));
+	// }
 });
-
-
-module.exports = SearchServiceView;

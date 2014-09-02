@@ -14,17 +14,17 @@ module.exports = {
 
 		var options = {
 			path: 'queues/' + queueID + '/'
-		}
+		};
 
 		dispatcher.trigger('router:showModule', 'queues', options);
 
 	},
 
-	showQueueTracks:function(queueID){
+	showQueueTracks:function(){
 		console.log('showQueueTracks');
 	},
 
-	showQueueTrack:function(queueID, trackID){
+	showQueueTrack:function(){
 		console.log('showQueueTrack');
 	}
 };

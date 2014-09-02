@@ -34,9 +34,9 @@ module.exports = Marionette.ItemView.extend({
 			data = {
 				queue: formData[i].name,
 				track: this.model.get('track')
-			}
+			};
 
-			this.trigger('queues:tracks:add', data)
+			this.trigger('queues:tracks:add', data);
 		}
 
 		this.remove();

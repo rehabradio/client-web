@@ -137,7 +137,7 @@ module.exports = Marionette.Controller.extend({
 
 		var playlistsDeleteModal = new PlaylistsDeleteModal({
 			model: model
-		})
+		});
 
 		self.layout.modalContainer.show(playlistsDeleteModal);
 
@@ -199,7 +199,7 @@ module.exports = Marionette.Controller.extend({
 		var playlistAddTrackModal = new PlaylistsAddTrackModal({
 			model: modelPlaylistAdd,
 			collection: dataStore.playlistsCollection
-		})
+		});
 
 		self.layout.modalContainer.show(playlistAddTrackModal);
 

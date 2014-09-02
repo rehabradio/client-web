@@ -1,17 +1,21 @@
-var LoginView = require('./views/login'),
-    Auth = require('../core/auth');
+var LoginView = require('../views/view-login'),
+    Auth = require('../../core/auth');
 
 module.exports = Marionette.Controller.extend({
-    initialize: function(options){
+    initialize: function(){
 
-    	this.MainLayout = options.MainLayout;
-    	this.loginView = new LoginView();	
+    	// this.MainLayout = options.MainLayout;
+    	this.view = new LoginView();	
     	
-    	this.MainLayout.main.show( this.loginView );
+    	// this.MainLayout.main.show( this.loginView );
 
-    	this.setUpListeners();
+    	// this.setUpListeners();
 
    	},
+
+    show: function(){
+      return this.view;
+    },
 
    	setUpListeners:function(){
    		this.listenTo(this.loginView, 'gapi.auth.signIn',  this._onSignIn);
