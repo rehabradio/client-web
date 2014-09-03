@@ -1,5 +1,5 @@
 #sidebar{
-	background: darken($grey, 5%);
+	background: darken($darkgrey, 5%);
 	float: left;
 	width: 200px;
 	height: 100%;
@@ -8,7 +8,7 @@
 		font-size: 14px;
 		text-indent: 30px;
 		padding: 15px 0px;
-		border-bottom: 1px solid darken($grey, 5%);
+		border-bottom: 1px solid darken($darkgrey, 5%);
 	}
 
 }

@@ -1,5 +1,5 @@
 #sidebar{
-	background: darken($grey, 5%);
+	background: darken($darkgrey, 5%);
 	float: left;
 	width: 200px;
 	height: 100%;
@@ -8,7 +8,7 @@
 		font-size: 14px;
 		text-indent: 30px;
 		padding: 15px 0px;
-		border-bottom: 1px solid darken($grey, 5%);
+		border-bottom: 1px solid darken($darkgrey, 5%);
 	}
 
 }
@@ -147,6 +147,29 @@ nav{
 	}
 
 	.track{
+		border-bottom: 2px solid $darkgrey;
+
+		td{
+			padding: 6px 0 4px;
+		}
+
+		.track-details{
+			padding-left: 12px;
+		}
+
+		button{
+			visibility: hidden;
+			margin: 0 12px 0 0;
+		}
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			button{
+				visibility: visible;
+			}
+		}
 
 		.coverart{
 			display: block;
@@ -173,40 +196,89 @@ nav{
 		float: left;
 	}
 
+	.queues{
+
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-content: space-around;
+		align-items: flex-start;
+	}
+
 	.queue{
+		width: 110px;
+		margin: 0 25px 20px 0;
+		order: 0;
+		flex: 0 1 auto;
+		align-self: auto;
 		overflow: hidden;
+	}
 
-		> .content{
-			position: relative;
-			width: 100%;
-			padding: 0 20px;
-		}
-
-		ul{
-			list-style: none;
-		}
-
-		li{
-			margin: 0 0 8px 0;
-		}
+	.queue-view{
+		position: relative;
+		margin: 0 0 20px 0;
+		width: 110px;
+		height: 110px;
+		overflow: hidden;
+		background-color: $blue;
+		outline: none;
+		cursor: pointer;
 
 		.cover-art{
 			display: block;
-			margin: 0 10px 0 0;
-			width: 40px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
 		}
 
-		table{
-
+		img{
+			display: block;
+			width: 50%;
+			height: 50%;
+			float: left;
 		}
 
-		tr{
-
+		i{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			background-color: rgba(0, 0, 0, 0.2);
+			display: none;
 		}
 
-		td{
-			padding: 0 0 10px 0;
+		.icon{
+
+			position: absolute;
+			top: 25%;
+			left: 25%;
+			width: 50%;
+			fill: #FFF;
 		}
+
+		&:hover{
+
+			i{
+				display: block;
+			}
+		}
+	}
+
+	table{
+
+	}
+
+	tr{
+
+	}
+
+	td{
+		padding: 0 0 10px 0;
 	}
 }
 #search{

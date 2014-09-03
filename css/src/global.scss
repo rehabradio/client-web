@@ -24,6 +24,7 @@ main{
 
 table{
 	width: 100%;
+	border-collapse: collapse;
 }
 
 button{
@@ -81,7 +82,7 @@ icon.orange{
 }
 
 icon.grey{
-	fill: $grey;
+	fill: $darkgrey;
 }
 
 form{

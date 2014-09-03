@@ -1,4 +1,11 @@
+<button id="queue-view" class="queue-view" title="View this queue">
+	<span class="cover-art">
+	{{#each coverart}}
+		<img src="{{url}}">
+	{{/each}}
+	</span>
+	<i>{{icon 'icon-play'}}</i>
+</button>
 <h3>{{name}}</h3>
 <h4>{{owner}}</h4>
 <p>{{description}}</p>
-<button type="button" class="btn">View queue</button>
