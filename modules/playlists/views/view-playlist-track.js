@@ -20,7 +20,7 @@
 	},
 
 	initialize: function(){
-
+		this.listenTo(this.model, 'change', this.render, this);
 	},
 
 	_onAddToQueue: function(){
@@ -50,12 +50,10 @@
 		 */
 
 		this.trigger('playlists:tracks:modal', data);
-		// dispatcher.trigger('playlist:tracks:modal', data);
 	},
 
 	_onRemoveFromPlaylist: function(){
 
 		this.trigger('playlists:tracks:remove', this.model);
-		// dispatcher.trigger('playlist:track:remove', this.model);
 	}
  });

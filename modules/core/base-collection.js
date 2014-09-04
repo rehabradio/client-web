@@ -12,7 +12,7 @@ var BaseCollection = Backbone.Collection.extend({
 
 	initialize: function(){
 		
-		this.poll();
+		// this.poll();
 	},
 
 	poll: function(){
@@ -28,6 +28,16 @@ var BaseCollection = Backbone.Collection.extend({
 		// 		}
 		// 	});
 		// }, 2000);
+	},
+
+	update: function(data){
+
+		/*
+		 *	Calls the build in 'set' method that merges the collection from the server with the current one.
+		 *	'parse' set as true to use the built in parse function. options 'add', 'remove' and 'merge' set to true by default
+		 */
+
+		this.set(data, {parse: true});
 	}
 
 });

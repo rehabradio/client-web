@@ -6,6 +6,5 @@ module.exports = Marionette.LayoutView.extend({
 
 	initialize: function(options){	
 		this.regions = options.regions;
-		dataStore.queueTracksCollections = [];
 	},
 });

@@ -14,6 +14,8 @@ module.exports = Marionette.Controller.extend({
 			}
 		});
 
+		dataStore.queueTracksCollections = [];
+
 		this.listenTo(this.layout, 'show', this.onShow);
 	},
 

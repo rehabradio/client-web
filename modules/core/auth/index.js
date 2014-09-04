@@ -47,7 +47,6 @@ var Auth = function(res){
 				// initialise the app
 				dispatcher.trigger('login:status', true, res.result);
 			}else{
-				dispatcher.trigger('login:status', false, res.result);
 			}
 		}
 	};	
@@ -56,6 +55,8 @@ var Auth = function(res){
 	if( signed_in && method === 'PROMPT' || method ==='AUTO'){
 		this.setUpAjax();
 		this.startAuth();
+	}else{
+		dispatcher.trigger('login:status', false, res.result);
 	}
 
 

@@ -7,9 +7,8 @@ module.exports = BaseCollection.extend({
 	model: require('../models/models-queues'),
 
 	initialize: function(){
-		this.on('remove', function(model){
-			console.log(model);
-		});
+
+		dispatcher.on('socket:queues:update', this.update.bind(this));
 	}
 	
 });

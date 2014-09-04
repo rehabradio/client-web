@@ -2,7 +2,7 @@ var PlaylistsLayout = require('../views/layout-playlists');
 var PlaylistsAll = require('../views/view-playlists-all');
 var PlaylistTracks = require('../views/view-playlist-tracks');
 var ModelPlaylistAdd = require('../models/models-playlist-add');
-var TracksCollection = require('../collections/collections-tracks');
+var TracksCollection = require('../collections/collection-playlists-tracks');
 
 var ModelPlaylistQueue = require('../models/models-playlist-queue');
 
@@ -39,6 +39,8 @@ module.exports = Marionette.Controller.extend({
 				playlistsControls: '#playlists-controls'
 			}
 		});
+
+		dataStore.playlistTracksCollections = [];
 
 		this.API = API;
 		
@@ -151,10 +153,22 @@ module.exports = Marionette.Controller.extend({
 	_onPlaylistShow: function(id){
 
 		var self = this;
+		
+		id = Number(id);
 
-		var collectionPlaylistTracks = new TracksCollection([], {url: window.API_ROOT + 'playlists/' + id + '/tracks/'});
+		if(!_.find(dataStore.playlistTracksCollections, function(element){ return element.id === id; })){
+			dataStore.playlistTracksCollections.push(new TracksCollection([], {
+				id: id,
+				url: window.API_ROOT + 'playlists/' + id + '/tracks/'
+			}));
+		}
 
-		var viewPlaylistTracks = new PlaylistTracks({collection: collectionPlaylistTracks, model: new TracksModel({id: id})});
+		// var collectionPlaylistTracks = new TracksCollection([], {url: window.API_ROOT + 'playlists/' + id + '/tracks/'});
+
+		var viewPlaylistTracks = new PlaylistTracks({
+			model: new TracksModel({id: id}),
+			collection: _.find(dataStore.playlistTracksCollections, function(element){ return element.id === id; })
+		});
 
 		self.layout.playlistsTracks.show(viewPlaylistTracks);
 

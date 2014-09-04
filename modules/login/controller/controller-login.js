@@ -9,7 +9,7 @@ module.exports = Marionette.Controller.extend({
     	
     	// this.MainLayout.main.show( this.loginView );
 
-    	// this.setUpListeners();
+    	this.setUpListeners();
 
    	},
 
@@ -18,7 +18,7 @@ module.exports = Marionette.Controller.extend({
     },
 
    	setUpListeners:function(){
-   		this.listenTo(this.loginView, 'gapi.auth.signIn',  this._onSignIn);
+   		this.listenTo(this.view, 'gapi.auth.signIn',  this._onSignIn);
     	this.listenTo(dispatcher, 'gapi.auth.signOut', this._onSignOut);
    	},
 

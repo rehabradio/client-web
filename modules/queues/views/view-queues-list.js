@@ -8,5 +8,10 @@ module.exports = Marionette.CompositeView.extend({
 
 	collection: dataStore.queuesCollection,
 
-	template: require('../templates/view-queues-list.hbs')
+	template: require('../templates/view-queues-list.hbs'),
+
+	initialize: function(){
+
+		// this.listenTo(this.collection, 'change', function(model){ console.log(model);}, this);
+	}
 });

@@ -1,37 +1,34 @@
+/*
+ *	Stores the data for tracks within a playlist.
+ */
+ 
 var BaseCollection = require('../../core/base-collection');
 
-var QueueTrack = require('../models/models-queue-tracks');
+var TrackModel = require('../models/models-track.js');
 
 module.exports = BaseCollection.extend({
 
-	model: QueueTrack,
-
 	url: null,
 
+	model: TrackModel,
+
 	initialize: function(models, options){
-		
 		this.url = options.url;
 		this.id = Number(options.id);
 
-		dispatcher.on('socket:queues:tracks:update', this.update.bind(this));
-
 		this.fetch();
-	},
 
-	comparator: function(element){
-		return element.id;
+		this.listenTo(dispatcher, 'socket:playlists:tracks:update', this.update, this);
 	},
-
 
 	update: function(data){
 
 		/*
-		 *	Checks if the collection 'id' corresponds to the 'id' supplied in the data
+		 *	Calls the build in 'set' method that merges the collection from the server with the current one.
 		 */
 
 		if(data.id === this.id){
 			this.set(data, {parse: true});
 		}
 	}
-	
 });

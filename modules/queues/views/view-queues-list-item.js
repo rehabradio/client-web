@@ -12,6 +12,7 @@ module.exports = Marionette.ItemView.extend({
 
 		var self = this;
 
+		self.listenTo(self.model, 'change', this.render, this);
 		self.listenTo(self.model, 'change:coverart', self._onCoverartChange);
 
 		if(self.model.get('coverart').length < 4){
