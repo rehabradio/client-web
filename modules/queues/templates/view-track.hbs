@@ -1,4 +1,4 @@
-<td>
+<td class="track-details">
 	<h4>{{track.name}}</h4>
 	<h5>{{track.album.name}}</h5>
 	{{#if track.artists}}
@@ -6,10 +6,5 @@
 	{{/if}}
 </td>
 <td>
-	<button class="btn remove">Remove</button>
+	<button type="button" class="btn remove-from-queue" title="Remove track from playlists"><i>{{icon 'icon-trash'}}</i></button>
 </td>
-<!-- <td>
-	<a href="#" title="">
-		<img src="/img/{{track.source_type}}.png" alt="{{track.source_type}}">
-	</a>
-</td> -->

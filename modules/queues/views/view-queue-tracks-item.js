@@ -2,10 +2,12 @@ module.exports = Marionette.ItemView.extend({
 
 	tagName: 'tr',
 
+	className: 'track',
+
 	template: require('../templates/view-track.hbs'),
 
 	events: {
-		'click .remove': '_onRemoveTrack'
+		'click .remove-from-queue': '_onRemoveTrack'
 	},
 
 	_onRemoveTrack: function(){

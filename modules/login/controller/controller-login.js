@@ -1,30 +1,34 @@
 var LoginView = require('../views/view-login'),
     Auth = require('../../core/auth');
 
+
+// #################################################
+// #                                               #
+// #                                               #
+// #    Note: Sign-out doesn't work on localhost   #
+// #                                               #
+// #                                               #
+// #################################################
+
 module.exports = Marionette.Controller.extend({
     initialize: function(){
 
-    	// this.MainLayout = options.MainLayout;
-    	this.view = new LoginView();	
-    	
-    	// this.MainLayout.main.show( this.loginView );
+        this.view = new LoginView();    
+        
+        this.setUpListeners();
 
-    	this.setUpListeners();
-
-   	},
+    },
 
     show: function(){
       return this.view;
     },
 
-   	setUpListeners:function(){
-   		this.listenTo(this.view, 'gapi.auth.signIn',  this._onSignIn);
-    	this.listenTo(dispatcher, 'gapi.auth.signOut', this._onSignOut);
-   	},
+    setUpListeners:function(){
+        this.listenTo(this.view, 'gapi.auth.signIn',  this._onSignIn);
+        this.listenTo(dispatcher, 'gapi.auth.signOut', this._onSignOut);
+    },
 
-   	_onSignIn: function(){
-
-      console.log('called on signIn');
+    _onSignIn: function(){
 
         gapi.auth.signIn({
             callback: function(result){
@@ -34,7 +38,7 @@ module.exports = Marionette.Controller.extend({
 
     },
 
-   	_onSignOut: function(){        
+    _onSignOut: function(){        
         gapi.auth.signOut();
         window.location.reload();
     }

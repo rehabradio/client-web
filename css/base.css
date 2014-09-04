@@ -186,10 +186,7 @@ nav {
   .module-playlists > .content {
     padding: 0 20px 62px;
     overflow: hidden; }
-  .module-playlists .left-column {
-    width: 50%;
-    float: left; }
-  .module-playlists .right-column {
+  .module-playlists .column {
     width: 50%;
     float: left; }
   .module-playlists .playlists {
@@ -372,6 +369,20 @@ nav {
     fill: #FFF; }
   .module-queues .queue-view:hover i {
     display: block; }
+.module-queues .track {
+  border-bottom: 2px solid #2c2c2c; }
+  .module-queues .track td {
+    padding: 6px 0 4px; }
+  .module-queues .track .track-details {
+    padding-left: 12px; }
+  .module-queues .track button {
+    visibility: hidden;
+    margin: 0 12px 0 0; }
+  .module-queues .track:hover {
+    background-color: #E7564D;
+    color: #FFFFFF; }
+    .module-queues .track:hover button {
+      visibility: visible; }
 .module-queues td {
   padding: 0 0 10px 0; }
 

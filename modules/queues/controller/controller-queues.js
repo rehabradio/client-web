@@ -57,6 +57,8 @@ module.exports = Marionette.Controller.extend({
 
 	_queueChange: function(id){
 
+		id = Number(id);
+
 		var model = dataStore.queuesCollection.find(function(element){ return element.get('id') === id; });
 
 		/*

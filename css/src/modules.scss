@@ -66,12 +66,7 @@ nav{
 	
 	/*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/
 
-	.left-column{
-		width: 50%;
-		float: left;
-	}
-
-	.right-column{
+	.column{
 		width: 50%;
 		float: left;
 	}
@@ -265,6 +260,32 @@ nav{
 
 			i{
 				display: block;
+			}
+		}
+	}
+
+	.track{
+		border-bottom: 2px solid $darkgrey;
+
+		td{
+			padding: 6px 0 4px;
+		}
+
+		.track-details{
+			padding-left: 12px;
+		}
+
+		button{
+			visibility: hidden;
+			margin: 0 12px 0 0;
+		}
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			button{
+				visibility: visible;
 			}
 		}
 	}
