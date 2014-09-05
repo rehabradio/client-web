@@ -1,4 +1,3 @@
-var fs = require('fs');
 var express = require('express');
 var handlebars = require('express-handlebars');
 
@@ -15,10 +14,8 @@ app.get('*', function(req, res){
 	 *	Loads in the icon svg and places it in the template inline
 	 */
 
-	fs.readFile('./img/icons.svg', 'utf8', function(err, data){
+	res.render('index');
 
-		res.render('index', {svg: data});
-	});
 });
 
 var port = Number(process.env.PORT || 3000);

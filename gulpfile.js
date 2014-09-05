@@ -111,10 +111,19 @@ function transformSvg (svg, cb) {
 }
 
 gulp.task('svg', function(){
-    return gulp.src('svg/*.svg')
+     var svg = gulp.src('svg/*.svg')
         .pipe(svgmin())
-        .pipe(svgstore({fileName: 'icons.svg', prefix: 'icon-', transformSvg: transformSvg}))
-        .pipe(gulp.dest('img/'));
+        .pipe(svgstore({fileName: 'icons.svg', prefix: 'icon-', transformSvg: transformSvg}));
+        // .pipe(gulp.dest('img/'));
+
+    function fileContents (filePath, file) {
+        return file.contents.toString('utf8')
+    }
+
+    return gulp
+        .src('views/layouts/base.html')
+        .pipe(plugins.inject(svg, {transform: fileContents}))
+        .pipe(gulp.dest('views/layouts/'));
 });
 
 gulp.task('default', function(){
