@@ -1,17 +1,18 @@
 header{
 	display: block;
 	width:100%;
-	padding: 10px 20px;
-	background-color: $blue;
+	//padding: 10px 20px;
+	padding: 33px 20px;
+	background-color: $darkgrey;
 	z-index: 1;
 	overflow: hidden;
 
 	form{
-		float: left;
+		float: right;
 	}
 
 	.user{
-		float: right;
+		float: left;
 		overflow: hidden;
 
 		img{

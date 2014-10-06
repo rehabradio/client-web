@@ -24,15 +24,15 @@ h4 {
   font-size: 12px; }
 
 body {
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: #f8f8f8;
+  color: #2c2c2c;
   font-size: 12px;
   font-family: 'Noto Sans', sans-serif;
   font-weight: 400;
   letter-spacing: 0.04em; }
 
 a {
-  color: #FFF;
+  color: #5373F7;
   text-decoration: none; }
 
 li {
@@ -100,9 +100,16 @@ form input[type="text"] {
 form input[type="submit"], form button {
   outline: none; }
 form .group input[type="text"] {
-  border-radius: 4px 0 0 4px;
+  border-radius: 20px/30px;
   display: block;
-  float: left; }
+  float: left;
+  padding: 5px 10px 5px;
+  position: relative;
+  background: white url('../img/rehabradio_icons_search_black.svg');
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  background-position: 90% 50%;
+  width: 186px; }
 form .group input[type="submit"], form .group button {
   display: block;
   float: left;
@@ -116,14 +123,14 @@ form .group input[type="submit"], form .group button {
 header {
   display: block;
   width: 100%;
-  padding: 10px 20px;
-  background-color: #5373F7;
+  padding: 33px 20px;
+  background-color: #2c2c2c;
   z-index: 1;
   overflow: hidden; }
   header form {
-    float: left; }
+    float: right; }
   header .user {
-    float: right;
+    float: left;
     overflow: hidden; }
     header .user img {
       float: left;
