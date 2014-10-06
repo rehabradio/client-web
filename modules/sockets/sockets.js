@@ -22,6 +22,11 @@ function Sockets(){
 		
 		dispatcher.trigger('socket:playlists:tracks:update', data);
 	});
+
+
+	socket.on('player:set', function(data){
+		dispatcher.trigger('socket:player:set', data);
+	});
 }
 
 module.exports = new Sockets();

@@ -10,10 +10,6 @@ app.use(express.static(__dirname));
 
 app.get('*', function(req, res){
 
-	/*
-	 *	Loads in the icon svg and places it in the template inline
-	 */
-
 	res.render('index');
 
 });

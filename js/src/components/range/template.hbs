@@ -1,0 +1,57 @@
+<style>
+    .range{
+        position: relative;
+        cursor: ew-resize;
+    }
+
+    .range-total{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 10px;
+        background: #FFFFFF;
+        border-radius: 5px;
+    }
+
+    .range-current{
+        width: 0;
+        height: 4px;
+        background-color: #E7564D;
+        position: absolute;
+        top: 3px;
+        left: 0;
+        border-radius: 3px;
+        pointer-events: none;
+    }
+
+    .range-control{
+        position: relative;
+        width: 0;
+        height: 0;
+        background-color: #000;
+        position: absolute;
+        top: 5px;
+        left: 0;
+        cursor: pointer;
+    }
+
+    .range-control:after{
+        position: absolute;
+        left: -10px;
+        top: -10px;
+        content: '';
+        width: 20px;
+        height: 20px;
+        background-color: #E7564D;
+        border-radius: 100%;
+        pointer-events: none;
+    }
+</style>
+
+<div class="range">
+    <div class="range-total">
+        <div class="range-current"></div>
+        <div class="range-control"></div>
+    </div>
+</div>

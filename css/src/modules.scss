@@ -56,6 +56,21 @@ nav{
 		}
 	}
 }
+.module-player{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+
+	.player-control{
+		width: 50%;
+		margin: 0 auto;
+	}
+
+	input[type="range"]{
+		width: 100%;
+	}
+}
 .module-playlists{
 	overflow: hidden;
 
