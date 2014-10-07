@@ -194,10 +194,24 @@ nav{
 	}
 }
 
+.module-profile{
+	overflow: hidden;
+
+	> .content{
+		padding: 0 20px 62px;
+		overflow: hidden;
+	}
+
+	.column{
+		width: 50%;
+		float: left;
+	}
+}
 .module-queues{
 
 	> .content{
 		width: 100%;
+		padding: 0 20px 62px;
 		overflow: hidden;
 	}
 
