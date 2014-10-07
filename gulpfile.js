@@ -138,6 +138,7 @@ gulp.task('watch', function(){
     gulp.watch('js/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);
+    gulp.watch('js/src/components/**/*.hbs', ['build']);
     gulp.watch('js/jasmine/mocks.js', ['build']);
     gulp.watch('js/jasmine/data/*.js', ['build']);
     gulp.watch('svg/*.svg', ['svg']);

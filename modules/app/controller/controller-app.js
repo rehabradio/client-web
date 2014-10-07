@@ -13,6 +13,7 @@ module.exports = Marionette.Controller.extend({
 	//modules that will be started as soon as the app boots
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
+		player: require('../../player/controller/controller-player'),
 		navigation : require('../../navigation/controller/controller-navigation')
 	},
 
@@ -103,7 +104,9 @@ module.exports = Marionette.Controller.extend({
 
 		console.log('booting views...');
 
+		new this.coreModules.player(this);
 		new this.coreModules.navigation(this);
+
 	},
 
 	_changeModule:function(module){
@@ -114,7 +117,6 @@ module.exports = Marionette.Controller.extend({
     },
 
 	_showModule:function(module, data){
-		
 		this.appContent.main.show( new this.viewModules[module](data).show() );
 	},
 	

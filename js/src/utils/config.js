@@ -32,6 +32,8 @@ require('../../libs/backbone.marionette.subrouter.js');
 dispatcher = require('./dispatcher');
 dataStore = require('./dataStore');
 
+var range = require('../components/range/range');
+
 /*
  *	Use Mock data by including the 'debug' param in the URL
  */
