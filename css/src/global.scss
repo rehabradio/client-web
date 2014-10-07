@@ -2,7 +2,7 @@ body{
 	background-color: $lightgrey;
 	color: $darkgrey;
 	font-size: 12px;
-	font-family: 'Noto Sans', sans-serif;
+	font-family: 'DIN Web Medium', sans-serif;
 	font-weight: 400;
 	letter-spacing: 0.04em;
 }
@@ -110,7 +110,7 @@ form{
 			float: left;
 			padding: 5px 10px 5px;
 			position: relative;
-			background: white url('../img/rehabradio_icons_search_black.svg');
+			background: white url('../svg/search.svg');
 			background-size: 14px 14px;
 			background-repeat: no-repeat;
 			background-position: 90% 50%;

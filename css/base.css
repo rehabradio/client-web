@@ -7,6 +7,20 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box; }
 
+@font-face {
+  font-family: 'DIN Web Light';
+  src: url('webfonts/DIN/DINWeb-Light.eot');
+  src: url('webfonts/DIN/DINWeb-Light.eot?#iefix') format('embedded-opentype'), url('webfonts/DIN/DINWeb-Light.woff') format('woff'), url('webfonts/DIN/DINWeb-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'DIN Web Medium';
+  src: url('webfonts/DIN/DINWeb-Medium.eot');
+  src: url('webfonts/DIN/DINWeb-Medium.eot?#iefix') format('embedded-opentype'), url('webfonts/DIN/DINWeb-Medium.woff') format('woff'), url('webfonts/DIN/DINWeb-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal; }
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: 100;
   margin: 0 0 0.2em 0; }
@@ -27,7 +41,7 @@ body {
   background-color: #f8f8f8;
   color: #2c2c2c;
   font-size: 12px;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'DIN Web Medium', sans-serif;
   font-weight: 400;
   letter-spacing: 0.04em; }
 
@@ -105,7 +119,7 @@ form .group input[type="text"] {
   float: left;
   padding: 5px 10px 5px;
   position: relative;
-  background: white url('../img/rehabradio_icons_search_black.svg');
+  background: white url('../svg/search.svg');
   background-size: 14px 14px;
   background-repeat: no-repeat;
   background-position: 90% 50%;
@@ -148,6 +162,103 @@ header {
       line-height: 33px;
       padding: 0 20px;
       border-radius: 4px; }
+  header .player {
+    width: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto; }
+    header .player .title {
+      font-size: 14px;
+      color: white;
+      text-align: center; }
+    header .player .progress-bar {
+      width: 100%;
+      height: 10px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px/20px;
+      position: relative; }
+    header .player .track {
+      animation: track 10s;
+      -webkit-animation: track 10s linear;
+      width: 0%;
+      height: 4px;
+      background: #e8564d;
+      top: 3px;
+      position: absolute; }
+    header .player .tracker {
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      background: #e8564d;
+      border-radius: 50%;
+      top: -3px; }
+  header .search-dropdown {
+    position: absolute;
+    top: 99px;
+    background: #2c2c2c;
+    width: 357px;
+    height: 100%;
+    max-height: 500px;
+    right: 0;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    -webkit-box-shadow: -3px 0 5px 0 rgba(50, 50, 50, 0.75);
+            box-shadow: -3px 0 5px 0 rgba(50, 50, 50, 0.75);
+    z-index: 1; }
+    header .search-dropdown .spotify-icon {
+      background: url(../svg/spotify.svg) no-repeat;
+      width: 26px;
+      height: 25px;
+      margin: 8px auto; }
+    header .search-dropdown .soundcloud-icon {
+      background: url(../svg/soundcloud.svg) no-repeat;
+      width: 41px;
+      height: 18px;
+      margin: 17px auto 8px; }
+    header .search-dropdown .icon {
+      width: 36px;
+      height: 36px;
+      display: block;
+      float: left;
+      margin-right: 21px; }
+      header .search-dropdown .icon img {
+        width: 100%; }
+    header .search-dropdown .song {
+      float: left; }
+    header .search-dropdown .song-title {
+      font-size: 16px;
+      color: white;
+      display: block;
+      margin-top: 4px; }
+    header .search-dropdown .artist {
+      font-size: 14px;
+      color: white;
+      display: block;
+      font-family: 'DIN Web Light'; }
+    header .search-dropdown ul {
+      list-style-type: none;
+      position: relative; }
+      header .search-dropdown ul:first-of-type:after {
+        content: '';
+        height: 1px;
+        width: 256px;
+        background: #bababa;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto; }
+      header .search-dropdown ul li a {
+        height: 58px;
+        display: block;
+        padding: 12px 64px; }
+        header .search-dropdown ul li a:hover {
+          background: #f8f8f8;
+          color: #d0d0d0; }
+          header .search-dropdown ul li a:hover .song-title, header .search-dropdown ul li a:hover .artist {
+            color: #2c2c2c; }
 
 #sidebar {
   background: #1f1f1f;
