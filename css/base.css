@@ -306,6 +306,7 @@ nav {
 
 .module-queues > .content {
   width: 100%;
+  padding: 0 20px 62px;
   overflow: hidden; }
 .module-queues .column {
   width: 50%;

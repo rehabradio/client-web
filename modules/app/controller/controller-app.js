@@ -20,6 +20,7 @@ module.exports = Marionette.Controller.extend({
 	//views that are called by the router's controller, these views will be displayed within the 
 	//layouts 'main' region
 	viewModules: {
+		profile: require('../../profile/controller/controller-profile'),
 		search: require('../../search/controller/controller-search'),
 		queues: require('../../queues/controller/controller-queues'),
 		playlists: require('../../playlists/controller/controller-playlists')
@@ -85,7 +86,7 @@ module.exports = Marionette.Controller.extend({
 		console.log('App Initialised');
 
 		/*
-		 *	Assign events to the global dispatcher	
+		 *	Assign events to the global dispatcher
 		 */
 
 		console.log('Creating global events...');
