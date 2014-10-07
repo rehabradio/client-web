@@ -1,1 +1,6 @@
-<h3>Profile Info</h3>
+{{#if avatar}}
+	<img src="{{avatar}}" alt="{{displayName}}">
+{{else}}
+	<img src="{{image}}" alt="{{displayName}}">
+{{/if}}
+<h3>{{displayName}}</h3>

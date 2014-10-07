@@ -304,6 +304,15 @@ nav {
   .module-playlists .details {
     float: left; }
 
+.module-profile {
+  overflow: hidden; }
+  .module-profile > .content {
+    padding: 0 20px 62px;
+    overflow: hidden; }
+  .module-profile .column {
+    width: 50%;
+    float: left; }
+
 .module-queues > .content {
   width: 100%;
   padding: 0 20px 62px;

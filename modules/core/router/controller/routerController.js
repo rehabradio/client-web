@@ -1,9 +1,10 @@
 var Queues = require('./methods/queues');
 var Playlists = require('./methods/playlists');
+var Profile = require('./methods/profile');
 
 var routerController = {};
 
-_.extend(routerController, Playlists, Queues);
+_.extend(routerController, Playlists, Queues, Profile);
 
 routerController.showSearch = function(params){
 

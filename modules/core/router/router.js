@@ -22,11 +22,12 @@ var Router = Marionette.AppRouter.extend({
     	// 'playlists/:id/tracks/:id' : 'showPlaylistTrack',
 
     	//Queue Endpoints
-    	'queues(/:id)(/)': 'showQueues'
+    	'queues(/:id)(/)': 'showQueues',
     	// 'queues/:id' : 'showQueue',
     	// 'queues/:id/tracks' : 'showQueueTracks',
     	// 'queues/:id/tracks/:id' : 'showQueueTrack'
 
+        'profile': 'showProfile'
     	//Search Endpoints
 
   	}
