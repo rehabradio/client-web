@@ -32,24 +32,23 @@ button{
 	border: none;
 }
 
+
+.sub-section{
+	margin: 0 0 64px 0;
+}
+
 .btn{
 	position: relative;
-	margin: 0;
+	margin: 0 6px;
 	padding: 0;
-	background-color: transparent;
+	background-color: $orange;
 	border: none;
-	overflow: hidden;
+	overflow: visible;
 	outline: none;
-	color: $blue;
+	color: $white;
+	line-height: 33px;
+	padding: 0 20px;
 
-	&:hover{
-		color: $white;
-		cursor: pointer;
-
-		i{
-			fill: $white;
-		}
-	}
 
 	i{
 		display: block;
@@ -57,6 +56,44 @@ button{
 		fill: $blue;
 	}
 
+	&.orange{
+
+	}
+	
+	&:before{
+		position: absolute;
+		left: -6px;
+		top: 0;
+		width: 12px;
+		height: 100%;
+		content: '';
+		background-color: $orange;
+		border-radius: 100%;
+	}
+
+	&:after{
+		position: absolute;
+		right: -6px;
+		top: 0;
+		width: 12px;
+		height: 100%;
+		content: '';
+		background-color: $orange;
+		border-radius: 100%;
+	}
+
+	&:hover{
+		background-color: $blue;
+		cursor: pointer;
+
+		&:before, &:after{
+			background-color: $blue;
+
+		}
+	}
+}
+
+.btn{
 }
 
 .close{

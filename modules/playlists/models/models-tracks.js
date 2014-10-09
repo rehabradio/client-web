@@ -3,7 +3,11 @@ module.exports = Backbone.Model.extend({
 		id: null
 	},
 
-	url: function(){
-		return Backbone.Model.prototype.url.call(this) + '/';
+	initialize: function(options){
+		this.url = options.url;
+		this.fetch();
 	}
+	// url: function(){
+	// 	return Backbone.Model.prototype.url.call(this) + '/';
+	// }
 });

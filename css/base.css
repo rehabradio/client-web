@@ -50,24 +50,48 @@ button {
   background-color: transparent;
   border: none; }
 
+.sub-section {
+  margin: 0 0 64px 0; }
+
 .btn {
   position: relative;
-  margin: 0;
+  margin: 0 6px;
   padding: 0;
-  background-color: transparent;
+  background-color: #E7564D;
   border: none;
-  overflow: hidden;
+  overflow: visible;
   outline: none;
-  color: #5373F7; }
-  .btn:hover {
-    color: #FFFFFF;
-    cursor: pointer; }
-    .btn:hover i {
-      fill: #FFFFFF; }
+  color: #FFFFFF;
+  line-height: 33px;
+  padding: 0 20px; }
   .btn i {
     display: block;
     width: 20px;
     fill: #5373F7; }
+  .btn:before {
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    content: '';
+    background-color: #E7564D;
+    border-radius: 100%; }
+  .btn:after {
+    position: absolute;
+    right: -6px;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    content: '';
+    background-color: #E7564D;
+    border-radius: 100%; }
+  .btn:hover {
+    background-color: #5373F7;
+    cursor: pointer; }
+    .btn:hover:before, .btn:hover:after {
+      background-color: #5373F7; }
+
 
 .close {
   position: absolute;
@@ -146,8 +170,7 @@ header {
       background-color: #E7564D;
       color: #FFFFFF;
       line-height: 33px;
-      padding: 0 20px;
-      border-radius: 4px; }
+      padding: 0 20px; }
 
 #sidebar {
   background: #1f1f1f;
@@ -167,20 +190,36 @@ nav {
   nav li {
     display: inline-block; }
   nav .btn {
-    padding: 8px 20px 8px 60px; }
-    nav .btn:before {
-      display: block;
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 300%;
-      content: '';
-      background-color: transparent;
-      border-radius: 100%;
-      z-index: -1; }
-    nav .btn:hover:before {
-      background-color: #E7564D; }
+    padding: 8px 20px 8px 60px;
+    overflow: visible;
+    background-color: transparent;
+    line-height: normal;
+    color: #5373F7;
+    /*&:before{
+			display: block;
+			position: absolute;
+			top: -100%;
+			left: 0;
+			width: 100%;
+			height: 300%;
+			content: '';
+			background-color: transparent;
+			border-radius: 100%;
+			z-index: -1;
+		}
+
+		&:after{
+			display: none;
+		}*/ }
+    nav .btn:before, nav .btn:after {
+      background-color: transparent; }
+    nav .btn:hover {
+      background-color: #E7564D;
+      color: #FFFFFF; }
+      nav .btn:hover:before, nav .btn:hover:after {
+        background-color: #E7564D; }
+      nav .btn:hover i {
+        fill: #FFFFFF; }
     nav .btn i {
       position: absolute;
       top: 4px;
@@ -290,7 +329,17 @@ nav {
       padding-left: 12px; }
     .module-playlists .track button {
       visibility: hidden;
-      margin: 0 12px 0 0; }
+      margin: 0 12px 0 0;
+      padding: 0; }
+      .module-playlists .track button:before, .module-playlists .track button:after {
+        display: none; }
+      .module-playlists .track button:hover {
+        background-color: transparent; }
+        .module-playlists .track button:hover i {
+          fill: #FFFFFF; }
+      .module-playlists .track button i {
+        width: 20px;
+        height: 20px; }
     .module-playlists .track:hover {
       background-color: #E7564D;
       color: #FFFFFF; }

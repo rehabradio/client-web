@@ -25,10 +25,17 @@ nav{
 	}
 
 	.btn{
-
 		padding: 8px 20px 8px 60px;
+		overflow: visible;
+		background-color: transparent;
+		line-height: normal;
+		color: $blue;
 
-		&:before{
+		&:before, &:after{
+			background-color: transparent;
+		}
+
+		/*&:before{
 			display: block;
 			position: absolute;
 			top: -100%;
@@ -41,10 +48,20 @@ nav{
 			z-index: -1;
 		}
 
-		&:hover{
+		&:after{
+			display: none;
+		}*/
 
-			&:before{
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			&:before, &:after{
 				background-color: $orange;
+			}
+
+			i{
+				fill: $white;
 			}
 		}
 
@@ -170,6 +187,24 @@ nav{
 		button{
 			visibility: hidden;
 			margin: 0 12px 0 0;
+			padding: 0;
+
+			&:before, &:after{
+				display: none;
+			}
+
+			&:hover{
+				background-color: transparent;
+
+				i{
+					fill: $white;
+				}
+			}
+
+			i{
+				width: 20px;
+				height: 20px;
+			}
 		}
 
 		&:hover{

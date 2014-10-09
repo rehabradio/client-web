@@ -11,10 +11,17 @@ nav{
 	}
 
 	.btn{
-
 		padding: 8px 20px 8px 60px;
+		overflow: visible;
+		background-color: transparent;
+		line-height: normal;
+		color: $blue;
 
-		&:before{
+		&:before, &:after{
+			background-color: transparent;
+		}
+
+		/*&:before{
 			display: block;
 			position: absolute;
 			top: -100%;
@@ -27,10 +34,20 @@ nav{
 			z-index: -1;
 		}
 
-		&:hover{
+		&:after{
+			display: none;
+		}*/
 
-			&:before{
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			&:before, &:after{
 				background-color: $orange;
+			}
+
+			i{
+				fill: $white;
 			}
 		}
 

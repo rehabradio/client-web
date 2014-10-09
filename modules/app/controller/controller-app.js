@@ -123,7 +123,7 @@ module.exports = Marionette.Controller.extend({
 	
 	_fetchData: function(){
 
-		dataStore.playlistsCollection.fetch();
+		// dataStore.playlistsCollection.fetch();
 		dataStore.queuesCollection.fetch();
 	},
 

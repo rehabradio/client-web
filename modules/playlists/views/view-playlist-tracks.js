@@ -14,5 +14,9 @@ module.exports = Marionette.CompositeView.extend({
 
 	childViewContainer: 'tbody',
 
-	emptyView: EmptyView
+	emptyView: EmptyView,
+
+	initialize: function(){
+		this.listenTo(this.model, 'change', this.render);
+	}
 });

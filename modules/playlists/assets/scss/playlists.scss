@@ -97,6 +97,24 @@
 		button{
 			visibility: hidden;
 			margin: 0 12px 0 0;
+			padding: 0;
+
+			&:before, &:after{
+				display: none;
+			}
+
+			&:hover{
+				background-color: transparent;
+
+				i{
+					fill: $white;
+				}
+			}
+
+			i{
+				width: 20px;
+				height: 20px;
+			}
 		}
 
 		&:hover{

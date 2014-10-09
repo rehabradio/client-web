@@ -1,9 +1,11 @@
-var PlaylistsLayout = require('../views/layout-playlists');
-var PlaylistsAll = require('../views/view-playlists-all');
+var LayoutPlaylists = require('../views/layout-playlists');
+var PlaylistsPublic = require('../views/view-playlists-public');
+var PlaylistsPersonal = require('../views/view-playlists-personal');
 var PlaylistTracks = require('../views/view-playlist-tracks');
 var ModelPlaylistAdd = require('../models/models-playlist-add');
 var TracksCollection = require('../collections/collection-playlists-tracks');
 
+var CollectionPlaylists = require('../../../modules/playlists/collections/collection-playlists-all');
 var ModelPlaylistQueue = require('../models/models-playlist-queue');
 
 var PlaylistsControls = require('../views/view-playlists-controls');
@@ -30,15 +32,21 @@ module.exports = Marionette.Controller.extend({
 	
 	initialize: function(){
 
-		this.layout = new PlaylistsLayout({
+		this.layout = new LayoutPlaylists({
 			regions: {
 				playlistsUser: '#playlists-user',
-				playlistsAll: '#playlists-all',
+				playlistsPersonal: '#playlists-personal',
+				playlistsPublic: '#playlists-public',
 				playlistsTracks: '#playlists-tracks',
 				modalContainer: '#playlist-modal-container',
 				playlistsControls: '#playlists-controls'
 			}
 		});
+
+		
+		dataStore.playlistsCollection = new CollectionPlaylists();
+
+		dataStore.playlistsCollection.fetch();
 
 		dataStore.playlistTracksCollections = [];
 
@@ -68,8 +76,11 @@ module.exports = Marionette.Controller.extend({
 		var playlistsControls = new PlaylistsControls();
 		self.layout.playlistsControls.show(playlistsControls);
 
-		var playlistsAll = new PlaylistsAll();
-		self.layout.playlistsAll.show(playlistsAll);
+		var playlistsPersonal = new PlaylistsPersonal();
+		self.layout.playlistsPersonal.show(playlistsPersonal);
+
+		var playlistsPublic = new PlaylistsPublic();
+		self.layout.playlistsPublic.show(playlistsPublic);
 
 		/*
 		 *	Listen for events from child views
@@ -77,11 +88,19 @@ module.exports = Marionette.Controller.extend({
 
 		self.layout.listenTo(playlistsControls, 'playlists:create', self._createPlaylistModal.bind(self));
 
-		self.layout.listenTo(playlistsAll, 'childview:playlists:tracks:show', function(view, id){
+		self.layout.listenTo(playlistsPersonal, 'childview:playlists:tracks:show', function(view, id){
 			self._onPlaylistShow(id);
 		}.bind(self));
 
-		self.layout.listenTo(playlistsAll, 'childview:playlists:delete', function(view, data){
+		self.layout.listenTo(playlistsPersonal, 'childview:playlists:delete', function(view, data){
+			self._deletePlaylistModal(data);
+		}.bind(self));
+
+		self.layout.listenTo(playlistsPublic, 'childview:playlists:tracks:show', function(view, id){
+			self._onPlaylistShow(id);
+		}.bind(self));
+
+		self.layout.listenTo(playlistsPublic, 'childview:playlists:delete', function(view, data){
 			self._deletePlaylistModal(data);
 		}.bind(self));
 
@@ -152,7 +171,8 @@ module.exports = Marionette.Controller.extend({
 
 	_onPlaylistShow: function(id){
 
-		var self = this;
+		var self = this,
+			model;
 		
 		id = Number(id);
 
@@ -163,10 +183,17 @@ module.exports = Marionette.Controller.extend({
 			}));
 		}
 
-		// var collectionPlaylistTracks = new TracksCollection([], {url: window.API_ROOT + 'playlists/' + id + '/tracks/'});
+		model = dataStore.playlistsCollection.findWhere({id: id});
+
+		if(!model){
+			model = new TracksModel({
+				// id: id
+				url: window.API_ROOT + 'playlists/' + id + '/'
+			});
+		}
 
 		var viewPlaylistTracks = new PlaylistTracks({
-			model: new TracksModel({id: id}),
+			model: model,
 			collection: _.find(dataStore.playlistTracksCollections, function(element){ return element.id === id; })
 		});
 

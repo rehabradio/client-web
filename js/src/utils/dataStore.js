@@ -4,11 +4,8 @@ var dataStore = {}
  *	Requiring and initialising empty collections
  */
 
-var PlaylistsCollection = require('../../../modules/playlists/collections/collection-playlists-all');
-dataStore.playlistsCollection = new PlaylistsCollection();
-
-// var TracksCollection = require('../../../modules/playlists/collections/collections-tracks');
-// dataStore.tracksCollection = new TracksCollection();
+// var PlaylistsCollection = require('../../../modules/playlists/collections/collection-playlists-all');
+// dataStore.playlistsCollection = new PlaylistsCollection();
 
 var QueuesCollection = require('../../../modules/queues/collections/collection-queues-all');
 dataStore.queuesCollection = new QueuesCollection();

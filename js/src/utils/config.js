@@ -32,7 +32,12 @@ require('../../libs/backbone.marionette.subrouter.js');
 dispatcher = require('./dispatcher');
 dataStore = require('./dataStore');
 
+/*
+ *	Initialize custom components
+ */
+
 var range = require('../components/range/range');
+var button = require('../components/button/button');
 
 /*
  *	Use Mock data by including the 'debug' param in the URL
