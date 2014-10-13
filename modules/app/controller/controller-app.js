@@ -14,7 +14,8 @@ module.exports = Marionette.Controller.extend({
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
 		player: require('../../player/controller/controller-player'),
-		navigation : require('../../navigation/controller/controller-navigation')
+		navigation : require('../../navigation/controller/controller-navigation'),
+		quicksearch: require('../../quicksearch/controller/controller-quicksearch')
 	},
 
 	//views that are called by the router's controller, these views will be displayed within the 
@@ -107,10 +108,11 @@ module.exports = Marionette.Controller.extend({
 
 		new this.coreModules.player(this);
 		new this.coreModules.navigation(this);
+		new this.coreModules.quicksearch(this);
 
 	},
 
-	_changeModule:function(module){
+	_changeModule:function(module, data){
 
 		this.appContent.main.show( new this.viewModules[module]().show() );
         this.router.navigate(module, {trigger: false});

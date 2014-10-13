@@ -48,11 +48,11 @@ if(document.location.search.match(/debug/gi)){
 }
 
 /*
- *	Define and initialise the root view to start the application
+ *	Define global config variables
  */
 
 window.API_ROOT = 'https://server-core.herokuapp.com/api/';
-
+window.services = ['spotify', 'soundcloud'];
 
 Handlebars.registerHelper('icon', function(data) {
 	return new Handlebars.SafeString('<svg viewBox="0 0 100 100" class="icon ' + data + '"><use xlink:href="#' + data + '"></use></svg>')

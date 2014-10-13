@@ -19,10 +19,7 @@ var API = require('../../../js/src/utils/api');
 
 module.exports = Marionette.Controller.extend({
 
-    services: [
-        'spotify',
-        'soundcloud'
-    ],
+    services: window.services,
 
     defaultService: 'spotify',
 

@@ -69,4 +69,20 @@ Api.prototype.Playlists = {
 
 };
 
+Api.prototype.Search = {
+
+	search: function(data){
+		$.ajax({
+			type: 'POST',
+			url: window.API_ROOT + 'search/?query=' + data,
+			success: function(data){
+				console.log(data);
+			},
+			error: function(){
+
+			}
+		});
+	}
+}
+
 module.exports = new Api();
