@@ -1,6 +1,193 @@
-.quicksearch{
-	
-	h3, h4{
-		color: $white;
+.module-quicksearch{
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 30%;
+	max-width: 358px;
+	padding: 33px 0;
+	background: $darkgrey;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+
+	fieldset{
+		border: none;
+		margin: 0 0 10px 0;
 	}
+
+	input[type="text"]{
+		padding: 10px 10px 10px;
+		border: none;
+		border-radius: 4px;
+	}
+
+	input[type="submit"], button{
+		outline: none;
+	}
+
+	.group{
+
+		input[type="text"]{
+			display: block;
+			position: relative;
+			margin: 14px auto;
+			padding: 5px 10px 5px;
+			width: 58%;
+			border-radius: 20px/30px;
+			background: white url('../svg/search.svg');
+			background-size: 14px 14px;
+			background-repeat: no-repeat;
+			background-position: 90% 50%;
+			outline: none;
+		}
+
+		input[type="submit"], button{
+			margin: 7px 0;
+			padding: 0 20px;
+			display: block;
+			border-radius: 0 4px 4px 0;
+			background-color: $orange;
+			color: $white;
+			line-height: 33px;
+		}
+	}
+
+	&.active:hover{
+		box-shadow: -4px -5px 5px 0 rgba(0, 0, 0, 0.75);
+
+		.search-dropdown{
+			display: block;
+		}
+	}
+}
+
+.search-dropdown{
+	display: none;
+	right: 0;
+	z-index: 1;
+
+	.service-icon{
+		margin: 20px auto 6px;
+		width: 32px;
+
+		img{
+			display: block;
+		}
+	}
+
+	.info{
+		overflow: hidden;
+	}
+
+	.artwork{
+		margin: 0 20px 0 0;
+		width: 35px;
+		min-height: 1px;
+		float: left;
+
+		img{
+			display: block;
+			width: 100%;
+		}
+	}
+
+	.icon{
+		width: 36px;
+		height: 36px;
+		display: block;
+		float: left;
+		margin-right: 21px;
+
+		img{
+			width: 100%;
+		}
+	}
+
+	.song{
+		float: left;
+	}
+
+	.song-title{
+		display: block;
+		margin: 2px 0 0;
+		font-size: 14px;
+		font-weight: 700;
+		color: white;
+		line-height: 1em;
+	}
+
+	.artist{
+		display: block;
+		font-size: 14px;
+		font-weight: 300;
+		color: white;
+	}
+
+	.results{
+		position: relative;
+		margin: 0 0 20px 0;
+
+		&:first-of-type{
+			
+			&:after{
+				display: block;
+				width: 74%;
+				height: 2px;
+				margin: 0 auto;
+				background-color: $midgrey;
+				content: '';
+			}
+		}
+	}
+
+	ul{
+		margin: 0 0 20px 0;
+	}
+
+	li{
+		padding: 10px 0;
+		overflow: hidden;
+
+		> .content{
+			width: 70%;
+			margin: 0 auto;
+		}
+
+		h3, h4{
+			margin: 0;
+			color: $white;
+		}
+
+		h3{
+			font-weight: 700;
+		}
+
+		&:hover{
+			background-color: $lightgrey;
+
+			h3, h4{
+				color: $black;
+			}
+		}
+	}
+
+	button{
+		display: block;
+		margin: 0 auto;
+		background-color: $white;
+		font-size: 14px;
+		color: $black;
+
+		&:before, &:after{
+			background-color: $white;
+		}
+
+		&:hover{
+			background-color: $midgrey;
+
+			&:before, &:after{
+				background-color: $midgrey;
+			}
+		}
+	}	
 }

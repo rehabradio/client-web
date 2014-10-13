@@ -14,6 +14,7 @@ module.exports = Marionette.ItemView.extend({
 
 	_onFocus: function(){
 		this.timer = setTimeout(this._doSearch.bind(this), 500);
+		this.trigger('quicksearch:setactive');
 	},
 
 	_onKeyup: function(){

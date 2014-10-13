@@ -8,7 +8,7 @@
     box-sizing: border-box; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 100;
+  font-weight: 400;
   margin: 0 0 0.2em 0; }
 
 
@@ -28,8 +28,7 @@ body {
   color: #2c2c2c;
   font-size: 12px;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.04em; }
+  font-weight: 400; }
 
 a {
   color: #5373F7;
@@ -200,122 +199,6 @@ header {
         -webkit-box-sizing: border-box;
                 box-sizing: border-box;
         border: 2px solid #FFFFFF; }
-  header form {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 30%;
-    max-width: 358px;
-    padding: 36px 0;
-    background: #2c2c2c;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px; }
-    header form fieldset {
-      border: none;
-      margin: 0 0 10px 0; }
-    header form input[type="text"] {
-      padding: 10px 10px 10px;
-      border: none;
-      border-radius: 4px; }
-    header form input[type="submit"], header form button {
-      outline: none; }
-    header form .group input[type="text"] {
-      display: block;
-      position: relative;
-      margin: 14px auto;
-      padding: 5px 10px 5px;
-      width: 58%;
-      border-radius: 20px/30px;
-      background: white url('../svg/search.svg');
-      background-size: 14px 14px;
-      background-repeat: no-repeat;
-      background-position: 90% 50%;
-      outline: none; }
-    header form .group input[type="submit"], header form .group button {
-      margin: 7px 0;
-      padding: 0 20px;
-      display: block;
-      border-radius: 0 4px 4px 0;
-      background-color: #E7564D;
-      color: #FFFFFF;
-      line-height: 33px; }
-    header form.active {
-      -webkit-box-shadow: -4px -5px 5px 0 rgba(0, 0, 0, 0.75);
-              box-shadow: -4px -5px 5px 0 rgba(0, 0, 0, 0.75); }
-      header form.active .search-dropdown {
-        display: block; }
-  header .search-dropdown {
-    display: none;
-    right: 0;
-    z-index: 1; }
-    header .search-dropdown .spotify-icon {
-      background: url(../svg/spotify.svg) no-repeat;
-      width: 26px;
-      height: 25px;
-      margin: 8px auto; }
-    header .search-dropdown .soundcloud-icon {
-      background: url(../svg/soundcloud.svg) no-repeat;
-      width: 41px;
-      height: 18px;
-      margin: 17px auto 8px; }
-    header .search-dropdown .icon {
-      width: 36px;
-      height: 36px;
-      display: block;
-      float: left;
-      margin-right: 21px; }
-      header .search-dropdown .icon img {
-        width: 100%; }
-    header .search-dropdown .song {
-      float: left; }
-    header .search-dropdown .song-title {
-      display: block;
-      margin: 2px 0 0;
-      font-size: 14px;
-      font-weight: 700;
-      color: white;
-      line-height: 1em; }
-    header .search-dropdown .artist {
-      display: block;
-      font-size: 14px;
-      font-weight: 300;
-      color: white; }
-    header .search-dropdown ul {
-      position: relative;
-      margin: 20px 0 0;
-      padding: 0 0 20px;
-      list-style-type: none; }
-      header .search-dropdown ul:first-of-type:after {
-        content: '';
-        height: 1px;
-        width: 256px;
-        background: #bababa;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: 0 auto; }
-      header .search-dropdown ul a {
-        height: 58px;
-        display: block;
-        padding: 12px 64px; }
-        header .search-dropdown ul a:hover {
-          background: #d0d0d0;
-          color: #d0d0d0; }
-          header .search-dropdown ul a:hover .song-title, header .search-dropdown ul a:hover .artist {
-            color: #2c2c2c; }
-    header .search-dropdown button {
-      display: block;
-      margin: 0 auto;
-      background-color: #FFFFFF;
-      font-size: 14px;
-      color: #000000; }
-      header .search-dropdown button:before, header .search-dropdown button:after {
-        background-color: #FFFFFF; }
-      header .search-dropdown button:hover {
-        background-color: #d0d0d0; }
-        header .search-dropdown button:hover:before, header .search-dropdown button:hover:after {
-          background-color: #d0d0d0; }
 
 #sidebar {
   background: #1f1f1f;
@@ -609,8 +492,131 @@ nav {
 .module-queues td {
   padding: 0 0 10px 0; }
 
-.quicksearch h3, .quicksearch h4 {
-  color: #FFFFFF; }
+.module-quicksearch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  max-width: 358px;
+  padding: 33px 0;
+  background: #2c2c2c;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px; }
+  .module-quicksearch fieldset {
+    border: none;
+    margin: 0 0 10px 0; }
+  .module-quicksearch input[type="text"] {
+    padding: 10px 10px 10px;
+    border: none;
+    border-radius: 4px; }
+  .module-quicksearch input[type="submit"], .module-quicksearch button {
+    outline: none; }
+  .module-quicksearch .group input[type="text"] {
+    display: block;
+    position: relative;
+    margin: 14px auto;
+    padding: 5px 10px 5px;
+    width: 58%;
+    border-radius: 20px/30px;
+    background: white url('../svg/search.svg');
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    background-position: 90% 50%;
+    outline: none; }
+  .module-quicksearch .group input[type="submit"], .module-quicksearch .group button {
+    margin: 7px 0;
+    padding: 0 20px;
+    display: block;
+    border-radius: 0 4px 4px 0;
+    background-color: #E7564D;
+    color: #FFFFFF;
+    line-height: 33px; }
+  .module-quicksearch.active:hover {
+    -webkit-box-shadow: -4px -5px 5px 0 rgba(0, 0, 0, 0.75);
+            box-shadow: -4px -5px 5px 0 rgba(0, 0, 0, 0.75); }
+    .module-quicksearch.active:hover .search-dropdown {
+      display: block; }
+
+.search-dropdown {
+  display: none;
+  right: 0;
+  z-index: 1; }
+  .search-dropdown .service-icon {
+    margin: 20px auto 6px;
+    width: 32px; }
+    .search-dropdown .service-icon img {
+      display: block; }
+  .search-dropdown .info {
+    overflow: hidden; }
+  .search-dropdown .artwork {
+    margin: 0 20px 0 0;
+    width: 35px;
+    min-height: 1px;
+    float: left; }
+    .search-dropdown .artwork img {
+      display: block;
+      width: 100%; }
+  .search-dropdown .icon {
+    width: 36px;
+    height: 36px;
+    display: block;
+    float: left;
+    margin-right: 21px; }
+    .search-dropdown .icon img {
+      width: 100%; }
+  .search-dropdown .song {
+    float: left; }
+  .search-dropdown .song-title {
+    display: block;
+    margin: 2px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    line-height: 1em; }
+  .search-dropdown .artist {
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    color: white; }
+  .search-dropdown .results {
+    position: relative;
+    margin: 0 0 20px 0; }
+    .search-dropdown .results:first-of-type:after {
+      display: block;
+      width: 74%;
+      height: 2px;
+      margin: 0 auto;
+      background-color: #d0d0d0;
+      content: ''; }
+  .search-dropdown ul {
+    margin: 0 0 20px 0; }
+  .search-dropdown li {
+    padding: 10px 0;
+    overflow: hidden; }
+    .search-dropdown li > .content {
+      width: 70%;
+      margin: 0 auto; }
+    .search-dropdown li h3, .search-dropdown li h4 {
+      margin: 0;
+      color: #FFFFFF; }
+    .search-dropdown li h3 {
+      font-weight: 700; }
+    .search-dropdown li:hover {
+      background-color: #f8f8f8; }
+      .search-dropdown li:hover h3, .search-dropdown li:hover h4 {
+        color: #000000; }
+  .search-dropdown button {
+    display: block;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    color: #000000; }
+    .search-dropdown button:before, .search-dropdown button:after {
+      background-color: #FFFFFF; }
+    .search-dropdown button:hover {
+      background-color: #d0d0d0; }
+      .search-dropdown button:hover:before, .search-dropdown button:hover:after {
+        background-color: #d0d0d0; }
 
 #search label {
   display: none; }

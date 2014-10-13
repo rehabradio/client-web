@@ -8,7 +8,8 @@ var ViewQuicksearchResults = require('../views/view-quicksearch-results');
 
 var LayoutQuicksearch = require('../views/layout-quicksearch');
 var LayoutQuicksearchResults = require('../views/layout-quicksearch-results');
-var QuicksearchQuery = require('../views/view-quicksearch-query');
+var ViewQuicksearchQuery = require('../views/view-quicksearch-query');
+var ModelQuicksearchResults = require('../models/model-quicksearch-results');
 
 module.exports = BaseContoller.extend({
 
@@ -33,7 +34,9 @@ module.exports = BaseContoller.extend({
             this.collectionsServices[this.services[i]] = new CollectionQuicksearchResults();
             this.collectionsServices[this.services[i]].service = this.services[i];
 
-            viewsServices[this.services[i]] = new ViewQuicksearchResults({collection: this.collectionsServices[this.services[i]]});
+            modelQuicksearchResults = new ModelQuicksearchResults({service: this.services[i]});
+
+            viewsServices[this.services[i]] = new ViewQuicksearchResults({model: modelQuicksearchResults, collection: this.collectionsServices[this.services[i]]});
 
             var region = {}
             region[this.services[i]] = '#search-service-' + this.services[i];
@@ -41,7 +44,7 @@ module.exports = BaseContoller.extend({
             layoutQuicksearchResults.addRegions(region);
         }
 
-        var quicksearchQuery = new QuicksearchQuery();
+        var quicksearchQuery = new ViewQuicksearchQuery();
 
         this.layout.quicksearchQuery.show(quicksearchQuery);
         this.layout.quicksearchResults.show(layoutQuicksearchResults);
@@ -51,6 +54,7 @@ module.exports = BaseContoller.extend({
         }
 
         this.listenTo(quicksearchQuery, 'quicksearch:search', this._doSearch.bind(this));
+        this.listenTo(quicksearchQuery, 'quicksearch:setactive', this._setActive.bind(this));
 
     },
 
@@ -59,5 +63,9 @@ module.exports = BaseContoller.extend({
         for(var i in this.collectionsServices){
             this.collectionsServices[i].update(query);
         }
+    },
+
+    _setActive: function(){
+        this.layout.$el.addClass('active');
     }
 });

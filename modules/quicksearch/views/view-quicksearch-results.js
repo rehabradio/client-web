@@ -6,9 +6,5 @@ module.exports = Marionette.CompositeView.extend({
 
 	childView: viewQuicksearchResult,
 
-	childViewContainer: '.results',
-
-	initialize: function(){
-		
-	}
+	childViewContainer: 'ul'
 });
