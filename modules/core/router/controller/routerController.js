@@ -8,9 +8,14 @@ _.extend(routerController, Playlists, Queues, Profile);
 
 routerController.showSearch = function(params){
 
-	var data = JSON.parse('{"' + params.replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+	if(params){
+
+		var data = JSON.parse('{"' + params.replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+		dispatcher.trigger('router:showModule', 'search', data.query);
+	}else{
+		dispatcher.trigger('router:showModule', 'search');
+	}
 	
-	dispatcher.trigger('router:showModule', 'search', data.query);
 };
 
 module.exports = routerController;

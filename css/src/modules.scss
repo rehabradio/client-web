@@ -565,9 +565,30 @@ nav{
 	label{
 		display: none;
 	}
+
 }
 
 .search-results{
+
+	header{
+		height: 100px;
+		position: relative;
+		
+	}
+
+	.query{
+		display: block;
+		width: 454px;
+		height: 33px;
+		margin: 0 auto;
+		padding: 0 26px;
+
+		background-color: $darkgrey;
+		color: #FFF;
+
+		border: none;
+		border-radius: 12px/30px;
+	}
 
 	[role="tabs"] a{
 		width: 50%;
@@ -596,16 +617,48 @@ nav{
 		width: 30px;
 		height: 30px;
 	}
-}
 
-.pagination{
-		text-align: center;
+	.results{
 		width: 100%;
+		max-width: 1280px;
+		margin: 0 auto;
 
-		li{
-			display: inline-block;
+		overflow: hidden;
+	}
+
+	.search-service{
+		width: 50%;
+		float: left;
+
+		i{
+			margin: 0 auto;
+			fill: $darkgrey;
+
+
+			&.spotify{
+				width: 37px;
+				height: 37px;
+
+			}
+
+			&.soundcloud{
+				width: 62px;
+				height: 62px;
+
+			}
 		}
 	}
+}
+
+
+.pagination{
+	text-align: center;
+	width: 100%;
+
+	li{
+		display: inline-block;
+	}
+}
 
 [data-service].loading{
 	opacity: 0.2;

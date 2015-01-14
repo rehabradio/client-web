@@ -4,6 +4,8 @@ var hbsfy = require('hbsfy');
 var gutil = require('gulp-util');
 var svgmin = require('gulp-svgmin');
 var svgstore = require('gulp-svgstore');
+var yuidoc = require('gulp-yuidoc');
+var jsdoc = require('gulp-jsdoc');
 
 var karma = require('karma').server;
 var karmaConfig = require('./karma-config.js');
@@ -113,17 +115,27 @@ function transformSvg (svg, cb) {
 gulp.task('svg', function(){
      var svg = gulp.src('svg/*.svg')
         .pipe(svgmin())
-        .pipe(svgstore({fileName: 'icons.svg', prefix: 'icon-', transformSvg: transformSvg}));
-        // .pipe(gulp.dest('img/'));
+        .pipe(svgstore({fileName: 'icons.svg', prefix: 'icon-', transformSvg: transformSvg}))
+        .pipe(gulp.dest('img/'));
 
     function fileContents (filePath, file) {
-        return file.contents.toString('utf8')
+
+        // Remove the xml declaration and doctype
+
+        return file.contents.toString('utf8').replace('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '');
     }
 
     return gulp
-        .src('views/layouts/base.html')
+        .src('./views/layouts/base.html')
         .pipe(plugins.inject(svg, {transform: fileContents}))
-        .pipe(gulp.dest('views/layouts/'));
+        .pipe(gulp.dest('./views/layouts'));
+});
+
+gulp.task('makedocs', function(){
+    gulp.src(['./js/*.js', './js/src/**/*.js', './modules/**/**/*.js'])
+        .pipe(jsdoc())
+        // .pipe(yuidoc())
+        .pipe(gulp.dest('./docs'));
 });
 
 gulp.task('default', function(){

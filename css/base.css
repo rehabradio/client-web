@@ -49,42 +49,44 @@ button {
   background-color: transparent;
   border: none; }
 
+i {
+  display: block; }
+
 .sub-section {
   margin: 0 0 64px 0; }
 
 .btn {
   position: relative;
-  margin: 0 6px;
-  padding: 0;
   height: 33px;
+  margin: 0 6px;
+  padding: 0 20px;
   background-color: #E7564D;
   border: none;
-  overflow: visible;
+  border-radius: 6px/20px;
   outline: none;
+  overflow: visible;
   color: #FFFFFF;
   line-height: 33px;
-  padding: 0 20px; }
+  /*&:before, &:after{
+		position: absolute;
+		left: -6px;
+		top: 0px;
+		width: 12px;
+		height: 33px;
+		content: '';
+		background-color: $orange;
+		border-radius: 100%;
+	}*/ }
   .btn i {
-    display: block;
     width: 20px;
     fill: #5373F7; }
-  .btn:before, .btn:after {
-    position: absolute;
-    left: -6px;
-    top: 0px;
-    width: 12px;
-    height: 33px;
-    content: '';
-    background-color: #E7564D;
-    border-radius: 100%; }
   .btn:after {
     left: auto;
     right: -6px; }
   .btn:hover {
-    background-color: #5373F7;
     cursor: pointer; }
-    .btn:hover:before, .btn:hover:after {
-      background-color: #5373F7; }
+    .btn:hover i {
+      fill: #FFFFFF; }
 
 
 .close {
@@ -108,7 +110,7 @@ icon.orange {
 icon.grey {
   fill: #2c2c2c; }
 
-header {
+.page-header {
   position: relative;
   display: block;
   width: 100%;
@@ -157,9 +159,9 @@ header {
 			top: -3px;
 		}
 	}*/ }
-  header form {
+  .page-header form {
     float: right; }
-  header .user {
+  .page-header .user {
     position: absolute;
     top: 0;
     left: 0;
@@ -167,38 +169,30 @@ header {
     max-width: 358px;
     padding: 36px 0;
     overflow: hidden; }
-    header .user img {
+    .page-header .user img {
       margin: 0 10px 0;
       height: 50px;
       float: left;
       border: 2px solid #FFFFFF;
       border-radius: 2px; }
-    header .user a {
+    .page-header .user a {
       display: block;
       float: left;
       line-height: 33px;
       margin: 0 0 0 10px; }
-    header .user button {
+    .page-header .user button {
       margin: 9px 6px;
-      padding: 0 2px;
+      padding: 0 8px;
       height: 28px;
       line-height: 28px;
       float: left;
       background-color: #2c2c2c;
       color: #FFFFFF;
-      border-top: 2px solid #FFFFFF;
-      border-bottom: 2px solid #FFFFFF;
+      border: 2px solid #FFFFFF;
+      border-radius: 4px/14px;
       -webkit-box-sizing: content-box;
               box-sizing: content-box;
       text-transform: uppercase; }
-      header .user button:before, header .user button:after {
-        top: -2px;
-        height: 32px;
-        background-color: transparent;
-        z-index: -1;
-        -webkit-box-sizing: border-box;
-                box-sizing: border-box;
-        border: 2px solid #FFFFFF; }
 
 #sidebar {
   background: #1f1f1f;
@@ -621,6 +615,19 @@ nav {
 #search label {
   display: none; }
 
+.search-results header {
+  height: 100px;
+  position: relative; }
+.search-results .query {
+  display: block;
+  width: 454px;
+  height: 33px;
+  margin: 0 auto;
+  padding: 0 26px;
+  background-color: #2c2c2c;
+  color: #FFF;
+  border: none;
+  border-radius: 12px/30px; }
 .search-results [role="tabs"] a {
   width: 50%;
   text-align: center;
@@ -641,6 +648,23 @@ nav {
 .search-results img {
   width: 30px;
   height: 30px; }
+.search-results .results {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden; }
+.search-results .search-service {
+  width: 50%;
+  float: left; }
+  .search-results .search-service i {
+    margin: 0 auto;
+    fill: #2c2c2c; }
+    .search-results .search-service i.spotify {
+      width: 37px;
+      height: 37px; }
+    .search-results .search-service i.soundcloud {
+      width: 62px;
+      height: 62px; }
 
 .pagination {
   text-align: center;

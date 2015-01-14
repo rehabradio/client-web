@@ -1,6 +1,7 @@
-var SearchLayout                = require('../views/layout-search'),
+var SearchLayout        = require('../views/layout-search'),
     SearchModel         = require('../models/models-search'),
     SearchCollection    = require('../collections/collections-search'),
+    ViewSearchInput     = require('../views/view-search-form'),
     searchServiceView   = require('../views/view-search-service');
 
 /*
@@ -16,6 +17,7 @@ Collection data will still be present within the controller
 */
 
 var API = require('../../../js/src/utils/api');
+
 
 module.exports = Marionette.Controller.extend({
 
@@ -34,19 +36,26 @@ module.exports = Marionette.Controller.extend({
         }
     },
 
-    model: new SearchModel(),
-
     initialize: function(query){
 
-        this.model.set('query', query);
+        // this.model.set('query', query);
 
         this.layout = new SearchLayout({
-            // defaultService: this.defaultService,
+            model: new SearchModel(),
             regions: {
-                results: '#results',
+                // results: '#results',
+                searchInput: '#search-input',
                 modalContainer : '#search-modal-container'
             }
         });
+        
+        var regions = {};
+        
+        for(var i in this.services){
+            regions[this.services[i]] = '#' + this.services[i];
+        }       
+
+        this.layout.addRegions(regions);
 
         if(!dataStore.searchCollections){
 
@@ -74,18 +83,27 @@ module.exports = Marionette.Controller.extend({
 
         this.listenTo(this.layout, 'search:service:change', this.showLayout);
 
-        if(this.model.get('query') && this.model.get('query').length > 0){
-            this.performSearch();
+        var viewSearchInput = new ViewSearchInput();
+
+        this.listenTo(viewSearchInput, 'search:search', this.performSearch);
+
+        this.layout.searchInput.show(viewSearchInput);
+
+        for(var i in this.services){
+            this.layout[this.services[i]].show(this.createService(this.services[i]));
+
         }
 
-        this.layout.results.show(this.createService(this.defaultService));
+        this.performSearch();
     },
 
     createService: function(service){
 
-        var self = this;
+        var self = this,
+            Model = Backbone.Model.extend();
 
         var searchService = new searchServiceView({
+            model: new Model({service: service}),
             collection: dataStore.searchCollections[service], 
             className: service
         });
@@ -162,15 +180,36 @@ module.exports = Marionette.Controller.extend({
 
     performSearch: function(){
 
-        _.each(dataStore.searchCollections, function(element){
-            element.reset();
-        });
+        var query = this._getQuery();
 
-        var query = this.model.get('query');
+        if(query.length > 0){
 
-        _.each(this.services, function(service){
-            this.fetchServices(query, service);
-        }, this);
+            _.each(dataStore.searchCollections, function(element){
+                element.reset();
+            });
+
+
+            _.each(this.services, function(service){
+                this.fetchServices(query, service);
+            }, this);
+        }
+    },
+
+    _getQuery: function(){
+
+        var query = '',
+            searchParams = location.search.replace('?', '').split('&'),
+            params = {};
+
+        for(var i in searchParams){
+            params[searchParams[i].split('=')[0]] = searchParams[i].split('=')[1];
+        }
+
+        if(params.query){
+            query = params.query;
+        }
+
+        return query;
 
     }
 });
