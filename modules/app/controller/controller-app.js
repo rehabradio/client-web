@@ -121,8 +121,8 @@ module.exports = Marionette.Controller.extend({
 
 	_changeModule:function(module, data){
 
-		this.appContent.main.show( new this.viewModules[module]().show() );
         this.router.navigate(module, {trigger: false});
+		this.appContent.main.show( new this.viewModules[module]().show() );
 
     },
 

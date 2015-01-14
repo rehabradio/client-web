@@ -1,7 +1,7 @@
 var SearchLayout        = require('../views/layout-search'),
     SearchModel         = require('../models/models-search'),
     SearchCollection    = require('../collections/collections-search'),
-    ViewSearchInput     = require('../views/view-search-form'),
+    ViewSearchForm     = require('../views/view-search-form'),
     searchServiceView   = require('../views/view-search-service');
 
 /*
@@ -40,11 +40,17 @@ module.exports = Marionette.Controller.extend({
 
         // this.model.set('query', query);
 
+        var Model = Backbone.Model.extend({
+            defaults: {
+                services: this.services
+            }
+        });
+
         this.layout = new SearchLayout({
-            model: new SearchModel(),
+            model: new Model(),
             regions: {
                 // results: '#results',
-                searchInput: '#search-input',
+                searchForm: '#search-form',
                 modalContainer : '#search-modal-container'
             }
         });
@@ -62,7 +68,9 @@ module.exports = Marionette.Controller.extend({
             dataStore.searchCollections = {};
 
             _.each(this.services, function(element, index){
-                dataStore.searchCollections[element] = new SearchCollection();
+                dataStore.searchCollections[element] = new SearchCollection([], {
+                    service: element
+                });
             });
         }
 
@@ -83,11 +91,11 @@ module.exports = Marionette.Controller.extend({
 
         this.listenTo(this.layout, 'search:service:change', this.showLayout);
 
-        var viewSearchInput = new ViewSearchInput();
+        var viewSearchForm = new ViewSearchForm();
 
-        this.listenTo(viewSearchInput, 'search:search', this.performSearch);
+        this.listenTo(viewSearchForm, 'search:search', this.performSearch);
 
-        this.layout.searchInput.show(viewSearchInput);
+        this.layout.searchForm.show(viewSearchForm);
 
         for(var i in this.services){
             this.layout[this.services[i]].show(this.createService(this.services[i]));
@@ -174,7 +182,8 @@ module.exports = Marionette.Controller.extend({
     }, 
 
     fetchServices: function(query, service, cb){
-        var xhr = dataStore.searchCollections[service].fetch({service:service, query:query});
+        debugger;
+        var xhr = dataStore.searchCollections[service].fetch();
         // xhr.done( cb );
     },
 
@@ -182,16 +191,16 @@ module.exports = Marionette.Controller.extend({
 
         var query = this._getQuery();
 
+
         if(query.length > 0){
 
             _.each(dataStore.searchCollections, function(element){
                 element.reset();
+                element.fetch();
             });
-
-
-            _.each(this.services, function(service){
-                this.fetchServices(query, service);
-            }, this);
+            // _.each(this.services, function(service){
+            //     this.fetchServices();
+            // }, this);
         }
     },
 

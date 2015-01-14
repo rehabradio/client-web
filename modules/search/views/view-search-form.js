@@ -33,6 +33,8 @@ module.exports = Marionette.ItemView.extend({
             this.el.querySelector('input').value = decodeURIComponent(params.query);;
         }
 
+        this.el.querySelector('.query').focus();
+
 	},
 
 	timer: null,

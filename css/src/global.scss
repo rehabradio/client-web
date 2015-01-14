@@ -29,12 +29,23 @@ table{
 button{
 	background-color: transparent;
 	border: none;
+	cursor: pointer;
+
+	&:focus{
+		outline: none;
+	}
 }
 
 i{
 	display: block;
 }
 
+input{
+
+	&:focus{
+		outline: none;
+	}
+}
 
 .sub-section{
 	margin: 0 0 64px 0;
