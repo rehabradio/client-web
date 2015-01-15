@@ -31,9 +31,12 @@ module.exports = Marionette.Controller.extend({
     _onSignIn: function(){
 
         gapi.auth.signIn({
-            callback: function(result){
-                new Auth(result);
+            callback: function(res){
+                debugger;
             }
+            // callback: function(result){
+            //     new Auth(result);
+            // }
         });
 
     },
