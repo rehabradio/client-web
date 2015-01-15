@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/js/build/build.js"></script>
 
 <script type="text/javascript">
-	function authoriseUser(res){
+	function onLoadCallback(res){
 		debugger;
 	}
 </script>
@@ -13,7 +13,7 @@
 
 	(function() {
 		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		po.src = 'https://apis.google.com/js/client:plusone.js';
+		po.src = 'https://apis.google.com/js/client:plusone.js?onload=onLoadCallback';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 	})();
 
