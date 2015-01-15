@@ -49,7 +49,7 @@ module.exports = Marionette.Controller.extend({
 
 		this.listenTo(dispatcher, 'login:status', this.setLoginStatus, this);
 		
-		this.once(this.model, 'change:loginStatus', function(model){
+		this.listenTo(this.model, 'change:loginStatus', function(model){
 			if(model.get('loginStatus')){
 				var datastorePreloading = this._fetchData();
 
