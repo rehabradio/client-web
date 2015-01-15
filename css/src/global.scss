@@ -6,6 +6,24 @@ body{
 	font-weight: 400;
 }
 
+
+.app{
+
+	.page-loader{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+
+		i{
+			position: relative;
+			width: 100px;
+			height: 100px;
+			left: -50px;
+			top: -50px;
+		}	
+	}
+}
+
 a{
 	color: #5373F7;
 	text-decoration: none;
@@ -40,10 +58,37 @@ i{
 	display: block;
 }
 
+
 input{
 
 	&:focus{
 		outline: none;
+	}
+}
+
+input[type="checkbox"]{
+	width: 20px;
+	height: 20px;
+
+	margin: 0 12px 0 0;
+	
+	border: 7px solid $blue;
+	border-radius: 100%;
+
+	-webkit-appearance: none;
+
+	&:checked{
+		background-color: $blue;
+	}
+}
+
+fieldset{
+	input[type="checkbox"]{
+		float: left;
+	}
+	label{
+		font-size: 16px;
+		line-height: 1.4em;
 	}
 }
 
@@ -93,17 +138,6 @@ input{
 	&.orange{
 
 	}
-	
-	/*&:before, &:after{
-		position: absolute;
-		left: -6px;
-		top: 0px;
-		width: 12px;
-		height: 33px;
-		content: '';
-		background-color: $orange;
-		border-radius: 100%;
-	}*/
 
 	&:after{
 		left: auto;
@@ -190,8 +224,4 @@ form{
 			padding: 0 20px;
 		}
 	}
-}
-
-
-.app{
 }

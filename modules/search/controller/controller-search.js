@@ -107,8 +107,7 @@ module.exports = Marionette.Controller.extend({
 
     createService: function(service){
 
-        var self = this,
-            Model = Backbone.Model.extend();
+        var Model = Backbone.Model.extend();
 
         var searchService = new searchServiceView({
             model: new Model({service: service}),
@@ -116,8 +115,8 @@ module.exports = Marionette.Controller.extend({
             className: service
         });
 
-        self.layout.listenTo(searchService, 'childview:search:queues:add', self._onAddToQueue.bind(self));
-        self.layout.listenTo(searchService, 'childview:search:playlists:add', self._onAddToPlaylist.bind(self));
+        this.layout.listenTo(searchService, 'childview:search:queues:add', this._onAddToQueue.bind(this));
+        this.layout.listenTo(searchService, 'childview:search:playlists:add', this._onAddToPlaylist.bind(this));
 
         return searchService;
     },
@@ -164,7 +163,7 @@ module.exports = Marionette.Controller.extend({
 
     createPlaylistModal:function(response){
 
-        var Model = Backbone.Model.extend({});
+        var Model = Backbone.Model.extend();
 
         this.modalAddPlaylist = new this.modals.playlists.addTrack({
             collection: dataStore.playlistsCollection,

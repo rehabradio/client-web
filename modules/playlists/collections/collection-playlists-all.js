@@ -12,8 +12,8 @@ module.exports = BaseCollection.extend({
 	model: Playlist,
 
 	initialize: function(){
-		dataStore.collectionPlaylistsPersonal = collectionPlaylistsPersonal;
-		dataStore.collectionPlaylistsPublic = collectionPlaylistsPublic;
+		// dataStore.collectionPlaylistsPersonal = collectionPlaylistsPersonal;
+		// dataStore.collectionPlaylistsPublic = collectionPlaylistsPublic;
 
 		/*
 		 *	Calls the fetch function to update instead of using update with data supplied through the socket
@@ -24,19 +24,19 @@ module.exports = BaseCollection.extend({
 
 	parse: function(data){
 
-		var queues = {},
-			owner = dataStore.appModel.get('displayName');
+		// var queues = {},
+		// 	owner = dataStore.appModel.get('displayName');
 
-		for(var i in data.results){
+		// for(var i in data.results){
 
-			if(owner === data.results[i].owner){
-				dataStore.collectionPlaylistsPersonal.add(data.results[i]);
-			}else{
-				dataStore.collectionPlaylistsPublic.add(data.results[i]);
-			}
-		}
+		// 	if(owner === data.results[i].owner){
+		// 		dataStore.collectionPlaylistsPersonal.add(data.results[i]);
+		// 	}else{
+		// 		dataStore.collectionPlaylistsPublic.add(data.results[i]);
+		// 	}
+		// }
 
 		return data.results;
-	},
+	}
 
 });

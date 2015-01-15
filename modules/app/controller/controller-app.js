@@ -51,7 +51,11 @@ module.exports = Marionette.Controller.extend({
 		
 		this.listenTo(this.model, 'change:loginStatus', function(model){
 			if(model.get('loginStatus')){
-				this.startApp();
+				var datastorePreloading = this._fetchData();
+
+				$.when(datastorePreloading).then(function() {
+					this.startApp();
+	            }.bind(this));
 			}
 		});
 	},
@@ -132,8 +136,18 @@ module.exports = Marionette.Controller.extend({
 	
 	_fetchData: function(){
 
+		var deferred = $.Deferred();
+		$.when(
+			dataStore.playlistsCollection.fetch(),
+			dataStore.queuesCollection.fetch()
+		)
+		.then(function() {
+            deferred.resolve();
+        });
+		return deferred;
+
 		// dataStore.playlistsCollection.fetch();
-		dataStore.queuesCollection.fetch();
+		// dataStore.queuesCollection.fetch();
 	},
 
 	_onPerformSearch: function(query){

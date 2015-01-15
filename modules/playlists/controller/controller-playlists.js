@@ -1,26 +1,25 @@
-var LayoutPlaylists = require('../views/layout-playlists');
-var PlaylistsPublic = require('../views/view-playlists-public');
-var PlaylistsPersonal = require('../views/view-playlists-personal');
-var PlaylistTracks = require('../views/view-playlist-tracks');
-var ModelPlaylistAdd = require('../models/models-playlist-add');
-var TracksCollection = require('../collections/collection-playlists-tracks');
+var LayoutPlaylists 		= require('../views/layout-playlists');
+var PlaylistsPublic 		= require('../views/view-playlists-public');
+var PlaylistsPersonal 		= require('../views/view-playlists-personal');
+var PlaylistTracks 			= require('../views/view-playlist-tracks');
+var ModelPlaylistAdd 		= require('../models/models-playlist-add');
+var TracksCollection 		= require('../collections/collection-playlists-tracks');
 
-var CollectionPlaylists = require('../../../modules/playlists/collections/collection-playlists-all');
-var ModelPlaylistQueue = require('../models/models-playlist-queue');
+var CollectionPlaylists 	= require('../../../modules/playlists/collections/collection-playlists-all');
+var ModelPlaylistQueue 		= require('../models/models-playlist-queue');
 
-var PlaylistsControls = require('../views/view-playlists-controls');
+var PlaylistsControls 		= require('../views/view-playlists-controls');
 
-
-var TracksModel = require('../models/models-tracks');
+var TracksModel 			= require('../models/models-tracks');
 
 /*
  *	Modals
  */
 
-var QueuesAddTrackModal = require('../../core/modals/views/modal-queues-add-track');
-var PlaylistsAddTrackModal = require('../../core/modals/views/modal-playlists-add-track');
-var PlaylistsCreateModal = require('../../core/modals/views/modal-playlists-create');
-var PlaylistsDeleteModal = require('../../core/modals/views/modal-playlists-delete');
+var QueuesAddTrackModal 	= require('../../core/modals/views/modal-queues-add-track');
+var PlaylistsAddTrackModal 	= require('../../core/modals/views/modal-playlists-add-track');
+var PlaylistsCreateModal 	= require('../../core/modals/views/modal-playlists-create');
+var PlaylistsDeleteModal 	= require('../../core/modals/views/modal-playlists-delete');
 
 /*
  *	Api services
@@ -42,9 +41,6 @@ module.exports = Marionette.Controller.extend({
 				playlistsControls: '#playlists-controls'
 			}
 		});
-
-		
-		dataStore.playlistsCollection = new CollectionPlaylists();
 
 		dataStore.playlistsCollection.fetch();
 
