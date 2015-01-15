@@ -1,13 +1,9 @@
 <header>
 	<div id="search-form" class=""></div>
 </header>
-<!-- <div role="tabs">
-	<a data-service="spotify" href="#" class="is-active">Spotify</a>
-	<a data-service="soundcloud" href="#">Soundcloud</a>
-</div> -->
 <div id="results" class="results">
 	{{#each services}}
-		<div id="{{this}}" class="search-service"></div>
+		<div id="{{this}}" class="search-service initial"></div>
 	{{/each}}
 </div>
 <div id="search-modal-container"></div>

@@ -19,17 +19,16 @@ module.exports = Marionette.CompositeView.extend({
 	},
 
 	initialize: function(){
-
+		this.listenTo(this.collection, 'sync', this._onSync, this);
 	},
 
 	onRender: function(){
 		
-
 		//offset till render is complete
 
 		setTimeout(function(){
 
-			var height = window.innerHeight - this.el.offsetTop - 200;
+			var height = window.innerHeight - this.el.parentNode.offsetTop - 200;
 
 			this.el.querySelector('.tracks').style.height = height + 'px';
 
@@ -42,10 +41,20 @@ module.exports = Marionette.CompositeView.extend({
 
 	_onPaginate: function(e){
 
+		this.el.parentNode.classList.add('searching');
+
 		if(e.currentTarget.classList.contains('previous')){
 			this.collection.trigger('search:page:previous');
 		}else{
 			this.collection.trigger('search:page:next');
 		}
+	},
+
+	_onSync: function(){
+
+		this.el.querySelector('.tracks').scrollTop = 0;
+
+		this.el.parentNode.classList.remove('searching');
+		this.el.parentNode.classList.remove('initial');
 	}
 });

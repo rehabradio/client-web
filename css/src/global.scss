@@ -47,6 +47,22 @@ input{
 	}
 }
 
+@keyframes loader{
+	from {
+		transform: rotate(0);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loader{
+	animation: loader 2000ms linear infinite;
+	transform-origin: 0 0;
+	fill: transparentize($blue, 0.2);
+}
+
 .sub-section{
 	margin: 0 0 64px 0;
 }

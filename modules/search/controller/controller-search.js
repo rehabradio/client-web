@@ -181,12 +181,6 @@ module.exports = Marionette.Controller.extend({
         this.layout.results.show(this.createService(service));
     }, 
 
-    fetchServices: function(query, service, cb){
-        debugger;
-        var xhr = dataStore.searchCollections[service].fetch();
-        // xhr.done( cb );
-    },
-
     performSearch: function(){
 
         var query = this._getQuery();
@@ -198,9 +192,6 @@ module.exports = Marionette.Controller.extend({
                 element.reset();
                 element.fetch();
             });
-            // _.each(this.services, function(service){
-            //     this.fetchServices();
-            // }, this);
         }
     },
 
