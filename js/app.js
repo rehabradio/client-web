@@ -1,7 +1,3 @@
 require('./src/utils/config');
 
-var Application = require('../modules/app/controller/controller-app');
-
-$(function(){
-	new Application();
-});
+window.Application = require('../modules/app/controller/controller-app');
