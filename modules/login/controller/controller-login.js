@@ -24,8 +24,8 @@ module.exports = Marionette.Controller.extend({
     },
 
     setUpListeners:function(){
-        this.listenTo(this.view, 'gapi.auth.signIn',  this._onSignIn);
-        this.listenTo(dispatcher, 'gapi.auth.signOut', this._onSignOut);
+        this.listenTo(this.view, 'gapi:auth:signIn',  this._onSignIn);
+        this.listenTo(dispatcher, 'gapi:auth:signOut', this._onSignOut);
     },
 
     _onSignIn: function(){

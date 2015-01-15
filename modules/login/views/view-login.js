@@ -1,5 +1,7 @@
 module.exports = Marionette.ItemView.extend({
+
     id: 'google-login',
+    
     template: require('../templates/login.hbs'),
 
     events: {
@@ -7,6 +9,6 @@ module.exports = Marionette.ItemView.extend({
     },
 
     _onSignIn: function(){
-        this.trigger('gapi.auth.signIn');
+        this.trigger('gapi:auth:signIn');
     }
 });
