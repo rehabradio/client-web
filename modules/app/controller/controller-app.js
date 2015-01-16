@@ -48,7 +48,7 @@ module.exports = Marionette.Controller.extend({
 
 		this.auth = new Auth();
 
-		this.listenTo(dispatcher, 'auth:signedin', function(){
+		this.listenTo(dispatcher, 'auth:signin', function(){
 			this.auth.trigger('auth:signin');
 		}, this);
 
