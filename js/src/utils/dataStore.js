@@ -4,9 +4,7 @@ var dataStore = {}
  *	Requiring and initialising empty collections
  */
 
-var createSubCollections = function(){
-	console.log('test');
-}
+dataStore.appModel = new (Backbone.Model.extend())();
 
 var PlaylistsCollection = require('../../../modules/playlists/collections/collection-playlists-all');
 dataStore.playlistsCollection = new PlaylistsCollection();

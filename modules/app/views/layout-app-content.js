@@ -15,7 +15,11 @@ module.exports = Marionette.LayoutView.extend({
 	},
 
 	onRender:function(){
-		this.user.show( new ViewUser() );
+		var viewUser = new ViewUser({
+			model: dataStore.appModel
+		});
+
+		this.user.show(viewUser);
 	},
 
 	_onSearch: function(e){

@@ -1,6 +1,8 @@
 module.exports = Marionette.ItemView.extend({
 
     id: 'google-login',
+
+    className: 'login',
     
     template: require('../templates/login.hbs'),
 

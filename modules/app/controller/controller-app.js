@@ -52,16 +52,12 @@ module.exports = Marionette.Controller.extend({
 			this.auth.trigger('auth:signin');
 		}, this);
 
+		this.listenTo(dispatcher, 'auth:signout', function(){
+			this.auth.trigger('auth:signout');
+		}, this);
+
 		this.listenTo(this.auth, 'auth:status:signedin', this._setupAppData, this);
 		this.listenTo(this.auth, 'auth:status:signedout', this._setupAppLogin, this);
-
-		// this.login = new Login();
-
-		// this.login.once('login:status:signedin', this._setupAppData, this);
-
-		// this.listenTo(this.login, 'login:status:signedout', function(){
-		// 	this.layout.appContent.show(this.login.show());
-		// });
 
 	},
 
@@ -92,30 +88,19 @@ module.exports = Marionette.Controller.extend({
 			this.startApp();
         }.bind(this));
 
-		this.model.set('url', this.auth.model.get('url'));
-		this.model.set('displayName', this.auth.model.get('displayName'));
-		this.model.set('image', this.auth.model.get('image.url'));
+		this.model.set('url', this.auth.model.get('profile').url);
+		this.model.set('displayName', this.auth.model.get('profile').displayName);
+		this.model.set('image', this.auth.model.get('profile').image.url);
 		this.model.set('loginStatus', true);
 	},
-
-	// setLoginStatus: function(status, user){
-
-	// 	if(!!status){
-
-
-	// 		this.model.set('loginStatus', status); // Triggers the rerender;
-
-	// 	}else{
-
-	// 		this.layout.appContent.show(this.login.show());
-	// 	}
-	// },
 
 	startApp: function(){
 		
 		console.log('Start App');
 
 		this.router = new AppRouter();
+
+		this.model = dataStore.appModel = modelApp;
 
 		this.appContent = new AppContent();
 		this.layout.appContent.show(this.appContent);
@@ -126,7 +111,6 @@ module.exports = Marionette.Controller.extend({
 		 *	Stores global information for the app. Examples include login information and queue information
 		 */
 
-		this.model = dataStore.appModel = modelApp;
 
 		console.log('App Initialised');
 
@@ -140,9 +124,6 @@ module.exports = Marionette.Controller.extend({
 		this.listenTo(dispatcher, 'navigation:changemodule', this._changeModule, this);
 
 		this.listenTo(dispatcher, 'search:perform', this._onPerformSearch, this);
-
-
-		// Backbone.history.start({ pushState: true, trigger: true });
 
 		/*
 		 *	Initialise views that don't rely on external data // core modules
@@ -177,10 +158,6 @@ module.exports = Marionette.Controller.extend({
 		dataStore.queuesCollection.reset();
 
 		var login = new Login();
-
-		// this.listenTo(login, 'login:signin', function(){
-		// 	this.auth.signin();
-		// });
 
 		this.layout.appContent.show(login.show());
 	}

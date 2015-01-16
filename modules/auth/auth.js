@@ -22,7 +22,6 @@ module.exports = Marionette.Controller.extend({
 
     signout: function(){     
         gapi.auth.signOut();
-        window.location.reload();
     },
 
     checkLoginStatus: function(res){

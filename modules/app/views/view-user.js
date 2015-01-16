@@ -1,8 +1,4 @@
-var modelApp = require('../../login/models/models-app');
-
 module.exports = Marionette.ItemView.extend({
-
-	model: modelApp,
 
 	template: require('../templates/user.hbs'),
 
@@ -11,10 +7,11 @@ module.exports = Marionette.ItemView.extend({
 	},
 
 	initialize: function(){
-		this.listenTo(this.model, 'change:loginStatus', this.render);
+		
+		this.listenTo(dataStore.appModel, 'change', this.render, this);
 	},
 
 	_onSignOut: function(){
-		dispatcher.trigger('gapi.auth.signOut');
+		dispatcher.trigger('auth:signout');
 	}
 });

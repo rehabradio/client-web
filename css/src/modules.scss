@@ -1,4 +1,4 @@
-#sidebar{
+/*#sidebar{
 	background: darken($darkgrey, 5%);
 	float: left;
 	width: 200px;
@@ -11,6 +11,17 @@
 		border-bottom: 1px solid darken($darkgrey, 5%);
 	}
 
+}*/
+
+.login{
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	text-align: center;
+
+	transform: translate(-50%, -50%);
 }
 nav{
 	margin: 30px 0;
