@@ -16,7 +16,7 @@ module.exports = Marionette.Controller.extend({
         this.view = new LoginView();    
         
         this.setUpListeners();
-
+        this._onSignIn();
     },
 
     show: function(){
