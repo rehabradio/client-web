@@ -138,7 +138,7 @@ module.exports = Marionette.Controller.extend({
 		this.listenTo(dispatcher, 'search:perform', this._onPerformSearch, this);
 
 
-		Backbone.history.start({ pushState: true, trigger: true });
+		// Backbone.history.start({ pushState: true, trigger: true });
 
 		/*
 		 *	Initialise views that don't rely on external data // core modules
