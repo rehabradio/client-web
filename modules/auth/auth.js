@@ -12,8 +12,8 @@ module.exports = Marionette.Controller.extend({
 	initialize: function(){
 		this.listenTo(this.model, 'change:signedin', this.onStatusChange, this);
 	    this.signin();
-	    this.listenTo(this, 'auth:signedin', this.signin, this);
-	    this.listenTo(this, 'auth:signedout', this.signout, this);
+	    this.listenTo(this, 'auth:signin', this.signin, this);
+	    this.listenTo(this, 'auth:signout', this.signout, this);
 	},
 
     signin: function(){
