@@ -32,6 +32,8 @@ require('../../libs/backbone.marionette.subrouter.js');
 dispatcher = require('./dispatcher');
 dataStore = require('./dataStore');
 
+Backbone.history.start({ pushState: true, trigger: true });
+
 /*
  *	Initialize custom components
  */
