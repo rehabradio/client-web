@@ -49,7 +49,7 @@ module.exports = Marionette.Controller.extend({
 		this.auth = new Auth();
 
 		this.listenTo(this.auth, 'login:status:signedin', this._setupAppData, this);
-		this.listenTo(this.auth, 'login:status:signedout', this._destroyApp, this);
+		this.listenTo(this.auth, 'login:status:signedout', this._setupAppLogin, this);
 
 		// this.login = new Login();
 
@@ -168,12 +168,15 @@ module.exports = Marionette.Controller.extend({
 		this.appContent.main.show( new this.viewModules.search(query).show() );
 	},
 
-	_destroyApp: function(){
+	_setupAppLogin: function(){
 		dataStore.playlistsCollection.reset();
 		dataStore.queuesCollection.reset();
 
-		this.login = new Login();
-		this.layout.appContent.show(this.login.show());
+		var login = new Login();
+
+		this.listenTo(login, 'login:signin', this.auth.signin);
+
+		this.layout.appContent.show(login.show());
 	}
 
 });

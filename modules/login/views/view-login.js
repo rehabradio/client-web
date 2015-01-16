@@ -9,6 +9,6 @@ module.exports = Marionette.ItemView.extend({
     },
 
     _onSignIn: function(){
-        this.trigger('gapi:auth:signIn');
+        this.trigger('login:signin');
     }
 });
