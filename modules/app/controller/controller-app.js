@@ -174,7 +174,9 @@ module.exports = Marionette.Controller.extend({
 
 		var login = new Login();
 
-		this.listenTo(login, 'login:signin', this.auth.signin, this.auth);
+		this.listenTo(login, 'login:signin', function(){
+			this.auth.signin();
+		});
 
 		this.layout.appContent.show(login.show());
 	}
