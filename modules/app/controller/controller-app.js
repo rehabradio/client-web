@@ -47,34 +47,73 @@ module.exports = Marionette.Controller.extend({
 
 		this.login = new Login();
 
-		this.listenTo(dispatcher, 'login:status', this.setLoginStatus, this);
-		
-		this.listenTo(this.model, 'change:loginStatus', function(model){
-			if(model.get('loginStatus')){
-				var datastorePreloading = this._fetchData();
+		this.listenTo(this.login, 'login:status:signedin', this._setupAppData, this);
 
-				$.when(datastorePreloading).then(function() {
-					this.startApp();
-	            }.bind(this));
-			}
-		});
-	},
-
-	setLoginStatus: function(status, user){
-
-		if(!!status){
-
-			this.model.set('url', user.url);
-			this.model.set('displayName', user.displayName);
-			this.model.set('image', user.image.url);
-
-			this.model.set('loginStatus', status); // Triggers the rerender;
-
-		}else{
-
+		this.listenTo(this.login, 'login:status:signedout', function(){
 			this.layout.appContent.show(this.login.show());
-		}
+		});
+
+		//
+
+
+		// this.listenTo(dispatcher, 'login:status', this.setLoginStatus, this);
+		
+		// this.listenTo(this.model, 'change:loginStatus', function(model){
+		// 	if(model.get('loginStatus')){
+		// 		var datastorePreloading = this._fetchData();
+
+		// 		$.when(datastorePreloading).then(function() {
+		// 			this.startApp();
+	 //            }.bind(this));
+		// 	}
+		// });
 	},
+
+	_fetchData: function(){
+
+		var deferred = $.Deferred();
+
+		$.when(
+			dataStore.playlistsCollection.fetch(),
+			dataStore.queuesCollection.fetch()
+		)
+		.then(function() {
+            deferred.resolve();
+        });
+
+		return deferred;
+	},
+
+	_setupAppData: function(user){
+
+		$.ajaxSetup({
+            headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
+        });
+
+        var datastorePreloading = this._fetchData();
+
+		$.when(datastorePreloading).then(function() {
+			this.startApp();
+        }.bind(this));
+
+		this.model.set('url', user.url);
+		this.model.set('displayName', user.displayName);
+		this.model.set('image', user.image.url);
+		this.model.set('loginStatus', true);
+	},
+
+	// setLoginStatus: function(status, user){
+
+	// 	if(!!status){
+
+
+	// 		this.model.set('loginStatus', status); // Triggers the rerender;
+
+	// 	}else{
+
+	// 		this.layout.appContent.show(this.login.show());
+	// 	}
+	// },
 
 	startApp: function(){
 		
@@ -132,22 +171,6 @@ module.exports = Marionette.Controller.extend({
 
 	_showModule:function(module, data){
 		this.appContent.main.show( new this.viewModules[module](data).show() );
-	},
-	
-	_fetchData: function(){
-
-		var deferred = $.Deferred();
-		$.when(
-			dataStore.playlistsCollection.fetch(),
-			dataStore.queuesCollection.fetch()
-		)
-		.then(function() {
-            deferred.resolve();
-        });
-		return deferred;
-
-		// dataStore.playlistsCollection.fetch();
-		// dataStore.queuesCollection.fetch();
 	},
 
 	_onPerformSearch: function(query){
