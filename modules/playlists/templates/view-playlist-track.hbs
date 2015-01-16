@@ -1,25 +1,21 @@
-<td>
-	<h4>{{track.name}}</h4>
-	<h5 class="album">{{track.album.name}}</h5>
-	{{#each track.artists}}
-		<h6 class="artist">{{name}}</h6>
-	{{/each}}
+<td class="track-details">
+	<h4>
+		{{track.name}}
+		{{#each track.artists}}
+			 - {{name}} 
+		{{/each}} - 
+		{{track.album.name}}
+	</h4>	
 </td>
 <td>
-	<a href="#" class="add-to-queue">Add to queue</a>
+	<button type="button" class="btn from-playlist" title="Add to favourites"><i>{{icon 'icon-heart'}}</i></button>
 </td>
 <td>
-	<a href="#" class="add-to-playlist">Add to playlist</a>
-	<select></select>
+	<button type="button" class="btn remove-from-playlist" title="Remove track from playlists"><i>{{icon 'icon-trash'}}</i></button>
 </td>
 <td>
-	<a href="#" class="remove-from-playlist">Remove from playlist</a>
+	<button type="button" class="btn add-to-queue" title="Add track to queue(s)"><i>{{icon 'icon-queues-add'}}</i></button>
 </td>
 <td>
-	{{#sourceSpotify track.source_type}}
-		<a href="#" title=""><img src="/img/spotify.png" alt="Spotify"></a>
-	{{/sourceSpotify}}
-	{{#sourceSoundcloud track.source_type}}
-		<a href="#" title=""><img src="/img/soundcloud.png" alt="Spotify"></a>
-	{{/sourceSoundcloud}}
+	<button type="button" class="btn add-to-playlist" title="Add track to playlist(s)"><i>{{icon 'icon-playlists'}}</i></button>
 </td>

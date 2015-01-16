@@ -1,0 +1,24 @@
+<div id="modal-playlist-add" class="modal">
+	<div class="modal-offset">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close cancel">x</button>
+				<h2>Choose Queue</h2>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					{{#each items}}
+					<fieldset>
+						<input name="{{id}}" type="checkbox">
+						<label>{{name}}</label>
+					</fieldset>
+					{{/each}}
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn cancel">Close</button>
+				<button type="button" class="btn blue save">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>

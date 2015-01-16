@@ -1,5 +1,13 @@
-<li>
+<button id="playlist-view" class="playlist-view" title="View this playlist">
+	<span class="cover-art">
+	{{#each coverart}}
+		<img src="{{url}}">
+	{{/each}}
+	</span>
+	<i>{{icon 'icon-play'}}</i>
+</button>
+<div class="details">
 	<h3>{{name}}</h3>
 	<h4>{{description}}</h4>
-	<a href="#">View Tracks</a>
-</li>
+	<button type="button" class="btn playlist-delete" title="Delete Playlist">Delete</button>
+</div>

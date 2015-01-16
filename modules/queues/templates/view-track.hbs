@@ -1,4 +1,4 @@
-<td>
+<td class="track-details">
 	<h4>{{track.name}}</h4>
 	<h5>{{track.album.name}}</h5>
 	{{#if track.artists}}
@@ -6,17 +6,5 @@
 	{{/if}}
 </td>
 <td>
-	<button class="delete">Remove</button>
+	<button type="button" class="remove-from-queue" title="Remove track from playlists"><i>{{icon 'icon-trash'}}</i></button>
 </td>
-<td>
-	{{#sourceSpotify track.source_type}}
-		<a href="#" title=""><img src="/img/spotify.png" alt="Spotify"></a>
-	{{/sourceSpotify}}
-	{{#sourceSoundcloud track.source_type}}
-		<a href="#" title=""><img src="/img/soundcloud.png" alt="Spotify"></a>
-	{{/sourceSoundcloud}}
-</td>
-<!-- <td> -->
-	<!-- <button class="up vote">+</button> -->
-	<!-- <button class="down vote">-</button> -->
-<!-- </td> -->

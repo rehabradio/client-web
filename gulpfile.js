@@ -2,6 +2,10 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
 var gutil = require('gulp-util');
+var svgmin = require('gulp-svgmin');
+var svgstore = require('gulp-svgstore');
+var yuidoc = require('gulp-yuidoc');
+var jsdoc = require('gulp-jsdoc');
 
 var karma = require('karma').server;
 var karmaConfig = require('./karma-config.js');
@@ -100,6 +104,40 @@ gulp.task('build-test-suites', ['lint'], function(){
 
 });
 
+function transformSvg (svg, cb) {
+    svg.attr({ style: 'display:none' });
+    svg.find('//*[@fill]').forEach(function (child) {
+        child.attr('fill').remove()
+    });
+    cb(null);
+}
+
+gulp.task('svg', function(){
+     var svg = gulp.src('svg/*.svg')
+        .pipe(svgmin())
+        .pipe(svgstore({fileName: 'icons.svg', prefix: 'icon-', transformSvg: transformSvg}))
+        .pipe(gulp.dest('img/'));
+
+    function fileContents (filePath, file) {
+
+        // Remove the xml declaration and doctype
+
+        return file.contents.toString('utf8').replace('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">', '');
+    }
+
+    return gulp
+        .src('./views/layouts/base.html')
+        .pipe(plugins.inject(svg, {transform: fileContents}))
+        .pipe(gulp.dest('./views/layouts'));
+});
+
+gulp.task('makedocs', function(){
+    gulp.src(['./js/*.js', './js/src/**/*.js', './modules/**/**/*.js'])
+        .pipe(jsdoc())
+        // .pipe(yuidoc())
+        .pipe(gulp.dest('./docs'));
+});
+
 gulp.task('default', function(){
     gulp.start('sass', 'build');
 });
@@ -112,6 +150,8 @@ gulp.task('watch', function(){
     gulp.watch('js/*.js', ['build']);
     gulp.watch('js/src/*.js', ['build']);
     gulp.watch('js/src/**/*.js', ['build']);
+    gulp.watch('js/src/components/**/*.hbs', ['build']);
     gulp.watch('js/jasmine/mocks.js', ['build']);
     gulp.watch('js/jasmine/data/*.js', ['build']);
+    gulp.watch('svg/*.svg', ['svg']);
 });

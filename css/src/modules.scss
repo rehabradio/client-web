@@ -1,94 +1,601 @@
-.playlists{
-	position: relative;
-	width: 50%;
+/*#sidebar{
+	background: darken($darkgrey, 5%);
 	float: left;
-	z-index: 0;
-	transition: width 150ms cubic-bezier(0, 0, .75, 1);
+	width: 200px;
+	height: 100%;
 
-	&.contract{
-		width: 25%;
+	li{
+		font-size: 14px;
+		text-indent: 30px;
+		padding: 15px 0px;
+		border-bottom: 1px solid darken($darkgrey, 5%);
 	}
 
-	> .content{
-		padding: 0 20px 62px;
-	}
+}*/
 
-	ul{
-		list-style: none;
-	}
+.login{
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	text-align: center;
+
+	transform: translate(-50%, -50%);
 }
-.tracks{
-	position: relative;
-	width: 25%;
-	float: left;
-	z-index: 1;
-
-	> .content{
-		position: relative;
-		padding: 0 20px 62px;
-	}
+nav{
+	margin: 30px 0;
 
 	ul{
-		list-style: none;
+		text-align: center;
 	}
 
 	li{
-		margin: 0 0 4px 0;
+		display: inline-block;
 
-		.album, .artist{
+	}
+
+	.btn{
+		padding: 8px 20px 8px 60px;
+		overflow: visible;
+		background-color: transparent;
+		line-height: normal;
+		color: $blue;
+
+		&:before, &:after{
+			background-color: transparent;
+		}
+
+		/*&:before{
 			display: block;
-			font-size: 12px;
+			position: absolute;
+			top: -100%;
+			left: 0;
+			width: 100%;
+			height: 300%;
+			content: '';
+			background-color: transparent;
+			border-radius: 100%;
+			z-index: -1;
+		}
+
+		&:after{
+			display: none;
+		}*/
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			&:before, &:after{
+				background-color: $orange;
+			}
+
+			i{
+				fill: $white;
+			}
+		}
+
+		i{
+			position: absolute;
+			top: 6px;
+			left: 18px;
+			width: 20px;
 		}
 	}
 }
-.queue{
-
+.module-player{
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 400px;
+	width: 100%;
+
+	.player-control{
+		width: 40%;
+		margin: 0 auto;
+		padding: 36px 0 0 62px;
+	}
+
+	input[type="range"]{
+		width: 100%;
+	}
+}
+.module-playlists{
+	overflow: hidden;
 
 	> .content{
-		position: relative;
 		padding: 0 20px 62px;
+		overflow: hidden;
+	}
+	
+	/*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/
+
+	.column{
+		width: 50%;
+		float: left;
+	}
+
+	.playlists{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-content: space-around;
+		align-items: flex-start;
+	}
+
+	.playlist{
+		width: 110px;
+		margin: 0 25px 20px 0;
+		order: 0;
+		flex: 0 1 auto;
+		align-self: auto;
+		overflow: hidden;
+
+		.playlist-view{
+			position: relative;
+			margin: 0 0 20px 0;
+			width: 110px;
+			height: 110px;
+			overflow: hidden;
+			background-color: $blue;
+			outline: none;
+			cursor: pointer;
+
+			.cover-art{
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+
+			img{
+				display: block;
+				width: 50%;
+				height: 50%;
+				float: left;
+			}
+
+			i{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				display: block;
+				background-color: rgba(0, 0, 0, 0.6);
+				display: none;
+			}
+
+			.icon{
+
+				position: absolute;
+				top: 30%;
+				left: 30%;
+				width: 40%;
+				fill: #FFF;
+			}
+
+			&:hover{
+
+				i{
+					display: block;
+				}
+			}
+		}
+	}
+
+	.track{
+		border-bottom: 2px solid $darkgrey;
+
+		td{
+			padding: 6px 0 4px;
+		}
+
+		.track-details{
+			padding-left: 12px;
+		}
+
+		button{
+			visibility: hidden;
+			margin: 0 12px 0 0;
+			padding: 0;
+
+			&:before, &:after{
+				display: none;
+			}
+
+			&:hover{
+				background-color: transparent;
+
+				i{
+					fill: $white;
+				}
+			}
+
+			i{
+				width: 20px;
+				height: 20px;
+			}
+		}
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			button{
+				visibility: visible;
+			}
+		}
+
+		.coverart{
+			display: block;
+			margin: 0 10px 0 0;
+			width: 40px;
+			background-image: url(/img/album.png);
+		}
+	}
+
+	.details{
+		float: left;
+	}
+}
+
+.module-profile{
+	overflow: hidden;
+
+	> .content{
+		padding: 0 20px 62px;
+		overflow: hidden;
+	}
+
+	.column{
+		width: 50%;
+		float: left;
+	}
+}
+.module-queues{
+
+	> .content{
+		width: 100%;
+		padding: 0 20px 62px;
+		overflow: hidden;
+	}
+
+	.column{
+		width: 50%;
+		float: left;
+	}
+
+	.queues{
+
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-content: space-around;
+		align-items: flex-start;
+	}
+
+	.queue{
+		width: 110px;
+		margin: 0 25px 20px 0;
+		order: 0;
+		flex: 0 1 auto;
+		align-self: auto;
+		overflow: hidden;
+	}
+
+	.queue-view{
+		position: relative;
+		margin: 0 0 20px 0;
+		width: 110px;
+		height: 110px;
+		overflow: hidden;
+		background-color: $blue;
+		outline: none;
+		cursor: pointer;
+
+		.cover-art{
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		img{
+			display: block;
+			width: 50%;
+			height: 50%;
+			float: left;
+		}
+
+		i{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			background-color: rgba(0, 0, 0, 0.2);
+			display: none;
+		}
+
+		.icon{
+
+			position: absolute;
+			top: 25%;
+			left: 25%;
+			width: 50%;
+			fill: #FFF;
+		}
+
+		&:hover{
+
+			i{
+				display: block;
+			}
+		}
+	}
+
+	.track{
+		border-bottom: 2px solid $darkgrey;
+
+		td{
+			padding: 6px 0 4px;
+		}
+
+		.track-details{
+			padding-left: 12px;
+		}
+
+		button{
+			visibility: hidden;
+			margin: 0 12px 0 0;
+		}
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			button{
+				visibility: visible;
+			}
+		}
+	}
+
+	table{
+
+	}
+
+	tr{
+
+	}
+
+	td{
+		padding: 0 0 10px 0;
+	}
+}
+.module-quicksearch{
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 30%;
+	max-width: 358px;
+	padding: 33px 0;
+	background: $darkgrey;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+
+	fieldset{
+		border: none;
+		margin: 0 0 10px 0;
+	}
+
+	input[type="text"]{
+		padding: 10px 10px 10px;
+		border: none;
+		border-radius: 4px;
+	}
+
+	input[type="text"]{
+		display: block;
+		position: relative;
+		margin: 14px auto;
+		padding: 5px 10px 5px;
+		width: 58%;
+		border-radius: 20px/30px;
+		background: white url('../svg/search.svg');
+		background-size: 14px 14px;
+		background-repeat: no-repeat;
+		background-position: 90% 50%;
+		outline: none;
+	}
+
+	input[type="submit"], button{
+		margin: 7px 0;
+		padding: 0 30px;
+		display: block;
+		background-color: $orange;
+		color: $white;
+		line-height: 33px;
+		outline: none;
+	}
+
+	&.active:hover{
+		box-shadow: -4px -5px 5px 0 rgba(0, 0, 0, 0.75);
+
+		.search-dropdown{
+			display: block;
+		}
+	}
+}
+
+.search-dropdown{
+	display: none;
+	right: 0;
+	z-index: 1;
+
+	.service-icon{
+		margin: 20px auto 14px;
+		width: 32px;
+
+		img{
+			display: block;
+		}
+	}
+
+	.info{
+		overflow: hidden;
+	}
+
+	.artwork{
+		margin: 0 20px 0 0;
+		width: 35px;
+		min-height: 1px;
+		float: left;
+
+		img{
+			display: block;
+			width: 100%;
+		}
+	}
+
+	.icon{
+		width: 36px;
+		height: 36px;
+		display: block;
+		float: left;
+		margin-right: 21px;
+
+		img{
+			width: 100%;
+		}
+	}
+
+	.song{
+		float: left;
+	}
+
+	.song-title{
+		display: block;
+		margin: 2px 0 0;
+		font-size: 14px;
+		font-weight: 700;
+		color: white;
+		line-height: 1em;
+	}
+
+	.artist{
+		display: block;
+		font-size: 14px;
+		font-weight: 300;
+		color: white;
+	}
+
+	.results{
+		position: relative;
+		margin: 0 0 20px 0;
+
+		&:first-of-type{
+			
+			&:after{
+				display: block;
+				width: 74%;
+				height: 2px;
+				margin: 0 auto;
+				background-color: $midgrey;
+				content: '';
+			}
+		}
 	}
 
 	ul{
-		list-style: none;
+		margin: 0 0 20px 0;
 	}
 
 	li{
-		margin: 0 0 8px 0;
-	}
-}
-#search{}
+		padding: 10px 0;
+		overflow: hidden;
 
-#search-results{
-	background: $blue;
-	z-index: 1;
-	color: #fff;
-	overflow-y: scroll;
-	max-height: 460px;
+		> .content{
+			width: 70%;
+			margin: 0 auto;
+		}
+
+		h3, h4{
+			margin: 0;
+			color: $white;
+		}
+
+		h3{
+			font-weight: 700;
+		}
+
+		&:hover{
+			background-color: $lightgrey;
+
+			h3, h4{
+				color: $black;
+			}
+		}
+	}
+
+	button{
+		display: block;
+		margin: 0 auto;
+		background-color: $white;
+		font-size: 14px;
+		color: $black;
+
+		&:before, &:after{
+			background-color: $white;
+		}
+
+		&:hover{
+			background-color: $midgrey;
+
+			&:before, &:after{
+				background-color: $midgrey;
+			}
+		}
+	}	
+}
+
+.module-search{
+
+	> header{
+		margin: 0 auto 40px;
+	}
+
+	.query{
+		display: block;
+		width: 454px;
+		height: 33px;
+		margin: 0 auto;
+		padding: 0 26px;
+
+		background-color: $darkgrey;
+		color: #FFF;
+
+		border: none;
+		border-radius: 12px/30px;
+	}
 
 	[role="tabs"] a{
 		width: 50%;
 		text-align: center;
-		background: $blue;
+		background: lighten($black, 2%);
 		color: #fff;
 		display: inline-block;
 		float: left;
-		padding: 10px 0px;
+		padding: 20px 0px;
 
-		&[data-service='spotify']{
-			background: green;
-		}
-
-		&[data-service='soundcloud']{
-			background: red;
-		}
-
-		&.active{
-			background: $black;
+		&.is-active{
+			background: $blue
 		}
 	}
 
@@ -106,16 +613,161 @@
 		height: 30px;
 	}
 
+	.results{
+		width: 100%;
+		max-width: 1280px;
+		margin: 0 auto;
+
+		overflow: hidden;
+	}
 }
 
-.pagination{
-		text-align: center;
-		width: 100%;
+.search-service{
+	position: relative;
+	width: 50%;
+	float: left;
+	padding: 0 20px 0 60px;
 
-		li{
-			display: inline-block;
+	transition: opacity 150ms linear;
+
+
+	&.initial{
+		opacity: 0;
+	}
+
+	&.searching{
+
+		.loader{
+			display: block;
+		}
+
+		table{
+			opacity: 0.2;
 		}
 	}
+
+	.loader{
+		display: none;
+	}
+
+	.loader{
+
+		position: absolute;
+		left: 50%;
+		top: 50%;
+
+		i{
+			position: relative;
+			width: 60px;
+			height: 60px;
+			left: -30px;
+			top: -30px;
+		}
+	}
+
+
+	/*> .content{
+		height: 0;
+		padding-right: 30px;
+		overflow-y: scroll;
+	}*/
+
+	header{
+		height: 100px;
+		position: relative;
+		
+		i{
+			margin: 0 auto;
+			fill: $darkgrey;
+
+
+			&.spotify{
+				width: 37px;
+				height: 37px;
+
+			}
+
+			&.soundcloud{
+				width: 62px;
+				height: 62px;
+
+			}
+		}
+	}
+
+	.tracks{
+		position: relative;
+		height: 0;
+		margin-bottom: 20px;
+		padding-right: 30px;
+		overflow-y: scroll;
+
+		table{
+			transition: opacity 150ms linear;
+		}
+
+		/*&::-webkit-scrollbar-track{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			background-color: #F5F5F5;
+		}*/
+
+		&::-webkit-scrollbar-thumb{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			background-color: #F00;
+		}
+	}
+
+	.track{
+		height: 45px;
+		border-bottom: 1px solid $midgrey;
+
+		&:hover{
+			background-color: $midgrey;
+
+			button{
+				visibility: visible;
+			}
+		}
+
+		td{
+			padding: 0 0 0 10px;
+		}
+
+		button{
+			visibility: hidden;
+			width: 20px;
+			height: 20px;
+
+			i{
+				fill: $blue;
+			}
+		}
+	}
+
+	.track-details{
+		position: relative;
+		overflow: hidden;
+
+		span{
+			position: absolute;
+			top: 0;
+			left: 0;
+			white-space: nowrap;
+		}
+	}
+}
+
+
+.pagination{
+	text-align: center;
+	width: 100%;
+
+	li{
+		display: inline-block;
+	}
+}
 
 [data-service].loading{
 	opacity: 0.2;

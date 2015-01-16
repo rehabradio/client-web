@@ -1,31 +1,35 @@
-#search{}
 
-#search-results{
-	background: $blue;
-	z-index: 1;
-	color: #fff;
-	overflow-y: scroll;
-	max-height: 460px;
+.module-search{
+
+	> header{
+		margin: 0 auto 40px;
+	}
+
+	.query{
+		display: block;
+		width: 454px;
+		height: 33px;
+		margin: 0 auto;
+		padding: 0 26px;
+
+		background-color: $darkgrey;
+		color: #FFF;
+
+		border: none;
+		border-radius: 12px/30px;
+	}
 
 	[role="tabs"] a{
 		width: 50%;
 		text-align: center;
-		background: $blue;
+		background: lighten($black, 2%);
 		color: #fff;
 		display: inline-block;
 		float: left;
-		padding: 10px 0px;
+		padding: 20px 0px;
 
-		&[data-service='spotify']{
-			background: green;
-		}
-
-		&[data-service='soundcloud']{
-			background: red;
-		}
-
-		&.active{
-			background: $black;
+		&.is-active{
+			background: $blue
 		}
 	}
 
@@ -43,16 +47,161 @@
 		height: 30px;
 	}
 
+	.results{
+		width: 100%;
+		max-width: 1280px;
+		margin: 0 auto;
+
+		overflow: hidden;
+	}
 }
 
-.pagination{
-		text-align: center;
-		width: 100%;
+.search-service{
+	position: relative;
+	width: 50%;
+	float: left;
+	padding: 0 20px 0 60px;
 
-		li{
-			display: inline-block;
+	transition: opacity 150ms linear;
+
+
+	&.initial{
+		opacity: 0;
+	}
+
+	&.searching{
+
+		.loader{
+			display: block;
+		}
+
+		table{
+			opacity: 0.2;
 		}
 	}
+
+	.loader{
+		display: none;
+	}
+
+	.loader{
+
+		position: absolute;
+		left: 50%;
+		top: 50%;
+
+		i{
+			position: relative;
+			width: 60px;
+			height: 60px;
+			left: -30px;
+			top: -30px;
+		}
+	}
+
+
+	/*> .content{
+		height: 0;
+		padding-right: 30px;
+		overflow-y: scroll;
+	}*/
+
+	header{
+		height: 100px;
+		position: relative;
+		
+		i{
+			margin: 0 auto;
+			fill: $darkgrey;
+
+
+			&.spotify{
+				width: 37px;
+				height: 37px;
+
+			}
+
+			&.soundcloud{
+				width: 62px;
+				height: 62px;
+
+			}
+		}
+	}
+
+	.tracks{
+		position: relative;
+		height: 0;
+		margin-bottom: 20px;
+		padding-right: 30px;
+		overflow-y: scroll;
+
+		table{
+			transition: opacity 150ms linear;
+		}
+
+		/*&::-webkit-scrollbar-track{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			background-color: #F5F5F5;
+		}*/
+
+		&::-webkit-scrollbar-thumb{
+			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+			border-radius: 10px;
+			background-color: #F00;
+		}
+	}
+
+	.track{
+		height: 45px;
+		border-bottom: 1px solid $midgrey;
+
+		&:hover{
+			background-color: $midgrey;
+
+			button{
+				visibility: visible;
+			}
+		}
+
+		td{
+			padding: 0 0 0 10px;
+		}
+
+		button{
+			visibility: hidden;
+			width: 20px;
+			height: 20px;
+
+			i{
+				fill: $blue;
+			}
+		}
+	}
+
+	.track-details{
+		position: relative;
+		overflow: hidden;
+
+		span{
+			position: absolute;
+			top: 0;
+			left: 0;
+			white-space: nowrap;
+		}
+	}
+}
+
+
+.pagination{
+	text-align: center;
+	width: 100%;
+
+	li{
+		display: inline-block;
+	}
+}
 
 [data-service].loading{
 	opacity: 0.2;

@@ -1,26 +1,44 @@
 module.exports = Marionette.ItemView.extend({
 
-	tagName: 'li',
+	tagName: 'tr',
+
+    className: 'track',
+    
 	template: require('../templates/view-search-tracks.hbs'),
 
-	events:{
-		"click [role='add-to-queue']" : "_addToQueue"
-	},	
+    events: {
+    	'click .add-to-queue': '_onAddToQueue',
+        'click .add-to-playlist': '_onAddToPlaylist'
+	},
 
-	_addToQueue:function(){
-		
-		/*
-		_addToQueue
-		PAYLOAD object accepts source_id, source_type
-		Triggers a queue:add event with payload and id
-		*/
+	_onAddToQueue: function(){
 
-		var payload = {
-			source_id: this.model.get('source_id'),
-			source_type: this.model.get('source_type')
-		};
+        this.trigger('search:queues:add');
+    },
 
-		dispatcher.trigger('queue:add', payload, null);
+    _onAddToPlaylist: function(){
 
-	}
+
+        this.trigger('search:playlists:add');
+
+    	// console.log('this model', this.model);
+
+     //    var urlRegex = /api\/playlists\/(.*)\/tracks\/(.*)\//,
+     //        url = this.model.url();
+
+     //    console.log(this.model.url());
+
+     //    console.log( this.model.url().match(urlRegex));
+
+     //    var data = {
+     //        playlist: url.match(urlRegex)[1],
+     //        track: this.model.get('track').id
+     //    };
+
+     //    dispatcher.trigger('search:onAddToPlaylist', data);
+    },
+
+    _onRemoveFromPlaylist: function(){
+        this.trigger('playlists:tracks:remove', this.model);
+    }
 });

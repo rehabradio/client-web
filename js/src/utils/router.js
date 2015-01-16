@@ -1,4 +1,10 @@
-var Backbone = require('backbone');
+/**
+* 
+* Provides first level routing.
+*
+* @class Router
+* @extends Application
+*/
 
 var Router = Backbone.Router.extend({
 

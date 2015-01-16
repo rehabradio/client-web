@@ -1,0 +1,61 @@
+nav{
+	margin: 30px 0;
+
+	ul{
+		text-align: center;
+	}
+
+	li{
+		display: inline-block;
+
+	}
+
+	.btn{
+		padding: 8px 20px 8px 60px;
+		overflow: visible;
+		background-color: transparent;
+		line-height: normal;
+		color: $blue;
+
+		&:before, &:after{
+			background-color: transparent;
+		}
+
+		/*&:before{
+			display: block;
+			position: absolute;
+			top: -100%;
+			left: 0;
+			width: 100%;
+			height: 300%;
+			content: '';
+			background-color: transparent;
+			border-radius: 100%;
+			z-index: -1;
+		}
+
+		&:after{
+			display: none;
+		}*/
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			&:before, &:after{
+				background-color: $orange;
+			}
+
+			i{
+				fill: $white;
+			}
+		}
+
+		i{
+			position: absolute;
+			top: 6px;
+			left: 18px;
+			width: 20px;
+		}
+	}
+}
