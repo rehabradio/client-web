@@ -48,8 +48,12 @@ module.exports = Marionette.Controller.extend({
 
 		this.auth = new Auth();
 
-		this.listenTo(this.auth, 'login:status:signedin', this._setupAppData, this);
-		this.listenTo(this.auth, 'login:status:signedout', this._setupAppLogin, this);
+		this.listenTo(dispatcher, 'auth:signedin', function(){
+			this.auth.trigger('auth:signin');
+		}, this);
+
+		this.listenTo(this.auth, 'auth:status:signedin', this._setupAppData, this);
+		this.listenTo(this.auth, 'auth:status:signedout', this._setupAppLogin, this);
 
 		// this.login = new Login();
 
@@ -174,9 +178,9 @@ module.exports = Marionette.Controller.extend({
 
 		var login = new Login();
 
-		this.listenTo(login, 'login:signin', function(){
-			this.auth.signin();
-		});
+		// this.listenTo(login, 'login:signin', function(){
+		// 	this.auth.signin();
+		// });
 
 		this.layout.appContent.show(login.show());
 	}

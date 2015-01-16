@@ -9,6 +9,6 @@ module.exports = Marionette.ItemView.extend({
     },
 
     _onSignIn: function(){
-        this.trigger('login:signin');
+    	dispatcher.trigger('auth:signin');
     }
 });

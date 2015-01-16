@@ -64,10 +64,10 @@ module.exports = Marionette.Controller.extend({
 
     onStatusChange: function(){
     	if(this.model.get('signedin')){
-    		this.trigger('login:status:signedin');
+    		this.trigger('auth:status:signedin');
 
     	}else{
-            this.trigger('login:status:signedout');
+            this.trigger('auth:status:signedout');
 
     	}
     }
