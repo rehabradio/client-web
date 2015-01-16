@@ -47,26 +47,12 @@ module.exports = Marionette.Controller.extend({
 
 		this.login = new Login();
 
-		this.listenTo(this.login, 'login:status:signedin', this._setupAppData, this);
+		this.once(this.login, 'login:status:signedin', this._setupAppData, this);
 
 		this.listenTo(this.login, 'login:status:signedout', function(){
 			this.layout.appContent.show(this.login.show());
 		});
 
-		//
-
-
-		// this.listenTo(dispatcher, 'login:status', this.setLoginStatus, this);
-		
-		// this.listenTo(this.model, 'change:loginStatus', function(model){
-		// 	if(model.get('loginStatus')){
-		// 		var datastorePreloading = this._fetchData();
-
-		// 		$.when(datastorePreloading).then(function() {
-		// 			this.startApp();
-	 //            }.bind(this));
-		// 	}
-		// });
 	},
 
 	_fetchData: function(){

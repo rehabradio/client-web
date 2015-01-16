@@ -62,14 +62,17 @@ module.exports = Marionette.Controller.extend({
     },
 
     _onClientLoad: function(){
-        gapi.client.plus.people.get( {'userId' : 'me'} ).execute(this._authorizeUsers.bind(this));
+        gapi.client.plus.people.get( {'userId' : 'me'} ).execute(this._authoriseUsers.bind(this));
     },
 
-    _authorizeUsers: function(res){
+    isAuthorised: false,
+
+    _authoriseUsers: function(res){
 
         for(var i in res.emails){
             // If one of the emails stored on the users google+ account is a rehabstudio
             if(/@rehabstudio\.com/.test(res.emails[i].value)){
+                this.isAuthorised = true;
                 // initialise the app
                 this.trigger('login:status:signedin', res.result);
                 break;
