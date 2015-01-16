@@ -126,8 +126,6 @@ module.exports = Marionette.Controller.extend({
 	
 		var self = this;
 
-		self._fetchData();
-
 		/*
 		 *	Stores global information for the app. Examples include login information and queue information
 		 */
