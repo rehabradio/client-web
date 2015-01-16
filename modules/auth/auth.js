@@ -12,15 +12,15 @@ module.exports = Marionette.Controller.extend({
 	initialize: function(){
 		this.listenTo(this.model, 'change:signedin', this.onStatusChange, this);
 	    this.signIn();
-	    this.listenTo(this, 'auth:signedin', this.signedin, this);
-	    this.listenTo(this, 'auth:signedout', this.signedout, this);
+	    this.listenTo(this, 'auth:signedin', this.signin, this);
+	    this.listenTo(this, 'auth:signedout', this.signout, this);
 	},
 
-    signIn: function(){
+    signin: function(){
 		gapi.auth.signIn({callback: this.checkLoginStatus.bind(this)});
 	},
 
-    signOut: function(){     
+    signout: function(){     
         gapi.auth.signOut();
         window.location.reload();
     },
