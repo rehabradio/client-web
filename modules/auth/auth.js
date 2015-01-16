@@ -1,6 +1,6 @@
 var Model = Backbone.Model.extend({
 	defaults: {
-		signedin: false,
+		signedin: null,
 		profile: null
 	}
 });
@@ -45,7 +45,7 @@ module.exports = Marionette.Controller.extend({
             // If one of the emails stored on the users google+ account is a rehabstudio
             if(/@rehabstudio\.com/.test(res.emails[i].value)){
                 // initialise the app
-                
+
                 this.model.set('profile', res);
                 this.model.set('signedin', true);
                 break;
