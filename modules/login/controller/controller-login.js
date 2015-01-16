@@ -65,8 +65,6 @@ module.exports = Marionette.Controller.extend({
         gapi.client.plus.people.get( {'userId' : 'me'} ).execute(this._authoriseUsers.bind(this));
     },
 
-    isAuthorised: false,
-
     _authoriseUsers: function(res){
 
         for(var i in res.emails){

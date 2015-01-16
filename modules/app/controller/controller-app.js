@@ -47,7 +47,7 @@ module.exports = Marionette.Controller.extend({
 
 		this.login = new Login();
 
-		this.once(this.login, 'login:status:signedin', this._setupAppData, this);
+		this.login.once('login:status:signedin', this._setupAppData, this);
 
 		this.listenTo(this.login, 'login:status:signedout', function(){
 			this.layout.appContent.show(this.login.show());
