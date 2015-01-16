@@ -9,6 +9,7 @@ var modelApp = require('../models/models-app'); // Already initialised
 var AppLayout = require('../views/layout-app');
 var AppRouter = require('../../core/router/router');
 
+var Auth = require('../../auth/auth');
 var Login = require('../../login/controller/controller-login');
 
 var AppContent = require('../views/layout-app-content');
@@ -45,13 +46,18 @@ module.exports = Marionette.Controller.extend({
 
 		this.layout.render();
 
-		this.login = new Login();
+		this.auth = new Auth();
 
-		this.login.once('login:status:signedin', this._setupAppData, this);
+		this.listenTo(this.auth, 'login:status:signedin', this._setupAppData, this);
+		this.listenTo(this.auth, 'login:status:signedout', this._destroyApp, this);
 
-		this.listenTo(this.login, 'login:status:signedout', function(){
-			this.layout.appContent.show(this.login.show());
-		});
+		// this.login = new Login();
+
+		// this.login.once('login:status:signedin', this._setupAppData, this);
+
+		// this.listenTo(this.login, 'login:status:signedout', function(){
+		// 	this.layout.appContent.show(this.login.show());
+		// });
 
 	},
 
@@ -70,7 +76,7 @@ module.exports = Marionette.Controller.extend({
 		return deferred;
 	},
 
-	_setupAppData: function(user){
+	_setupAppData: function(){
 
 		$.ajaxSetup({
             headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
@@ -82,9 +88,9 @@ module.exports = Marionette.Controller.extend({
 			this.startApp();
         }.bind(this));
 
-		this.model.set('url', user.url);
-		this.model.set('displayName', user.displayName);
-		this.model.set('image', user.image.url);
+		this.model.set('url', this.auth.model.get('url'));
+		this.model.set('displayName', this.auth.model.get('displayName'));
+		this.model.set('image', this.auth.model.get('image.url'));
 		this.model.set('loginStatus', true);
 	},
 
@@ -160,6 +166,14 @@ module.exports = Marionette.Controller.extend({
 	_onPerformSearch: function(query){
         this.router.navigate('search/?query=' + query, {trigger: false});
 		this.appContent.main.show( new this.viewModules.search(query).show() );
+	},
+
+	_destroyApp: function(){
+		dataStore.playlistsCollection.reset();
+		dataStore.queuesCollection.reset();
+
+		this.login = new Login();
+		this.layout.appContent.show(this.login.show());
 	}
 
 });
