@@ -1,7 +1,7 @@
 var SearchLayout        = require('../views/layout-search'),
     SearchModel         = require('../models/models-search'),
     SearchCollection    = require('../collections/collections-search'),
-    ViewSearchForm     = require('../views/view-search-form'),
+    ViewSearchForm      = require('../views/view-search-form'),
     searchServiceView   = require('../views/view-search-service');
 
 /*
@@ -132,10 +132,20 @@ module.exports = Marionette.Controller.extend({
     _onAddToQueue: function(view){
 
         /*
-         *  Add the track to the meta data before opening the add-to-queue modal. The function to open the modal is triggered by the ajax promise callback 
+         *  Trigger the 'add-to-queue' modal, create an xhr object and pass it as the request param.
          */
 
-        API.Meta.addTrack(view.model.attributes, this.createQueueModal.bind(this) );
+
+        var Model = Backbone.Model.extend({});
+
+        this.modalAddQueue = new this.modals.queues.addTrack({
+            request: API.Meta.addTrack(view.model.attributes),
+            collection: dataStore.queuesCollection
+        });
+
+        this.layout.modalContainer.show(this.modalAddQueue);
+        this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
+
     },
 
     _onAddToPlaylist:function(view){
@@ -144,34 +154,17 @@ module.exports = Marionette.Controller.extend({
          *  Add the track to the meta data before opening the add-to-playlist modal. The function to open the modal is triggered by the ajax promise callback 
          */
 
-       API.Meta.addTrack(view.model.attributes, this.createPlaylistModal.bind(this) );
-
-    },
-
-    createQueueModal: function(response){
-
-        var Model = Backbone.Model.extend({});
-
-        this.modalAddQueue = new this.modals.queues.addTrack({
-            collection: dataStore.queuesCollection,
-            model: new Model({track: response.id})
-        });
-
-        this.layout.modalContainer.show(this.modalAddQueue);
-        this.layout.listenTo(this.modalAddQueue, 'queues:tracks:add', API.Queues.addTrackToQueue, this);
-    },
-
-    createPlaylistModal:function(response){
-
         var Model = Backbone.Model.extend();
 
         this.modalAddPlaylist = new this.modals.playlists.addTrack({
-            collection: dataStore.playlistsCollection,
-            model: new Model({track: response.id})
+            request: API.Meta.addTrack(view.model.attributes),
+            collection: dataStore.playlistsCollection
+            // model: new Model({track: response.id})
         });
 
         this.layout.modalContainer.show(this.modalAddPlaylist);
         this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
+       // API.Meta.addTrack(view.model.attributes, this.createPlaylistModal.bind(this) );
 
     },
 

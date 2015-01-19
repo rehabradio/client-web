@@ -11,6 +11,10 @@ module.exports = Marionette.ItemView.extend({
     	console.log('modal save');
     },
 
+    initialize: function(options){
+    	this.request = options.request;
+    },
+
 	serializeData: function(){
 		
 		/*
@@ -29,14 +33,13 @@ module.exports = Marionette.ItemView.extend({
 
 		for(var i in formData){
 
-			console.log(this.model);
+			(function(queue){
+				this.request.done(function(response){
 
-			data = {
-				queue: formData[i].name,
-				track: this.model.get('track')
-			};
-
-			this.trigger('queues:tracks:add', data);
+					this.trigger('queues:tracks:add', {queue: queue, track: response.id});
+					
+				}.bind(this));
+			}.bind(this))(formData[i].name);
 		}
 
 		this.remove();

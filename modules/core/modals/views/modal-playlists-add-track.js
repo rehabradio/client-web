@@ -7,15 +7,17 @@ module.exports = Marionette.ItemView.extend({
 		'click .save': '_onSavePlaylist'
 	},
 	
-	initialize: function(){
+    initialize: function(options){
+
+    	this.request = options.request;
 
 		/*
 		 *	Filter the collection to exclude the currently displayed playlist
 		 */
 
-		var self = this;
+		var owner = dataStore.appModel.get('displayName');
 
-		this.playlists = _.filter(this.collection.toJSON(), function(element){ return element.id !== parseInt(self.model.get('playlist')); });
+		this.playlists = _.filter(this.collection.toJSON(), function(e){ return e.owner === owner });
 
 	},
 
@@ -28,17 +30,17 @@ module.exports = Marionette.ItemView.extend({
 
 	_onSavePlaylist: function(){
 
-		var formData = this.$el.find('form').serializeArray(),
-			data = {};
+		var formData = this.$el.find('form').serializeArray();
 
 		for(var i in formData){
 
-			data = {
-				playlist: formData[i].name,
-				track: this.model.get('track')
-			};
+			(function(playlist){
+				this.request.done(function(response){
 
-			this.trigger('playlist:tracks:add', data);
+					this.trigger('playlist:tracks:add', {playlist: playlist, track: response.id});
+					
+				}.bind(this));
+			}.bind(this))(formData[i].name);
 		}
 
 		this.remove();

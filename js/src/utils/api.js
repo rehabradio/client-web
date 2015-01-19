@@ -20,6 +20,8 @@ Api.prototype.Queues = {
 		* @param {Object} data Queue ID (queue) and Track ID (track)
 		*/
 
+		debugger;
+
 		$.ajax({
 			type: 'POST',
 			url: window.API_ROOT + 'queues/' + data.queue + '/tracks/',
@@ -35,7 +37,8 @@ Api.prototype.Queues = {
 };
 
 Api.prototype.Meta = {
-	addTrack:function(model, callback){
+
+	addTrack:function(model){
 		/**
 		* Sends a request to server to store a track information. This must be done before a track can be added to a queue/playlist 
 		*
@@ -52,9 +55,10 @@ Api.prototype.Meta = {
 			data: {source_id : model.source_id, source_type: model.source_type}
 		});
 
-		xhr.done(function(data){
-			callback(data);
-		});
+		return xhr;
+		// xhr.done(function(data){
+		// 	callback(data);
+		// });
 	}
 }
 
@@ -69,6 +73,8 @@ Api.prototype.Playlists = {
 		* @param {Object} data Queue ID and Track ID
 		* @for API
 		*/
+
+		debugger;
 
 		$.ajax({
 			type: 'POST',

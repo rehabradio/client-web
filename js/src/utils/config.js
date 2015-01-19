@@ -60,3 +60,13 @@ Handlebars.registerHelper('icon', function(data) {
 	return new Handlebars.SafeString('<svg viewBox="0 0 100 100" class="icon ' + data + '"><use xlink:href="#' + data + '"></use></svg>')
 });
 
+Handlebars.registerHelper('trackduration', function(duration_ms) {
+
+	debugger;
+	var milli2seconds = parseInt(Number(duration_ms) / 1000),
+		minutes = parseInt(milli2seconds / 60),
+		seconds = Math.floor(milli2seconds % 60);
+
+	return minutes + ':' + ((seconds.toString().length === 0) ? '0' + seconds : seconds);
+});
+
