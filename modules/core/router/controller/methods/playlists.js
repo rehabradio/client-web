@@ -2,7 +2,6 @@
 
 module.exports = {
 	showPlaylists:function(){
-		
 		dispatcher.trigger('router:showModule', 'playlists');
 	},
 

@@ -107,6 +107,7 @@ module.exports = Marionette.Controller.extend({
 	
 		var self = this;
 
+
 		/*
 		 *	Stores global information for the app. Examples include login information and queue information
 		 */
@@ -130,6 +131,24 @@ module.exports = Marionette.Controller.extend({
 		 */
 
 		console.log('booting views...');
+
+		if(!Backbone.History.started){
+			Backbone.history.start({ pushState: true, trigger: true });
+		}else{
+
+			if(Backbone.history.fragment.indexOf('playlists') > -1){
+				this._showModule('playlists');
+
+			}else if(Backbone.history.fragment.indexOf('queues') > -1){
+				this._showModule('queues');
+
+			}else if(Backbone.history.fragment.indexOf('profile') > -1){
+				this._showModule('profile');
+				
+			}else if(Backbone.history.fragment.indexOf('search') > -1){
+				this._showModule('search');			
+			}
+		}
 
 		new this.coreModules.player(this);
 		new this.coreModules.navigation(this);

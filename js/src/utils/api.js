@@ -20,8 +20,6 @@ Api.prototype.Queues = {
 		* @param {Object} data Queue ID (queue) and Track ID (track)
 		*/
 
-		debugger;
-
 		$.ajax({
 			type: 'POST',
 			url: window.API_ROOT + 'queues/' + data.queue + '/tracks/',
@@ -73,8 +71,6 @@ Api.prototype.Playlists = {
 		* @param {Object} data Queue ID and Track ID
 		* @for API
 		*/
-
-		debugger;
 
 		$.ajax({
 			type: 'POST',
