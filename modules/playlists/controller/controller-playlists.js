@@ -226,21 +226,14 @@ module.exports = Marionette.Controller.extend({
 		 *	Initialise the Add To Playlist modal
 		 */
 
-		var self = this;
-
-		var modelPlaylistAdd = new ModelPlaylistAdd({
-			playlist: data.playlist,
-			track: data.track
-		});
-
 		var playlistAddTrackModal = new PlaylistsAddTrackModal({
-			model: modelPlaylistAdd,
+			request: $.Deferred().resolve({id: data.track}), //
 			collection: dataStore.playlistsCollection
 		});
 
-		self.layout.modalContainer.show(playlistAddTrackModal);
+		this.layout.modalContainer.show(playlistAddTrackModal);
 
-		self.layout.listenTo(playlistAddTrackModal, 'playlist:tracks:add', this.API.Playlists.addTrackToPlaylist);
+		this.layout.listenTo(playlistAddTrackModal, 'playlist:tracks:add', this.API.Playlists.addTrackToPlaylist);
 	},
 
 	_onAddToQueue: function(id){
@@ -249,12 +242,13 @@ module.exports = Marionette.Controller.extend({
 		 *	Initialise the Add To Queue modal
 		 */
 
-		var modelPlaylistQueue = new ModelPlaylistQueue({
-			track: id
-		});
+		// var modelPlaylistQueue = new ModelPlaylistQueue({
+		// 	track: id
+		// });
 
 		var modalAddQueue = new QueuesAddTrackModal({
-			model: modelPlaylistQueue,
+			// model: modelPlaylistQueue,
+			request: $.Deferred().resolve({id: id}), //
 			collection: dataStore.queuesCollection
 		});
 

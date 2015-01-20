@@ -579,7 +579,9 @@ nav {
     padding-left: 12px; }
   .module-queues .track button {
     visibility: hidden;
-    margin: 0 12px 0 0; }
+    margin: 0 12px 0 0;
+    width: 20px;
+    height: 20px; }
   .module-queues .track:hover {
     background-color: #E7564D;
     color: #FFFFFF; }

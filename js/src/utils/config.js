@@ -62,7 +62,6 @@ Handlebars.registerHelper('icon', function(data) {
 
 Handlebars.registerHelper('trackduration', function(duration_ms) {
 
-	debugger;
 	var milli2seconds = parseInt(Number(duration_ms) / 1000),
 		minutes = parseInt(milli2seconds / 60),
 		seconds = Math.floor(milli2seconds % 60);
