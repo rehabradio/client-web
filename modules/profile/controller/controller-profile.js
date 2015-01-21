@@ -1,7 +1,6 @@
-var LayoutProfile = require('../views/layout-profile');
-var ViewProfileInfo = require('../views/view-profile-info');
-var ViewProfileActivity = require('../views/view-profile-activity');
-var ModelProfileInfo = require('../models/model-profile');
+var LayoutProfile = require('../views/layout-profile'),
+	ViewProfileInfo = require('../views/view-profile-info'),
+	ViewProfileActivity = require('../views/view-profile-activity');
 
 module.exports = Marionette.Controller.extend({
 
@@ -28,8 +27,7 @@ module.exports = Marionette.Controller.extend({
 
 	onShow: function(){
 
-		var modelProfileInfo = new ModelProfileInfo();
-		var viewProfileInfo = new ViewProfileInfo({model: modelProfileInfo});
+		var viewProfileInfo = new ViewProfileInfo({model: dataStore.appModel});
 
 		this.layout.info.show(viewProfileInfo);
 

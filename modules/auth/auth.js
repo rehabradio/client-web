@@ -5,7 +5,7 @@ var Model = Backbone.Model.extend({
 	}
 });
 
-module.exports = Marionette.Controller.extend({
+module.exports = Marionette.Object.extend({
 
 	model: new Model(),
 

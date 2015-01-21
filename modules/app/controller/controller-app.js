@@ -132,6 +132,11 @@ module.exports = Marionette.Controller.extend({
 
 		console.log('booting views...');
 
+
+		new this.coreModules.player(this);
+		new this.coreModules.navigation(this);
+		new this.coreModules.quicksearch(this);
+
 		if(!Backbone.History.started){
 			Backbone.history.start({ pushState: true, trigger: true });
 		}else{
@@ -150,13 +155,13 @@ module.exports = Marionette.Controller.extend({
 			}
 		}
 
-		new this.coreModules.player(this);
-		new this.coreModules.navigation(this);
-		new this.coreModules.quicksearch(this);
+
 
 	},
 
 	_changeModule:function(module, data){
+
+		dispatcher.trigger('navigation:ui:update', module);
 
         this.router.navigate(module, {trigger: false});
 		this.appContent.main.show( new this.viewModules[module]().show() );
@@ -164,6 +169,8 @@ module.exports = Marionette.Controller.extend({
     },
 
 	_showModule:function(module, data){
+		
+		dispatcher.trigger('navigation:ui:update', module);
 		this.appContent.main.show( new this.viewModules[module](data).show() );
 	},
 

@@ -38,7 +38,6 @@ dataStore = require('./dataStore');
  */
 
 var range = require('../components/range/range');
-var button = require('../components/button/button');
 
 /*
  *	Use Mock data by including the 'debug' param in the URL
@@ -65,6 +64,6 @@ Handlebars.registerHelper('trackduration', function(duration_ms) {
 		minutes = parseInt(milli2seconds / 60),
 		seconds = Math.floor(milli2seconds % 60);
 
-	return minutes + ':' + ((seconds.toString().length === 0) ? '0' + seconds : seconds);
+	return minutes + ':' + ((seconds.toString().length === 1) ? '0' + seconds :  seconds);
 });
 

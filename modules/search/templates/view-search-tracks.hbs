@@ -6,15 +6,14 @@
 {{/if}}
 </td> -->
 <td class="track-details" title="{{name}}{{#if artist.[0].name }} - {{artists.[0].name}}{{/if}}{{#if artists.[0].name }} - {{artists.[0].name}} {{/if}}{{#if album.name }} - {{album.name}}{{/if}}">
-	<!-- {{name}}{{#if artist.[0].name }} - {{artists.[0].name}}{{/if}}{{#if artists.[0].name }} - {{artists.[0].name}} {{/if}}{{#if album.name }} - {{album.name}}{{/if}} -->
 	{{details}}
 </td>
 <td class="track-duration">
 	{{trackduration duration_ms}}
 </td>
-<td>
+<td class="track-control">
 	<button type="button" class="orange add-to-queue"><i>{{icon 'icon-queues-add'}}</i></button>
 </td>
-<td>
+<td class="track-control">
 	<button type="button" class="orange add-to-playlist"><i>{{icon 'icon-playlists'}}</i></button>
 </td>

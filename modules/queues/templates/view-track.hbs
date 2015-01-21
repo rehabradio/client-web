@@ -1,10 +1,6 @@
 <td class="track-details">
-	<h4>{{track.name}}</h4>
-	<h5>{{track.album.name}}</h5>
-	{{#if track.artists}}
-		<h6>{{track.artists.[0].name}}</h6>
-	{{/if}}
+	<span title="{{title}}">{{titleTruncated}}</span>
 </td>
-<td>
+<td class="track-control">
 	<button type="button" class="remove-from-queue" title="Remove track from playlists"><i>{{icon 'icon-trash'}}</i></button>
 </td>

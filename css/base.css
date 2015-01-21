@@ -27,8 +27,8 @@ h1, h2, h3, h4, h5, h6 {
 
 
 h2 {
-  margin: 0 0 4px 0;
-  color: #E7564D; }
+  margin: 0 0 24px 0;
+  color: #000000; }
 
 h3 {
   font-size: 13px;
@@ -54,6 +54,11 @@ body {
     height: 100px;
     left: -50px;
     top: -50px; }
+
+main {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto; }
 
 a {
   color: #5373F7;
@@ -130,16 +135,15 @@ fieldset label {
 
 .btn {
   position: relative;
-  height: 33px;
-  margin: 0 6px;
+  height: 28px;
+  margin: 0;
   padding: 0 20px;
   background-color: #E7564D;
   border: none;
-  border-radius: 6px/20px;
+  border-radius: 8px/20px;
   outline: none;
   overflow: visible;
-  color: #FFFFFF;
-  line-height: 33px; }
+  color: #FFFFFF; }
   .btn i {
     width: 20px;
     fill: #5373F7; }
@@ -150,7 +154,6 @@ fieldset label {
     cursor: pointer; }
     .btn:hover i {
       fill: #FFFFFF; }
-
 
 .close {
   position: absolute;
@@ -202,12 +205,46 @@ form .group input[type="submit"], form .group button {
   line-height: 33px;
   padding: 0 20px; }
 
+.tracks .track {
+  border-bottom: 2px solid #2c2c2c; }
+  .tracks .track:hover {
+    background-color: #d0d0d0;
+    color: #000000; }
+    .tracks .track:hover button {
+      visibility: visible; }
+  .tracks .track td {
+    padding: 6px 0 4px; }
+  .tracks .track .track-details {
+    padding-left: 12px; }
+  .tracks .track button {
+    margin: 0 12px 0 0;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    visibility: hidden;
+    fill: #5373F7; }
+    .tracks .track button:before, .tracks .track button:after {
+      display: none; }
+    .tracks .track button:hover {
+      background-color: transparent; }
+      .tracks .track button:hover i {
+        fill: #FFFFFF; }
+    .tracks .track button i {
+      width: 20px;
+      height: 20px; }
+  .tracks .track .coverart {
+    display: block;
+    margin: 0 10px 0 0;
+    width: 40px;
+    background-image: url(/img/album.png); }
+.tracks .track-control {
+  width: 32px; }
+
 .page-header {
   position: relative;
   display: block;
   width: 100%;
-  height: 117px;
-  padding: 33px 20px;
+  height: 98px;
   background-color: #2c2c2c;
   z-index: 1;
   /*.player{
@@ -254,13 +291,13 @@ form .group input[type="submit"], form .group button {
   .page-header .user {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 72px;
     width: 30%;
     max-width: 358px;
-    padding: 36px 0;
+    padding: 18px 0 0;
     overflow: hidden; }
     .page-header .user img {
-      margin: 0 10px 0;
+      margin: 0;
       height: 50px;
       float: left;
       border: 2px solid #FFFFFF;
@@ -314,57 +351,110 @@ nav {
   nav li {
     display: inline-block; }
   nav .btn {
-    padding: 8px 20px 8px 60px;
+    padding: 0 20px 0 60px;
     overflow: visible;
     background-color: transparent;
-    line-height: normal;
-    color: #5373F7;
-    /*&:before{
-			display: block;
-			position: absolute;
-			top: -100%;
-			left: 0;
-			width: 100%;
-			height: 300%;
-			content: '';
-			background-color: transparent;
-			border-radius: 100%;
-			z-index: -1;
-		}
-
-		&:after{
-			display: none;
-		}*/ }
+    color: #5373F7; }
     nav .btn:before, nav .btn:after {
       background-color: transparent; }
-    nav .btn:hover {
+    nav .btn:hover, nav .btn.active {
       background-color: #E7564D;
       color: #FFFFFF; }
-      nav .btn:hover:before, nav .btn:hover:after {
+      nav .btn:hover:before, nav .btn:hover:after, nav .btn.active:before, nav .btn.active:after {
         background-color: #E7564D; }
-      nav .btn:hover i {
+      nav .btn:hover i, nav .btn.active i {
         fill: #FFFFFF; }
     nav .btn i {
       position: absolute;
       top: 6px;
       left: 18px;
-      width: 20px; }
+      width: 16px; }
 
 .module-player {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100%; }
+  width: 100%;
+  color: #FFFFFF;
+  font-family: 'DIN Web Light', sans-serif;
+  font-size: 14px; }
   .module-player .player-control {
-    width: 40%;
+    position: relative;
+    width: 35%;
     margin: 0 auto;
-    padding: 36px 0 0 62px; }
+    padding: 20px 0; }
+  .module-player .playbar {
+    position: relative; }
+  .module-player .player-info {
+    font-weight: 300;
+    text-align: center;
+    word-wrap: nowrap; }
+  .module-player .playbar-offset {
+    width: 85%;
+    margin: 0 auto; }
   .module-player input[type="range"] {
     width: 100%; }
+  .module-player .track-time {
+    position: absolute;
+    left: 0;
+    top: 10px; }
+    .module-player .track-time.total-time {
+      text-align: right;
+      right: 0; }
 
 .module-playlists {
   overflow: hidden;
-  /*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/ }
+  /*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/
+  /*.track{
+		border-bottom: 2px solid $darkgrey;
+
+		td{
+			padding: 6px 0 4px;
+		}
+
+		.track-details{
+			padding-left: 12px;
+		}
+
+		button{
+			visibility: hidden;
+			margin: 0 12px 0 0;
+			padding: 0;
+
+			&:before, &:after{
+				display: none;
+			}
+
+			&:hover{
+				background-color: transparent;
+
+				i{
+					fill: $white;
+				}
+			}
+
+			i{
+				width: 20px;
+				height: 20px;
+			}
+		}
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			button{
+				visibility: visible;
+			}
+		}
+
+		.coverart{
+			display: block;
+			margin: 0 10px 0 0;
+			width: 40px;
+			background-image: url(/img/album.png);
+		}
+	}*/ }
   .module-playlists > .content {
     padding: 0 20px 62px;
     overflow: hidden; }
@@ -446,149 +536,146 @@ nav {
         fill: #FFF; }
       .module-playlists .playlist .playlist-view:hover i {
         display: block; }
-  .module-playlists .track {
-    border-bottom: 2px solid #2c2c2c; }
-    .module-playlists .track td {
-      padding: 6px 0 4px; }
-    .module-playlists .track .track-details {
-      padding-left: 12px; }
-    .module-playlists .track button {
-      visibility: hidden;
-      margin: 0 12px 0 0;
-      padding: 0; }
-      .module-playlists .track button:before, .module-playlists .track button:after {
-        display: none; }
-      .module-playlists .track button:hover {
-        background-color: transparent; }
-        .module-playlists .track button:hover i {
-          fill: #FFFFFF; }
-      .module-playlists .track button i {
-        width: 20px;
-        height: 20px; }
-    .module-playlists .track:hover {
-      background-color: #E7564D;
-      color: #FFFFFF; }
-      .module-playlists .track:hover button {
-        visibility: visible; }
-    .module-playlists .track .coverart {
-      display: block;
-      margin: 0 10px 0 0;
-      width: 40px;
-      background-image: url(/img/album.png); }
   .module-playlists .details {
     float: left; }
 
 .module-profile {
-  overflow: hidden; }
-  .module-profile > .content {
+  position: relative; }
+  .module-profile .profile-info {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 344px; }
+  .module-profile .profile-image {
+    margin: 0 0 18px; }
+    .module-profile .profile-image img {
+      display: block;
+      width: 100%;
+      max-width: 164px;
+      margin: 0 auto; }
+  .module-profile .profile-name {
+    display: block;
+    color: #5373F7;
+    text-align: center;
+    font-size: 16px; }
+  .module-profile .profile-activity {
+    width: 100%;
+    padding: 0 0 0 344px; }
+
+.module-queues {
+  /*.track{
+		border-bottom: 2px solid $darkgrey;
+
+		td{
+			padding: 6px 0 4px;
+		}
+
+		.track-details{
+			padding-left: 12px;
+		}
+
+		button{
+			visibility: hidden;
+			margin: 0 12px 0 0;
+			width: 20px;
+			height: 20px;
+		}
+
+		&:hover{
+			background-color: $orange;
+			color: $white;
+
+			button{
+				visibility: visible;
+			}
+		}
+	}*/ }
+  .module-queues > .content {
+    width: 100%;
     padding: 0 20px 62px;
     overflow: hidden; }
-  .module-profile .column {
+  .module-queues .column {
     width: 50%;
     float: left; }
-
-.module-queues > .content {
-  width: 100%;
-  padding: 0 20px 62px;
-  overflow: hidden; }
-.module-queues .column {
-  width: 50%;
-  float: left; }
-.module-queues .queues {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-align-content: space-around;
-      -ms-flex-line-pack: distribute;
-          align-content: space-around;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-      -ms-flex-align: start;
-          align-items: flex-start; }
-.module-queues .queue {
-  width: 110px;
-  margin: 0 25px 20px 0;
-  -webkit-box-ordinal-group: 1;
-  -webkit-order: 0;
-      -ms-flex-order: 0;
-          order: 0;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 1 auto;
-      -ms-flex: 0 1 auto;
-          flex: 0 1 auto;
-  -webkit-align-self: auto;
-      -ms-flex-item-align: auto;
-          align-self: auto;
-  overflow: hidden; }
-.module-queues .queue-view {
-  position: relative;
-  margin: 0 0 20px 0;
-  width: 110px;
-  height: 110px;
-  overflow: hidden;
-  background-color: #5373F7;
-  outline: none;
-  cursor: pointer; }
-  .module-queues .queue-view .cover-art {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%; }
-  .module-queues .queue-view img {
-    display: block;
-    width: 50%;
-    height: 50%;
-    float: left; }
-  .module-queues .queue-view i {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    background-color: rgba(0, 0, 0, 0.2);
-    display: none; }
-  .module-queues .queue-view .icon {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    width: 50%;
-    fill: #FFF; }
-  .module-queues .queue-view:hover i {
-    display: block; }
-.module-queues .track {
-  border-bottom: 2px solid #2c2c2c; }
-  .module-queues .track td {
-    padding: 6px 0 4px; }
-  .module-queues .track .track-details {
-    padding-left: 12px; }
-  .module-queues .track button {
-    visibility: hidden;
-    margin: 0 12px 0 0;
-    width: 20px;
-    height: 20px; }
-  .module-queues .track:hover {
-    background-color: #E7564D;
-    color: #FFFFFF; }
-    .module-queues .track:hover button {
-      visibility: visible; }
-.module-queues td {
-  padding: 0 0 10px 0; }
+  .module-queues .queues {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-align-content: space-around;
+        -ms-flex-line-pack: distribute;
+            align-content: space-around;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start; }
+  .module-queues .queue {
+    width: 110px;
+    margin: 0 25px 20px 0;
+    -webkit-box-ordinal-group: 1;
+    -webkit-order: 0;
+        -ms-flex-order: 0;
+            order: 0;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+    -webkit-align-self: auto;
+        -ms-flex-item-align: auto;
+            align-self: auto;
+    overflow: hidden; }
+  .module-queues .queue-view {
+    position: relative;
+    margin: 0 0 20px 0;
+    width: 110px;
+    height: 110px;
+    overflow: hidden;
+    background-color: #5373F7;
+    outline: none;
+    cursor: pointer; }
+    .module-queues .queue-view .cover-art {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%; }
+    .module-queues .queue-view img {
+      display: block;
+      width: 50%;
+      height: 50%;
+      float: left; }
+    .module-queues .queue-view i {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-color: rgba(0, 0, 0, 0.2);
+      display: none; }
+    .module-queues .queue-view .icon {
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      fill: #FFF; }
+    .module-queues .queue-view:hover i {
+      display: block; }
+  .module-queues td {
+    padding: 0 0 10px 0; }
 
 .module-quicksearch {
   position: absolute;
@@ -596,7 +683,7 @@ nav {
   right: 0;
   width: 30%;
   max-width: 358px;
-  padding: 33px 0;
+  padding: 22px 0 0;
   background: #2c2c2c;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px; }
@@ -703,7 +790,7 @@ nav {
         color: #000000; }
   .search-dropdown button {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 32px;
     background-color: #FFFFFF;
     font-size: 14px;
     color: #000000; }
@@ -758,12 +845,7 @@ nav {
   float: left;
   padding: 0 20px 0 60px;
   -webkit-transition: opacity 150ms linear;
-          transition: opacity 150ms linear;
-  /*> .content{
-		height: 0;
-		padding-right: 30px;
-		overflow-y: scroll;
-	}*/ }
+          transition: opacity 150ms linear; }
   .search-service.initial {
     opacity: 0; }
   .search-service.searching .loader {
@@ -799,42 +881,12 @@ nav {
     height: 0;
     margin-bottom: 20px;
     padding-right: 30px;
-    overflow-y: scroll;
-    /*&::-webkit-scrollbar-track{
-			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-			border-radius: 10px;
-			background-color: #F5F5F5;
-		}*/ }
+    overflow-y: scroll; }
     .search-service .tracks table {
       -webkit-transition: opacity 150ms linear;
               transition: opacity 150ms linear; }
-    .search-service .tracks::-webkit-scrollbar-thumb {
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-      background-color: #F00; }
   .search-service .track {
-    height: 45px;
-    border-bottom: 1px solid #d0d0d0; }
-    .search-service .track:hover {
-      background-color: #d0d0d0; }
-      .search-service .track:hover button {
-        visibility: visible; }
-    .search-service .track td {
-      padding: 0 0 0 10px; }
-    .search-service .track button {
-      visibility: hidden;
-      width: 20px;
-      height: 20px; }
-      .search-service .track button i {
-        fill: #5373F7; }
-  .search-service .track-details {
-    position: relative;
-    overflow: hidden; }
-    .search-service .track-details span {
-      position: absolute;
-      top: 0;
-      left: 0;
-      white-space: nowrap; }
+    height: 45px; }
 
 .pagination {
   text-align: center;

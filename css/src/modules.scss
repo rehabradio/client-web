@@ -36,34 +36,16 @@ nav{
 	}
 
 	.btn{
-		padding: 8px 20px 8px 60px;
+		padding: 0 20px 0 60px;
 		overflow: visible;
 		background-color: transparent;
-		line-height: normal;
 		color: $blue;
 
 		&:before, &:after{
 			background-color: transparent;
 		}
 
-		/*&:before{
-			display: block;
-			position: absolute;
-			top: -100%;
-			left: 0;
-			width: 100%;
-			height: 300%;
-			content: '';
-			background-color: transparent;
-			border-radius: 100%;
-			z-index: -1;
-		}
-
-		&:after{
-			display: none;
-		}*/
-
-		&:hover{
+		&:hover, &.active{
 			background-color: $orange;
 			color: $white;
 
@@ -80,7 +62,7 @@ nav{
 			position: absolute;
 			top: 6px;
 			left: 18px;
-			width: 20px;
+			width: 16px;
 		}
 	}
 }
@@ -89,15 +71,50 @@ nav{
 	left: 0;
 	top: 0;
 	width: 100%;
+	color: $white;
+
+	font-family: $fontlight;
+	font-size: 14px;
 
 	.player-control{
-		width: 40%;
+		position: relative;
+		width: 35%;
 		margin: 0 auto;
-		padding: 36px 0 0 62px;
+		padding: 20px 0;
+	}
+
+	.playbar{
+		position: relative;
+	}
+
+	.player-info{
+		font-weight: 300;
+		text-align: center;
+		word-wrap: nowrap;
+	}
+
+	.playbar-offset{
+		width: 85%;
+		margin: 0 auto;
 	}
 
 	input[type="range"]{
 		width: 100%;
+	}
+
+	.track-time{
+		position: absolute;
+		left: 0;
+		top: 10px;
+
+		&.elapsed-time{
+
+		}
+
+		&.total-time{
+			text-align: right;
+			right: 0;
+		}
 	}
 }
 .module-playlists{
@@ -185,7 +202,7 @@ nav{
 		}
 	}
 
-	.track{
+	/*.track{
 		border-bottom: 2px solid $darkgrey;
 
 		td{
@@ -234,7 +251,7 @@ nav{
 			width: 40px;
 			background-image: url(/img/album.png);
 		}
-	}
+	}*/
 
 	.details{
 		float: left;
@@ -242,16 +259,36 @@ nav{
 }
 
 .module-profile{
-	overflow: hidden;
+	position: relative;
 
-	> .content{
-		padding: 0 20px 62px;
-		overflow: hidden;
+	.profile-info{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 344px;
 	}
 
-	.column{
-		width: 50%;
-		float: left;
+	.profile-image{
+		margin: 0 0 18px;
+
+		img{
+			display: block;
+			width: 100%;
+			max-width: 164px;
+			margin: 0 auto;
+		}
+	}
+
+	.profile-name{
+		display: block;
+		color: $blue;
+		text-align: center;
+		font-size: 16px;
+	}
+
+	.profile-activity{
+		width: 100%;
+		padding: 0 0 0 344px;
 	}
 }
 .module-queues{
@@ -340,7 +377,7 @@ nav{
 		}
 	}
 
-	.track{
+	/*.track{
 		border-bottom: 2px solid $darkgrey;
 
 		td{
@@ -366,15 +403,8 @@ nav{
 				visibility: visible;
 			}
 		}
-	}
+	}*/
 
-	table{
-
-	}
-
-	tr{
-
-	}
 
 	td{
 		padding: 0 0 10px 0;
@@ -387,7 +417,7 @@ nav{
 	right: 0;
 	width: 30%;
 	max-width: 358px;
-	padding: 33px 0;
+	padding: 22px 0 0;
 	background: $darkgrey;
 	border-bottom-right-radius: 20px;
 	border-bottom-left-radius: 20px;
@@ -548,7 +578,7 @@ nav{
 
 	button{
 		display: block;
-		margin: 0 auto;
+		margin: 0 auto 32px;
 		background-color: $white;
 		font-size: 14px;
 		color: $black;
@@ -667,13 +697,6 @@ nav{
 		}
 	}
 
-
-	/*> .content{
-		height: 0;
-		padding-right: 30px;
-		overflow-y: scroll;
-	}*/
-
 	header{
 		height: 100px;
 		position: relative;
@@ -708,56 +731,10 @@ nav{
 			transition: opacity 150ms linear;
 		}
 
-		/*&::-webkit-scrollbar-track{
-			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-			border-radius: 10px;
-			background-color: #F5F5F5;
-		}*/
-
-		&::-webkit-scrollbar-thumb{
-			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-			border-radius: 10px;
-			background-color: #F00;
-		}
 	}
-
+	
 	.track{
 		height: 45px;
-		border-bottom: 1px solid $midgrey;
-
-		&:hover{
-			background-color: $midgrey;
-
-			button{
-				visibility: visible;
-			}
-		}
-
-		td{
-			padding: 0 0 0 10px;
-		}
-
-		button{
-			visibility: hidden;
-			width: 20px;
-			height: 20px;
-
-			i{
-				fill: $blue;
-			}
-		}
-	}
-
-	.track-details{
-		position: relative;
-		overflow: hidden;
-
-		span{
-			position: absolute;
-			top: 0;
-			left: 0;
-			white-space: nowrap;
-		}
 	}
 }
 
@@ -780,4 +757,3 @@ nav{
 	opacity: 1;
 	pointer-events:auto;
 }
-

@@ -22,6 +22,38 @@ module.exports = BaseCollection.extend({
 		return element.id;
 	},
 
+	parse: function(res){
+
+		var title, track;
+
+		for(var i in res.results){
+
+			title = '';
+			track = res.results[i].track;
+
+			title += track.name;
+
+			if(track.album){
+				title += (' - ' + track.album.name);
+			}
+
+			if(track.artists.length){
+				title += (' - ' + track.artists[0].name);
+			}
+
+			var titleTruncated = title.substring(0, 60);
+			
+			if(title.length > 60){
+				titleTruncated += '…';
+			}
+
+			res.results[i].title = title;
+			res.results[i].titleTruncated = titleTruncated;
+		}
+
+		return res.results;
+	},
+
 
 	update: function(data){
 

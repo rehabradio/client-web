@@ -2,8 +2,7 @@
 	position: relative;
 	display: block;
 	width: 100%;
-	height: 117px;
-	padding: 33px 20px;
+	height: 98px;
 	background-color: $darkgrey;
 	z-index: 1;
 
@@ -14,14 +13,14 @@
 	.user{
 		position: absolute;
 		top: 0;
-		left: 0;
+		left: 72px;
 		width: 30%;
 		max-width: 358px;
-		padding: 36px 0;
+		padding: 18px 0 0;
 		overflow: hidden;
 
 		img{
-			margin: 0 10px 0;
+			margin: 0;
 			height: 50px;
 			float: left;
 			border: 2px solid $white;

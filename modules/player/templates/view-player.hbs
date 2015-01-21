@@ -1,1 +1,11 @@
-<input type="range" is="rs-range" readonly>
+<div class="player-info">
+	{{playerText}}
+</div>
+<div class="playbar">
+	
+	<span class="track-time elapsed-time">{{elapsedTimeReadable}}</span>
+	<div class="playbar-offset">
+		<input type="range" is="rs-range" readonly value="0">
+	</div>
+	<span class="track-time total-time">{{totalTimeReadable}}</span>
+</div>

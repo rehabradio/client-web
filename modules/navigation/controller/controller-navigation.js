@@ -14,7 +14,6 @@ module.exports = BaseContoller.extend({
 
         this.layout.navigation.show( new NavigationView() );
 
-        // dispatcher.trigger(changeModule);
     }
 
 });

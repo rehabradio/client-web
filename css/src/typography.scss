@@ -1,6 +1,9 @@
 @include font-face('DIN Web Light', DINWeb-Light);
 @include font-face('DIN Web Medium', DINWeb-Medium);
 
+$fontlight: 'DIN Web Light', sans-serif;
+$fontmedium: 'DIN Web Medium', sans-serif;
+
 h1, h2, h3, h4, h5, h6{
 	font-weight: 400;
 	margin: 0 0 0.2em 0;
@@ -11,8 +14,8 @@ h1{
 }
 
 h2{
-	margin: 0 0 4px 0;
-	color: $orange;
+	margin: 0 0 24px 0;
+	color: $black;
 }
 
 h3{

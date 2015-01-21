@@ -1,6 +1,8 @@
-{{#if avatar}}
-	<img src="{{avatar}}" alt="{{displayName}}">
-{{else}}
-	<img src="{{image}}" alt="{{displayName}}">
-{{/if}}
-<h3>{{displayName}}</h3>
+<div class="profile-image">
+	{{#if avatar}}
+		<img src="{{avatar}}" alt="{{displayName}}">
+	{{else}}
+		<img src="{{image}}0" alt="{{displayName}}">
+	{{/if}}
+</div>
+<div class="profile-name">{{displayName}}</div>

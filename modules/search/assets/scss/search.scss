@@ -99,13 +99,6 @@
 		}
 	}
 
-
-	/*> .content{
-		height: 0;
-		padding-right: 30px;
-		overflow-y: scroll;
-	}*/
-
 	header{
 		height: 100px;
 		position: relative;
@@ -140,56 +133,10 @@
 			transition: opacity 150ms linear;
 		}
 
-		/*&::-webkit-scrollbar-track{
-			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-			border-radius: 10px;
-			background-color: #F5F5F5;
-		}*/
-
-		&::-webkit-scrollbar-thumb{
-			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-			border-radius: 10px;
-			background-color: #F00;
-		}
 	}
-
+	
 	.track{
 		height: 45px;
-		border-bottom: 1px solid $midgrey;
-
-		&:hover{
-			background-color: $midgrey;
-
-			button{
-				visibility: visible;
-			}
-		}
-
-		td{
-			padding: 0 0 0 10px;
-		}
-
-		button{
-			visibility: hidden;
-			width: 20px;
-			height: 20px;
-
-			i{
-				fill: $blue;
-			}
-		}
-	}
-
-	.track-details{
-		position: relative;
-		overflow: hidden;
-
-		span{
-			position: absolute;
-			top: 0;
-			left: 0;
-			white-space: nowrap;
-		}
 	}
 }
 
@@ -212,4 +159,3 @@
 	opacity: 1;
 	pointer-events:auto;
 }
-

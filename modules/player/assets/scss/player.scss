@@ -3,14 +3,49 @@
 	left: 0;
 	top: 0;
 	width: 100%;
+	color: $white;
+
+	font-family: $fontlight;
+	font-size: 14px;
 
 	.player-control{
-		width: 40%;
+		position: relative;
+		width: 35%;
 		margin: 0 auto;
-		padding: 36px 0 0 62px;
+		padding: 20px 0;
+	}
+
+	.playbar{
+		position: relative;
+	}
+
+	.player-info{
+		font-weight: 300;
+		text-align: center;
+		word-wrap: nowrap;
+	}
+
+	.playbar-offset{
+		width: 85%;
+		margin: 0 auto;
 	}
 
 	input[type="range"]{
 		width: 100%;
+	}
+
+	.track-time{
+		position: absolute;
+		left: 0;
+		top: 10px;
+
+		&.elapsed-time{
+
+		}
+
+		&.total-time{
+			text-align: right;
+			right: 0;
+		}
 	}
 }

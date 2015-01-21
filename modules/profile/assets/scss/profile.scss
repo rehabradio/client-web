@@ -1,13 +1,33 @@
 .module-profile{
-	overflow: hidden;
+	position: relative;
 
-	> .content{
-		padding: 0 20px 62px;
-		overflow: hidden;
+	.profile-info{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 344px;
 	}
 
-	.column{
-		width: 50%;
-		float: left;
+	.profile-image{
+		margin: 0 0 18px;
+
+		img{
+			display: block;
+			width: 100%;
+			max-width: 164px;
+			margin: 0 auto;
+		}
+	}
+
+	.profile-name{
+		display: block;
+		color: $blue;
+		text-align: center;
+		font-size: 16px;
+	}
+
+	.profile-activity{
+		width: 100%;
+		padding: 0 0 0 344px;
 	}
 }
