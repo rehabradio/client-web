@@ -11,7 +11,7 @@
     "express-handlebars": "^1.0.1",
     "jquery": "^2.1.1",
     "jquery-mockjax": "^1.5.3",
-    "socket.io-client": "^1.1.0",
+    "socket.io-client": "0.9.16",
     "underscore": "^1.6.0"
   },
   "devDependencies": {
@@ -37,7 +37,6 @@
     "jshint-stylish": "^0.4.0",
     "karma": "^0.12.21",
     "karma-jasmine": "^0.1.5",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "socket.io": "0.9.16"
+    "karma-phantomjs-launcher": "^0.1.4"
   }
 }

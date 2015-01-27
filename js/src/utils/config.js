@@ -32,7 +32,7 @@ require('../../libs/backbone.marionette.subrouter.js');
 dispatcher = require('./dispatcher');
 dataStore = require('./dataStore');
 
-// sockets = require('../../../modules/sockets/sockets');
+sockets = require('../../../modules/sockets/sockets');
 
 /*
  *	Initialize custom components
