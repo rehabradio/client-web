@@ -38,11 +38,8 @@ Sockets.prototype = {
 
 	login: function(){
 		return $.ajax({
-			url: 'http://rehabradio.herokuapp.com/login',
-			type: 'GET',
-			success: function(data){
-				debugger;
-			}
+			url: 'http://radio-socket-server.herokuapp.com/login',
+			type: 'GET'
 		});
 	},
 
