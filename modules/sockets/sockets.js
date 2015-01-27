@@ -1,6 +1,10 @@
 var io = require('socket.io-client'),
 	socket = io.connect(process.env.SOCKETS_URL);
 
+socket.on('connection', function(data){
+	debugger;
+})
+
 function Sockets(){
 
 	socket.on('queues:updated', function(){
