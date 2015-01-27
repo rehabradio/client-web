@@ -1,5 +1,5 @@
 var io = require('socket.io-client'),
-	socket = io.connect(process.env.SOCKETS_URL + '/updates');
+	socket = io.connect(process.env.SOCKETS_URL);
 
 function Sockets(){
 
