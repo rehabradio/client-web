@@ -10,10 +10,10 @@ function Sockets(){
 
 	// websocket = new WebSocket('https://radio-socket-server.herokuapp.com/');
 	websocket = new WebSocket(process.env.SOCKETS_URL);
-    websocket.onopen = function(evt) { onOpen(evt) };
-    websocket.onclose = function(evt) { onClose(evt) };
-    websocket.onmessage = function(evt) { onMessage(evt) };
-    websocket.onerror = function(evt) { onError(evt) };
+    websocket.onopen = function(evt) { debugger; };
+    websocket.onclose = function(evt) { debugger; };
+    websocket.onmessage = function(evt) { debugger; };
+    websocket.onerror = function(evt) { debugger; };
 
 	// socket.on('queues:updated', function(){
 		
