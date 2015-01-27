@@ -45,19 +45,19 @@ Sockets.prototype = {
 	},
 
 	onLoginDone: function(){
+		debugger;
 
-		namespace = '/updates';
-    	socket = io.connect('wss://radio-socket-server.herokuapp.com/updates', {'force new connection': true});
+		// namespace = '/updates';
+  //   	socket = io.connect('wss://radio-socket-server.herokuapp.com/updates', {'force new connection': true});
 
-    	socket.on('message', this.onMessage);
-    	socket.on('connect', this.onConnect);
-    	socket.on('disconnect', this.onDisconnect);
-    	socket.on('error', this.onError);
+  //   	socket.on('message', this.onMessage);
+  //   	socket.on('connect', this.onConnect);
+  //   	socket.on('disconnect', this.onDisconnect);
+  //   	socket.on('error', this.onError);
 
 	},
 
 	onMessage: function(){
-		debugger;
 	},
 
 	onConnect: function(){
