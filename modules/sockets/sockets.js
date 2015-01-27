@@ -39,17 +39,22 @@ Sockets.prototype = {
 		});
 	},
 
-	onLoginDone: function(data){
-		debugger;
+	onLoginDone: function(){
 
 		namespace = '/updates';
     	socket = io.connect('wss://radio-socket-server.herokuapp.com/');
 
-    	socket.on('connect', this.onConnection);
+    	socket.on('connect', this.onConnect);
+    	socket.on('disconnect', this.onDisconnect);
+    	socket.on('error', this.onError);
 
 	},
 
-	onConnection: function(){
+	onConnect: function(){
+		debugger;
+	},
+
+	onDisconnect: function(){
 		debugger;
 	},
 
