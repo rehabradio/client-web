@@ -1,5 +1,4 @@
 var io = require('socket.io-client'),
-	// socket = io.connect('https://radio-socket-server.herokuapp.com/');
 	socket = io.connect(process.env.SOCKETS_URL);
 
 // socket.on('connection', function(data){
@@ -7,13 +6,6 @@ var io = require('socket.io-client'),
 // });
 
 function Sockets(){
-
-	// websocket = new WebSocket('https://radio-socket-server.herokuapp.com/');
-	websocket = new WebSocket(process.env.SOCKETS_URL);
-    websocket.onopen = function(evt) { debugger; };
-    websocket.onclose = function(evt) { debugger; };
-    websocket.onmessage = function(evt) { debugger; };
-    websocket.onerror = function(evt) { debugger; };
 
 	// socket.on('queues:updated', function(){
 		
