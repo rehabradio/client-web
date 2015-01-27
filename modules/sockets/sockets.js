@@ -39,11 +39,14 @@ Sockets.prototype = {
 	login: function(){
 		return $.ajax({
 			url: 'http://rehabradio.herokuapp.com/login',
-			type: 'GET'
+			type: 'GET',
+			success: function(data){
+				debugger;
+			}
 		});
 	},
 
-	onLoginDone: function(){
+	onLoginDone: function(data){
 		debugger;
 
 		// namespace = '/updates';
