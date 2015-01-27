@@ -2,10 +2,9 @@ var io = require('socket.io-client');
 
 function Sockets(){
 
-	debugger;
-	// var login = this.login();
+	var login = this.login();
 
-	// login.done(this.onLoginDone);
+	login.done(this.onLoginDone);
 
 
 
