@@ -1,9 +1,14 @@
 var io = require('socket.io-client');
 
 function Sockets(){
-	var login = this.login();
 
-	login.done(this.onLoginDone);
+	debugger;
+	// var login = this.login();
+
+	// login.done(this.onLoginDone);
+
+
+
 	// socket.on('queues:updated', function(){
 		
 	// 	dispatcher.trigger('socket:queues:updated');
