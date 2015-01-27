@@ -45,6 +45,8 @@
 				position: absolute;
 				left: 0;
 				top: 0;
+				width: 100%;
+				height: 100%;
 			}
 
 			img{
@@ -82,57 +84,6 @@
 			}
 		}
 	}
-
-	/*.track{
-		border-bottom: 2px solid $darkgrey;
-
-		td{
-			padding: 6px 0 4px;
-		}
-
-		.track-details{
-			padding-left: 12px;
-		}
-
-		button{
-			visibility: hidden;
-			margin: 0 12px 0 0;
-			padding: 0;
-
-			&:before, &:after{
-				display: none;
-			}
-
-			&:hover{
-				background-color: transparent;
-
-				i{
-					fill: $white;
-				}
-			}
-
-			i{
-				width: 20px;
-				height: 20px;
-			}
-		}
-
-		&:hover{
-			background-color: $orange;
-			color: $white;
-
-			button{
-				visibility: visible;
-			}
-		}
-
-		.coverart{
-			display: block;
-			margin: 0 10px 0 0;
-			width: 40px;
-			background-image: url(/img/album.png);
-		}
-	}*/
 
 	.details{
 		float: left;

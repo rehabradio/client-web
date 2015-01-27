@@ -44,6 +44,8 @@ module.exports = Marionette.Controller.extend({
 			}
 		});
 
+		dataStore.appModel = this.model;
+
 		this.layout.render();
 
 		this.auth = new Auth();
@@ -78,6 +80,11 @@ module.exports = Marionette.Controller.extend({
 
 	_setupAppData: function(){
 
+		this.model.set('url', this.auth.model.get('profile').url);
+		this.model.set('displayName', this.auth.model.get('profile').displayName);
+		this.model.set('image', this.auth.model.get('profile').image.url);
+		this.model.set('loginStatus', true);
+
 		$.ajaxSetup({
             headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
         });
@@ -88,10 +95,6 @@ module.exports = Marionette.Controller.extend({
 			this.startApp();
         }.bind(this));
 
-		this.model.set('url', this.auth.model.get('profile').url);
-		this.model.set('displayName', this.auth.model.get('profile').displayName);
-		this.model.set('image', this.auth.model.get('profile').image.url);
-		this.model.set('loginStatus', true);
 	},
 
 	startApp: function(){
@@ -99,8 +102,6 @@ module.exports = Marionette.Controller.extend({
 		console.log('Start App');
 
 		this.router = new AppRouter();
-
-		this.model = dataStore.appModel = modelApp;
 
 		this.appContent = new AppContent();
 		this.layout.appContent.show(this.appContent);

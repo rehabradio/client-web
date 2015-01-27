@@ -18,7 +18,7 @@ module.exports = BaseCollection.extend({
 
 		this.fetch();
 
-		this.listenTo(dispatcher, 'socket:playlists:tracks:update', this.update, this);
+		this.listenTo(dispatcher, 'socket:playlist:update', this.update, this);
 	},
 	
 
@@ -56,12 +56,8 @@ module.exports = BaseCollection.extend({
 
 	update: function(data){
 
-		/*
-		 *	Calls the build in 'set' method that merges the collection from the server with the current one.
-		 */
-
 		if(data.id === this.id){
-			this.set(data, {parse: true});
+			this.fetch();
 		}
 	}
 });

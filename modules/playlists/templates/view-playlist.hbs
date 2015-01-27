@@ -9,5 +9,7 @@
 <div class="details">
 	<h3>{{name}}</h3>
 	<h4>{{description}}</h4>
-	<button type="button" class="btn playlist-delete" title="Delete Playlist">Delete</button>
+	{{#if isOwner}}
+		<button type="button" class="btn playlist-delete" title="Delete Playlist">Delete</button>
+	{{/if}}
 </div>

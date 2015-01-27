@@ -7,14 +7,16 @@
 			</div>
 			<div class="modal-body">
 				<form role="form">
-					{{#each playlists}}
 					<fieldset>
-						<input name="{{id}}" type="checkbox">
-						<label>{{name}}</label>
+						<!-- {{#each playlists}}
+							<div>
+								<input name="{{id}}" type="checkbox">
+								<label>{{name}}</label>
+							</div>
+						{{/each}} -->
 					</fieldset>
-					{{/each}}
 					<button type="button" class="btn cancel">Close</button>
-					<button type="button" class="btn blue save">Save changes</button>
+					<button type="button" class="btn blue save" disabled>Save changes</button>
 				</form>
 			</div>
 		</div>

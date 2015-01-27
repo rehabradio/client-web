@@ -42,7 +42,7 @@ module.exports = Marionette.Controller.extend({
 			}
 		});
 
-		dataStore.playlistsCollection.fetch();
+		// dataStore.playlistsCollection.fetch();
 
 		dataStore.playlistTracksCollections = [];
 
@@ -226,9 +226,16 @@ module.exports = Marionette.Controller.extend({
 		 *	Initialise the Add To Playlist modal
 		 */
 
+		// Remove the current Playlist from the collection list
+		var currentPlaylist = parseInt(data.playlist),
+			playlists = dataStore.playlistsCollection.filter(function(collection){ return collection.id !== currentPlaylist}),
+			// playlists = dataStore.playlistsCollection.toJSON(),
+			tmpCollection = Backbone.Collection.extend();
+
+
 		var playlistAddTrackModal = new PlaylistsAddTrackModal({
 			request: $.Deferred().resolve({id: data.track}), //
-			collection: dataStore.playlistsCollection
+			collection: new tmpCollection(playlists)
 		});
 
 		this.layout.modalContainer.show(playlistAddTrackModal);

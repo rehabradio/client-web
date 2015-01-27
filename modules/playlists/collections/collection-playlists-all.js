@@ -12,17 +12,17 @@ module.exports = BaseCollection.extend({
 	model: Playlist,
 
 	initialize: function(){
-		// dataStore.collectionPlaylistsPersonal = collectionPlaylistsPersonal;
-		// dataStore.collectionPlaylistsPublic = collectionPlaylistsPublic;
 
-		/*
-		 *	Calls the fetch function to update instead of using update with data supplied through the socket
-		 */
-
-		dispatcher.on('socket:playlists:update', this.fetch.bind(this));
+		dispatcher.on('socket:playlists:update', this.fetch, this);
 	},
 
 	parse: function(data){
+
+		for(var i in data.results){
+			if(data.results[i].owner === dataStore.appModel.get('displayName')){
+				data.results[i].isOwner = true;
+			}
+		}
 
 		// var queues = {},
 		// 	owner = dataStore.appModel.get('displayName');

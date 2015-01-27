@@ -8,7 +8,7 @@ module.exports = BaseCollection.extend({
 
 	initialize: function(){
 
-		dispatcher.on('socket:queues:update', this.update.bind(this));
+		dispatcher.on('socket:queues:update', this.fetch, this);
 	}
 	
 });

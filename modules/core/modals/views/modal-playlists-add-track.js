@@ -1,10 +1,20 @@
-module.exports = Marionette.ItemView.extend({
+var ViewPlaylistCheckbox = require('./view-playlist-checkbox'),
+	ViewEmpty = require('./view-playlist-empty');
+
+module.exports = Marionette.CompositeView.extend({
 
 	template: require('../templates/modal-playlist-add-track.hbs'),
 
+	childView: ViewPlaylistCheckbox,
+
+	childViewContainer: 'fieldset',
+
+	emptyView: ViewEmpty,
+
 	events: {
 		'click .cancel': 'remove',
-		'click .save': '_onSavePlaylist'
+		'click .save': '_onSavePlaylist',
+		'click input[type="checkbox"]': '_onCheckbox'
 	},
 	
     initialize: function(options){
@@ -14,18 +24,21 @@ module.exports = Marionette.ItemView.extend({
 		/*
 		 *	Filter the collection to exclude the currently displayed playlist
 		 */
-
+		// debugger;
 		var owner = dataStore.appModel.get('displayName');
 
-		this.playlists = _.filter(this.collection.toJSON(), function(e){ return e.owner === owner });
+		this.collection.each(function(model){ if(model.get('owner') !== owner){ this.collection.remove(model); }; }.bind(this));
+		// this.playlists = _.filter(this.collection.toJSON(), function(e){ return e.owner === owner });
 
 	},
 
-	render: function(){
-
-		this.setElement(this.template({playlists: this.playlists}));
-
-		return this;
+	_onCheckbox: function(){
+		
+		if(this.el.querySelectorAll('input[type="checkbox"]:checked').length){
+			this.el.querySelector('.save').removeAttribute('disabled');
+		}else{
+			this.el.querySelector('.save').setAttribute('disabled', 'disabled');
+		}
 	},
 
 	_onSavePlaylist: function(){

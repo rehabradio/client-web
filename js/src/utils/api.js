@@ -25,10 +25,10 @@ Api.prototype.Queues = {
 			url: window.API_ROOT + 'queues/' + data.queue + '/tracks/',
 			data: {track: data.track},
 			success: function(data){
-				console.log('queues:tracks:add', data);
+				// console.log('queues:tracks:add', data);
 			},
 			error: function(error){
-				console.log('queues:tracks:add:error', error);
+				// console.log('queues:tracks:add:error', error);
 			}
 		});
 	}
@@ -78,10 +78,10 @@ Api.prototype.Playlists = {
 			dataType: 'JSON',
 			data: {track: data.track},
 			success: function(data){
-				console.log('playlists:tracks:add', data);
+				// console.log('playlists:tracks:add', data);
 			},
 			error: function(error){
-				console.log('playlists:tracks:add:error', error);
+				// console.log('playlists:tracks:add:error', error);
 			}
 		});
 	},
@@ -101,10 +101,10 @@ Api.prototype.Playlists = {
 			dataType: 'JSON',
 			data: data,
 			success: function(data){
-				console.log('playlists:create:', data);
+				// console.log('playlists:create:', data);
 			},
 			error: function(error){
-				console.log('playlists:create:error', error);
+				// console.log('playlists:create:error', error);
 			}
 		});
 	}
@@ -118,7 +118,6 @@ Api.prototype.Search = {
 			type: 'POST',
 			url: window.API_ROOT + 'search/?query=' + data,
 			success: function(data){
-				console.log(data);
 			},
 			error: function(){
 

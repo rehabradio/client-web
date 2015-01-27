@@ -1,3 +1,9 @@
+var dotenv = require('dotenv'),
+    envify = require('envify/custom'),
+    fs = require('fs');
+
+dotenv.load();
+
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var hbsfy = require('hbsfy');
@@ -75,7 +81,11 @@ gulp.task('build', ['lint'], function(){
         }))
         .pipe(plugins.browserify({
         	debug: true,
-            transform: [hbsfy]
+            transform: [hbsfy, envify({
+                NODE_ENV: process.env.NODE_ENV,
+                API_ROOT: process.env.API_ROOT,
+                SOCKETS_URL: process.env.SOCKETS_URL
+            })]
         }))
         .on('error', gutil.log)
         .pipe(plugins.concat('build.js'))

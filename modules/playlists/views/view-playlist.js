@@ -70,10 +70,13 @@ module.exports = Marionette.ItemView.extend({
 
 	_onCoverartChange: function(){
 		
-		var self = this;
+		var self = this,
+			$coverart = self.$el.find('#playlist-view .cover-art');
+
+		$coverart.empty();
 
 		_.each(this.model.get('coverart'), function(element){
-			self.$el.find('#playlist-view .cover-art').append('<img src="' + element.url + '" alt="">');
+			$coverart.append('<img src="' + element.url + '" alt="">');
 		});
 		
 	}

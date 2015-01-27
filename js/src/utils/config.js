@@ -32,6 +32,7 @@ require('../../libs/backbone.marionette.subrouter.js');
 dispatcher = require('./dispatcher');
 dataStore = require('./dataStore');
 
+// sockets = require('../../../modules/sockets/sockets');
 
 /*
  *	Initialize custom components
@@ -51,7 +52,7 @@ if(document.location.search.match(/debug/gi)){
  *	Define global config variables
  */
 
-window.API_ROOT = 'https://server-core.herokuapp.com/api/';
+window.API_ROOT = process.env.API_ROOT;
 window.services = ['spotify', 'soundcloud'];
 
 Handlebars.registerHelper('icon', function(data) {

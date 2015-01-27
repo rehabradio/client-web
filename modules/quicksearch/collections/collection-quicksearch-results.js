@@ -12,10 +12,6 @@ module.exports = BaseCollection.extend({
 
 	model: ModelQuicksearchResults,
 
-	events:{
-		'click .quicksearch-show-all': '_onQuicksearchShowAll'
-	},
-
 	/**
 	 * Dynamically creates the url for the search query. Overrides built-in 'url' function.
 	 *
@@ -54,15 +50,4 @@ module.exports = BaseCollection.extend({
 		this.fetch();
 	},
 
-	/**
-	 * Called on the '+ Show All' click event. Loads the 'search' module.
-	 *
-	 * @function _onQuicksearchShowAll
-	 * @memberOf CollectionQuicksearchResults
-	 * @protected
-	 */
-	_onQuicksearchShowAll: function(){
-
-		dispatcher.trigger('navigation:changemodule', 'search', this.query);
-	}
 });

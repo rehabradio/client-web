@@ -11,7 +11,9 @@ module.exports = Marionette.ItemView.extend({
 	template: require('../templates/template-search-input.hbs'),
 
 	events: {
-		'keyup input': '_onQueryChange'
+		'keypress input': '_onQueryChange',
+		'change input': 'test',
+		'keyup input': '_onKeyUp',
 	},
 
 	model: new Model(),
@@ -40,20 +42,51 @@ module.exports = Marionette.ItemView.extend({
 	timer: null,
 	
 	_onQueryChange: function(e){
+		
+		var self = this,
+			s = String.fromCharCode(e.keyCode),
+			regex = /[a-zA-Z0-9!@£$%^&*()]/;
 
-		if(this.timer){
-			clearTimeout(this.timer);
+		if(regex.test(s)){
+
+			// e.currentTarget.addEventListener('keyup', this._onSetQuery.bind(this), false);
+
+			e.currentTarget.addEventListener('keyup', function onKeyUp(){
+
+				this.removeEventListener('keyup', onKeyUp, true);
+
+				if(self.timer){
+					clearTimeout(self.timer);
+				}
+
+				self.timer = setTimeout(self._triggerSearch.bind(self), 500);
+
+				self.model.set('query', e.currentTarget.value);
+			}, true);
 		}
+	},
 
-		this.timer = setTimeout(this._triggerSearch.bind(this), 500);
+	_onKeyUp: function(e){
 
-		this.model.set('query', e.currentTarget.value);
+		if(e.keyCode === 8){
 
-		// console.log(e.currentTarget.value);
+			if(this.timer){
+				clearTimeout(this.timer);
+			}
+
+			this.timer = setTimeout(this._triggerSearch.bind(this), 500);
+
+			this.model.set('query', e.currentTarget.value);
+		}
+	},
+
+	test: function(e){
+		console.log(e.currentTarget.value);
 	},
 
 	_triggerSearch: function(){
-		history.pushState(null, null, '?query=' + this.model.get('query'));
+
+		history.pushState(null, null, '?query=' + encodeURIComponent(this.model.get('query')));
 		this.trigger('search:search', this.model.get('query'));
 	}
 });

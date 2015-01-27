@@ -134,6 +134,10 @@ fieldset{
 
 	color: $white;
 
+	&:disabled{
+		background-color: $midgrey;
+	}
+
 	i{
 		width: 20px;
 		fill: $blue;

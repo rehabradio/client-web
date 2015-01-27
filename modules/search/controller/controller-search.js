@@ -164,7 +164,6 @@ module.exports = Marionette.Controller.extend({
 
         this.layout.modalContainer.show(this.modalAddPlaylist);
         this.layout.listenTo(this.modalAddPlaylist, 'playlist:tracks:add', API.Playlists.addTrackToPlaylist, this);
-       // API.Meta.addTrack(view.model.attributes, this.createPlaylistModal.bind(this) );
 
     },
 

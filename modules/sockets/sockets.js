@@ -1,31 +1,31 @@
 var io = require('socket.io-client'),
-	socket = io();
+	socket = io(process.env.SOCKETS_URL);
 
 function Sockets(){
 
-	socket.on('queues:update', function(data){
+	socket.on('queues:updated', function(){
 		
-		dispatcher.trigger('socket:queues:update', data);
+		dispatcher.trigger('socket:queues:updated');
 	});
 
-	socket.on('queues:tracks:update', function(data){
+	socket.on('queue:updated', function(data){
 		
-		dispatcher.trigger('socket:queues:tracks:update', data);
+		// dispatcher.trigger('socket:queues:tracks:updated', data);
 	});
 
-	socket.on('playlists:update', function(data){
+	socket.on('playlists:updated', function(data){
 		
-		dispatcher.trigger('socket:playlists:update', data);
+		// dispatcher.trigger('socket:playlists:updated', data);
 	});
 
-	socket.on('playlists:tracks:update', function(data){
+	socket.on('playlist:updated', function(data){
 		
-		dispatcher.trigger('socket:playlists:tracks:update', data);
+		// dispatcher.trigger('socket:playlists:tracks:updated', data);
 	});
 
 
-	socket.on('player:set', function(data){
-		dispatcher.trigger('socket:player:set', data);
+	socket.on('queue-head:updated', function(data){
+		// dispatcher.trigger('socket:player:set', data);
 	});
 }
 
