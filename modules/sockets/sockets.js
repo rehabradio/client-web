@@ -48,12 +48,16 @@ Sockets.prototype = {
 		// namespace = '/updates';
     	// socket = io.connect('wss://radio-socket-server.herokuapp.com', {'force new connection': true});
 
-    	var socket = new WebSocket('wss://radio-socket-server.herokuapp.com');
+    	// socket.on('message', this.onMessage);
+    	// socket.on('connect', this.onConnect);
+    	// socket.on('disconnect', this.onDisconnect);
+    	// socket.on('error', this.onError);
 
-    	socket.on('message', this.onMessage);
-    	socket.on('connect', this.onConnect);
-    	socket.on('disconnect', this.onDisconnect);
-    	socket.on('error', this.onError);
+    	var socket = new WebSocket('wss://radio-socket-server.herokuapp.com');
+    	socket.onopen = this.onConnect;
+    	socket.onmessage = this.onMessage;
+    	socket.onclose = this.onDisconnect;
+    	socket.onerror = this.onError;
 
 	},
 
