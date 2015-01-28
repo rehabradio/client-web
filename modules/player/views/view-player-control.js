@@ -10,10 +10,10 @@ module.exports = Marionette.ItemView.extend({
 
 	onRender: function(){
 
-		var viewPlayerPlaybar = new ViewPlayerPlaybar();
+		this.viewPlayerPlaybar = new ViewPlayerPlaybar();
 		var playbar = this.el.querySelector('#playbar');
 
-		playbar.appendChild(viewPlayerPlaybar.render().el);
+		playbar.appendChild(this.viewPlayerPlaybar.render().el);
 
 		var viewPlayerSelect = new ViewPlayerSelect();
 		var playerQueueSelect = this.el.querySelector('.player-queue-select');
@@ -34,13 +34,7 @@ module.exports = Marionette.ItemView.extend({
 
 	},
 
-	_setPlayhead: function(value){
-		this.range.setValue(value);
-	},
-
-
-
-	_ticker: function(){
-		
-	}
+	// _setPlayhead: function(value){
+	// 	this.range.setValue(value);
+	// }
 });

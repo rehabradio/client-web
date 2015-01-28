@@ -47,9 +47,9 @@ module.exports = Marionette.Controller.extend({
 			});
 
 			this.startTime = performance.now();
-			this_tick()/// NEEDS TO BE FIXED - Use SOCKETS
+			this._tick()/// NEEDS TO BE FIXED - Use SOCKETS to get state
 
-			this.layout.playerControl.show(playerControl);
+			this.layout.playerControl.show(this.playerControl);
 
 		}.bind(this))
 
@@ -76,12 +76,16 @@ module.exports = Marionette.Controller.extend({
 
 	_tick: function(){
 
-		if(this.state === 'playing'){
+		// if(this.state === 'playing'){
 			this.currentTime = performance.now() - this.startTime;
 
-		}
+			var timeDelta = this.currentTime / this.playerControl.model.get('totalTime');
 
-		requestAnimationFrame(this._tick);
+			// THINK OF A BETTER WAY TO DO THIS
+			dispatcher.trigger('player:playbar:set', timeDelta);
+		// }
+
+		requestAnimationFrame(this._tick.bind(this));
 	}
 });
 
