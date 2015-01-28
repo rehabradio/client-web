@@ -68,20 +68,16 @@ Sockets.prototype = {
 	},
 
 	onQueuesUpdated: function(){
-		debugger;
 	},
 
 	onQueueUpdated: function(queue){
-		debugger;
 	},
 
 	onPlaylistsUpdated: function(){
-		debugger;
 		dispatcher.trigger('socket:playlists:updated', data);
 	},
 
 	onPlaylistUpdated: function(playlist){
-		debugger;
 	},
 
 

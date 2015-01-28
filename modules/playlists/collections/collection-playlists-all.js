@@ -13,7 +13,10 @@ module.exports = BaseCollection.extend({
 
 	initialize: function(){
 
-		dispatcher.on('socket:playlists:update', this.fetch, this);
+		// dispatcher.on('socket:playlists:update', this.fetch, this);
+		dispatcher.on('socket:playlists:update', function(){
+			debugger;
+		}, this);
 	},
 
 	parse: function(data){
