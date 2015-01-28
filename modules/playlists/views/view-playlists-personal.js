@@ -19,6 +19,20 @@ module.exports = Marionette.CompositeView.extend({
 
 		var playlists = dataStore.playlistsCollection.filter(function(e){ return e.get('owner') === owner; });
 		
+		this.listenTo(dataStore.playlistsCollection, 'add', this._onPlaylistAdd, this);
+		this.listenTo(dataStore.playlistsCollection, 'remove', this._onPlaylistRemove, this);
 		this.collection = new Collection(playlists);
+	},
+
+	_onPlaylistAdd: function(playlist){
+		debugger;
+		// if(playlist.get('owner') === dataStore.appModel.get('displayName')){
+			this.collection.add(playlist);
+		// }
+	},
+
+	_onPlaylistRemove: function(playlist){
+		debugger;
+			this.collection.remove(playlist);
 	}
 });

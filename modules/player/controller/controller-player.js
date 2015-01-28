@@ -53,11 +53,6 @@ module.exports = Marionette.Controller.extend({
 
 		}.bind(this))
 
-
-		// this.layout.listenTo(playerControl, 'player:seekend', function(){
-			
-		// });
-
 		// this.listenTo(dispatcher, 'socket:player:set', this._onPlayerSet, this);
 		this.listenTo(dispatcher, 'socket:player:change', this._onPlayerChange, this);
 
@@ -88,16 +83,3 @@ module.exports = Marionette.Controller.extend({
 		requestAnimationFrame(this._tick.bind(this));
 	}
 });
-
-
-// var Model = Backbone.Model.extend({
-// 	defaults: {
-// 		playerText: 'Queue is empty',
-// 		totalTime: 0,
-// 		totalTimeReadable: '00:00',
-// 		elapsedTime: 0,
-// 		elapsedTimeReadable: '00:00'
-// 	}
-// });
-
-// 	model: new Model(),
