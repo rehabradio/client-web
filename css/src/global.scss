@@ -252,6 +252,14 @@ form{
 		.track-details{
 			padding-left: 12px;
 		}
+	
+		.track-duration{
+			width: 36px;
+		}
+
+		.track-control{
+			width: 32px;
+		}
 
 		button{
 			margin: 0 12px 0 0;
@@ -288,9 +296,5 @@ form{
 			width: 40px;
 			background-image: url(/img/album.png);
 		}
-	}
-
-	.track-control{
-		width: 32px;
 	}
 }

@@ -1,34 +1,36 @@
-var Model = Backbone.Model.extend({
-	defaults: {
-		playerText: 'Queue is empty',
-		totalTime: 10000,
-		totalTimeReadable: '00:10',
-		elapsedTime: 1000,
-		elapsedTimeReadable: '00:01'
-	}
-});
+var ViewPlayerPlaybar = require('../views/view-player-playbar'),
+	ViewPlayerSelect = require('../views/view-player-select');
 
 module.exports = Marionette.ItemView.extend({
 
-	template: require('../templates/view-player.hbs'),
-
-	model: new Model(),
+	template: require('../templates/template-player.hbs'),
 
 	initialize: function(){
-
 	},
 
 	onRender: function(){
 
-		this.range = this.el.querySelector('input[type="range"]');
+		var viewPlayerPlaybar = new ViewPlayerPlaybar();
+		var playbar = this.el.querySelector('#playbar');
 
-		this.range.addEventListener('onseek', function(){
-		}, false);
+		playbar.appendChild(viewPlayerPlaybar.render().el);
 
-		this.range.addEventListener('onseekend', function(e){
+		var viewPlayerSelect = new ViewPlayerSelect();
+		var playerQueueSelect = this.el.querySelector('.player-queue-select');
 
-			this.trigger('player:seekend', e.value);
-		}.bind(this), false);
+		playerQueueSelect.appendChild(viewPlayerSelect.render().el);
+
+		//Using a Web Component 
+
+		// this.range = this.el.querySelector('input[type="range"]');
+
+		// this.range.addEventListener('onseek', function(){
+		// }, false);
+
+		// this.range.addEventListener('onseekend', function(e){
+
+		// 	this.trigger('player:seekend', e.value);
+		// }.bind(this), false);
 
 	},
 

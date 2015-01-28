@@ -44,19 +44,21 @@ Sockets.prototype = {
 	},
 
 	onLoginDone: function(data){
-		debugger;
 
 		// namespace = '/updates';
-  //   	socket = io.connect('wss://radio-socket-server.herokuapp.com/updates', {'force new connection': true});
+    	// socket = io.connect('wss://radio-socket-server.herokuapp.com', {'force new connection': true});
 
-  //   	socket.on('message', this.onMessage);
-  //   	socket.on('connect', this.onConnect);
-  //   	socket.on('disconnect', this.onDisconnect);
-  //   	socket.on('error', this.onError);
+    	var socket = new WebSocket('wss://radio-socket-server.herokuapp.com');
+
+    	socket.on('message', this.onMessage);
+    	socket.on('connect', this.onConnect);
+    	socket.on('disconnect', this.onDisconnect);
+    	socket.on('error', this.onError);
 
 	},
 
 	onMessage: function(){
+		debugger;
 	},
 
 	onConnect: function(){
