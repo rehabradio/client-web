@@ -76,7 +76,7 @@ Sockets.prototype = {
 	},
 
 	onPlaylistsUpdated: function(){
-		dispatcher.trigger('socket:playlists:update', data);
+		dispatcher.trigger('socket:playlists:update');
 	},
 
 	onPlaylistUpdated: function(playlist){
