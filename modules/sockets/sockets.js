@@ -4,7 +4,7 @@ function Sockets(){
 
 	var login = this.login();
 
-	login.done(this.onLoginDone);
+	login.done(this.onLoginDone.bind(this));
 
 
 
@@ -83,6 +83,7 @@ Sockets.prototype = {
 	onPlaylistUpdated: function(playlist){
 		debugger;
 	},
+
 
 	onMessage: function(){
 		debugger;
