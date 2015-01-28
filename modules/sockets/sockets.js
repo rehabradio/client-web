@@ -48,10 +48,16 @@ Sockets.prototype = {
 		var namespace = '/updates';
     	socket = io.connect('wss://radio-socket-server.herokuapp.com:80' + namespace, {'force new connection': true});
 
-    	socket.on('message', this.onMessage);
-    	socket.on('connect', this.onConnect);
-    	socket.on('disconnect', this.onDisconnect);
-    	socket.on('error', this.onError);
+		socket.on('queues:updated', this.onQueuesUpdated);
+		socket.on('queue:updated', this.onQueueUpdated);
+    	socket.on('playlists:updated', this.onPlaylistsUpdated);
+		socket.on('playlist:updated', this.onPlaylistUpdated);
+
+
+    	// socket.on('message', this.onMessage);
+    	// socket.on('connect', this.onConnect);
+    	// socket.on('disconnect', this.onDisconnect);
+    	// socket.on('error', this.onError);
 
     	// var socket = new WebSocket('wss://radio-socket-server.herokuapp.com');
     	// socket.onopen = this.onConnect;
@@ -59,6 +65,23 @@ Sockets.prototype = {
     	// socket.onclose = this.onDisconnect;
     	// socket.onerror = this.onError;
 
+	},
+
+	onQueuesUpdated: function(){
+		debugger;
+	},
+
+	onQueueUpdated: function(queue){
+		debugger;
+	},
+
+	onPlaylistsUpdated: function(){
+		debugger;
+		dispatcher.trigger('socket:playlists:updated', data);
+	},
+
+	onPlaylistUpdated: function(playlist){
+		debugger;
 	},
 
 	onMessage: function(){
