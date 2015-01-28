@@ -25,14 +25,12 @@ module.exports = Marionette.CompositeView.extend({
 	},
 
 	_onPlaylistAdd: function(playlist){
-		debugger;
-		// if(playlist.get('owner') === dataStore.appModel.get('displayName')){
+		if(playlist.get('owner') !== dataStore.appModel.get('displayName')){
 			this.collection.add(playlist);
-		// }
+		}
 	},
 
 	_onPlaylistRemove: function(playlist){
-		debugger;
 		this.collection.remove(playlist);
 	}
 });
