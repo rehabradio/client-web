@@ -45,8 +45,8 @@ Sockets.prototype = {
 
 	onLoginDone: function(data){
 
-		// namespace = '/updates';
-    	socket = io.connect('wss://radio-socket-server.herokuapp.com', {'force new connection': true});
+		var namespace = '/updates';
+    	socket = io.connect('wss://radio-socket-server.herokuapp.com:80' + namespace, {'force new connection': true});
 
     	socket.on('message', this.onMessage);
     	socket.on('connect', this.onConnect);
