@@ -53,6 +53,8 @@ Sockets.prototype = {
     	socket.on('playlists:updated', this.onPlaylistsUpdated);
 		socket.on('playlist:updated', this.onPlaylistUpdated);
 
+		socket.on('error', this.onError);
+
 
     	// socket.on('message', this.onMessage);
     	// socket.on('connect', this.onConnect);
@@ -74,7 +76,7 @@ Sockets.prototype = {
 	},
 
 	onPlaylistsUpdated: function(){
-		dispatcher.trigger('socket:playlists:updated', data);
+		dispatcher.trigger('socket:playlists:update', data);
 	},
 
 	onPlaylistUpdated: function(playlist){
@@ -93,7 +95,7 @@ Sockets.prototype = {
 		debugger;
 	},
 
-	onError: function(){
+	onError: function(error){
 		debugger;
 	}
 }
