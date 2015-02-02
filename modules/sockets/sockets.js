@@ -2,31 +2,11 @@ var io = require('socket.io-client');
 
 function Sockets(){
 
-	var login = this.login();
+	// var login = this.login();
 
-	login.done(this.onLoginDone.bind(this));
+	// login.done(this.onLoginDone.bind(this));
 
-
-
-	// socket.on('queues:updated', function(){
-		
-	// 	dispatcher.trigger('socket:queues:updated');
-	// });
-
-	// socket.on('queue:updated', function(data){
-		
-	// 	// dispatcher.trigger('socket:queues:tracks:updated', data);
-	// });
-
-	// socket.on('playlists:updated', function(data){
-		
-	// 	// dispatcher.trigger('socket:playlists:updated', data);
-	// });
-
-	// socket.on('playlist:updated', function(data){
-		
-	// 	// dispatcher.trigger('socket:playlists:tracks:updated', data);
-	// });
+	this.onLoginDone();
 
 
 	// socket.on('queue-head:updated', function(data){
@@ -55,24 +35,14 @@ Sockets.prototype = {
 
 		socket.on('error', this.onError);
 
-
-    	// socket.on('message', this.onMessage);
-    	// socket.on('connect', this.onConnect);
-    	// socket.on('disconnect', this.onDisconnect);
-    	// socket.on('error', this.onError);
-
-    	// var socket = new WebSocket('wss://radio-socket-server.herokuapp.com');
-    	// socket.onopen = this.onConnect;
-    	// socket.onmessage = this.onMessage;
-    	// socket.onclose = this.onDisconnect;
-    	// socket.onerror = this.onError;
-
 	},
 
 	onQueuesUpdated: function(){
+		dispatcher.trigger('socket:queues:update');
 	},
 
 	onQueueUpdated: function(queue){
+		dispatcher.trigger('socket:queue:update', queue);
 	},
 
 	onPlaylistsUpdated: function(){
@@ -80,20 +50,9 @@ Sockets.prototype = {
 	},
 
 	onPlaylistUpdated: function(playlist){
+		dispatcher.trigger('socket:playlist:update', playlist);
 	},
 
-
-	onMessage: function(){
-		debugger;
-	},
-
-	onConnect: function(){
-		debugger;
-	},
-
-	onDisconnect: function(){
-		debugger;
-	},
 
 	onError: function(error){
 		debugger;

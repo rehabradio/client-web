@@ -16,11 +16,17 @@ module.exports = Marionette.ItemView.extend({
 		 *	Load the thumbnail images for the first four tracks in the playlist
 		 */
 
-		self.listenTo(self.model, 'change:coverart', self._onCoverartChange);
+		this._setCoverArt();
 
-		if(self.model.get('coverart').length < 4){
+		this.listenTo(dispatcher, 'socket:playlist:update', this._setCoverArt, this);
+		self.listenTo(self.model, 'change:coverart', self._onCoverartChange);
+	},
+
+	_setCoverArt: function(){
+
+		if(this.model.get('coverart').length < 4){
 			$.ajax({
-				url: window.API_ROOT + 'playlists/' + self.model.get('id') + '/tracks/',
+				url: window.API_ROOT + 'playlists/' + this.model.get('id') + '/tracks/',
 				type: 'GET',
 				success: function(data){
 
@@ -45,8 +51,8 @@ module.exports = Marionette.ItemView.extend({
 						}
 					}
 
-					self.model.set('coverart', coverart);
-				}
+					this.model.set('coverart', coverart);
+				}.bind(this)
 			});
 		}
 	},

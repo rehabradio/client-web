@@ -13,7 +13,7 @@ module.exports = BaseCollection.extend({
 		this.url = options.url;
 		this.id = Number(options.id);
 
-		dispatcher.on('socket:queues:tracks:update', this.update.bind(this));
+		this.listenTo(dispatcher, 'socket:queue:update', this.update, this);
 
 		this.fetch();
 	},
@@ -55,14 +55,15 @@ module.exports = BaseCollection.extend({
 	},
 
 
-	update: function(data){
+	update: function(queue){
 
 		/*
 		 *	Checks if the collection 'id' corresponds to the 'id' supplied in the data
 		 */
 
-		if(data.id === this.id){
-			this.set(data, {parse: true});
+		if(queue.queue_id === this.id){
+			// this.set(data, {parse: true});
+			this.fetch();
 		}
 	}
 	

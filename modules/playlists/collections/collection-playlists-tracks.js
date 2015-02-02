@@ -54,9 +54,9 @@ module.exports = BaseCollection.extend({
 		return res.results;
 	},
 
-	update: function(data){
+	update: function(playlist){
 
-		if(data.id === this.id){
+		if(playlist.playlist_id === this.id){
 			this.fetch();
 		}
 	}

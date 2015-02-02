@@ -12,12 +12,21 @@ module.exports = Marionette.ItemView.extend({
 
 		var self = this;
 
-		self.listenTo(self.model, 'change', this.render, this);
+		// self.listenTo(self.model, 'change', this.render, this);
+
+		this._setCoverArt();
+// 
+
+		this.listenTo(dispatcher, 'socket:queue:update', this._setCoverArt, this);
 		self.listenTo(self.model, 'change:coverart', self._onCoverartChange);
 
-		if(self.model.get('coverart').length < 4){
+	},
+
+
+	_setCoverArt: function(){
+		if(this.model.get('coverart').length < 4){
 			$.ajax({
-				url: window.API_ROOT + 'queues/' + self.model.get('id') + '/tracks/',
+				url: window.API_ROOT + 'queues/' + this.model.get('id') + '/tracks/',
 				type: 'GET',
 				success: function(data){
 
@@ -42,19 +51,21 @@ module.exports = Marionette.ItemView.extend({
 						}
 					}
 
-					self.model.set('coverart', coverart);
-				}
+					this.model.set('coverart', coverart);
+				}.bind(this)
 			});
 		}
 	},
 
-
 	_onCoverartChange: function(){
 		
-		var self = this;
+		var self = this,
+			$coverart = self.$el.find('#queue-view .cover-art');
+
+		$coverart.empty();
 
 		_.each(this.model.get('coverart'), function(element){
-			self.$el.find('#queue-view .cover-art').append('<img src="' + element.url + '" alt="">');
+			$coverart.append('<img src="' + element.url + '" alt="">');
 		});
 		
 	},
