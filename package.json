@@ -41,7 +41,7 @@
     "karma-phantomjs-launcher": "^0.1.4"
   },
   "devDependencies": {
-    "gulp-notify": "^1.4.2",
+    "gulp-notify": "^1.4.2"
   },
   "scripts": {
     "postinstall": "gulp build"
