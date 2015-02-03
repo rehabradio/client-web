@@ -27,6 +27,7 @@
     "gulp-jshint": "^1.8.2",
     "gulp-load-plugins": "^0.5.3",
     "gulp-plumber": "^0.6.4",
+    "gulp-notify": "^1.4.2",
     "gulp-sass": "0.7.1",
     "gulp-svgmin": "^0.4.6",
     "gulp-svgstore": "^1.0.1",
@@ -41,7 +42,6 @@
     "karma-phantomjs-launcher": "^0.1.4"
   },
   "devDependencies": {
-    "gulp-notify": "^1.4.2"
   },
   "scripts": {
     "postinstall": "gulp build"
