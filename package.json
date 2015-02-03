@@ -2,6 +2,7 @@
   "name": "rehabradio",
   "version": "1.0.0",
   "description": "rehabstudio music player",
+  "engine": "node 0.10.33",
   "dependencies": {
     "backbone": "^1.1.2",
     "backbone.marionette": "^2.1.0",

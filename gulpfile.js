@@ -144,7 +144,6 @@ gulp.task('svg', function(){
 gulp.task('makedocs', function(){
     gulp.src(['./js/*.js', './js/src/**/*.js', './modules/**/**/*.js'])
         .pipe(jsdoc())
-        // .pipe(yuidoc())
         .pipe(gulp.dest('./docs'));
 });
 
