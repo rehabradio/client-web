@@ -86,6 +86,7 @@ module.exports = Marionette.Controller.extend({
 		this.model.set('loginStatus', true);
 
 		$.ajaxSetup({
+			withCredentials: true,
             headers: { "X_GOOGLE_AUTH_TOKEN": gapi.auth.getToken().access_token }
         });
 

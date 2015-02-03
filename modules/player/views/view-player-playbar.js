@@ -3,7 +3,7 @@ module.exports = Backbone.View.extend({
 	template: require('../templates/template-player-playbar.hbs'),
 
 	initialize: function(){
-		this.listenTo(dispatcher, 'player:playbar:set', this._onPlaybarSet, this);
+		// this.listenTo(this, 'player:playbar:set', this._onPlaybarSet, this);
 	},
 
 	render: function(){
@@ -13,6 +13,7 @@ module.exports = Backbone.View.extend({
 	},
 
 	_onPlaybarSet: function(offset){
+
 		var rangeCurrent = this.el.querySelector('.range-current'),
 			rangeControl = this.el.querySelector('.range-control');
 

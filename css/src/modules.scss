@@ -92,7 +92,9 @@ nav{
 		margin: 0 0 10px;
 		font-weight: 300;
 		text-align: center;
-		word-wrap: nowrap;
+		white-space: nowrap;
+		overflow: hidden;
+
 	}
 
 	.playbar-offset{

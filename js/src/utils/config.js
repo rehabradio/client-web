@@ -32,11 +32,21 @@ require('../../libs/backbone.marionette.subrouter.js');
 dispatcher = require('./dispatcher');
 dataStore = require('./dataStore');
 
+msToReadable = function(time){
+
+	var milli2seconds = parseInt(Number(time) / 1000),
+		minutes = parseInt(milli2seconds / 60),
+		seconds = Math.floor(milli2seconds % 60);
+
+	return minutes + ':' + ((seconds.toString().length === 1) ? '0' + seconds :  seconds);
+
+}
+
 /*
  *	Initialize custom components
  */
 
-var range = require('../components/range/range');
+// var range = require('../components/range/range');
 
 /*
  *	Use Mock data by including the 'debug' param in the URL
@@ -63,6 +73,7 @@ Handlebars.registerHelper('trackduration', function(duration_ms) {
 		minutes = parseInt(milli2seconds / 60),
 		seconds = Math.floor(milli2seconds % 60);
 
-	return minutes + ':' + ((seconds.toString().length === 1) ? '0' + seconds :  seconds);
+	return msToReadable(duration_ms);
 });
+
 

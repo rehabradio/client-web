@@ -1,6 +1,4 @@
 var LoginView = require('../views/view-login');
-//     Auth = require('../../core/auth');
-
 
 // #################################################
 // #                                               #

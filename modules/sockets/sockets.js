@@ -30,8 +30,11 @@ Sockets.prototype = {
 
 		socket.on('queues:updated', this.onQueuesUpdated);
 		socket.on('queue:updated', this.onQueueUpdated);
+
     	socket.on('playlists:updated', this.onPlaylistsUpdated);
 		socket.on('playlist:updated', this.onPlaylistUpdated);
+
+		socket.on('queue-head:updated', this.onPlayheadUpdated);
 
 		socket.on('error', this.onError);
 
@@ -53,9 +56,12 @@ Sockets.prototype = {
 		dispatcher.trigger('socket:playlist:update', playlist);
 	},
 
+	onPlayheadUpdated: function(data){
+		console.log('test', data);
+	},
+
 
 	onError: function(error){
-		debugger;
 	}
 }
 

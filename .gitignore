@@ -20,5 +20,6 @@ Thumbs.db
 
 node_modules/
 .env
+js/build/*.js
 
 *.pyc
