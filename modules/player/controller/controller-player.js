@@ -20,9 +20,5 @@ module.exports = Marionette.Controller.extend({
 
 		this.layout.playerControl.show(playerControl);
 		
-	},
-
-	_onPlayerChange: function(){
-		this.playerControl.model.set()
 	}
 });

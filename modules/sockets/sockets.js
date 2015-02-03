@@ -56,8 +56,8 @@ Sockets.prototype = {
 		dispatcher.trigger('socket:playlist:update', playlist);
 	},
 
-	onPlayheadUpdated: function(data){
-		console.log('test', data);
+	onPlayheadUpdated: function(queue){
+		dispatcher.trigger('socket:player:update', queue.queue_id);
 	},
 
 

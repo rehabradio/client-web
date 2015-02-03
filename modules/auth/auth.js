@@ -10,7 +10,7 @@ module.exports = Marionette.Object.extend({
 	model: new Model(),
 
     gettingUserData: false,
-    
+
     hasUserData: false,
 
 	initialize: function(){
@@ -33,7 +33,6 @@ module.exports = Marionette.Object.extend({
 
     checkLoginStatus: function(res){
 
-
         if(!res.status.signed_in){
             this.model.set('signedin', false);
         }else{
@@ -44,7 +43,6 @@ module.exports = Marionette.Object.extend({
     },
 
     getUserData: function(){
-        console.log('getUserData');
 
         this.gettingUserData = true;
 

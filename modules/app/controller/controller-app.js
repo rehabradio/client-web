@@ -21,7 +21,7 @@ module.exports = Marionette.Controller.extend({
 	//modules that will be started as soon as the app boots
 	//maybe move them into core, things like header, sidebar will go here
 	coreModules: {
-		player: require('../../player/controller/controller-player'),
+		// player: require('../../player/controller/controller-player'),
 		navigation : require('../../navigation/controller/controller-navigation'),
 		quicksearch: require('../../quicksearch/controller/controller-quicksearch')
 	},
@@ -112,12 +112,6 @@ module.exports = Marionette.Controller.extend({
 		
 sockets = require('../../../modules/sockets/sockets');
 
-
-		/*
-		 *	Stores global information for the app. Examples include login information and queue information
-		 */
-
-
 		console.log('App Initialised');
 
 		/*
@@ -138,10 +132,12 @@ sockets = require('../../../modules/sockets/sockets');
 		console.log('booting views...');
 
 
-		new this.coreModules.player(this);
-		new this.coreModules.navigation(this);
-		new this.coreModules.quicksearch(this);
+		// new this.coreModules.player(this);
 
+		for(var i in this.coreModules){
+			new this.coreModules[i]();
+		}
+		
 		if(!Backbone.History.started){
 			Backbone.history.start({ pushState: true, trigger: true });
 		}else{

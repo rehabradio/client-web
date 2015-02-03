@@ -11,12 +11,13 @@ module.exports = Marionette.ItemView.extend({
 		this.listenTo(this.model, 'change:timeOffset', this._setTimeOffset, this);
 		this.listenTo(this.model, 'change:trackTitle', this._setPlayerText, this);
 
+		this.listenTo(dispatcher, 'socket:player:update', this._setQueue, this);
+
 		$.ajax({
 			url: window.API_ROOT + 'queues/' + dataStore.queuesCollection.at(0).get('id') + '/head/'
 		})
 		.done(this._setData.bind(this));
 
-		this.startTime = performance.now();
 		this._tick();
 	},
 
@@ -51,6 +52,8 @@ module.exports = Marionette.ItemView.extend({
 
 	_setData: function(track){
 
+		console.log(track);
+
 		var trackDetails = track.track;
 
 		var title = trackDetails.name;
@@ -69,9 +72,12 @@ module.exports = Marionette.ItemView.extend({
 		this.model.set('elapsedTime', track.time_position);
 		this.model.set('elapsedTimeReadable', msToReadable(track.time_position));
 
+		this.state = 'PLAYING';
+
 	},
 
 	_getQueueHeadInfo: function(queue){
+
 		return $.ajax({
 			url: window.API_ROOT + 'queues/' + queue + '/head/'
 		});
@@ -107,15 +113,15 @@ module.exports = Marionette.ItemView.extend({
 		elapsedTime.innerText = this.model.get('elapsedTimeReadable');
 	},
 
-	startTime: 0,
+	state: 'PAUSED',
+
+	startTime: performance.now(),
 
 	currentTime: 0,
 
 	_tick: function(){
 
-
-
-		// if(this.state === 'playing'){
+		if(this.state === 'PLAYING'){
 			this.currentTime = performance.now();
 
 			var timeDelta = this.currentTime - this.startTime;
@@ -126,7 +132,7 @@ module.exports = Marionette.ItemView.extend({
 			this.model.set('timeOffset', timeOffset);
 
 			this.startTime = this.currentTime;
-		// }
+		}
 
 
 		requestAnimationFrame(this._tick.bind(this));
