@@ -25,7 +25,8 @@ var onError = function (err) {
  */
 
 gulp.task('sass', ['build-modules-scss'], function(){
-	return gulp.src('./css/src/base.scss')
+
+    var stream = gulp.src('./css/src/base.scss')
 		.pipe(plugins.sass())
         .pipe(plugins.autoprefixer(
             'last 2 version',
@@ -36,11 +37,16 @@ gulp.task('sass', ['build-modules-scss'], function(){
             'ios 6',
             'android 4'
         ))
-		.pipe(gulp.dest('./css'))
-        .pipe(plugins.notify({
+		.pipe(gulp.dest('./css'));
+
+    if(process.env.NODE_ENV === 'develop'){
+        stream.pipe(plugins.notify({
             title: 'SASS',
             message: 'CSS build complete'
         }));
+    }
+
+    return stream;
 });
 
 /*
@@ -75,7 +81,7 @@ gulp.task('lint', function(){
  */
 
 gulp.task('build', ['lint'], function(){
-	return gulp.src('./js/app.js')
+	var stream = gulp.src('./js/app.js')
         .pipe(plugins.plumber({
             errorHandler: onError
         }))
@@ -89,11 +95,17 @@ gulp.task('build', ['lint'], function(){
         }))
         .on('error', gutil.log)
         .pipe(plugins.concat('build.js'))
-		.pipe(gulp.dest('./js/build'))
-        .pipe(plugins.notify({
+		.pipe(gulp.dest('./js/build'));
+
+    if(process.env.NODE_ENV === 'develop'){
+
+        stream.pipe(plugins.notify({
             title: 'Build',
             message: 'Javascript build complete'
         }));
+    }
+
+    return stream;
 });
 
 
