@@ -34,6 +34,11 @@ var SearchCollection = BaseCollection.extend({
 
 	parse:function(response){
 
+		if(response.query !== decodeURI(this._getQuery())){
+			// Prevents race condition errors caused when search responses are returned a different order from when they are sent.
+			return;
+		}
+
 		this.pages = Math.floor(response.count / 20);
 		return response.results;
 	},

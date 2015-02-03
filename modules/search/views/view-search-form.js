@@ -12,7 +12,6 @@ module.exports = Marionette.ItemView.extend({
 
 	events: {
 		'keypress input': '_onQueryChange',
-		'change input': 'test',
 		'keyup input': '_onKeyUp',
 	},
 
@@ -78,10 +77,6 @@ module.exports = Marionette.ItemView.extend({
 
 			this.model.set('query', e.currentTarget.value);
 		}
-	},
-
-	test: function(e){
-		console.log(e.currentTarget.value);
 	},
 
 	_triggerSearch: function(){
