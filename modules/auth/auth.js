@@ -9,7 +9,12 @@ module.exports = Marionette.Object.extend({
 
 	model: new Model(),
 
+    gettingUserData: false,
+    
+    hasUserData: false,
+
 	initialize: function(){
+
 		this.listenTo(this.model, 'change:signedin', this.onStatusChange, this);
 	    this.signin();
 	    this.listenTo(this, 'auth:signin', this.signin, this);
@@ -17,30 +22,40 @@ module.exports = Marionette.Object.extend({
 	},
 
     signin: function(){
+
 		gapi.auth.signIn({callback: this.checkLoginStatus.bind(this)});
 	},
 
-    signout: function(){     
+    signout: function(){
+
         gapi.auth.signOut();
     },
 
     checkLoginStatus: function(res){
 
+
         if(!res.status.signed_in){
             this.model.set('signedin', false);
         }else{
-            if(res.status.method === 'PROMPT'){
+            if(!this.gettingUserData){
                 this.getUserData();
             }
         }
     },
 
     getUserData: function(){
-        gapi.client.load('plus', 'v1', this.onClientLoad.bind(this));
+        console.log('getUserData');
 
+        this.gettingUserData = true;
+
+        if(!this.hasUserData){
+            gapi.client.load('plus', 'v1', this.onClientLoad.bind(this));
+        }
     },
 
     onClientLoad: function(){
+        this.hasUserData = true;
+
         gapi.client.plus.people.get( {'userId' : 'me'} ).execute(this.authoriseUsers.bind(this));
     },
 
@@ -66,6 +81,7 @@ module.exports = Marionette.Object.extend({
     		this.trigger('auth:status:signedin');
 
     	}else{
+            this.hasData = false;
             this.trigger('auth:status:signedout');
 
     	}
