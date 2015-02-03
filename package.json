@@ -12,9 +12,7 @@
     "jquery": "^2.1.1",
     "jquery-mockjax": "^1.5.3",
     "socket.io-client": "0.9.16",
-    "underscore": "^1.6.0"
-  },
-  "devDependencies": {
+    "underscore": "^1.6.0",
     "backbone.localstorage": "^1.1.9",
     "gulp": "^3.8.6",
     "gulp-autoprefixer": "0.0.8",
@@ -38,6 +36,8 @@
     "karma": "^0.12.21",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "postinstall": "gulp build"
