@@ -14,6 +14,12 @@ Using standard rehabstudio practices and frameworks.
 Set up
 ------
 
+An .env file is required in the root. Values in the .env are needed for the following attributes:
+
+	$ NODE_ENV
+	$ API_ROOT
+	$ SOCKETS_URL
+
 Set up the packages needed for dev:
 
 	$ npm install
