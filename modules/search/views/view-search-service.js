@@ -6,7 +6,7 @@ module.exports = Marionette.CompositeView.extend({
 
 	childView: SearchTrackView,
 
-	childViewContainer: '.tracks tbody',
+	childViewContainer: '.tracks',
 
 	paginationClass: '.pagination',
 	

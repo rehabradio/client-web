@@ -1,17 +1,12 @@
-var PlaylistView = require('./view-playlist');
-var EmptyView = require('./view-playlists-empty');
+var ViewPlaylist = require('./view-playlists');
 
 var Collection = Backbone.Collection.extend();
 
-module.exports = Marionette.CompositeView.extend({
-
-	childView: PlaylistView,
+module.exports = ViewPlaylist.extend({
 
 	template:  require('../templates/view-playlists-personal.hbs'),
 
-	emptyView: EmptyView,
-
-	childViewContainer: '.playlists',
+	collection: new Collection(),
 
 	initialize: function(){
 
@@ -21,16 +16,12 @@ module.exports = Marionette.CompositeView.extend({
 		
 		this.listenTo(dataStore.playlistsCollection, 'add', this._onPlaylistAdd, this);
 		this.listenTo(dataStore.playlistsCollection, 'remove', this._onPlaylistRemove, this);
-		this.collection = new Collection(playlists);
+		this.collection.add(playlists);
 	},
 
 	_onPlaylistAdd: function(playlist){
 		if(playlist.get('owner') === dataStore.appModel.get('displayName')){
 			this.collection.add(playlist);
 		}
-	},
-
-	_onPlaylistRemove: function(playlist){
-		this.collection.remove(playlist);
 	}
 });

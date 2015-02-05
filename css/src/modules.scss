@@ -164,6 +164,15 @@ nav{
         pointer-events: none;
     }
 }
+@keyframes animation-remove{
+	from {
+		transform: scale(1, 1);
+	}
+	to {
+		transform: scale(0, 0);
+	}
+}
+
 .module-playlists{
 	overflow: hidden;
 
@@ -248,6 +257,10 @@ nav{
 					display: block;
 				}
 			}
+		}
+
+		&.animation-remove{
+			animation: animation-remove 200ms ease-out;
 		}
 	}
 
@@ -725,14 +738,14 @@ nav{
 		padding-right: 30px;
 		overflow-y: scroll;
 
-		table{
-			transition: opacity 150ms linear;
-		}
-
 	}
 	
 	.track{
 		height: 45px;
+	}
+
+	.track-details, .track-duration{
+		line-height: 34px;
 	}
 }
 

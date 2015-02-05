@@ -11,6 +11,7 @@ module.exports = BaseCollection.extend({
 	initialize: function(models, options){
 		
 		this.url = options.url;
+		
 		this.id = Number(options.id);
 
 		this.listenTo(dispatcher, 'socket:queue:update', this.update, this);
@@ -63,7 +64,7 @@ module.exports = BaseCollection.extend({
 
 		if(queue.queue_id === this.id){
 			// this.set(data, {parse: true});
-			this.fetch();
+			this.fetch({reset: false});
 		}
 	}
 	

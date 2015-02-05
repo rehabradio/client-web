@@ -231,9 +231,22 @@ form{
 	}
 }
 
+@keyframes track-animation-remove{
+
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-100px);
+	}
+}
+
 .tracks{
 
 	.track{
+		padding: 6px 0 4px;
+		overflow: hidden;
 		border-bottom: 2px solid $darkgrey;
 
 		&:hover{
@@ -245,20 +258,28 @@ form{
 			}
 		}
 
-		td{
-			padding: 6px 0 4px;
+		&.animation-remove{
+			animation: track-animation-remove 200ms linear;
 		}
 
 		.track-details{
 			padding-left: 12px;
+			float: left;
+			line-height: 22px;
 		}
-	
-		.track-duration{
-			width: 36px;
+
+		.track-controls{
+			float: right;
 		}
 
 		.track-control{
 			width: 32px;
+			float: left;
+		}
+
+		.track-duration{
+			width: 36px;
+			float: left;
 		}
 
 		button{

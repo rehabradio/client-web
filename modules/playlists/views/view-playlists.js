@@ -1,21 +1,24 @@
-var ViewTrackItem = require('./view-queue-tracks-item');
+var PlaylistView = require('./view-playlist'),
+	EmptyView = require('./view-playlists-empty');
 
 module.exports = Marionette.CompositeView.extend({
 
-	template: require('../templates/view-tracks.hbs'),
+	childView: PlaylistView,
 
-	childView: ViewTrackItem,
+	emptyView: EmptyView,
 
-	childViewContainer: '.tracks',
+	childViewContainer: '.playlists',
 
-	initialize: function(){
-
-		this.listenTo(this, 'before:remove:child', this._triggerRemoveAnimation, this);
+	_onPlaylistRemove: function(playlist){
+		this.collection.remove(playlist);
 	},
 
 	removeChildView: function(view) {
+		// Overrides built in Marionette function
 
 		if (view) {
+
+			view.el.classList.add('animation-remove');
 
 			view.once('animation:remove:complete', function(){
 				// call 'destroy' or 'remove', depending on which is found

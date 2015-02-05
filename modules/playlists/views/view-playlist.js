@@ -20,6 +20,10 @@ module.exports = Marionette.ItemView.extend({
 
 		this.listenTo(dispatcher, 'socket:playlist:update', this._setCoverArt, this);
 		self.listenTo(self.model, 'change:coverart', self._onCoverartChange);
+
+
+	    this.listenTo(this, 'animation:remove', this._animationRemove, this);
+		this.el.addEventListener(animationEndEvent, this._animationRemoveComplete.bind(this), false);
 	},
 
 	_setCoverArt: function(){
@@ -85,6 +89,14 @@ module.exports = Marionette.ItemView.extend({
 			$coverart.append('<img src="' + element.url + '" alt="">');
 		});
 		
+	},
+  
+	_animationRemove: function(){
+		this.el.classList.add('animation-remove');
+	},
+
+	_animationRemoveComplete: function(){
+		this.trigger('animation:remove:complete');
 	}
 
 });

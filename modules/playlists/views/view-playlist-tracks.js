@@ -12,7 +12,7 @@ module.exports = Marionette.CompositeView.extend({
 
 	childView: TrackView,
 
-	childViewContainer: 'tbody',
+	childViewContainer: '.tracks',
 
 	emptyView: EmptyView,
 

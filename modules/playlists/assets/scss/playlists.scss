@@ -1,3 +1,12 @@
+@keyframes animation-remove{
+	from {
+		transform: scale(1, 1);
+	}
+	to {
+		transform: scale(0, 0);
+	}
+}
+
 .module-playlists{
 	overflow: hidden;
 
@@ -82,6 +91,10 @@
 					display: block;
 				}
 			}
+		}
+
+		&.animation-remove{
+			animation: animation-remove 200ms ease-out;
 		}
 	}
 

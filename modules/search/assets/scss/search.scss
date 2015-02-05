@@ -129,14 +129,14 @@
 		padding-right: 30px;
 		overflow-y: scroll;
 
-		table{
-			transition: opacity 150ms linear;
-		}
-
 	}
 	
 	.track{
 		height: 45px;
+	}
+
+	.track-details, .track-duration{
+		line-height: 34px;
 	}
 }
 

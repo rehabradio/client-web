@@ -1,6 +1,6 @@
 module.exports = Marionette.ItemView.extend({
 
-	tagName: 'tr',
+	tagName: 'div',
 
 	className: 'track',
 
@@ -10,9 +10,24 @@ module.exports = Marionette.ItemView.extend({
 		'click .remove-from-queue': '_onRemoveTrack'
 	},
 
-	_onRemoveTrack: function(){
+	initialize: function(){
 
+		this.listenTo(this, 'animation:remove', this._animationRemove, this);
+
+		this.el.addEventListener(animationEndEvent, this._animationRemoveComplete.bind(this), false);
+	},
+
+	_onRemoveTrack: function(){
 		this.trigger('queues:tracks:remove', this.model);
+
+	},
+
+	_animationRemove: function(){
+		this.el.classList.add('animation-remove');
+	},
+
+	_animationRemoveComplete: function(){
+		this.trigger('animation:remove:complete');
 	}
 
 });

@@ -1,6 +1,6 @@
 module.exports = Marionette.ItemView.extend({
 
-	tagName: 'tr',
+	tagName: 'div',
 
     className: 'track',
     

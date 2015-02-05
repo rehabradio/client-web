@@ -207,21 +207,48 @@ form .group input[type="submit"], form .group button {
   line-height: 33px;
   padding: 0 20px; }
 
+@-webkit-keyframes track-animation-remove {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+
+  to {
+    -webkit-transform: translateX(-100px);
+            transform: translateX(-100px); } }
+
+@keyframes track-animation-remove {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+
+  to {
+    -webkit-transform: translateX(-100px);
+            transform: translateX(-100px); } }
+
 .tracks .track {
+  padding: 6px 0 4px;
+  overflow: hidden;
   border-bottom: 2px solid #2c2c2c; }
   .tracks .track:hover {
     background-color: #d0d0d0;
     color: #000000; }
     .tracks .track:hover button {
       visibility: visible; }
-  .tracks .track td {
-    padding: 6px 0 4px; }
+  .tracks .track.animation-remove {
+    -webkit-animation: track-animation-remove 200ms linear;
+            animation: track-animation-remove 200ms linear; }
   .tracks .track .track-details {
-    padding-left: 12px; }
-  .tracks .track .track-duration {
-    width: 36px; }
+    padding-left: 12px;
+    float: left;
+    line-height: 22px; }
+  .tracks .track .track-controls {
+    float: right; }
   .tracks .track .track-control {
-    width: 32px; }
+    width: 32px;
+    float: left; }
+  .tracks .track .track-duration {
+    width: 36px;
+    float: left; }
   .tracks .track button {
     margin: 0 12px 0 0;
     padding: 0;
@@ -444,6 +471,24 @@ nav {
     border-radius: 100%;
     pointer-events: none; }
 
+@-webkit-keyframes animation-remove {
+  from {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+
+  to {
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0); } }
+
+@keyframes animation-remove {
+  from {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+
+  to {
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0); } }
+
 .module-playlists {
   overflow: hidden;
   /*transition: width 150ms cubic-bezier(0, 0, .75, 1);*/ }
@@ -530,6 +575,9 @@ nav {
         fill: #FFF; }
       .module-playlists .playlist .playlist-view:hover i {
         display: block; }
+    .module-playlists .playlist.animation-remove {
+      -webkit-animation: animation-remove 200ms ease-out;
+              animation: animation-remove 200ms ease-out; }
   .module-playlists .details {
     float: left; }
 
@@ -876,11 +924,10 @@ nav {
     margin-bottom: 20px;
     padding-right: 30px;
     overflow-y: scroll; }
-    .search-service .tracks table {
-      -webkit-transition: opacity 150ms linear;
-              transition: opacity 150ms linear; }
   .search-service .track {
     height: 45px; }
+  .search-service .track-details, .search-service .track-duration {
+    line-height: 34px; }
 
 .pagination {
   text-align: center;
@@ -923,6 +970,8 @@ nav {
   background-color: #FFFFFF;
   border-radius: 4px;
   color: #000000; }
+  .modal-content p {
+    margin-bottom: 32px; }
 
 .modal-header, .modal-body {
   position: relative;
