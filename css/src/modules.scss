@@ -164,15 +164,6 @@ nav{
         pointer-events: none;
     }
 }
-@keyframes animation-remove{
-	from {
-		transform: scale(1, 1);
-	}
-	to {
-		transform: scale(0, 0);
-	}
-}
-
 .module-playlists{
 	overflow: hidden;
 

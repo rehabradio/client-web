@@ -207,23 +207,69 @@ form .group input[type="submit"], form .group button {
   line-height: 33px;
   padding: 0 20px; }
 
+@-webkit-keyframes track-animation-add {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0); }
+
+  50% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+
+  100% {
+    opacity: 1; } }
+
+@keyframes track-animation-add {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0); }
+
+  50% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1); }
+
+  100% {
+    opacity: 1; } }
+
+.track-animation-add {
+  -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-animation: track-animation-add 400ms linear both;
+          animation: track-animation-add 400ms linear both; }
+
 @-webkit-keyframes track-animation-remove {
-  from {
+  0% {
+    opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); }
 
-  to {
+  100% {
+    opacity: 0;
     -webkit-transform: translateX(-100px);
             transform: translateX(-100px); } }
 
 @keyframes track-animation-remove {
-  from {
+  0% {
+    opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0); }
 
-  to {
+  100% {
+    opacity: 0;
     -webkit-transform: translateX(-100px);
             transform: translateX(-100px); } }
+
+.track-animation-remove {
+  -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-animation: track-animation-remove 400ms cubic-bezier(0, 0.25, 0.75, 1);
+          animation: track-animation-remove 400ms cubic-bezier(0, 0.25, 0.75, 1);
+  -webkit-animation-delay: 0;
+          animation-delay: 0; }
 
 .tracks .track {
   padding: 6px 0 4px;
@@ -270,6 +316,99 @@ form .group input[type="submit"], form .group button {
     margin: 0 10px 0 0;
     width: 40px;
     background-image: url(/img/album.png); }
+  .tracks .track.track-animation-add:nth-child(1) {
+    -webkit-animation-delay: 50ms;
+            animation-delay: 50ms; }
+  .tracks .track.track-animation-add:nth-child(2) {
+    -webkit-animation-delay: 100ms;
+            animation-delay: 100ms; }
+  .tracks .track.track-animation-add:nth-child(3) {
+    -webkit-animation-delay: 150ms;
+            animation-delay: 150ms; }
+  .tracks .track.track-animation-add:nth-child(4) {
+    -webkit-animation-delay: 200ms;
+            animation-delay: 200ms; }
+  .tracks .track.track-animation-add:nth-child(5) {
+    -webkit-animation-delay: 250ms;
+            animation-delay: 250ms; }
+  .tracks .track.track-animation-add:nth-child(6) {
+    -webkit-animation-delay: 300ms;
+            animation-delay: 300ms; }
+  .tracks .track.track-animation-add:nth-child(7) {
+    -webkit-animation-delay: 350ms;
+            animation-delay: 350ms; }
+  .tracks .track.track-animation-add:nth-child(8) {
+    -webkit-animation-delay: 400ms;
+            animation-delay: 400ms; }
+  .tracks .track.track-animation-add:nth-child(9) {
+    -webkit-animation-delay: 450ms;
+            animation-delay: 450ms; }
+  .tracks .track.track-animation-add:nth-child(10) {
+    -webkit-animation-delay: 500ms;
+            animation-delay: 500ms; }
+  .tracks .track.track-animation-add:nth-child(11) {
+    -webkit-animation-delay: 550ms;
+            animation-delay: 550ms; }
+  .tracks .track.track-animation-add:nth-child(12) {
+    -webkit-animation-delay: 600ms;
+            animation-delay: 600ms; }
+  .tracks .track.track-animation-add:nth-child(13) {
+    -webkit-animation-delay: 650ms;
+            animation-delay: 650ms; }
+  .tracks .track.track-animation-add:nth-child(14) {
+    -webkit-animation-delay: 700ms;
+            animation-delay: 700ms; }
+  .tracks .track.track-animation-add:nth-child(15) {
+    -webkit-animation-delay: 750ms;
+            animation-delay: 750ms; }
+  .tracks .track.track-animation-add:nth-child(16) {
+    -webkit-animation-delay: 800ms;
+            animation-delay: 800ms; }
+  .tracks .track.track-animation-add:nth-child(17) {
+    -webkit-animation-delay: 850ms;
+            animation-delay: 850ms; }
+  .tracks .track.track-animation-add:nth-child(18) {
+    -webkit-animation-delay: 900ms;
+            animation-delay: 900ms; }
+  .tracks .track.track-animation-add:nth-child(19) {
+    -webkit-animation-delay: 950ms;
+            animation-delay: 950ms; }
+  .tracks .track.track-animation-add:nth-child(20) {
+    -webkit-animation-delay: 1000ms;
+            animation-delay: 1000ms; }
+  .tracks .track.track-animation-add:nth-child(21) {
+    -webkit-animation-delay: 1050ms;
+            animation-delay: 1050ms; }
+  .tracks .track.track-animation-add:nth-child(22) {
+    -webkit-animation-delay: 1100ms;
+            animation-delay: 1100ms; }
+  .tracks .track.track-animation-add:nth-child(23) {
+    -webkit-animation-delay: 1150ms;
+            animation-delay: 1150ms; }
+  .tracks .track.track-animation-add:nth-child(24) {
+    -webkit-animation-delay: 1200ms;
+            animation-delay: 1200ms; }
+  .tracks .track.track-animation-add:nth-child(25) {
+    -webkit-animation-delay: 1250ms;
+            animation-delay: 1250ms; }
+  .tracks .track.track-animation-add:nth-child(26) {
+    -webkit-animation-delay: 1300ms;
+            animation-delay: 1300ms; }
+  .tracks .track.track-animation-add:nth-child(27) {
+    -webkit-animation-delay: 1350ms;
+            animation-delay: 1350ms; }
+  .tracks .track.track-animation-add:nth-child(28) {
+    -webkit-animation-delay: 1400ms;
+            animation-delay: 1400ms; }
+  .tracks .track.track-animation-add:nth-child(29) {
+    -webkit-animation-delay: 1450ms;
+            animation-delay: 1450ms; }
+  .tracks .track.track-animation-add:nth-child(30) {
+    -webkit-animation-delay: 1500ms;
+            animation-delay: 1500ms; }
+  .tracks .track.track-animation-remove {
+    -webkit-animation-delay: 0;
+            animation-delay: 0; }
 
 .page-header {
   position: relative;
@@ -470,24 +609,6 @@ nav {
     background-color: #E7564D;
     border-radius: 100%;
     pointer-events: none; }
-
-@-webkit-keyframes animation-remove {
-  from {
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1); }
-
-  to {
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0); } }
-
-@keyframes animation-remove {
-  from {
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1); }
-
-  to {
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0); } }
 
 .module-playlists {
   overflow: hidden;

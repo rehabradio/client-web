@@ -1,59 +1,69 @@
 /*
  *	View for individual tracks within playlist
  */
-// var TrackModel = require('../models/models-track.js');
 
+module.exports = Backbone.View.extend({
+  
+	tagName: 'div',
 
- module.exports = Marionette.ItemView.extend({
+	events: {
+		'click button': '_onRemove'
+	},
 
- 	tagName: 'div',
-
- 	className: 'track',
+	className: 'track',
 
 	template: require('../templates/view-playlist-track.hbs'),
 
-	events: {
-		'click .add-to-queue': '_onAddToQueue',
-		'click .add-to-playlist': '_onAddToPlaylist',
-		'click .remove-from-playlist': '_onRemoveFromPlaylist',
-		'change select': '_onSelectPlaylist'
-	},
-
 	initialize: function(){
+
+		this.listenTo(this, 'animation:remove', this._animationRemove, this);
+		this.listenTo(this, 'this:remove', this._remove, this);
 		this.listenTo(this.model, 'change', this.render, this);
+
+		this.el.addEventListener(animationEndEvent, this._animationComplete.bind(this), false);
 	},
 
-	_onAddToQueue: function(){
+	_onRemove: function(){
+		
+		this.model.destroy();
 
-		var id = this.model.get('track').id;
-
-		this.trigger('queue:tracks:modal', id);
+		// todos.remove(this.model);
 	},
 
-	_onAddToPlaylist: function(){
-
-		/*
-		 *	Harvest the Playlist id from the model url
-		 */
-
-		var urlRegex = /api\/playlists\/(.*)\/tracks\/(.*)\//,
-			url = this.model.url();
-
-		var data = {
-
-			playlist: url.match(urlRegex)[1],
-			track: this.model.get('track').id
-		};
-
-		/*
-		 *	Trigger the initialisation of the Add-To-Playlists modal
-		 */
-
-		this.trigger('playlists:tracks:modal', data);
+	_animationRemove: function(){
+		this.el.classList.add('track-animation-remove');
 	},
 
-	_onRemoveFromPlaylist: function(){
+	_animationComplete: function(e){
 
-		this.trigger('playlists:tracks:remove', this.model);
+		switch (e.animationName){
+			case 'track-animation-add':
+			this.el.classList.remove('track-animation-add');
+			break;
+
+			case 'track-animation-remove':
+			this.remove();
+			this.trigger('animation:remove:complete');
+			break;
+		}
+	},
+
+	_remove: function(){
+		this._animationRemove();
+	},
+
+	_onChange: function(model){
+		console.log(model);
+	},
+
+	render: function(){
+		this.$el.empty();
+
+		this.$el.addClass('track-animation-add');
+		this.$el.append(this.template(this.model.toJSON()));
+
+
+		return this;
 	}
- });
+  
+});
