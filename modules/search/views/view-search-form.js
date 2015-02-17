@@ -11,6 +11,7 @@ module.exports = Marionette.ItemView.extend({
 	template: require('../templates/template-search-input.hbs'),
 
 	events: {
+		'submit': '_onSubmit',
 		'keypress input': '_onQueryChange',
 		'keyup input': '_onKeyUp',
 	},
@@ -36,6 +37,10 @@ module.exports = Marionette.ItemView.extend({
 
         this.el.querySelector('.query').focus();
 
+	},
+
+	_onSubmit: function(e){
+		e.preventDefault();
 	},
 
 	timer: null,
