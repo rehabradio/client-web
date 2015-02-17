@@ -1,20 +1,16 @@
-/*
- *	View for individual tracks within playlist
- */
-
 var ViewCollectionItem = require('../../core/views/view-collection-item-base')
 
 module.exports = ViewCollectionItem.extend({
   
-	tagName: 'div',
+	className: 'track',
+
+	template: require('../templates/view-track.hbs'),
 
 	events: {
-		'click button': '_onRemove'
+		'click .remove-from-queue': '_onRemoveTrack'
 	},
 
 	className: 'track',
-
-	template: require('../templates/view-playlist-track.hbs'),
 
 	animationNameAdd: 'track-animation-add',
 
