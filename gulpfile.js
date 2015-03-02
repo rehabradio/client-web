@@ -10,7 +10,6 @@ var hbsfy = require('hbsfy');
 var gutil = require('gulp-util');
 var svgmin = require('gulp-svgmin');
 var svgstore = require('gulp-svgstore');
-var yuidoc = require('gulp-yuidoc');
 var jsdoc = require('gulp-jsdoc');
 
 var karma = require('karma').server;
