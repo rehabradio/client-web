@@ -26,8 +26,7 @@ var onError = function (err) {
 
 gulp.task('sass', ['build-modules-scss'], function(){
 
-    var stream = gulp.src('./css/src/base.scss')
-		.pipe(plugins.sass())
+    var stream = plugins.rubySass('./css/src/base.scss')
         .pipe(plugins.autoprefixer(
             'last 2 version',
             'safari 5',
