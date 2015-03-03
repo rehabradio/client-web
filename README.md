@@ -26,6 +26,10 @@ Set up the packages needed for dev:
 
 This will install all dependencies and dev-dependencies. The application is currently deployed to Heroku and therefore uses a simple Node.js script (index.js).
 
+The gulp file uses gulp-ruby-sass so the sass executable will need to be available. This is installed through:
+	
+	$ gem install sass
+
 To run the server locally, make sure you have node installed and use:
 
 	$ node index.js
