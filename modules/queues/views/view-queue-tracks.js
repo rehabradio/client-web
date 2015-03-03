@@ -1,4 +1,4 @@
-var ViewTrackItem = require('./view-queue-tracks-item');
+var ViewTrackItem = require('./view-queue-track');
 
 module.exports = Marionette.CompositeView.extend({
 
@@ -6,5 +6,5 @@ module.exports = Marionette.CompositeView.extend({
 
 	childView: ViewTrackItem,
 
-	childViewContainer: 'tbody'
+	childViewContainer: '.tracks'
 });

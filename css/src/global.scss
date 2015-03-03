@@ -234,6 +234,10 @@ form{
 .tracks{
 
 	.track{
+		height: 34px;
+
+		overflow: hidden;
+
 		border-bottom: 2px solid $darkgrey;
 
 		&:hover{
@@ -244,57 +248,61 @@ form{
 				visibility: visible;
 			}
 		}
+	}
 
-		td{
-			padding: 6px 0 4px;
+	.track-details{
+		padding-left: 12px;
+		float: left;
+		line-height: 34px;
+	}
+
+	.track-controls{
+		float: right;
+		overflow: hidden;
+	}
+
+	.track-control{
+		width: 32px;
+		float: left;
+	}
+
+	.track-duration{
+		width: 36px;
+	}
+
+	button{
+		margin: 6px 12px 0 0;
+		padding: 0;
+		width: 20px;
+		height: 20px;
+
+		visibility: hidden;
+
+		fill: $blue;
+
+		&:before, &:after{
+			display: none;
 		}
 
-		.track-details{
-			padding-left: 12px;
-		}
-	
-		.track-duration{
-			width: 36px;
-		}
-
-		.track-control{
-			width: 32px;
-		}
-
-		button{
-			margin: 0 12px 0 0;
-			padding: 0;
-			width: 20px;
-			height: 20px;
-
-			visibility: hidden;
-
-			fill: $blue;
-
-			&:before, &:after{
-				display: none;
-			}
-
-			&:hover{
-				background-color: transparent;
-
-				i{
-					fill: $white;
-				}
-			}
+		&:hover{
+			background-color: transparent;
 
 			i{
-				width: 20px;
-				height: 20px;
+				fill: $white;
 			}
 		}
 
-
-		.coverart{
-			display: block;
-			margin: 0 10px 0 0;
-			width: 40px;
-			background-image: url(/img/album.png);
+		i{
+			width: 20px;
+			height: 20px;
 		}
+	}
+
+
+	.coverart{
+		display: block;
+		margin: 0 10px 0 0;
+		width: 40px;
+		background-image: url(/img/album.png);
 	}
 }

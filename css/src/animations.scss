@@ -1,0 +1,40 @@
+@keyframes track-animation-add{
+  
+	0% {
+		opacity: 0;
+		transform: scale(0, 0);
+	}
+
+	50% {
+		transform: scale(1, 1);
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.track-animation-add{
+	transform-origin: 0 0;
+	animation: track-animation-add 400ms linear both;
+}
+
+
+@keyframes track-animation-remove{
+  
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(-100px);
+	}
+}
+
+.track-animation-remove{
+	transform-origin: 0 0;
+	animation: track-animation-remove 400ms cubic-bezier(0, .25, .75, 1);
+	animation-delay: 0
+}

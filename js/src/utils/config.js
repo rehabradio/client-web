@@ -42,6 +42,44 @@ msToReadable = function(time){
 
 }
 
+function whichTransitionEndEvent(){
+	var t,
+		el = document.createElement('div'),
+		transitions = {
+		'transition':'transitionend',
+		'OTransition':'oTransitionEnd',
+		'MozTransition':'transitionend',
+		'WebkitTransition':'webkitTransitionEnd'
+	}
+
+	for(t in transitions){
+		if( el.style[t] !== undefined ){
+			return transitions[t];
+		}
+	}
+}
+
+function whichAnimationEndEvent(){
+	var t,
+		el = document.createElement('div'),
+		animations = {
+		'animation'      : 'animationend',
+		'OAnimation'     : 'oAnimationEnd',
+		'MozAnimation'   : 'animationend',
+		'WebkitAnimation': 'webkitAnimationEnd'
+	}
+
+	for (t in animations){
+		if (el.style[t] !== undefined){
+			return animations[t];
+		}
+	}
+}
+
+transitionEndEvent = whichTransitionEndEvent();
+animationEndEvent = whichAnimationEndEvent();
+
+
 /*
  *	Initialize custom components
  */

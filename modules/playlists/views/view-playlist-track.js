@@ -6,8 +6,6 @@
 
  module.exports = Marionette.ItemView.extend({
 
- 	tagName: 'tr',
-
  	className: 'track',
 
 	template: require('../templates/view-playlist-track.hbs'),
@@ -15,7 +13,7 @@
 	events: {
 		'click .add-to-queue': '_onAddToQueue',
 		'click .add-to-playlist': '_onAddToPlaylist',
-		'click .remove-from-playlist': '_onRemoveFromPlaylist',
+		'click .remove-from-playlist': '_onRemoveTrack',
 		'change select': '_onSelectPlaylist'
 	},
 
@@ -52,7 +50,14 @@
 		this.trigger('playlists:tracks:modal', data);
 	},
 
-	_onRemoveFromPlaylist: function(){
+	_onRemoveTrack: function(){
+
+		this.el.addEventListener(animationEndEvent, this._removeTrack.bind(this))
+		this.el.classList.add('track-animation-remove');
+
+	},
+
+	_removeTrack: function(e){
 
 		this.trigger('playlists:tracks:remove', this.model);
 	}
