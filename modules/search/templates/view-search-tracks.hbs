@@ -1,19 +1,21 @@
-<!-- <td class="track-image">
+<!-- <div class="track-image">
 {{#if image_large}}
 	<img src="{{image_large}}" />  
 {{else}}
 	<img src="http://gallery.orchardproject.net/Themes/OrchardGallery/Content/Images/moduleDefaultIcon.png" /> 
 {{/if}}
-</td> -->
-<td class="track-details" title="{{name}}{{#if artist.[0].name }} - {{artists.[0].name}}{{/if}}{{#if artists.[0].name }} - {{artists.[0].name}} {{/if}}{{#if album.name }} - {{album.name}}{{/if}}">
+</div> -->
+<div class="track-details" title="{{name}}{{#if artist.[0].name }} - {{artists.[0].name}}{{/if}}{{#if artists.[0].name }} - {{artists.[0].name}} {{/if}}{{#if album.name }} - {{album.name}}{{/if}}">
 	{{details}}
-</td>
-<td class="track-duration">
+</div>
+<div class="track-controls">
+	<div class="track-control">
+		<button type="button" class="orange add-to-queue"><i>{{icon 'icon-queues-add'}}</i></button>
+	</div>
+	<div class="track-control">
+		<button type="button" class="orange add-to-playlist"><i>{{icon 'icon-playlists'}}</i></button>
+	</div>
+</div>
+<div class="track-duration">
 	{{trackduration duration_ms}}
-</td>
-<td class="track-control">
-	<button type="button" class="orange add-to-queue"><i>{{icon 'icon-queues-add'}}</i></button>
-</td>
-<td class="track-control">
-	<button type="button" class="orange add-to-playlist"><i>{{icon 'icon-playlists'}}</i></button>
-</td>
+</div>

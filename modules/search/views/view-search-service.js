@@ -6,7 +6,7 @@ module.exports = Marionette.CompositeView.extend({
 
 	childView: SearchTrackView,
 
-	childViewContainer: '.tracks tbody',
+	childViewContainer: '.tracks',
 
 	paginationClass: '.pagination',
 	
@@ -28,9 +28,9 @@ module.exports = Marionette.CompositeView.extend({
 
 		setTimeout(function(){
 
-			var height = window.innerHeight - this.el.parentNode.offsetTop - 200;
+			// var height = window.innerHeight - this.el.parentNode.offsetTop - 200;
 
-			this.el.querySelector('.tracks').style.height = height + 'px';
+			// this.el.querySelector('.tracks').style.height = height + 'px';
 
 			var viewPagination = new ViewPagination({
 				el: this.el.querySelector('.pagination'),

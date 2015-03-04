@@ -2,8 +2,10 @@ module.exports = Marionette.ItemView.extend({
 
 	template: require('../templates/modal-queues-add-track.hbs'),
 
+	className: 'modal',
+
 	events: {
-		'click .cancel': 'remove',
+		'click .cancel': '_remove',
 		'click .save': '_onAddToQueue'
 	},
 
@@ -42,7 +44,23 @@ module.exports = Marionette.ItemView.extend({
 			}.bind(this))(formData[i].name);
 		}
 
-		this.remove();
+		this._remove();
 	},
+
+	_onAnimationComplete: function(e){
+
+		switch(e.animationName){
+			case 'model-hide':
+				this.remove();
+				break;
+		}
+	},
+
+	_remove: function(){
+
+		this.el.addEventListener(animationEndEvent, this._onAnimationComplete, false);
+
+		this.el.classList.add('remove');
+	}
 
 });

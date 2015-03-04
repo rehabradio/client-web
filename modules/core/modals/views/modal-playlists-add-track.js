@@ -5,6 +5,8 @@ module.exports = Marionette.CompositeView.extend({
 
 	template: require('../templates/modal-playlist-add-track.hbs'),
 
+	className: 'modal',
+
 	childView: ViewPlaylistCheckbox,
 
 	childViewContainer: 'fieldset',
@@ -12,7 +14,7 @@ module.exports = Marionette.CompositeView.extend({
 	emptyView: ViewEmpty,
 
 	events: {
-		'click .cancel': 'remove',
+		'click .cancel': '_remove',
 		'click .save': '_onSavePlaylist',
 		'click input[type="checkbox"]': '_onCheckbox'
 	},
@@ -56,6 +58,22 @@ module.exports = Marionette.CompositeView.extend({
 			}.bind(this))(formData[i].name);
 		}
 
-		this.remove();
+		this._remove();
+	},
+
+	_onAnimationComplete: function(e){
+
+		switch(e.animationName){
+			case 'model-hide':
+				this.remove();
+				break;
+		}
+	},
+
+	_remove: function(){
+
+		this.el.addEventListener(animationEndEvent, this._onAnimationComplete, false);
+
+		this.el.classList.add('remove');
 	}
 });

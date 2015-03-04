@@ -662,7 +662,7 @@ nav{
 
 
 	&.initial{
-		opacity: 0;
+		//opacity: 0;
 	}
 
 	&.searching{
@@ -720,19 +720,25 @@ nav{
 
 	.tracks{
 		position: relative;
-		height: 0;
 		margin-bottom: 20px;
 		padding-right: 30px;
-		overflow-y: scroll;
+		/*overflow-y: scroll;*/
+		overflow: hidden;
 
 		table{
 			transition: opacity 150ms linear;
 		}
 
 	}
+
+	.track-details{
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
 	
 	.track{
-		height: 45px;
+		/*height: 45px;*/
 	}
 }
 

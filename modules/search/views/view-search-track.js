@@ -1,7 +1,5 @@
 module.exports = Marionette.ItemView.extend({
 
-	tagName: 'tr',
-
     className: 'track',
     
 	template: require('../templates/view-search-tracks.hbs'),
